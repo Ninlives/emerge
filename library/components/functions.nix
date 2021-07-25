@@ -1,5 +1,6 @@
 { ... }@inputs:
-with inputs; {
+with inputs;
+with nixpkgs.lib; {
   mkNixOS = extraConfig:
     let
       modules = [
@@ -19,7 +20,7 @@ with inputs; {
           nixpkgs.config = nixpkgsConfig;
 
           nix.registry.emerge.to = {
-            type = "path";
+            type = "git+file";
             path = toString entry;
           };
           revive.specifications.with-snapshot-home.boxes = [ entry secrets ];

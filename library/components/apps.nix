@@ -55,8 +55,8 @@ in {
         '';
       };
   in {
-    world = fire self.nixosConfigurations.mlatus;
-    wsl = fire self.nixosConfigurations.wsl;
+    world = fire nixosConfigurations.mlatus;
+    wsl = fire nixosConfigurations.wsl;
     commit = mkApp {
       drv = writeShellScriptBin "commit" ''
         export EDITOR=$(${coreutils}/bin/realpath $(which $EDITOR))

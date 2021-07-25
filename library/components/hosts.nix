@@ -1,5 +1,7 @@
 { ... }@inputs:
-with inputs; with out-of-world; {
+with inputs;
+with nixpkgs.lib;
+with out-of-world; {
   nixosConfigurations.mlatus = mkNixOS [
     dirs.world.top-level
     dirs.secrets
@@ -19,8 +21,7 @@ with inputs; with out-of-world; {
   nixosConfigurations.wsl = mkNixOS [
     dirs.world.wsl
     ({ config, ... }: {
-      home-manager.users.${constant.user.name} =
-        import dirs.home.wsl;
+      home-manager.users.${constant.user.name} = import dirs.home.wsl;
     })
   ];
 

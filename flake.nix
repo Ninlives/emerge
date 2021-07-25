@@ -25,7 +25,7 @@
       functions = import ./library/components/functions.nix (inputs // variables);
       args = inputs // variables // functions;
       hosts = import ./library/components/hosts.nix args;
-      apps = import ./library/components/apps.nix args;
+      apps = import ./library/components/apps.nix (args // hosts);
       packages = import ./library/components/packages.nix args;
     in {
       inherit (hosts) nixosConfigurations;
