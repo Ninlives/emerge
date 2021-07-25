@@ -20,8 +20,8 @@ with nixpkgs.lib; {
           nixpkgs.config = nixpkgsConfig;
 
           nix.registry.emerge.to = {
-            type = "git+file";
-            path = toString entry;
+            type = "git";
+            url = "file://${toString entry}";
           };
           revive.specifications.with-snapshot-home.boxes = [ entry secrets ];
         })
