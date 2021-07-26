@@ -54,10 +54,10 @@ in {
 
     (mkIf config.nvidia.asPrimaryGPU {
       hardware.nvidia.prime.sync.enable = true;
-      services.xserver.displayManager.sessionCommands = ''
-        ${xorg.xrandr}/bin/xrandr --setprovideroutputsource modesetting NVIDIA-0
-        ${xorg.xrandr}/bin/xrandr --auto
-      '';
+      # services.xserver.displayManager.sessionCommands = ''
+      #   ${xorg.xrandr}/bin/xrandr --setprovideroutputsource modesetting NVIDIA-0
+      #   ${xorg.xrandr}/bin/xrandr --auto
+      # '';
       # environment.systemPackages = [ cudatoolkit ];
     })
   ];
