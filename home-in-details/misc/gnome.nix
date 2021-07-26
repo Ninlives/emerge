@@ -103,9 +103,8 @@ with pkgs.nixos-cn.gnome-themes; {
       show-battery-percentage = true;
     };
     "org/gnome/desktop/calendar".show-weekdate = true;
-    "org/gnome/desktop/background".picture-uri = "file://${
-        toString (inputs.data.content.resources + /wallpapers/mountain.jpg)
-      }";
+    "org/gnome/desktop/background".picture-uri =
+      "file://${inputs.data.content.resources + /wallpapers/mountain.jpg}";
 
     # Extensions
 
