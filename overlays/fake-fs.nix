@@ -2,7 +2,7 @@ final: prev: {
   fakeFS = { drv
     , fakeHome ? "$HOME/.local/fakefs/${(builtins.parseDrvName drv.name).name}"
     , extraBinds ? { }, bindFonts ? false
-    , exclude ? [ "$HOME/.config" "$HOME/.local" "$HOME/.cache" "$HOME/.ssh" "$HOME/.gnupg" ] }:
+    , exclude ? [ "$HOME/.config" "$HOME/.local" "$HOME/.cache" "$HOME/.ssh" "$HOME/.gnupg" "$HOME/Secrets" ] }:
     with final;
     with final.lib;
     let

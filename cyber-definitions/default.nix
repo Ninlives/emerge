@@ -8,6 +8,7 @@ in {
     ./science.nix
     ./beancount.nix
     ./syncthing.nix
+    ./otp.nix
   ];
 
   nixpkgs.config.allowUnfree = true;
