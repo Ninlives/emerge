@@ -97,7 +97,7 @@ in {
     };
     net = mkApp {
       drv = let
-        node = self.nixosConfigurations.cyber.config;
+        node = nixosConfigurations.cyber.config;
         def = node.system.build.toplevel;
         key = "/var/lib/sops/key";
         dir = "/var/lib/sops";
