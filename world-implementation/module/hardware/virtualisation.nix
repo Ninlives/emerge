@@ -15,23 +15,8 @@ in {
     "${spice-gtk}/bin/spice-client-glib-usb-acl-helper";
   environment.systemPackages = [ virtmanager spice-gtk ];
   boot.extraModprobeConfig = ''
-    options vfio-pci ids=10de:1f91
+    options kvm_intel nested=1
+    options kvm_intel emulate_invalid_guest_state=0
+    options kvm ignore_msrs=1
   '';
-
-  hack.specialisation = {
-    pci-passthru.configuration = {
-      boot.loader.grub.configurationName = "PCI Passthrough";
-      powersave.enable = false;
-      nvidia.enable = false;
-
-      boot.kernelParams = [ "intel_iommu=on" "iommu=pt" ];
-      boot.kernelModules =
-        [ "vfio" "vfio_iommu_type1" "vfio_pci" "vfio_virqfd" ];
-      boot.extraModprobeConfig = ''
-        options kvm_intel nested=1
-        options kvm_intel emulate_invalid_guest_state=0
-        options kvm ignore_msrs=1
-      '';
-    };
-  };
 }
