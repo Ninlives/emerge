@@ -6,7 +6,7 @@ let
     (builtins.attrNames config.networking.wireguard.interfaces);
 in {
   hack.specialisation.server.configuration = {
-    boot.loader.grub.configurationName = "server";
+    boot.loader.grub.configurationName = "Server";
     nvidia.asPrimaryGPU = false;
     services.openssh = {
       enable = true;

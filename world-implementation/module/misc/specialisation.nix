@@ -34,13 +34,13 @@ in {
 
   hack.specialisation = {
     power-save.configuration = {
-      boot.loader.grub.configurationName = "power save";
+      boot.loader.grub.configurationName = "Power Save";
       powersave.enable = true;
       nvidia.asPrimaryGPU = false;
     };
 
     barebone.configuration = {
-      boot.loader.grub.configurationName = "barebone";
+      boot.loader.grub.configurationName = "Barebone";
       disabledModules = [ desktop ];
       revive.enable = false;
       environment.systemPackages = [ time-machine backup ];
