@@ -22,7 +22,7 @@ in {
     pci-passthru.configuration = {
       boot.loader.grub.configurationName = "PCI Passthrough";
       powersave.enable = false;
-      nvidia.asPrimaryGPU = true;
+      nvidia.enable = false;
 
       boot.kernelParams = [ "intel_iommu=on" "iommu=pt" ];
       boot.kernelModules =

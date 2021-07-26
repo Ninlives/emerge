@@ -3,11 +3,17 @@ let
   inherit (pkgs) writeShellScriptBin xorg cudatoolkit;
   inherit (lib) mkIf mkMerge mkOption types;
 in {
-  options.nvidia.asPrimaryGPU = mkOption {
-    type = types.bool;
-    default = true;
+  options.nvidia = {
+    enable = mkOption {
+      type = types.bool;
+      default = true;
+    };
+    asPrimaryGPU = mkOption {
+      type = types.bool;
+      default = true;
+    };
   };
-  config = mkMerge [
+  config = mkIf config.nvidia.enable (mkMerge [
     {
       hardware.nvidia.prime.nvidiaBusId = "PCI:1:0:0";
       hardware.nvidia.prime.intelBusId = "PCI:0:2:0";
@@ -54,11 +60,10 @@ in {
 
     (mkIf config.nvidia.asPrimaryGPU {
       hardware.nvidia.prime.sync.enable = true;
-      # services.xserver.displayManager.sessionCommands = ''
-      #   ${xorg.xrandr}/bin/xrandr --setprovideroutputsource modesetting NVIDIA-0
-      #   ${xorg.xrandr}/bin/xrandr --auto
-      # '';
-      # environment.systemPackages = [ cudatoolkit ];
+      services.xserver.displayManager.sessionCommands = ''
+        ${xorg.xrandr}/bin/xrandr --setprovideroutputsource modesetting NVIDIA-0
+        ${xorg.xrandr}/bin/xrandr --auto
+      '';
     })
-  ];
+  ]);
 }
