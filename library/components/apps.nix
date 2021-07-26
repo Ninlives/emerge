@@ -7,13 +7,13 @@ let
   mkFilter = action: writeShellScript "filter" ''
     export PATH=${makeBinPath [ sops nixFlakes nixfmt coreutils findutils gawk gnupg ]}
     export sopsPGPKeyDirs='${toString sopsPGPKeyDirs}'
-    source ${sops-nix.packages.${system}.sops-pgp-hook}/nix-support/setup-hook
+    source ${sops-nix.packages.${system}.sops-import-keys-hook}/nix-support/setup-hook
     ${action}
   '';
   sops-git-filter-clean = mkFilter ''
     # <<<sh>>>
     content=$(cat)
-    sopsPGPHook && \
+    sopsImportKeysHook && \
     (nix eval --json --expr "$content"|sops --input-type=json -e /dev/stdin|nix eval --expr "builtins.fromJSON '''""$(cat)""'''"|nixfmt) \
     || exit 1
     # >>>sh<<<
@@ -22,7 +22,7 @@ let
     # <<<sh>>>
     content=$(cat)
     encfile=$(mktemp --suffix ".json")
-    sopsPGPHook && \
+    sopsImportKeysHook && \
     (nix eval --json --expr "$content" > $encfile) && (sops --input-type=json -d $encfile|nix eval --expr "builtins.fromJSON '''""$(cat)""'''"|nixfmt) \
     || (echo $content|nixfmt)
     # >>>sh<<<
@@ -36,7 +36,7 @@ let
 in {
   devShell.${system} = mkShell {
     inherit sopsPGPKeyDirs;
-    nativeBuildInputs = [ sops-nix.packages.${system}.sops-pgp-hook ];
+    nativeBuildInputs = [ sops-nix.packages.${system}.sops-import-keys-hook ];
   };
 
   apps.${system} = let
