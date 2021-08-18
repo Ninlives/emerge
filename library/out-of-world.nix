@@ -70,6 +70,11 @@ in rec {
       __overrides = attrsDirs top-level;
     };
 
+    robot = rec {
+      top-level = ../robotic-evolution;
+      __overrides = attrsDirs top-level;
+    };
+
     secrets = ../secrets;
 
     overlays = ../overlays;

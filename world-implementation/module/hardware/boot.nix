@@ -27,6 +27,8 @@ in mkMerge [
     boot.loader.grub.font =
       "${fixedsys-excelsior}/share/fonts/truetype/fixedsys-excelsior-3.00.ttf";
 
+    boot.cleanTmpDir = true;
+
     console.font = "ter-i32b";
     console.packages = [ terminus_font ];
     console.earlySetup = true;

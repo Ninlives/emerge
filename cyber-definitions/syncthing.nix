@@ -9,7 +9,7 @@ in {
       key = scrt.s-key-server.path;
       devices.local.id = config.secrets.decrypted.s-id-local;
     };
-    relay.enable = true;
+    relay.enable = false;
     relay.providedBy = "Somebody";
   };
 

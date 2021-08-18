@@ -36,4 +36,6 @@ with out-of-world; {
       ({ ... }: { sops.sshKeyPaths = [ "/var/lib/sops/key" ]; })
     ];
   };
+
+  robotConfigurations.cmi = robotnix.lib.robotnixSystem (import dirs.robot.top-level);
 }

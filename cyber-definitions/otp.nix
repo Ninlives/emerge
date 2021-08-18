@@ -4,8 +4,8 @@ let
   repo = fetchFromGitHub {
     owner = "Ninlives";
     repo = "pam-remote-otp";
-    rev = "4bf2daf3e4f9b19a89090add02ba33400241dbcf";
-    sha256 = "1m1ss1apf8m06mmy60aifhj4rzi6j7yvqc2i072577rz50sz4fi1";
+    rev = "d2359a799ca84c120fd041c3484388e871762d35";
+    sha256 = "1wbxqy286zc72iasz5zsrykg4zah6g00yhvch82hxmi8q0994hpy";
   };
   dp = config.secrets.decrypted;
 in {

@@ -1,5 +1,25 @@
 {
   "nodes": {
+    "androidPkgs": {
+      "inputs": {
+        "flake-utils": "flake-utils_3",
+        "nixpkgs": "nixpkgs_3"
+      },
+      "locked": {
+        "lastModified": 1623960850,
+        "narHash": "sha256-mh2sqnweuITV4kFIK6a8wEeeY999DIHLrFE8dU2JiTM=",
+        "owner": "tadfisher",
+        "repo": "android-nixpkgs",
+        "rev": "a68fee88e480673ac0cd4de9113ad222ae8efc5a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "tadfisher",
+        "ref": "stable",
+        "repo": "android-nixpkgs",
+        "type": "github"
+      }
+    },
     "data": {
       "inputs": {
         "nixpkgs": "nixpkgs"
@@ -69,6 +89,21 @@
         "type": "github"
       }
     },
+    "flake-utils_3": {
+      "locked": {
+        "lastModified": 1614513358,
+        "narHash": "sha256-LakhOx3S1dRjnh0b5Dg3mbZyH0ToC9I8Y2wKSkBaTzU=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "5466c5bbece17adaab2d82fae80b46e807611bf3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -121,6 +156,57 @@
         "type": "github"
       }
     },
+    "nixpkgs_3": {
+      "locked": {
+        "lastModified": 1614989413,
+        "narHash": "sha256-g503bGSdVhLu2cKR5sHG8XetLFrVUzAL3+mrnQJpmdY=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "102eb68ceecbbd32ab1906a53ef5a7269dc9794a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_4": {
+      "locked": {
+        "lastModified": 1623617138,
+        "narHash": "sha256-zd03k0aZWdE+JjZjVbsQGCKmc1C4HIwIbW7MbI9ym6s=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "93963c27b934f24289a94b9e3784d60a9b77e92c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-21.05",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "robotnix": {
+      "inputs": {
+        "androidPkgs": "androidPkgs",
+        "nixpkgs": "nixpkgs_4"
+      },
+      "locked": {
+        "lastModified": 1627496125,
+        "narHash": "sha256-xW8pirpOVovcauUI8MLkxmUyGEKF7Svdz2VDrbnevoY=",
+        "owner": "danielfullmer",
+        "repo": "robotnix",
+        "rev": "83b9a06502d32807f0a57495b21438501b03b5da",
+        "type": "github"
+      },
+      "original": {
+        "owner": "danielfullmer",
+        "repo": "robotnix",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "data": "data",
@@ -128,6 +214,7 @@
         "flake-utils": "flake-utils_2",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs_2",
+        "robotnix": "robotnix",
         "sops-nix": "sops-nix"
       }
     },
