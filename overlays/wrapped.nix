@@ -19,7 +19,7 @@ in {
   #   path = [ "androidStudioPackages" "stable" ];
   # };
   android-studio = fakeFS {
-    drv = final.androidStudioPackages.stable;
+    drv = final.androidStudioPackages.dev;
     fakeHome = "$HOME/.local/fakefs/android-studio";
   };
   zoom-us = fakeFS { drv = prev.zoom-us; };

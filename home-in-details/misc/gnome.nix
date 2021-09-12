@@ -15,7 +15,7 @@ with pkgs.nixos-cn.gnome-themes; {
     steal-my-focus
     dynamic-panel-transparent
     pixel-saver
-    compiz-windows-effect
+    #compiz-windows-effect
     x11gestures
 
     bibata-cursors

@@ -15,7 +15,6 @@
   inputs.robotnix.url = "github:danielfullmer/robotnix";
   inputs.external = {
     url = "github:nixos-cn/flakes";
-    inputs.nixpkgs.follows = "nixpkgs";
   };
   inputs.data.url = "github:Ninlives/data";
 
