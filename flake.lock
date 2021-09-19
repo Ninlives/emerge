@@ -3,7 +3,7 @@
     "androidPkgs": {
       "inputs": {
         "flake-utils": "flake-utils_3",
-        "nixpkgs": "nixpkgs_3"
+        "nixpkgs": "nixpkgs_4"
       },
       "locked": {
         "lastModified": 1623960850,
@@ -25,11 +25,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1630544111,
-        "narHash": "sha256-EIhqejNkt2aUECbbjRFcLl6g/6gPVNyRZywqNI5UUFw=",
+        "lastModified": 1631321760,
+        "narHash": "sha256-UT6raGvcXt+5OnJjDFxFtn+v0+nqOIK4dfiYkm49gV4=",
         "owner": "Ninlives",
         "repo": "data",
-        "rev": "daeb2d6a888c7ae1bb25da546ebb165b0715c854",
+        "rev": "29cd7ac274ded09a06059fbfc22246cbac7cfa44",
         "type": "github"
       },
       "original": {
@@ -41,16 +41,14 @@
     "external": {
       "inputs": {
         "flake-utils": "flake-utils",
-        "nixpkgs": [
-          "nixpkgs"
-        ]
+        "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1630372016,
-        "narHash": "sha256-wiV31I4Z89Qra0viLm6jtEghpS9ParaFRcv8+ONqUY4=",
+        "lastModified": 1631409071,
+        "narHash": "sha256-J2va7ZCUSQVscQQ6llh75aRj/zYAtQfGkc3ribWgr6s=",
         "owner": "nixos-cn",
         "repo": "flakes",
-        "rev": "134d9a4944b1cfd4172f3bf05c022c8db79afce6",
+        "rev": "0aa6d05b1927350b6bb6c1ca401ac837bcdc2ecd",
         "type": "github"
       },
       "original": {
@@ -111,11 +109,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1630428740,
-        "narHash": "sha256-394yJxkFjvg47vB0jK5WHCitLDilyGjO3HpuZkAM2GA=",
+        "lastModified": 1631134124,
+        "narHash": "sha256-C17wJ2HyuFZllJ/PbpFuuDjkzWvg8np9UIAdSrpuwS0=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "21a2ff449620a9cb91802f9d1a9157b2ae8c6b39",
+        "rev": "039f786e609fdb3cfd9c5520ff3791750c3eaebf",
         "type": "github"
       },
       "original": {
@@ -142,11 +140,27 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1630514589,
-        "narHash": "sha256-kcyLmy2awVvKyV4ehfuHFc0NQVn0nntAHlx+Rl9jMys=",
+        "lastModified": 1629137058,
+        "narHash": "sha256-rOOLXq8/HcqlKNTJdSiPqB+kbYdcjBaGwqq6pP5IOfQ=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "ed4771d6e23001d55bf6b422699ad798dcd61d77",
+        "rev": "23485f23ff8536592b5178a5d244f84da770bc87",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_3": {
+      "locked": {
+        "lastModified": 1631351437,
+        "narHash": "sha256-Rs5SaZw4L3tNhOS5fXjdAuJ9zwohpVtkP4i8p56+1L0=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "f2f8e282204266187f471b3353728843a577bc7e",
         "type": "github"
       },
       "original": {
@@ -156,7 +170,7 @@
         "type": "github"
       }
     },
-    "nixpkgs_3": {
+    "nixpkgs_4": {
       "locked": {
         "lastModified": 1614989413,
         "narHash": "sha256-g503bGSdVhLu2cKR5sHG8XetLFrVUzAL3+mrnQJpmdY=",
@@ -172,7 +186,7 @@
         "type": "github"
       }
     },
-    "nixpkgs_4": {
+    "nixpkgs_5": {
       "locked": {
         "lastModified": 1623617138,
         "narHash": "sha256-zd03k0aZWdE+JjZjVbsQGCKmc1C4HIwIbW7MbI9ym6s=",
@@ -191,14 +205,14 @@
     "robotnix": {
       "inputs": {
         "androidPkgs": "androidPkgs",
-        "nixpkgs": "nixpkgs_4"
+        "nixpkgs": "nixpkgs_5"
       },
       "locked": {
-        "lastModified": 1629916645,
-        "narHash": "sha256-KEI2rkdNIi/PJ2iF6zmM/iiBJQKjZw+c5nXiQ9Hbhnk=",
+        "lastModified": 1631429031,
+        "narHash": "sha256-ItXlguzclN+vMMB79QV7mjd4vOa9n3uH3d7eyX3xbvM=",
         "owner": "danielfullmer",
         "repo": "robotnix",
-        "rev": "4431a8a3ee25c6f6ed3ef2f8895ae7910d547707",
+        "rev": "4469399c4a612cb34cc0c6957ec80e1fa14e2418",
         "type": "github"
       },
       "original": {
@@ -213,7 +227,7 @@
         "external": "external",
         "flake-utils": "flake-utils_2",
         "home-manager": "home-manager",
-        "nixpkgs": "nixpkgs_2",
+        "nixpkgs": "nixpkgs_3",
         "robotnix": "robotnix",
         "sops-nix": "sops-nix"
       }

@@ -12,13 +12,12 @@
     inputs.nixpkgs.follows = "nixpkgs";
   };
   inputs.flake-utils.url = "github:numtide/flake-utils";
-  inputs.robotnix.url = "github:danielfullmer/robotnix";
   inputs.external = {
     url = "github:nixos-cn/flakes";
   };
   inputs.data.url = "github:Ninlives/data";
 
-  outputs = { self, nixpkgs, home-manager, flake-utils, robotnix, external
+  outputs = { self, nixpkgs, home-manager, flake-utils, external
     , sops-nix, data }@inputs:
     let
       variables = import ./library/components/variables.nix inputs;
@@ -29,7 +28,7 @@
       apps = import ./library/components/apps.nix (args // hosts);
       packages = import ./library/components/packages.nix args;
     in {
-      inherit (hosts) nixosConfigurations robotConfigurations;
+      inherit (hosts) nixosConfigurations;
       inherit (apps) apps devShell;
       inherit (packages) legacyPackages packages;
     };
