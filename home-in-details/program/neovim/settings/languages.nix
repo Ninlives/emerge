@@ -13,6 +13,7 @@ in {
         vim-beancount
         typescript-vim
         vim-jsx-typescript
+        soong
       ];
   };
 }

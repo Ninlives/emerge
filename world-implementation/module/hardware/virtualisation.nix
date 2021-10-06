@@ -11,8 +11,12 @@ in {
     qemuPackage = qemu_kvm;
     onBoot = "ignore";
   };
-  # security.wrappers.spice-client-glib-usb-acl-helper.source =
-  #   "${spice-gtk}/bin/spice-client-glib-usb-acl-helper";
+  security.wrappers.spice-client-glib-usb-acl-helper = {
+    source = "${spice-gtk}/bin/spice-client-glib-usb-acl-helper";
+    owner = "root";
+    group = "root";
+    setuid = true;
+  };
   environment.systemPackages = [ virtmanager spice-gtk ];
   boot.extraModprobeConfig = ''
     options kvm_intel nested=1
