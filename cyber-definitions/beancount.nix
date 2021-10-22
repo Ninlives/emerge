@@ -48,7 +48,7 @@ in {
     '';
   };
 
-  services.syncthing.declarative.folders.beancount = {
+  services.syncthing.folders.beancount = {
     path = dir;
     devices = [ "local" ];
     versioning.type = "simple";

@@ -12,9 +12,7 @@
     inputs.nixpkgs.follows = "nixpkgs";
   };
   inputs.flake-utils.url = "github:numtide/flake-utils";
-  inputs.external = {
-    url = "github:nixos-cn/flakes";
-  };
+  inputs.external.url = "github:nixos-cn/flakes";
   inputs.data.url = "github:Ninlives/data";
 
   outputs = { self, nixpkgs, home-manager, flake-utils, external

@@ -1,10 +1,10 @@
 { config, pkgs, lib, ... }: 
 let
-  inherit (pkgs) linuxPackages_5_13;
+  inherit (pkgs) zfs;
 in
 {
   boot.supportedFilesystems = [ "zfs" ];
-  boot.kernelPackages = linuxPackages_5_13;
+  boot.kernelPackages = zfs.latestCompatibleLinuxPackages;
 
   networking.hostId = "87b331db";
   boot.zfs.requestEncryptionCredentials = true;

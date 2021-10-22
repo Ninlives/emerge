@@ -4,11 +4,9 @@ in {
   services.syncthing = {
     enable = true;
     openDefaultPorts = true;
-    declarative = {
-      cert = scrt.s-cert-server.path;
-      key = scrt.s-key-server.path;
-      devices.local.id = config.secrets.decrypted.s-id-local;
-    };
+    cert = scrt.s-cert-server.path;
+    key = scrt.s-key-server.path;
+    devices.local.id = config.secrets.decrypted.s-id-local;
     relay.enable = false;
     relay.providedBy = "Somebody";
   };

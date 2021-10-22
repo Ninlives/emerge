@@ -33,7 +33,7 @@ with out-of-world; {
       (dirs.world.option + /secrets.nix)
       sops-nix.nixosModules.sops
       external.nixosModules.nixos-cn
-      ({ ... }: { sops.sshKeyPaths = [ "/var/lib/sops/key" ]; })
+      ({ ... }: { sops.gnupg.sshKeyPaths = [ "/var/lib/sops/key" ]; })
     ];
   };
 }
