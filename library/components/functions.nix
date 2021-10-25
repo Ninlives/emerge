@@ -6,7 +6,7 @@ with nixpkgs.lib; {
       modules = [
         external.nixosModules.nixos-cn-registries
         external.nixosModules.nixos-cn
-        home-manager.nixosModules.home-manager
+        home-manager.nixosModule
 
         ({ ... }: {
           home-manager.useGlobalPkgs = true;
