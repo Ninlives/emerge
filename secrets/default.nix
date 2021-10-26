@@ -9,6 +9,7 @@ let
   w = k: tpl k ./data/wireguard.yaml;
 in
 {
+  imports = [ ./token.nix ];
   sops.defaultSopsFile = ./data/tokens.yaml;
 
   sops.secrets.s-server = s "server";
@@ -32,8 +33,4 @@ in
   sops.secrets.w-preshared-key = w "preshared-key";
   sops.secrets.w-server-private-key = w "server-private-key";
   sops.secrets.w-local-private-key = w "local-private-key";
-
-  secrets.decrypted = import ./encrypt // {
-    h-auth = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEFnTuV16kTR18LPUzQBb0yhPwp0xAJXR/fRFsTrLQ5C cardno:000615452495";
-  };
 }

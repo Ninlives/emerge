@@ -12,7 +12,11 @@ with out-of-world; {
     image = let
       os = nixpkgs.lib.nixosSystem {
         inherit system specialArgs;
-        modules = [ (dirs.cyber.top-level + /image.nix) dirs.secrets ];
+        modules = [
+          (dirs.cyber.top-level + /image.nix)
+          (dirs.world.option + /secrets.nix)
+          (dirs.secrets + /token.nix)
+        ];
       };
     in os.config.system.build.image;
   };
