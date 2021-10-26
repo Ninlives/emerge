@@ -1,1 +1,1 @@
-update_install_nix_action
+fix_image_build
