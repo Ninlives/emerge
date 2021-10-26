@@ -1,1 +1,1 @@
-trigger_action_on_push
+update_install_nix_action
