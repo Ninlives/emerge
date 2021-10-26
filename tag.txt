@@ -1,1 +1,1 @@
-emulated_system_aarch64
+trigger_action_on_push

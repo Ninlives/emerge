@@ -11,7 +11,7 @@ with pkgs.nixos-cn.gnome-themes; {
   home.packages = [
     dash-to-dock
     mpris-indicator-button
-    tray-icons
+    appindicator
     steal-my-focus
     dynamic-panel-transparent
     pixel-saver
@@ -116,10 +116,9 @@ with pkgs.nixos-cn.gnome-themes; {
       "dynamic-panel-transparency@rockon999.github.io"
       "native-window-placement@gnome-shell-extensions.gcampax.github.com"
       "nohotcorner@azuri.free.fr"
-      "dict@sun.wxg@gmail.com"
       "steal-my-focus@kagesenshi.org"
       "windowsNavigator@gnome-shell-extensions.gcampax.github.com"
-      "tray-icons@zhangkaizhao.com"
+      "appindicatorsupport@rgcjonas.gmail.com"
       "mprisindicatorbutton@JasonLG1979.github.io"
       "pixel-saver@deadalnix.me"
       "compiz-windows-effect@hermes83.github.com"
