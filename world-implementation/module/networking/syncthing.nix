@@ -27,6 +27,9 @@
     wantedBy = [ "syncthing.service" ];
     after = [ "syncthing.service" ];
     script = ''
+      while [[ ! -e  ${constant.user.config.home}/Sync ]];do
+        sleep 1
+      done
       ${pkgs.coreutils}/bin/rm -rf "${constant.user.config.home}/Sync"
     '';
     serviceConfig.Type = "oneshot";

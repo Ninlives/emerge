@@ -96,7 +96,7 @@ with pkgs.nixos-cn.gnome-themes; {
 
     "org/gnome/desktop/interface" = {
       cursor-theme = "Bibata_Classic";
-      gtk-theme = "Flat-Remix-GTK-Green-Dark-Solid";
+      gtk-theme = "Flat-Remix-GTK-Green-Dark";
       icon-theme = "Gruvbox";
 
       clock-show-weekday = true;

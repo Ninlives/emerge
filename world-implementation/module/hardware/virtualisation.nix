@@ -8,7 +8,7 @@ in {
 
   virtualisation.libvirtd = {
     enable = true;
-    qemuPackage = qemu_kvm;
+    qemu.package = qemu_kvm;
     onBoot = "ignore";
   };
   security.wrappers.spice-client-glib-usb-acl-helper = {
