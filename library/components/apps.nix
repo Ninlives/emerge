@@ -3,37 +3,7 @@ with inputs;
 with flake-utils.lib;
 with nixpkgs.lib;
 with pkgs;
-let
-  mkFilter = action: writeShellScript "filter" ''
-    export PATH=${makeBinPath [ sops nixFlakes nixfmt coreutils findutils gawk gnupg ]}
-    export sopsPGPKeyDirs='${toString sopsPGPKeyDirs}'
-    source ${sops-nix.packages.${system}.sops-import-keys-hook}/nix-support/setup-hook
-    ${action}
-  '';
-  sops-git-filter-clean = mkFilter ''
-    # <<<sh>>>
-    content=$(cat)
-    sopsImportKeysHook && \
-    (nix eval --json --expr "$content"|sops --input-type=json -e /dev/stdin|nix eval --expr "builtins.fromJSON '''""$(cat)""'''"|nixfmt) \
-    || exit 1
-    # >>>sh<<<
-  '';
-  sops-git-filter-smudge = mkFilter ''
-    # <<<sh>>>
-    content=$(cat)
-    encfile=$(mktemp --suffix ".json")
-    sopsImportKeysHook && \
-    (nix eval --json --expr "$content" > $encfile) && (sops --input-type=json -d $encfile|nix eval --expr "builtins.fromJSON '''""$(cat)""'''"|nixfmt) \
-    || (echo $content|nixfmt)
-    # >>>sh<<<
-  '';
-  sops-git-diff = writeShellScript "diff" ''
-    export PATH=${makeBinPath [ nixFlakes nixfmt coreutils ]}
-    # <<<sh>>>
-    nix eval --json --expr "$(cat $1)"|nix eval --expr "builtins.fromJSON '''""$(cat)""'''"|nixfmt
-    # >>>sh<<<
-  '';
-in {
+{
   devShell.${system} = mkShell {
     inherit sopsPGPKeyDirs;
     nativeBuildInputs = [ sops-nix.packages.${system}.sops-import-keys-hook ];
@@ -83,10 +53,10 @@ in {
         chmod +x .git/hooks/post-commit
 
         echo Setup filter
-        git config filter.sops-nix.clean ${sops-git-filter-clean}
-        git config filter.sops-nix.smudge ${sops-git-filter-smudge}
+        git config filter.sops-nix.clean sops-git-filter-clean
+        git config filter.sops-nix.smudge sops-git-filter-smudge
         git config filter.sops-nix.required true
-        git config diff.sops-nix.textconv ${sops-git-diff}
+        git config diff.sops-nix.textconv sops-git-diff
 
         echo Commit
         git add .
