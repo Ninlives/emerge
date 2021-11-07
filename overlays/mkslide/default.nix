@@ -9,6 +9,7 @@ final: prev: {
           gnumake
           texlive.combined.scheme-full
           pandoc
+          bashInteractive
           coreutils
           fd
           (callPackage ./slide-filter { })

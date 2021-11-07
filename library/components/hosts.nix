@@ -2,7 +2,7 @@
 with inputs;
 with nixpkgs.lib;
 with out-of-world;
-with nixpkgs;
+with pkgs;
 let
   mkFilter = name: action:
     writeShellScriptBin name ''
@@ -54,7 +54,7 @@ in {
       home-manager.users.${constant.user.name} = import dirs.home.top-level;
     })
     {
-      home-manager.users.${constan.user.name}.home.packages =
+      home-manager.users.${constant.user.name}.home.packages =
         [ sops-git-filter-clean sops-git-filter-smudge sops-git-diff ];
     }
   ];
