@@ -8,6 +8,8 @@ in {
       sarasa-gothic
       (nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
       twitter-color-emoji
+      source-han-serif-simplified-chinese
+      source-han-serif-traditional-chinese
     ];
 
     fontconfig.defaultFonts = {
