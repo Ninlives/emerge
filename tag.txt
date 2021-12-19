@@ -1,1 +1,1 @@
-update_lock
+update_cursor_theme

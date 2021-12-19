@@ -95,7 +95,7 @@ with pkgs.nixos-cn.gnome-themes; {
     "org/gnome/shell/extensions/user-theme".name = "Flat-Remix-Green-Dark";
 
     "org/gnome/desktop/interface" = {
-      cursor-theme = "Bibata_Classic";
+      cursor-theme = "Bibata-Modern-Classic";
       gtk-theme = "Flat-Remix-GTK-Green-Dark";
       icon-theme = "Gruvbox";
 
