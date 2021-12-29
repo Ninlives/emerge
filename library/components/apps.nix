@@ -77,6 +77,11 @@ with pkgs;
         # <<<sh>>>
         set -ex
         tmp=$(mktemp -d)
+        reboot=0
+        if [[ "$1" == "-r" ]];then
+          reboot=1
+          shift
+        fi
         keyFile=$1
         shift
         key="$tmp/key"
@@ -99,7 +104,13 @@ with pkgs;
         scp "$key" root@${host}:${key}
         rm "$key"
         nix copy -s --to ssh://root@${host} "${def}"
-        ssh root@${host} ${def}/bin/switch-to-configuration switch
+
+        if [[ $reboot -eq 1 ]];then
+          ssh root@${host} ${def}/bin/switch-to-configuration boot
+          ssh root@${host} reboot
+        else
+          ssh root@${host} ${def}/bin/switch-to-configuration switch
+        fi
         # >>>sh<<<
       '';
     };

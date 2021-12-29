@@ -12,7 +12,7 @@ in {
     loader.grub.device = "/dev/sda";
     initrd.availableKernelModules =
       [ "ata_piix" "uhci_hcd" "virtio_pci" "sr_mod" "virtio_blk" ];
-    kernelPackages = linuxPackages_5_14_hardened;
+    kernelPackages = linuxPackages_5_15_hardened;
     kernel.sysctl = {
       "net.ipv6.conf.${ifname}.use_tempaddr" = 0;
       "net.core.default_qdisc" = "fq";
