@@ -27,6 +27,7 @@ in {
     drv = prev.steam;
     bindFonts = true;
   };
+  steam-run = prev.steam.run;
   work-station = fakeFS {
     drv = prev.jetbrains.idea-ultimate;
     bind = {
