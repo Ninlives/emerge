@@ -30,7 +30,7 @@ with pkgs;
     commit = mkApp {
       drv = writeShellScriptBin "commit" ''
         export EDITOR=$(${coreutils}/bin/realpath $(which $EDITOR))
-        export PATH=${makeBinPath [ git nixFlakes coreutils ]}:/bin
+        export PATH=${makeBinPath [ git nix coreutils sops ]}
         pushd ${entry}
 
         echo Install hooks
