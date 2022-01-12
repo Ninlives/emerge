@@ -19,21 +19,24 @@
   fileSystems."/nix" = {
     device = "tower/circle/nix";
     fsType = "zfs";
+    options = [ "zfsutil" ];
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/0556-E01E";
+    device = "/dev/disk/by-label/BOOT";
     fsType = "vfat";
   };
 
   fileSystems."/chest" = {
     device = "tower/circle/chest";
     fsType = "zfs";
+    options = [ "zfsutil" ];
   };
 
   fileSystems."/space" = {
     device = "tower/circle/space";
     fsType = "zfs";
+    options = [ "zfsutil" ];
   };
 
   swapDevices = [ ];
@@ -42,5 +45,5 @@
   # High-DPI console
   console.font =
     lib.mkDefault "${pkgs.terminus_font}/share/consolefonts/ter-u28n.psf.gz";
-  boot.loader.grub.device = "/dev/nvme0n1";
+  boot.loader.grub.device = "nodev";
 }

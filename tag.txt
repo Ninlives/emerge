@@ -1,1 +1,1 @@
-Update_shadowsocks
+os_prober
