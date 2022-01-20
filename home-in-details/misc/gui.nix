@@ -6,7 +6,9 @@
     keepassxc
     tdesktop
     element-desktop
+    libreoffice
   ];
+  services.flameshot.enable = true;
 
   home.file.".face".source = inputs.data.content.resources + /avatar.jpg;
 

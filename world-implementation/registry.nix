@@ -13,7 +13,7 @@ in
   nix.systemFeatures =
     [ "benchmark" "big-parallel" "kvm" "nixos-test" "recursive-nix" ];
   nix.extraOptions = ''
-    experimental-features = recursive-nix flakes nix-command ca-references
+    experimental-features = recursive-nix flakes nix-command
     flake-registry = ${
       pkgs.writeText "flake-empty.json" (builtins.toJSON {
         flakes = [ ];

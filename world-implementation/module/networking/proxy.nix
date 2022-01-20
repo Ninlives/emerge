@@ -80,7 +80,7 @@ let
         }
         {
           type = "field";
-          inboundTag = [ "acl" "transparent" ];
+          inboundTag = [ "acl" ];
           ip = [ "geoip:cn" ];
           outboundTag = "direct";
         }

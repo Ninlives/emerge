@@ -5,7 +5,7 @@ let
     ${nixosConfig.hardware.pulseaudio.package}/bin/pactl \
       set-sink-port 3 '[Out] Speaker'
     ${nixosConfig.hardware.pulseaudio.package}/bin/pactl \
-      set-sink-volume 3 50%
+      set-sink-volume 3 70%
   '';
 in {
   systemd.user.services.fix-sound = {

@@ -2,31 +2,6 @@
 let
   inherit (pkgs) flameshot qt5 writeShellScript writeText xboxdrv;
 in {
-  systemd.user.services = {
-    flameshot = let
-      startFlameshot = writeShellScript "startFlameshot" ''
-        # Start flameshot later, otherwise the system tray icon may not shown.
-        # After all, we usually don't need screenshot immediately after boot.
-        sleep 20
-        ${flameshot}/bin/flameshot
-      '';
-    in {
-      description = "Flameshot";
-      wantedBy = [ "graphical-session.target" ];
-      after = [ "graphical-session-pre.target" ];
-      partOf = [ "graphical-session.target" ];
-
-      environment = {
-        QT_PLUGIN_PATH = "/run/current-system/sw/" + qt5.qtbase.qtPluginPrefix;
-      };
-
-      serviceConfig = {
-        ExecStart = "${startFlameshot}";
-        Restart = "on-abort";
-      };
-    };
-  };
-
   systemd.services = {
     xbox-controller = let
       xbox-config = writeText "conf" ''
