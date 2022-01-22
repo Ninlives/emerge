@@ -30,7 +30,7 @@ in {
 
   environment.systemPackages = [
     gnome3.gnome-tweaks
-    gnome3.networkmanagerapplet
+    pkgs.networkmanagerapplet
   ];
 
   systemd.packages = [ touchegg ];
