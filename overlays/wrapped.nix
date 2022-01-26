@@ -39,6 +39,7 @@ in {
   };
 
   wine-wechat = final.nixos-cn.wine-wechat.override {
+    scopedMount = true;
     fakeHome = "$HOME/.local/fakefs/wechat";
     extraMountPoints = { "/space/Share" = "/space/Share"; };
   };
