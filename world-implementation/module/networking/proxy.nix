@@ -100,7 +100,7 @@ let
       port = 443;
       users = [{
         inherit id;
-        alterId = 64;
+        alterId = 0;
       }];
     }];
     streamSettings = {

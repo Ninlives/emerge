@@ -1,1 +1,1 @@
-update
+update_proxy_settings

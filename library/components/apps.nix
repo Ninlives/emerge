@@ -92,7 +92,7 @@ with pkgs;
           while true;do
             echo 'Removing keyfile on server...'
             ssh root@${host} 'if [[ -e ${key} ]];then rm ${key};fi' \
-            && break || echo 'Failed, try again.'
+            && break || (echo 'Failed, try again.'; sleep 1)
           done
         }
         trap cleanup EXIT
