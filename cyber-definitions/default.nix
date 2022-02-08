@@ -6,9 +6,6 @@ in {
   imports = [
     ./machine.nix
     ./science.nix
-    ./beancount.nix
-    ./syncthing.nix
-    ./otp.nix
   ];
 
   nixpkgs.config.allowUnfree = true;

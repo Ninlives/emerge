@@ -10,7 +10,7 @@ let
 in
 {
   nix.package = pkgs.nixFlakes;
-  nix.systemFeatures =
+  nix.settings.system-features =
     [ "benchmark" "big-parallel" "kvm" "nixos-test" "recursive-nix" ];
   nix.extraOptions = ''
     experimental-features = recursive-nix flakes nix-command

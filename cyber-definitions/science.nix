@@ -60,6 +60,9 @@ in {
       "/".root = "/${dp.v-root-location}";
       "/${dp.v-secret-path}" = mkProxy dp.v-internal-port;
       "/${dp.w-secret-path}" = mkProxy dp.w-port;
+      
+      # Reverse proxy
+      "/${dp.r-secret-path}" = mkProxy dp.r-port;
     };
   };
 
@@ -77,10 +80,24 @@ in {
     inbounds = [
       (mkInbound dp.v-internal-port plh.v-id "/${dp.v-secret-path}")
       (mkInbound dp.w-port plh.w-id "/${dp.w-secret-path}")
+
+      # Reverse proxy
+      (mkInbound dp.r-port plh.r-id "/${dp.r-secret-path}" // { tag = "tunnel"; })
     ];
     outbounds = [{
       protocol = "freedom";
       settings = { };
+    }];
+
+    # Reverse proxy
+    reverse.portals = [{
+      tag = "portal";
+      domain = "reverse.proxy";
+    }];
+    routing.rules = [{
+      type = "field";
+      inboundTag = "tunnel";
+      outboundTag = "portal";
     }];
   };
 

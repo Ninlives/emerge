@@ -7,6 +7,7 @@ let
   t = k: tpl k ./data/telegram.yaml;
   f = k: tpl k ./data/fava.yaml;
   w = k: tpl k ./data/wireguard.yaml;
+  r = k: tpl k ./data/reverse.yaml;
 in
 {
   imports = [ ./token.nix ];
@@ -33,4 +34,6 @@ in
   sops.secrets.w-preshared-key = w "preshared-key";
   sops.secrets.w-server-private-key = w "server-private-key";
   sops.secrets.w-local-private-key = w "local-private-key";
+
+  sops.secrets.r-id = r "id";
 }
