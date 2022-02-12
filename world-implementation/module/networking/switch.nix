@@ -38,7 +38,7 @@ let
     ${doNotRedirect}
 
     ip46tables -t nat -A ${tag} -p tcp -j REDIRECT --to-ports ${
-      toString proxy.redirPort
+      toString proxy.port.redir
     } 2>/dev/null || true
     ip46tables -t nat -A OUTPUT -p tcp -j ${tag} 2>/dev/null || true
 

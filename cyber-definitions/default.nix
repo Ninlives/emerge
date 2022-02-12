@@ -10,7 +10,7 @@ in {
 
   nixpkgs.config.allowUnfree = true;
   security.acme.acceptTerms = true;
-  security.acme.email = "${dp.email}";
+  security.acme.defaults.email = "${dp.email}";
 
   networking.firewall.allowedTCPPorts = [ 80 443 ];
   networking.firewall.allowedUDPPorts = [ 443 ];

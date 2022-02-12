@@ -29,7 +29,7 @@ let
     inbounds = [
       {
         inherit sniffing;
-        port = redirPort;
+        port = port.redir;
         tag = "transparent";
         protocol = "dokodemo-door";
         settings = {
@@ -38,19 +38,20 @@ let
         };
         streamSettings.sockopt.tproxy = "redirect";
       }
-      {
-        listen = "127.0.0.1";
-        port = dp.w-internal-port;
-        tag = "wire";
-        protocol = "dokodemo-door";
-        settings = {
-          address = "127.0.0.1";
-          port = dp.w-internal-port;
-          network = "tcp,udp";
-        };
-      }
-      (socksInbound localPort "proxy")
-      (socksInbound aclPort "acl")
+      # {
+      #   listen = "127.0.0.1";
+      #   port = dp.w-internal-port;
+      #   tag = "wire";
+      #   protocol = "dokodemo-door";
+      #   settings = {
+      #     address = "127.0.0.1";
+      #     port = dp.w-internal-port;
+      #     network = "tcp,udp";
+      #   };
+      # }
+      (socksInbound port.local "proxy")
+      (socksInbound port.acl "acl")
+      (socksInbound port.reverse "tunnel")
     ];
 
     outbounds = [
@@ -61,16 +62,22 @@ let
         streamSettings.sockopt.mark = mark;
       }
       ({ tag = "proxy"; } // backend)
-      ({ tag = "guard"; } // (mkVmess plh.w-id dp.w-secret-path))
+      # ({ tag = "guard"; } // (mkVmess plh.w-id dp.w-secret-path))
+      # (mkVmess plh.r-id "/${dp.r-secret-path}" // { tag = "interconn"; })
     ];
 
     routing = {
       domainStrategy = "IPOnDemand";
       rules = [
+        # {
+        #   type = "field";
+        #   inboundTag = [ "wire" ];
+        #   outboundTag = "guard";
+        # }
         {
           type = "field";
-          inboundTag = [ "wire" ];
-          outboundTag = "guard";
+          inboundTag = [ "tunnel" ];
+          outboundTag = "interconn";
         }
         {
           type = "field";
@@ -96,7 +103,7 @@ let
   mkVmess = id: secretPath: {
     protocol = "vmess";
     settings.vnext = [{
-      address = "${dp.v-host}";
+      address = "${dp.v2ray.host}";
       port = 443;
       users = [{
         inherit id;
@@ -111,15 +118,15 @@ let
     };
   };
 
-  vmessBackend = mkVmess plh.v-id "/${dp.v-secret-path}";
+  vmessBackend = mkVmess plh."v2ray/id" "/${dp.v2ray.secret-path}";
 
   ssBackend = {
     protocol = "shadowsocks";
     settings.servers = [{
-      address = plh.s-server;
-      port = plh.s-port;
-      method = plh.s-method;
-      password = plh.s-password;
+      address = plh."shadowsocks/server";
+      port = plh."shadowsocks/port";
+      method = plh."shadowsocks/method";
+      password = plh."shadowsocks/password";
     }];
     streamSettings.sockopt.mark = mark;
   };

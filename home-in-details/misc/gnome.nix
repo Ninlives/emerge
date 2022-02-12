@@ -64,7 +64,7 @@ with pkgs.nixos-cn.gnome-themes; {
     "system/proxy".mode = "manual";
     "system/proxy/socks" = {
       host = proxy.address;
-      port = proxy.aclPort;
+      port = proxy.port.acl;
     };
 
     # "org/gnome/desktop/sound".allow-volume-above-100-percent = true;

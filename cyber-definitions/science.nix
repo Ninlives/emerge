@@ -31,38 +31,38 @@ let
     };
   };
 in {
-  networking.wireguard = {
-    enable = true;
-    interfaces.wg0 = {
-      ips = [ "${net.server.address}/${net.server.prefixLength}" ];
-      privateKeyFile = scrt.w-server-private-key.path;
-      listenPort = dp.w-internal-port;
-      peers = [{
-        publicKey = dp.w-local-public-key;
-        allowedIPs = [ net.subnet ];
-        presharedKeyFile = scrt.w-preshared-key.path;
-      }];
-    };
-  };
-  services.nginx.streamConfig = ''
-    server {
-      listen 0.0.0.0:${toString dp.h-port};
-      proxy_pass ${net.local.address}:${toString dp.h-port};
-    }
-  '';
-  networking.firewall.allowedUDPPorts = [ dp.w-internal-port ];
-  networking.firewall.allowedTCPPorts = [ dp.h-port ];
+  # networking.wireguard = {
+  #   enable = true;
+  #   interfaces.wg0 = {
+  #     ips = [ "${net.server.address}/${net.server.prefixLength}" ];
+  #     privateKeyFile = scrt.w-server-private-key.path;
+  #     listenPort = dp.w-internal-port;
+  #     peers = [{
+  #       publicKey = dp.w-local-public-key;
+  #       allowedIPs = [ net.subnet ];
+  #       presharedKeyFile = scrt.w-preshared-key.path;
+  #     }];
+  #   };
+  # };
+  # services.nginx.streamConfig = ''
+  #   server {
+  #     listen 0.0.0.0:${toString dp.ssh.port};
+  #     proxy_pass ${net.local.address}:${toString dp.ssh.port};
+  #   }
+  # '';
+  # networking.firewall.allowedUDPPorts = [ dp.w-internal-port ];
+  # networking.firewall.allowedTCPPorts = [ dp.ssh.port ];
 
-  services.nginx.virtualHosts.${dp.v-host} = {
+  services.nginx.virtualHosts.${dp.v2ray.host} = {
     forceSSL = true;
     enableACME = true;
     locations = {
-      "/".root = "/${dp.v-root-location}";
-      "/${dp.v-secret-path}" = mkProxy dp.v-internal-port;
-      "/${dp.w-secret-path}" = mkProxy dp.w-port;
+      "/".root = "/${dp.v2ray.root-location}";
+      "/${dp.v2ray.secret-path}" = mkProxy dp.v2ray.internal-port;
+      # "/${dp.w-secret-path}" = mkProxy dp.w-port;
       
       # Reverse proxy
-      "/${dp.r-secret-path}" = mkProxy dp.r-port;
+      # "/${dp.r-secret-path}" = mkProxy dp.r-port;
     };
   };
 
@@ -78,11 +78,11 @@ in {
       loglevel = "info";
     };
     inbounds = [
-      (mkInbound dp.v-internal-port plh.v-id "/${dp.v-secret-path}")
-      (mkInbound dp.w-port plh.w-id "/${dp.w-secret-path}")
+      (mkInbound dp.v2ray.internal-port plh."v2ray/id" "/${dp.v2ray.secret-path}")
+      # (mkInbound dp.w-port plh.w-id "/${dp.w-secret-path}")
 
       # Reverse proxy
-      (mkInbound dp.r-port plh.r-id "/${dp.r-secret-path}" // { tag = "tunnel"; })
+      # (mkInbound dp.r-port plh.r-id "/${dp.r-secret-path}" // { tag = "tunnel"; })
     ];
     outbounds = [{
       protocol = "freedom";
@@ -90,15 +90,15 @@ in {
     }];
 
     # Reverse proxy
-    reverse.portals = [{
-      tag = "portal";
-      domain = "reverse.proxy";
-    }];
-    routing.rules = [{
-      type = "field";
-      inboundTag = "tunnel";
-      outboundTag = "portal";
-    }];
+    # reverse.portals = [{
+    #   tag = "portal";
+    #   domain = "reverse.proxy";
+    # }];
+    # routing.rules = [{
+    #   type = "field";
+    #   inboundTag = "tunnel";
+    #   outboundTag = "portal";
+    # }];
   };
 
 }

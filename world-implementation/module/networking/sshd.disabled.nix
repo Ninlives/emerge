@@ -28,7 +28,7 @@ in {
         }
       ];
     };
-    networking.firewall.allowedTCPPorts = [ dp.h-port ];
+    networking.firewall.allowedTCPPorts = [ dp.ssh.port ];
     systemd.services.sshd.after = wireguardUnits;
     services.logind.lidSwitchExternalPower = "lock";
     revive.specifications.with-snapshot.boxes = [ /var/lib/ssh ];

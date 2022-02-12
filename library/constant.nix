@@ -10,10 +10,13 @@ with pkgs; {
     group = "outcha";
     user = group;
     address = "127.0.0.1";
-    localPort = 1080;
-    redirPort = 1081;
-    aclPort = 1082;
-    dnsPort = 1083;
+    port = {
+      local = 1080;
+      redir = 1081;
+      acl = 1082;
+      dns = 1083;
+      reverse = 1084;
+    };
   };
 
   user = rec {

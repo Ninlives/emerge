@@ -71,7 +71,7 @@ with pkgs;
         def = node.system.build.toplevel;
         key = "/var/lib/sops/key";
         dir = "/var/lib/sops";
-        host = node.secrets.decrypted.v-host;
+        host = node.secrets.decrypted.v2ray.host;
       in writeShellScriptBin "net" ''
         export PATH=${makeBinPath [ git openssh coreutils nixFlakes ]}
         # <<<sh>>>

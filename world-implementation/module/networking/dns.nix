@@ -3,7 +3,7 @@ let
   inherit (pkgs)
     writeShellScript writeShellScriptBin coreutils gnugrep gnused gnumake git;
   inherit (constant.seal) chest;
-  inherit (constant.proxy) dnsPort;
+  inherit (constant.proxy) port;
   conf-file = "${inputs.data.content.smartdns}";
 in {
   services.smartdns = {
@@ -38,7 +38,7 @@ in {
     enable = true;
     config = ''
       . {
-        forward . 127.0.0.1:${toString dnsPort} 127.0.0.1:76 {
+        forward . 127.0.0.1:${toString port.dns} 127.0.0.1:76 {
           policy sequential
         }
       }

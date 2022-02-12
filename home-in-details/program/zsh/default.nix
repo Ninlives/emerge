@@ -3,7 +3,7 @@ let
   inherit (pkgs)
     fetchFromGitHub sqlite nix-zsh-completions zsh-syntax-highlighting;
   inherit (lib) optionalAttrs;
-  inherit (constant.proxy) address localPort;
+  inherit (constant.proxy) address port;
   inherit (config.home) homeDirectory;
   histdb = fetchFromGitHub {
     owner = "larkery";
@@ -43,7 +43,7 @@ in {
           "docker-machine --storage-path $HOME/.local/docker/machine";
         docker = "docker --config $HOME/.config/docker";
         a = "ranger";
-        ssr = "all_proxy=socks5://${address}:${toString localPort}";
+        ssr = "all_proxy=socks5://${address}:${toString port.local}";
         open = "xdg-open";
       };
 

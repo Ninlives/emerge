@@ -9,7 +9,9 @@ let
   configPy = mergeFiles [
     (substituteAll {
       src = ./config.py;
-      inherit (proxy) address localPort aclPort;
+      inherit (proxy) address;
+      localPort = proxy.port.local;
+      aclPort = proxy.port.acl;
     })
     ./gruvbox.py
   ];

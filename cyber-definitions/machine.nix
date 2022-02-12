@@ -46,7 +46,7 @@ in {
     passwordAuthentication = false;
   };
 
-  users.users.root.openssh.authorizedKeys.keys = [ dp.h-auth ];
+  users.users.root.openssh.authorizedKeys.keys = [ dp.ssh.auth ];
 
-  nix.autoOptimiseStore = true;
+  nix.settings.auto-optimise-store = true;
 }
