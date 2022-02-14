@@ -1,8 +1,9 @@
 { ... }@inputs:
 with inputs;
 with nixpkgs.lib; {
-  mkNixOS = extraConfig:
+  mkNixOS = profile: extraConfig:
     let
+      specialArgs' = inputs.specialArgs // { inherit profile; };
       modules = [
         external.nixosModules.nixos-cn-registries
         external.nixosModules.nixos-cn
@@ -11,7 +12,7 @@ with nixpkgs.lib; {
         ({ ... }: {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          home-manager.extraSpecialArgs = specialArgs;
+          home-manager.extraSpecialArgs = specialArgs';
         })
 
         ({ ... }: {
@@ -28,31 +29,6 @@ with nixpkgs.lib; {
 
         ({ pkgs, ... }: {
           environment.systemPackages = [
-            (pkgs.writeTextDir "share/zsh/site-functions/_nix" ''
-              # <<<sh>>>
-              function _nix() {
-                local ifs_bk="$IFS"
-                local input=("''${(Q)words[@]}")
-                IFS=$'\n'
-                local res=($(NIX_GET_COMPLETIONS=$((CURRENT - 1)) "$input[@]"))
-                IFS="$ifs_bk"
-                local tpe="''${''${res[1]}%%>	*}"
-                local -a suggestions
-                declare -a suggestions
-                for suggestion in ''${res:1}; do
-                  # FIXME: This doesn't work properly if the suggestion word contains a `:`
-                  # itself
-                  suggestions+="''${suggestion/	/:}"
-                done
-                if [[ "$tpe" == filenames ]]; then
-                  compadd -f
-                fi
-                _describe 'nix' suggestions
-              }
-
-              _nix "$@"
-              # >>>sh<<<
-            '')
             (pkgs.writeShellScriptBin "emerge" ''
               app=$1
               shift
@@ -61,10 +37,13 @@ with nixpkgs.lib; {
           ];
         })
       ] ++ extraConfig;
-      preprocess =
-        nixpkgs.lib.nixosSystem { inherit system specialArgs modules; };
+      preprocess = nixpkgs.lib.nixosSystem {
+        inherit system modules;
+        specialArgs = specialArgs';
+      };
     in nixpkgs.lib.nixosSystem {
-      inherit system specialArgs;
+      inherit system;
+      specialArgs = specialArgs';
       modules = modules ++ (builtins.attrValues
         preprocess.config.home-manager.users.${constant.user.name}.nixosConfig);
     };

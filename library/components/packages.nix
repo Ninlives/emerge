@@ -15,7 +15,6 @@ with out-of-world; {
         modules = [
           (dirs.cyber.top-level + /image.nix)
           (dirs.world.option + /secrets.nix)
-          (dirs.secrets + /token.nix)
         ];
       };
     in os.config.system.build.image;

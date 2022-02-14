@@ -1,15 +1,14 @@
-{ config, pkgs, lib, baseModules, modules, allSpecialArgs, inputs, ... }:
+{ config, pkgs, lib, baseModules, modules, specialArgs, inputs, ... }:
 with lib;
 let
   children = mapAttrs (childName: childConfig:
     (inputs.nixpkgs.lib.nixosSystem {
-      inherit baseModules;
+      inherit baseModules specialArgs;
       system = config.nixpkgs.initialSystem;
       modules = (optionals childConfig.inheritParentConfig modules) ++ [{
         boot.loader.grub.device = mkOverride 0 "nodev";
         hack.specialisation = mkOverride 0 { };
       }] ++ [ childConfig.configuration ];
-      specialArgs = allSpecialArgs;
     }).config.system.build.toplevel) config.hack.specialisation;
 in {
   options.hack.specialisation = mkOption {

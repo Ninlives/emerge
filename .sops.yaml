@@ -1,4 +1,15 @@
+keys:
+  - &server DBF39C1CFAC86760C31C66F216748B49774F7A49
+  - &local BBD0D45C231BAA71FDA88D8A82D4D9EB41B53BCF
 creation_rules:
-  - pgp: >-
-      BBD0D45C231BAA71FDA88D8A82D4D9EB41B53BCF,
-      DBF39C1CFAC86760C31C66F216748B49774F7A49
+
+  - path_regex: .*/server/.*
+    pgp: *server
+
+  - path_regex: .*/local/.*
+    pgp: *local
+
+  - key_groups:
+    - pgp:
+      - *server
+      - *local

@@ -39,7 +39,7 @@ let
     # >>>sh<<<
   '';
 in {
-  nixosConfigurations.mlatus = mkNixOS [
+  nixosConfigurations.mlatus = mkNixOS "local" [
     dirs.world.top-level
     dirs.secrets
     sops-nix.nixosModules.sops
@@ -59,15 +59,9 @@ in {
     }
   ];
 
-  nixosConfigurations.wsl = mkNixOS [
-    dirs.world.wsl
-    ({ config, ... }: {
-      home-manager.users.${constant.user.name} = import dirs.home.wsl;
-    })
-  ];
-
   nixosConfigurations.cyber = nixpkgs.lib.nixosSystem {
-    inherit system specialArgs;
+    inherit system;
+    specialArgs = specialArgs // { profile = "server"; };
     modules = [
       dirs.cyber.top-level
       dirs.secrets

@@ -1,10 +1,9 @@
-{ config, lib, pkgs, modules, inputs, system, out-of-world, allSpecialArgs, ... }:
+{ config, lib, pkgs, modules, inputs, system, out-of-world, specialArgs, ... }:
 let
   inherit (config.lib.conf) entry;
   inherit (out-of-world.function) dotNixFilesFrom;
   eval = inputs.nixpkgs.lib.nixosSystem {
-    inherit system;
+    inherit system specialArgs;
     modules = modules ++ [{ disabledModules = dotNixFilesFrom ./.; }];
-    specialArgs = allSpecialArgs;
   };
 in { _module.args.alpha-world-line = eval.config; }

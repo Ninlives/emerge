@@ -1,4 +1,0 @@
-{ ... }: {
-  secrets.decrypted = import ./encrypt // {
-  };
-}

@@ -6,6 +6,8 @@ in {
   imports = [
     ./machine.nix
     ./science.nix
+    ./vaultwarden.nix
+    ./syncthing.nix
   ];
 
   nixpkgs.config.allowUnfree = true;

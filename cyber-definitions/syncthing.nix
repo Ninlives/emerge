@@ -1,18 +1,20 @@
 { config, ... }:
-let scrt = config.sops.secrets;
+let
+  scrt = config.sops.secrets;
+  dp = config.secrets.decrypted;
 in {
   services.syncthing = {
     enable = true;
     openDefaultPorts = true;
-    cert = scrt.s-cert-server.path;
-    key = scrt.s-key-server.path;
-    devices.local.id = config.secrets.decrypted.s-id-local;
-    relay.enable = false;
-    relay.providedBy = "Somebody";
+    cert = scrt."syncthing/server/cert.pem".path;
+    key = scrt."syncthing/server/key.pem".path;
+    devices.local.id = dp.syncthing.local.id;
+    # relay.enable = false;
+    # relay.providedBy = "Somebody";
   };
 
-  networking.firewall.allowedTCPPorts = with config.services.syncthing.relay; [
-    port
-    statusPort
-  ];
+  # networking.firewall.allowedTCPPorts = with config.services.syncthing.relay; [
+  #   port
+  #   statusPort
+  # ];
 }

@@ -16,7 +16,6 @@ with inputs; rec {
     [ "${entry}/secrets/keys/users" "${entry}/secrets/keys/hosts" ];
   specialArgs = {
     inherit out-of-world constant system inputs;
-    allSpecialArgs = specialArgs;
   };
 
   mergedOverlays = [

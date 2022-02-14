@@ -47,6 +47,7 @@ in {
   };
 
   users.users.root.openssh.authorizedKeys.keys = [ dp.ssh.auth ];
+  users.mutableUsers = false;
 
   nix.settings.auto-optimise-store = true;
 }

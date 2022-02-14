@@ -1,8 +1,10 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, profile, ... }:
 let
   inherit (pkgs) yaml2json runCommandLocal;
   inherit (builtins)
-    readFile fromJSON concatLists isString listToAttrs attrNames;
+    filter readFile fromJSON concatLists isString listToAttrs attrNames;
+  inherit (lib) removePrefix hasInfix;
+  inherit (lib.filesystem) listFilesRecursive;
   sopsFile = ./tokens.yaml;
   importYAML = path:
     fromJSON (readFile (runCommandLocal "content.json" { }
@@ -16,12 +18,24 @@ let
         else
           map (subkey: "${k}/${subkey}") (generateKeys attr.${k}))
         (attrNames attr));
-  in generateKeys content;
-in {
-  imports = [ ./token.nix ];
-  sops.defaultSopsFile = sopsFile;
-  sops.secrets = listToAttrs (map (k: {
+  in listToAttrs (map (k: {
     name = k;
     value = { };
-  }) keys);
+  }) (generateKeys content));
+  binaries = let
+    files = listFilesRecursive ./data;
+    filterFunc = f:
+      !(hasInfix (if profile == "local" then "/server/" else "/local/")
+        (toString f));
+  in listToAttrs (map (f: {
+    name = removePrefix ((toString ./data) + "/") (toString f);
+    value = {
+      format = "binary";
+      sopsFile = f;
+    };
+  }) (filter filterFunc files));
+in {
+  secrets.decrypted = import ./encrypt;
+  sops.defaultSopsFile = sopsFile;
+  sops.secrets = keys // binaries;
 }
