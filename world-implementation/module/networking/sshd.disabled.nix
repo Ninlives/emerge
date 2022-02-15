@@ -31,7 +31,10 @@ in {
     networking.firewall.allowedTCPPorts = [ dp.ssh.port ];
     systemd.services.sshd.after = wireguardUnits;
     services.logind.lidSwitchExternalPower = "lock";
-    revive.specifications.with-snapshot.boxes = [ /var/lib/ssh ];
+    revive.specifications.system.boxes = [{
+      src = /chest/System/Data/ssh;
+      dst = /var/lib/ssh;
+    }];
 
     programs.gnupg.agent.pinentryFlavor = "curses";
     users.users.${constant.user.name}.openssh.authorizedKeys.keys =

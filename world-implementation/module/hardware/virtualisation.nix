@@ -3,7 +3,10 @@ let
   inherit (pkgs) qemu_kvm virtmanager spice-gtk;
   inherit (constant) user;
 in {
-  revive.specifications.no-snapshot.boxes = [ /var/lib/libvirt ];
+  revive.specifications.system.boxes = [{
+    src = /Programs/libvirt;
+    dst = /var/lib/libvirt;
+  }];
   users.users.${user.name}.extraGroups = [ "libvirtd" "kvm" ];
 
   virtualisation.libvirtd = {

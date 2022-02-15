@@ -30,5 +30,8 @@ in {
     fi
   '';
 
-  persistent.boxes = [ ".config/ibus/rime" ];
+  persistent.boxes = [{
+    src = /Programs/rime;
+    dst = ".config/ibus/rime";
+  }];
 }

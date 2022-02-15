@@ -1,10 +1,6 @@
 { lib, pkgs }:
 with lib;
 with pkgs; {
-  seal = {
-    chest = /chest;
-    space = /space/Redirect;
-  };
   proxy = rec {
     mark = 187;
     group = "outcha";

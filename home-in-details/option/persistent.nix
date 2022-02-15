@@ -1,23 +1,31 @@
 { config, lib, pkgs, out-of-world, ... }:
 with lib;
 with lib.types;
-let inherit (out-of-world.function) home;
+let
+  inherit (out-of-world.function) home;
+  mapRevive = p:
+    if builtins.isAttrs p then
+      p // { dst = home p.dst; }
+    else {
+      inherit (p) src;
+      dst = home p.dst;
+    };
 in {
   options.persistent = {
     boxes = mkOption {
-      type = listOf str;
+      type = listOf (either str attrs);
       default = [ ];
     };
     scrolls = mkOption {
-      type = listOf str;
+      type = listOf (either str attrs);
       default = [ ];
     };
   };
 
   config = {
-    nixosConfig.persistent-boxes.revive.specifications.with-snapshot-home.boxes =
-      map home config.persistent.boxes;
-    nixosConfig.persistent-scrolls.revive.specifications.with-snapshot-home.scrolls =
-      map home config.persistent.scrolls;
+    nixosConfig.persistent-boxes.revive.specifications.user.boxes =
+      map mapRevive config.persistent.boxes;
+    nixosConfig.persistent-scrolls.revive.specifications.user.scrolls =
+      map mapRevive config.persistent.scrolls;
   };
 }

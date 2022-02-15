@@ -12,10 +12,9 @@ in {
     withNodeJs = true;
   };
   persistent.boxes = [
-    ".local/undodir"
-    ".local/share/nvim"
-
-    ".config/coc"
+    { src = /Programs/neovim/main/data; dst = ".local/share/nvim"; }
+    { src = /Programs/neovim/main/undo; dst = ".local/undodir"; }
+    { src = /Programs/neovim/coc; dst = ".config/coc"; }
   ];
 }
 

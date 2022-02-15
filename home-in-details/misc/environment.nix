@@ -3,6 +3,10 @@ let
   inherit (config.home) homeDirectory;
   inherit (constant) seal;
   inherit (lib.hm) dag;
+  Home = p: {
+    src = "/Home/${p}";
+    dst = p;
+  };
 in {
   home.sessionVariables = {
     EDITOR = "vi";
@@ -15,7 +19,7 @@ in {
 
   home.extraOutputsToInstall = [ "doc" "info" "devdoc" ];
 
-  persistent.boxes = [
+  persistent.boxes = map Home [
     "Desktop"
     "Documents"
     "Downloads"
@@ -24,14 +28,13 @@ in {
     "Public"
     "Templates"
     "Videos"
-    ".ssh"
-    ".gnupg"
-
-    ".local/fakefs"
-    ".local/share/nix"
-
-    ".cache/nix"
-    ".cache/nix-index"
+  ] ++ [
+    { src = /Programs/ssh; dst = ".ssh"; }
+    { src = /Programs/gnupg; dst = ".gnupg"; }
+    { src = /Programs/wrapped; dst = ".local/fakefs"; }
+    { src = /Programs/nix/data; dst = ".local/share/nix"; }
+    { src = /Programs/nix/cache; dst = ".cache/nix"; }
+    { src = /Programs/nix/index; dst = ".cache/nix-index"; }
   ];
 
   home.activation.scratch = dag.entryAfter [ "writeBoundary" ] ''

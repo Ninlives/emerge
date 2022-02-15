@@ -3,9 +3,11 @@
     enable = true;
     indicator = true;
   };
-  systemd.user.services.kdeconnect-indicator.Unit.PartOf = lib.mkForce [];
-  systemd.user.services.kdeconnect-indicator.Unit.After = [ "graphical-session.target" ];
-  systemd.user.services.kdeconnect-indicator.Service.ExecStartPre = "${pkgs.coreutils}/bin/sleep 20";
+  systemd.user.services.kdeconnect-indicator.Unit.PartOf = lib.mkForce [ ];
+  systemd.user.services.kdeconnect-indicator.Unit.After =
+    [ "graphical-session.target" ];
+  systemd.user.services.kdeconnect-indicator.Service.ExecStartPre =
+    "${pkgs.coreutils}/bin/sleep 20";
   nixosConfig.kdeconnect-ports = {
     networking.firewall.allowedTCPPorts = [ 22 ];
     networking.firewall.allowedTCPPortRanges = [{
@@ -18,9 +20,21 @@
     }];
   };
   persistent.boxes = [
-    ".config/kdeconnect"
-    ".config/kde.org"
-    ".local/share/kpeople"
-    ".local/share/kpeoplevcard"
+    {
+      src = /Programs/kdeconnect/config/main;
+      dst = ".config/kdeconnect";
+    }
+    {
+      src = /Programs/kdeconnect/config/kde.org;
+      dst = ".config/kde.org";
+    }
+    {
+      src = /Programs/kdeconnect/data/kpeople;
+      dst = ".local/share/kpeople";
+    }
+    {
+      src = /Programs/kdeconnect/data/kpeoplevcard;
+      dst = ".local/share/kpeoplevcard";
+    }
   ];
 }

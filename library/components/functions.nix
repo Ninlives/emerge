@@ -24,7 +24,16 @@ with nixpkgs.lib; {
             type = "git";
             url = "file://${toString entry}";
           };
-          revive.specifications.with-snapshot-home.boxes = [ entry secrets ];
+          revive.specifications.user.boxes = [
+            {
+              src = /Home/Emerge;
+              dst = entry;
+            }
+            {
+              src = /Home/Secrets;
+              dst = secrets;
+            }
+          ];
         })
 
         ({ pkgs, ... }: {

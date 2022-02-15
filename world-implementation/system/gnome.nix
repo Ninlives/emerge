@@ -28,21 +28,28 @@ in {
   services.gnome.tracker-miners.enable = false;
   services.gnome.tracker.enable = false;
 
-  environment.systemPackages = [
-    gnome3.gnome-tweaks
-    pkgs.networkmanagerapplet
-  ];
+  environment.systemPackages =
+    [ gnome3.gnome-tweaks pkgs.networkmanagerapplet ];
 
   systemd.packages = [ touchegg ];
   systemd.services.touchegg.wantedBy = [ "multi-user.target" ];
 
-  revive.specifications.with-snapshot-home.boxes = [
-    "/home/${mainUser}/.config/goa-1.0"
-    "/home/${mainUser}/.local/share/keyrings"
-  ];
-
-  revive.specifications.no-snapshot-home.boxes = [
-    "/home/${mainUser}/.local/share/geary"
-    "/home/${mainUser}/.config/geary"
+  revive.specifications.user.boxes = [
+    {
+      src = /Programs/gnome/data/keyrings;
+      dst = "/home/${mainUser}/.local/share/keyrings";
+    }
+    {
+      src = /Programs/gnome/data/geary;
+      dst = "/home/${mainUser}/.local/share/geary";
+    }
+    {
+      src = /Programs/gnome/state/goa;
+      dst = "/home/${mainUser}/.config/goa-1.0";
+    }
+    {
+      src = /Programs/gnome/state/geary;
+      dst = "/home/${mainUser}/.config/geary";
+    }
   ];
 }

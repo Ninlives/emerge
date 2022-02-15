@@ -1,13 +1,14 @@
 { config, lib, pkgs, alpha-world-line, out-of-world, ... }:
 let
-  inherit (pkgs) yubico-pam;
+  inherit (pkgs) pam_u2f;
   inherit (out-of-world) dirs;
   inherit (lib) mkForce foldl;
   inherit (builtins) appendContext getContext;
+  scrt = config.sops.secrets;
 
   crpath = "/var/lib/yubico";
   yubico-rule = control:
-    "auth ${control} ${yubico-pam}/lib/security/pam_yubico.so mode=challenge-response chalresp_path=${crpath}";
+    "auth ${control} ${pam_u2f}/lib/security/pam_u2f.so authfile=${scrt.u2f.path} origin=pam://mlatus appid=pam://auth cue";
 
   pam-service-config = alpha-world-line.security.pam.services;
 
@@ -35,5 +36,4 @@ let
     in { text = mkForce result; }) pam-service-config;
 in {
   security.pam.services = patched-pam-text;
-  revive.specifications.with-snapshot.boxes = [ crpath ];
 }

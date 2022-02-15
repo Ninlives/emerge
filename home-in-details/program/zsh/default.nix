@@ -1,7 +1,6 @@
 { config, pkgs, lib, constant, ... }:
 let
-  inherit (pkgs)
-    fetchFromGitHub sqlite nix-zsh-completions zsh-syntax-highlighting;
+  inherit (pkgs) fetchFromGitHub sqlite zsh-syntax-highlighting;
   inherit (lib) optionalAttrs;
   inherit (constant.proxy) address port;
   inherit (config.home) homeDirectory;
@@ -22,7 +21,20 @@ in {
   home.file.".bashrc".text = ''
     export HISTFILE=${homeDirectory}/.local/history/bash_history
   '';
-  persistent.boxes = [ ".local/z" ".config/zsh" ".local/history" ];
+  persistent.boxes = [
+    {
+      src = /Programs/shell/history;
+      dst = ".local/history";
+    }
+    {
+      src = /Programs/shell/zsh/z;
+      dst = ".local/z";
+    }
+    {
+      src = /Programs/shell/zsh/config;
+      dst = ".config/zsh";
+    }
+  ];
 
   programs = {
     zsh = rec {
@@ -68,17 +80,11 @@ in {
         theme = "lam";
       };
 
-      plugins = [{
-        src = nix-zsh-completions.src;
-        name = "nix-zsh-completions";
-      }];
-
       initExtra = ''
         # <<<sh>>>
         source ${zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
         source ${autopair}/autopair.zsh
         source ${histdb}/sqlite-history.zsh
-        prompt_nix_shell_setup
 
         _zsh_autosuggest_strategy_histdb_top() {
           local query="select commands.argv from

@@ -34,5 +34,8 @@ in {
     };
   };
 
-  persistent.boxes = [ ".local/tldrc" ];
+  persistent.boxes = [{
+    src = /Programs/tldr;
+    dst = ".local/tldrc";
+  }];
 }

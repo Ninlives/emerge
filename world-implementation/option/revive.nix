@@ -6,6 +6,20 @@ let
   inherit (constant) user;
   cfg = config.revive;
   mount = "${pkgs.utillinux}/bin/mount";
+  mapping = mkOptionType {
+    name = "mapping";
+    check = x:
+      builtins.isAttrs x && x ? src && x ? dst && path.check x.src
+      && path.check x.dst;
+  };
+  pathToMapping = p:
+    if builtins.isAttrs p then
+      p
+    else {
+      src = p;
+      dst = p;
+    };
+  pathsToMappings = map pathToMapping;
 in {
   options.revive = {
     enable = mkOption {
@@ -28,12 +42,14 @@ in {
             default = "root";
           };
           boxes = mkOption {
-            type = listOf path;
+            type = listOf (either mapping path);
             default = [ ];
+            apply = pathsToMappings;
           };
           scrolls = mkOption {
-            type = listOf path;
+            type = listOf (either mapping path);
             default = [ ];
+            apply = pathsToMappings;
           };
         };
       }));
@@ -49,23 +65,32 @@ in {
           user = icfg.user;
           group = icfg.group;
           run = "${utillinux}/bin/runuser -u ${user} -g ${group} --";
-        in (concatMapStringsSep "\n" (path: ''
-          echo Reviving ${path}
-          mkdir -p '${prefix}/${path}' 
-          chown ${user} '${prefix}/${path}' 
-          chgrp ${group} '${prefix}/${path}' 
-          ${run} mkdir -p '${path}'
-          mount --bind '${prefix}/${path}' '${path}'
-        '') (map toString icfg.boxes)) + (concatMapStringsSep "\n" (path: ''
-          echo Reviving ${path}
-          touch '${prefix}/${path}' 
-          chown ${user} '${prefix}/${path}' 
-          chgrp ${group} '${prefix}/${path}' 
-          ${run} mkdir -p '${dirOf path}'
-          ${run} touch '${path}'
-          mount --bind '${prefix}/${path}' '${path}'
-        '') (map toString icfg.scrolls))) (filterAttrs
-          (n: v: v.seal != null && (v.boxes != [ ] || v.scrolls != [ ]))
-          cfg.specifications)));
+        in (concatMapStringsSep "\n" (mapping:
+          let
+            src = toString mapping.src;
+            dst = toString mapping.dst;
+          in ''
+            echo Reviving ${dst} from ${prefix}/${src}
+            mkdir -p '${prefix}/${src}' 
+            chown ${user} '${prefix}/${src}' 
+            chgrp ${group} '${prefix}/${src}' 
+            ${run} mkdir -p '${dst}'
+            mount --bind '${prefix}/${src}' '${dst}'
+          '') icfg.boxes) + (concatMapStringsSep "\n" (mapping:
+            let
+              src = toString mapping.src;
+              dst = toString mapping.dst;
+            in ''
+              echo Reviving ${dst} from ${prefix}/${src}
+              mkdir -p '${prefix}/${dirOf src}'
+              touch '${prefix}/${src}' 
+              chown ${user} '${prefix}/${src}' 
+              chgrp ${group} '${prefix}/${src}' 
+              ${run} mkdir -p '${dirOf dst}'
+              ${run} touch '${dst}'
+              mount --bind '${prefix}/${src}' '${dst}'
+            '') icfg.scrolls)) (filterAttrs
+              (n: v: v.seal != null && (v.boxes != [ ] || v.scrolls != [ ]))
+              cfg.specifications)));
   };
 }

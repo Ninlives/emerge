@@ -11,8 +11,16 @@ in {
   services.printing.enable = true;
   services.printing.drivers = [ gutenprint gutenprintBin ];
 
-  revive.specifications.with-snapshot.boxes =
-    [ /etc/NetworkManager/system-connections /var/lib/bluetooth ];
+  revive.specifications.system.boxes = [
+    {
+      src = /Data/network-connections;
+      dst = /etc/NetworkManager/system-connections;
+    }
+    {
+      src = /Data/bluetooth;
+      dst = /var/lib/bluetooth;
+    }
+  ];
 
   time.timeZone = "Asia/Shanghai";
 

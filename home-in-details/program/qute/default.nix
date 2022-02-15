@@ -29,5 +29,14 @@ in {
     })
   ];
 
-  persistent.boxes = [ ".local/share/qutebrowser" ".config/qutebrowser" ];
+  persistent.boxes = [
+    {
+      src = /Programs/qute/data;
+      dst = ".local/share/qutebrowser";
+    }
+    {
+      src = /Programs/qute/config;
+      dst = ".config/qutebrowser";
+    }
+  ];
 }

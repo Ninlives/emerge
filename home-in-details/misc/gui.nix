@@ -18,9 +18,13 @@
   xdg.mimeApps.associations.added."application/msword" = "writer.desktop";
 
   persistent.boxes = [
-    ".local/share/TelegramDesktop"
-    ".config/keepassxc"
-    ".cache/keepassxc"
-    ".config/Element"
+    {
+      src = /Programs/telegram;
+      dst = ".local/share/TelegramDesktop";
+    }
+    {
+      src = /Programs/element;
+      dst = ".config/Element";
+    }
   ];
 }

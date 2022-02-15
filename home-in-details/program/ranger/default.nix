@@ -61,5 +61,8 @@ in {
 
   home.sessionVariables = { BAT_THEME = "gruvbox-dark"; };
 
-  persistent.boxes = [ ".local/share/ranger" ];
+  persistent.boxes = [{
+    src = /Programs/ranger;
+    dst = ".local/share/ranger";
+  }];
 }

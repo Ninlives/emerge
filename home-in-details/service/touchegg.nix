@@ -18,5 +18,8 @@ in {
   };
 
   home.packages = [ crow-translate ];
-  persistent.boxes = [ ".config/Crow Translate" ];
+  persistent.boxes = [{
+    src = /Programs/crow-translate;
+    dst = ".config/Crow Translate";
+  }];
 }

@@ -45,7 +45,7 @@ in {
     sops-nix.nixosModules.sops
 
     ({ config, ... }: {
-      sops.encryptedSSHKeyPaths = [ "/var/lib/sops/local" ];
+      sops.encryptedSSHKeyPaths = [ "/chest/System/Data/sops/local" ];
       system.activationScripts.pre-sops.deps =
         mkIf config.revive.enable [ "revive" ];
       users.users.${constant.user.name}.extraGroups =

@@ -1,25 +1,20 @@
 { config, pkgs, constant, ... }:
-let
-  inherit (constant) user seal;
-  inherit (seal) chest space;
+let inherit (constant) user;
 in {
-  revive.specifications.with-snapshot.seal = chest;
-  revive.specifications.no-snapshot.seal = space;
-
-  revive.specifications.with-snapshot-home = {
-    seal = chest;
+  revive.specifications.system.seal = "/chest/System";
+  revive.specifications.user = {
+    seal = "/chest/User";
     user = user.name;
     group = config.users.groups.users.name;
   };
-  revive.specifications.no-snapshot-home = {
-    seal = space;
-    user = user.name;
-    group = config.users.groups.users.name;
-  };
-
   fileSystems."/chest".neededForBoot = true;
-  fileSystems."/space".neededForBoot = true;
 
-  revive.specifications.with-snapshot-home.boxes = [ "${user.config.home}/.android" ];
-  revive.specifications.with-snapshot.boxes = [ /var/lib/sops ];
+  revive.specifications.user.boxes = [{
+    src = /Programs/adb;
+    dst = "${user.config.home}/.android";
+  }];
+  revive.specifications.system.boxes = [{
+    src = /Data/sops;
+    dst = /var/lib/sops;
+  }];
 }
