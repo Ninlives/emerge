@@ -62,7 +62,7 @@ in {
       # "/${dp.w-secret-path}" = mkProxy dp.w-port;
       
       # Reverse proxy
-      # "/${dp.r-secret-path}" = mkProxy dp.r-port;
+      "/${dp.reverse-proxy.secret-path}" = mkProxy dp.reverse-proxy.port;
     };
   };
 
@@ -82,7 +82,7 @@ in {
       # (mkInbound dp.w-port plh.w-id "/${dp.w-secret-path}")
 
       # Reverse proxy
-      # (mkInbound dp.r-port plh.r-id "/${dp.r-secret-path}" // { tag = "tunnel"; })
+      (mkInbound dp.reverse-proxy.port plh."reverse-proxy/id" "/${dp.reverse-proxy.secret-path}" // { tag = "tunnel"; })
     ];
     outbounds = [{
       protocol = "freedom";
@@ -90,15 +90,15 @@ in {
     }];
 
     # Reverse proxy
-    # reverse.portals = [{
-    #   tag = "portal";
-    #   domain = "reverse.proxy";
-    # }];
-    # routing.rules = [{
-    #   type = "field";
-    #   inboundTag = "tunnel";
-    #   outboundTag = "portal";
-    # }];
+    reverse.portals = [{
+      tag = "portal";
+      domain = plh."reverse-proxy/domain";
+    }];
+    routing.rules = [{
+      type = "field";
+      inboundTag = "tunnel";
+      outboundTag = "portal";
+    }];
   };
 
 }

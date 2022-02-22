@@ -8,6 +8,7 @@ in {
     ./science.nix
     ./vaultwarden.nix
     ./syncthing.nix
+    ./vikunja.nix
   ];
 
   nixpkgs.config.allowUnfree = true;

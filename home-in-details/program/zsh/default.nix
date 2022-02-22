@@ -1,6 +1,6 @@
 { config, pkgs, lib, constant, ... }:
 let
-  inherit (pkgs) fetchFromGitHub sqlite zsh-syntax-highlighting;
+  inherit (pkgs) fetchFromGitHub sqlite zsh-syntax-highlighting runCommandLocal;
   inherit (lib) optionalAttrs;
   inherit (constant.proxy) address port;
   inherit (config.home) homeDirectory;
@@ -70,13 +70,18 @@ in {
           "git"
           "vi-mode"
           "extract"
-          "taskwarrior"
           # "tmux"
           "history-substring-search"
           "colored-man-pages"
         ];
 
-        custom = "${./config}";
+        custom = toString (runCommandLocal "custom" { redirPort = port.redir; } ''
+          mkdir -p $out
+          cp -r ${./config}/. $out/.
+          find $out -type f -print0 | while read -d "" f;do
+            substituteAllInPlace "$f"
+          done
+        '');
         theme = "lam";
       };
 

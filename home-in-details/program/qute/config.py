@@ -1,9 +1,10 @@
 from qutebrowser.api import cmdutils, message
+from subprocess import call
 
 config.load_autoconfig(True)
 
-acl_proxy    = 'socks://@address@:@aclPort@'
-global_proxy = 'socks://@address@:@localPort@'
+acl_proxy    = 'socks://@sPROXY_ADDRESS@:@sACL_PORT@'
+global_proxy = 'socks://@sPROXY_ADDRESS@:@sLOCAL_PORT@'
 
 c.content.javascript.can_access_clipboard = True;
 c.content.proxy     = acl_proxy
@@ -25,3 +26,5 @@ def toggle_proxy():
     else:
         c.content.proxy = global_proxy
         message.info(f"Switch proxy to {global_proxy}")
+
+call(['@sKEYCTL@', 'new_session', 'qute'])

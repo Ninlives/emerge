@@ -12,6 +12,7 @@ with pkgs; {
       acl = 1082;
       dns = 1083;
       reverse = 1084;
+      wormhole = 1085;
     };
   };
 

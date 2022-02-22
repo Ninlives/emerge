@@ -19,6 +19,15 @@ let
       udp = false;
     };
   };
+  dokodemoInbound = port: tag: {
+    inherit port tag sniffing;
+    protocol = "dokodemo-door";
+    settings = {
+      network = "tcp,udp";
+      followRedirect = true;
+    };
+    streamSettings.sockopt.tproxy = "redirect";
+  };
 
   configWith = backend: {
     log = {
@@ -27,17 +36,8 @@ let
       loglevel = "info";
     };
     inbounds = [
-      {
-        inherit sniffing;
-        port = port.redir;
-        tag = "transparent";
-        protocol = "dokodemo-door";
-        settings = {
-          network = "tcp,udp";
-          followRedirect = true;
-        };
-        streamSettings.sockopt.tproxy = "redirect";
-      }
+      (dokodemoInbound port.redir "transparent")
+      (dokodemoInbound port.wormhole "wormhole")
       # {
       #   listen = "127.0.0.1";
       #   port = dp.w-internal-port;
@@ -63,7 +63,9 @@ let
       }
       ({ tag = "proxy"; } // backend)
       # ({ tag = "guard"; } // (mkVmess plh.w-id dp.w-secret-path))
-      # (mkVmess plh.r-id "/${dp.r-secret-path}" // { tag = "interconn"; })
+      (mkVmess plh."reverse-proxy/id" "/${dp.reverse-proxy.secret-path}" // {
+        tag = "interconn";
+      })
     ];
 
     routing = {
@@ -76,7 +78,7 @@ let
         # }
         {
           type = "field";
-          inboundTag = [ "tunnel" ];
+          inboundTag = [ "wormhole" "tunnel" ];
           outboundTag = "interconn";
         }
         {

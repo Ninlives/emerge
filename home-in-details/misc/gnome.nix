@@ -88,7 +88,7 @@ with pkgs.nixos-cn.gnome-themes; {
       "FeelUOwn.desktop"
       "org.keepassxc.KeePassXC.desktop"
       "telegramdesktop.desktop"
-      "firefox.desktop"
+      "org.qutebrowser.qutebrowser.desktop"
       "steam.desktop"
     ];
 

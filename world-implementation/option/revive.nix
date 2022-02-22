@@ -67,28 +67,28 @@ in {
           run = "${utillinux}/bin/runuser -u ${user} -g ${group} --";
         in (concatMapStringsSep "\n" (mapping:
           let
-            src = toString mapping.src;
+            src = builtins.toPath "${prefix}/${toString mapping.src}";
             dst = toString mapping.dst;
           in ''
-            echo Reviving ${dst} from ${prefix}/${src}
-            mkdir -p '${prefix}/${src}' 
-            chown ${user} '${prefix}/${src}' 
-            chgrp ${group} '${prefix}/${src}' 
+            echo Reviving ${dst} from ${src}
+            mkdir -p '${src}' 
+            chown ${user} '${src}' 
+            chgrp ${group} '${src}' 
             ${run} mkdir -p '${dst}'
-            mount --bind '${prefix}/${src}' '${dst}'
+            mount --bind '${src}' '${dst}'
           '') icfg.boxes) + (concatMapStringsSep "\n" (mapping:
             let
-              src = toString mapping.src;
+              src = builtins.toPath "${prefix}/${toString mapping.src}";
               dst = toString mapping.dst;
             in ''
-              echo Reviving ${dst} from ${prefix}/${src}
-              mkdir -p '${prefix}/${dirOf src}'
-              touch '${prefix}/${src}' 
-              chown ${user} '${prefix}/${src}' 
-              chgrp ${group} '${prefix}/${src}' 
+              echo Reviving ${dst} from ${src}
+              mkdir -p '${dirOf src}'
+              touch '${src}' 
+              chown ${user} '${src}' 
+              chgrp ${group} '${src}' 
               ${run} mkdir -p '${dirOf dst}'
               ${run} touch '${dst}'
-              mount --bind '${prefix}/${src}' '${dst}'
+              mount --bind '${src}' '${dst}'
             '') icfg.scrolls)) (filterAttrs
               (n: v: v.seal != null && (v.boxes != [ ] || v.scrolls != [ ]))
               cfg.specifications)));

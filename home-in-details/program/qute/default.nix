@@ -1,6 +1,6 @@
 { config, pkgs, lib, constant, ... }:
 let
-  inherit (pkgs) qutebrowser substituteAll symlinkJoin makeWrapper;
+  inherit (pkgs) qutebrowser substituteAll symlinkJoin makeWrapper keyutils writeShellScript;
   inherit (constant) proxy;
   inherit (lib) fold optionalAttrs mkMerge mkIf;
   inherit (builtins) readFile;
@@ -9,9 +9,11 @@ let
   configPy = mergeFiles [
     (substituteAll {
       src = ./config.py;
-      inherit (proxy) address;
-      localPort = proxy.port.local;
-      aclPort = proxy.port.acl;
+
+      sPROXY_ADDRESS = proxy.address;
+      sLOCAL_PORT = proxy.port.local;
+      sACL_PORT = proxy.port.acl;
+      sKEYCTL = "${keyutils}/bin/keyctl";
     })
     ./gruvbox.py
   ];

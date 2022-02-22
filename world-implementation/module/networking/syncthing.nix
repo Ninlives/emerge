@@ -17,4 +17,9 @@ in {
       devices = [ "server" ];
     };
   };
+
+  revive.specifications.user.boxes = [{
+    src = /Programs/syncthing;
+    dst = "${constant.user.config.home}/.local/share/syncthing";
+  }];
 }

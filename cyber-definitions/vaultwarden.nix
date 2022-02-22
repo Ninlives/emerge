@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 let
   plh = config.sops.placeholder;
   tpl = config.sops.templates;
@@ -36,7 +36,6 @@ in {
     config = {
       domain = "https://${dp.vaultwarden.host}";
       signupsAllowed = false;
-      sendsAllowed = false;
       emergencyAccessAllowed = false;
       websocketEnabled = true;
       websocketAddress = "127.0.0.1";
@@ -46,12 +45,18 @@ in {
     };
     environmentFile = tpl.vaultwarden.path;
     backupDir = backupDirPath;
+    webVaultPackage = pkgs.vaultwarden-vault.overrideAttrs (_: {
+      src = pkgs.fetchurl {
+        url = "https://github.com/dani-garcia/bw_web_builds/releases/download/v2.25.1b/bw_web_v2.25.1b.tar.gz";
+        sha256 = "sha256-YZu/aeQJohmrsNMTVudQtRE8GT3FUxp0IDU7VWAgAAE=";
+      };
+    });
   };
 
   systemd.services.backup-vaultwarden.serviceConfig = {
     Group = sync-group;
     StateDirectory = backupDir;
-    StateDirectoryMode = "0775";
+    StateDirectoryMode = "0770";
   };
 
   systemd.services.backup-vaultwarden.aliases = lib.mkForce [];
