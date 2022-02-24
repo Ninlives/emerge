@@ -9,6 +9,7 @@ in {
     ./vaultwarden.nix
     ./syncthing.nix
     ./vikunja.nix
+    ./trilium.nix
   ];
 
   nixpkgs.config.allowUnfree = true;

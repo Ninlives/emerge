@@ -45,6 +45,7 @@ in {
         chmod +x $out/scope.sh
 
         sed -i 's#set preview_script .*#set preview_script '$out/scope.sh'#' $out/rc.conf
+        sed -i 's#set preview_images_method .*#set preview_images_method kitty#' $out/rc.conf
 
         cat ${compressCommand} >> $out/commands.py
       '';

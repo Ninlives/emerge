@@ -13,7 +13,7 @@ c.auto_save.session = True
 
 config.bind('J', 'tab-prev')
 config.bind('K', 'tab-next')
-config.bind('<Ctrl-p>', 'spawn --userscript qute-keepass -p ~/.config/nixpkgs/security/data/Password.kdbx', mode='insert')
+config.bind('<Ctrl-p>', 'spawn --userscript @sVAULTWARDEN_SCRIPT@', mode='insert')
 
 @cmdutils.register()
 def toggle_proxy():
