@@ -51,8 +51,8 @@ show_all_items(){
 
 action(){
     bw list items|jq -r '.[]|select(.id == "'"$1"'")|(.login.username,.login.password)'| {
-        read username;
-        read password;
+        read -r username;
+        read -r password;
         case "$2" in
             10) echo $username|xclip -in -selection clipboard
                 ;;
@@ -149,7 +149,9 @@ set_session_key(){
     fi
 }
 
+echo 'message-info "Checking authentication status..."' >> "$QUTE_FIFO"
 if [[ $(bw status | jq -r '.["status"]') == "unauthenticated" ]];then
+    echo 'message-info "Logging in..."' >> "$QUTE_FIFO"
     bw config server https://@sVAULTWARDEN_HOST@
     export BW_CLIENTID=$(cat '@sVAULTWARDEN_CLIENTID@')
     export BW_CLIENTSECRET=$(cat '@sVAULTWARDEN_CLIENTSECRET@')

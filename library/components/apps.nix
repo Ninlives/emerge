@@ -45,7 +45,7 @@ with pkgs;
         #!${runtimeShell}
         if [[ -e .commit-unfinished ]];then
           rm .commit-unfinished
-          git log --format=%B -n 1|tr -d ':/\n'|tr -d "'"|tr '[:space:]' '_' > tag.txt
+          git log --format=%B -n 1|tr -d ':/\n'|tr -d "'"|tr '[:space:]' '_'|tr ';' '-' > tag.txt
           git add tag.txt
           git commit --amend -C HEAD --no-verify
         fi

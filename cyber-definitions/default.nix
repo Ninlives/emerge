@@ -10,6 +10,7 @@ in {
     ./syncthing.nix
     ./vikunja.nix
     ./trilium.nix
+    ./maddy.nix
   ];
 
   nixpkgs.config.allowUnfree = true;

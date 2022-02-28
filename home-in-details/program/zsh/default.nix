@@ -1,20 +1,14 @@
 { config, pkgs, lib, constant, ... }:
 let
-  inherit (pkgs) fetchFromGitHub sqlite zsh-syntax-highlighting runCommandLocal;
+  inherit (pkgs) fetchFromGitHub sqlite zsh-syntax-highlighting runCommandLocal zsh-vi-mode zsh-autopair;
   inherit (lib) optionalAttrs;
   inherit (constant.proxy) address port;
   inherit (config.home) homeDirectory;
   histdb = fetchFromGitHub {
     owner = "larkery";
     repo = "zsh-histdb";
-    rev = "4274de7c1bca84f440fb0125e6931c1f75ad5e29";
-    sha256 = "1zh3r090jh6n6xwb4d2qvrhdhw35pc48j74hvkwsq06g62382zk3";
-  };
-  autopair = fetchFromGitHub {
-    owner = "hlissner";
-    repo = "zsh-autopair";
-    rev = "34a8bca0c18fcf3ab1561caef9790abffc1d3d49";
-    sha256 = "1h0vm2dgrmb8i2pvsgis3lshc5b0ad846836m62y8h3rdb3zmpy1";
+    rev = "30797f0c50c31c8d8de32386970c5d480e5ab35d";
+    sha256 = "sha256-PQIFF8kz+baqmZWiSr+wc4EleZ/KD8Y+lxW2NT35/bg=";
   };
 in {
   home.packages = [ sqlite ];
@@ -42,8 +36,6 @@ in {
       dotDir = ".config/zsh";
       enableCompletion = true;
       enableAutosuggestions = true;
-      history.size = 2147483647;
-      history.save = 2147483647;
       history.path = "${homeDirectory}/.local/history/zsh_history";
 
       shellAliases = {
@@ -51,16 +43,12 @@ in {
         etr = "trans en:zh -shell";
         ztr = "trans zh:en -shell";
         axel = "axel -n 128 -a";
-        docker-machine =
-          "docker-machine --storage-path $HOME/.local/docker/machine";
-        docker = "docker --config $HOME/.config/docker";
         a = "ranger";
         ssr = "all_proxy=socks5://${address}:${toString port.local}";
         open = "xdg-open";
       };
 
       sessionVariables = {
-        ZSH_TMUX_AUTOSTART = true;
         HISTDB_FILE = "${homeDirectory}/${dotDir}/zsh-history.db";
       };
 
@@ -68,9 +56,7 @@ in {
         enable = true;
         plugins = [
           "git"
-          "vi-mode"
           "extract"
-          # "tmux"
           "history-substring-search"
           "colored-man-pages"
         ];
@@ -88,8 +74,13 @@ in {
       initExtra = ''
         # <<<sh>>>
         source ${zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-        source ${autopair}/autopair.zsh
+        source ${zsh-autopair}/share/zsh/zsh-autopair/autopair.zsh
         source ${histdb}/sqlite-history.zsh
+        source ${zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+
+        ZVM_INSERT_MODE_CURSOR=$ZVM_CURSOR_UNDERLINE
+        ZVM_NORMAL_MODE_CURSOR=$ZVM_CURSOR_BLOCK
+        ZVM_OPPEND_MODE_CURSOR=$ZVM_CURSOR_BEAM
 
         _zsh_autosuggest_strategy_histdb_top() {
           local query="select commands.argv from
@@ -103,6 +94,10 @@ in {
         # >>>sh<<<
       '';
 
+    };
+    z-lua = {
+      enable = true;
+      enableZshIntegration = true;
     };
   };
 }

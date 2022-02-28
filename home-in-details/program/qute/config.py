@@ -10,6 +10,8 @@ c.content.javascript.can_access_clipboard = True;
 c.content.proxy     = acl_proxy
 c.scrolling.smooth  = True
 c.auto_save.session = True
+c.logging.level.console = "info"
+c.logging.level.ram = "info"
 
 config.bind('J', 'tab-prev')
 config.bind('K', 'tab-next')
