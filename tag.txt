@@ -1,1 +1,1 @@
-Setup_maddy
+Vikunja_email_notification

@@ -21,8 +21,8 @@ in {
   };
 
   sops.templates.vikunja.content = ''
-    VIKUNJA_MAILER_USERNAME=${plh."vikunja/smtp-username"}
-    VIKUNJA_MAILER_PASSWORD=${plh."vikunja/smtp-password"}
+    VIKUNJA_MAILER_USERNAME='${plh."vikunja/smtp-username"}'
+    VIKUNJA_MAILER_PASSWORD='${plh."vikunja/smtp-password"}'
   '';
 
   services.nginx.virtualHosts.${config.services.vikunja.frontendHostname} = {
