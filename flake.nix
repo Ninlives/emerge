@@ -7,6 +7,7 @@
     url = "github:Mic92/sops-nix";
     inputs.nixpkgs.follows = "nixpkgs";
   };
+  inputs.emanote.url = "github:srid/emanote";
   inputs.home-manager = {
     url = "github:nix-community/home-manager";
     inputs.nixpkgs.follows = "nixpkgs";
@@ -15,8 +16,7 @@
   inputs.external.url = "github:nixos-cn/flakes";
   inputs.data.url = "github:Ninlives/data";
 
-  outputs = { self, nixpkgs, home-manager, flake-utils, external
-    , sops-nix, data }@inputs:
+  outputs = { self, ... }@inputs:
     let
       variables = import ./library/components/variables.nix inputs;
       functions =

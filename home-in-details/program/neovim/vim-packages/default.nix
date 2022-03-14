@@ -45,4 +45,14 @@ in {
       sha256 = "0zr3r4dgpdadaz3g9hzn7vyv0rids0k1wdywk9yywfp6q9m0ygj8";
     };
   };
+  telekasten-nvim = buildVimPluginFrom2Nix {
+    name = "telekasten.nvim";
+    src = fetchFromGitHub {
+      owner = "renerocksai";
+      repo = "telekasten.nvim";
+      fetchSubmodules = true;
+      rev = "15f68e7d9fbf050c9c4b60d9ce890c49867f0abf";
+      sha256 = "0h57hz9rl6w2h0minyp4fnqz0l5c4a7afc7nckv4v7azfkgg2wk2";
+    };
+  };
 }

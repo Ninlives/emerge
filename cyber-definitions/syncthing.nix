@@ -6,8 +6,8 @@ in {
   services.syncthing = {
     enable = true;
     openDefaultPorts = true;
-    cert = scrt."syncthing/server/cert.pem".path;
-    key = scrt."syncthing/server/key.pem".path;
+    cert = scrt."syncthing/cert.pem".path;
+    key = scrt."syncthing/key.pem".path;
     devices.local.id = dp.syncthing.local.id;
     # relay.enable = false;
     # relay.providedBy = "Somebody";

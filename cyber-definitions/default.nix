@@ -11,6 +11,7 @@ in {
     ./vikunja.nix
     ./trilium.nix
     ./maddy.nix
+    ./note
   ];
 
   nixpkgs.config.allowUnfree = true;

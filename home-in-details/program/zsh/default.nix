@@ -1,6 +1,6 @@
 { config, pkgs, lib, constant, ... }:
 let
-  inherit (pkgs) fetchFromGitHub sqlite zsh-syntax-highlighting runCommandLocal zsh-vi-mode zsh-autopair;
+  inherit (pkgs) fetchFromGitHub sqlite zsh-syntax-highlighting runCommandLocal zsh-vi-mode zsh-autopair zsh-history-substring-search;
   inherit (lib) optionalAttrs;
   inherit (constant.proxy) address port;
   inherit (config.home) homeDirectory;
@@ -50,6 +50,7 @@ in {
 
       sessionVariables = {
         HISTDB_FILE = "${homeDirectory}/${dotDir}/zsh-history.db";
+        _ZL_DATA = "${homeDirectory}/${dotDir}/zlua";
       };
 
       oh-my-zsh = {
@@ -57,7 +58,6 @@ in {
         plugins = [
           "git"
           "extract"
-          "history-substring-search"
           "colored-man-pages"
         ];
 
@@ -74,6 +74,7 @@ in {
       initExtra = ''
         # <<<sh>>>
         source ${zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+        source ${zsh-history-substring-search}/share/zsh-history-substring-search/zsh-history-substring-search.zsh
         source ${zsh-autopair}/share/zsh/zsh-autopair/autopair.zsh
         source ${histdb}/sqlite-history.zsh
         source ${zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
@@ -91,6 +92,11 @@ in {
           suggestion=$(_histdb_query "$query")
         }
         ZSH_AUTOSUGGEST_STRATEGY=histdb_top
+
+        bindkey '^[[A' history-substring-search-up
+        bindkey '^[[B' history-substring-search-down
+        bindkey -M vicmd 'k' history-substring-search-up
+        bindkey -M vicmd 'j' history-substring-search-down
         # >>>sh<<<
       '';
 

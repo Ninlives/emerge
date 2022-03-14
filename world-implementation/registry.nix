@@ -9,7 +9,7 @@ let
   };
 in
 {
-  nix.package = pkgs.nixFlakes;
+  nix.package = pkgs.nixVersions.unstable;
   nix.settings.system-features =
     [ "benchmark" "big-parallel" "kvm" "nixos-test" "recursive-nix" ];
   nix.extraOptions = ''
