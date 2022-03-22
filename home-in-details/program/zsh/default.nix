@@ -77,6 +77,7 @@ in {
         source ${zsh-history-substring-search}/share/zsh-history-substring-search/zsh-history-substring-search.zsh
         source ${zsh-autopair}/share/zsh/zsh-autopair/autopair.zsh
         source ${histdb}/sqlite-history.zsh
+        ZVM_INIT_MODE=sourcing
         source ${zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 
         ZVM_INSERT_MODE_CURSOR=$ZVM_CURSOR_UNDERLINE
@@ -95,8 +96,8 @@ in {
 
         bindkey '^[[A' history-substring-search-up
         bindkey '^[[B' history-substring-search-down
-        bindkey -M vicmd 'k' history-substring-search-up
-        bindkey -M vicmd 'j' history-substring-search-down
+        zvm_bindkey vicmd 'k' history-substring-search-up
+        zvm_bindkey vicmd 'j' history-substring-search-down
         # >>>sh<<<
       '';
 

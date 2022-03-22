@@ -9,11 +9,20 @@ rofi_menu(){
         -font 'Mono 27'
 }
 
-exit_error() {
+show_message(){
   local message="$1"
 
   rofi -e "$message" -font 'Mono 27'
+}
+
+exit_error() {
+  show_message "$1"
   exit 127
+}
+
+exit_normal(){
+  show_message "$1"
+  exit 0
 }
 
 show_items(){
@@ -29,7 +38,7 @@ show_items(){
             show_all_items
         else
             if [[ $selection -lt 0 ]];then
-                exit_error "No item selected."
+                exit_normal "No item selected."
             fi
             id=$(echo $items|jq -r ".[$selection].id")
             action $id $code
