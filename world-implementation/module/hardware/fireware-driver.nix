@@ -18,7 +18,7 @@ in {
   hardware.opengl = {
     extraPackages = with pkgs; [
       vaapiIntel
-      vaapiVdpau
+      # vaapiVdpau
       libvdpau-va-gl
       intel-media-driver
     ];

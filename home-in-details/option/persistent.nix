@@ -23,9 +23,9 @@ in {
   };
 
   config = {
-    nixosConfig.persistent-boxes.revive.specifications.user.boxes =
+    requestNixosConfig.persistent-boxes.revive.specifications.user.boxes =
       map mapRevive config.persistent.boxes;
-    nixosConfig.persistent-scrolls.revive.specifications.user.scrolls =
+    requestNixosConfig.persistent-scrolls.revive.specifications.user.scrolls =
       map mapRevive config.persistent.scrolls;
   };
 }

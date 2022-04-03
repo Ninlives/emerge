@@ -1,6 +1,6 @@
 { config, pkgs, lib, constant, out-of-world, ... }:
 let
-  inherit (pkgs) gnome3;
+  inherit (pkgs) gnome;
   inherit (pkgs.nixos-cn) touchegg;
   inherit (lib) concatMapStringsSep;
   inherit (constant) user;
@@ -15,11 +15,12 @@ in {
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.displayManager.gdm.wayland = false;
 
-  environment.gnome.excludePackages = with gnome3; [
+  environment.gnome.excludePackages = with gnome; [
     gnome-software
     epiphany
     gnome-maps
     gedit
+    geary
     gnome-todo
     gnome-contacts
     gnome-packagekit
@@ -28,8 +29,10 @@ in {
   services.gnome.tracker-miners.enable = false;
   services.gnome.tracker.enable = false;
 
+  services.gnome.sushi.enable = true;
+
   environment.systemPackages =
-    [ gnome3.gnome-tweaks pkgs.networkmanagerapplet ];
+    [ gnome.gnome-tweaks pkgs.networkmanagerapplet pkgs.thunderbird ];
 
   systemd.packages = [ touchegg ];
   systemd.services.touchegg.wantedBy = [ "multi-user.target" ];
@@ -40,16 +43,8 @@ in {
       dst = "/home/${mainUser}/.local/share/keyrings";
     }
     {
-      src = /Programs/gnome/data/geary;
-      dst = "/home/${mainUser}/.local/share/geary";
-    }
-    {
       src = /Programs/gnome/state/goa;
       dst = "/home/${mainUser}/.config/goa-1.0";
-    }
-    {
-      src = /Programs/gnome/state/geary;
-      dst = "/home/${mainUser}/.config/geary";
     }
   ];
 }

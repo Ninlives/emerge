@@ -8,7 +8,7 @@
     [ "graphical-session.target" ];
   systemd.user.services.kdeconnect-indicator.Service.ExecStartPre =
     "${pkgs.coreutils}/bin/sleep 20";
-  nixosConfig.kdeconnect-ports = {
+  requestNixosConfig.kdeconnect-ports = {
     networking.firewall.allowedTCPPorts = [ 22 ];
     networking.firewall.allowedTCPPortRanges = [{
       from = 1714;

@@ -62,6 +62,6 @@ in {
     }
   ];
 
-  nixosConfig.qute.sops.secrets."vaultwarden/client-id".owner = constant.user.name;
-  nixosConfig.qute.sops.secrets."vaultwarden/client-secret".owner = constant.user.name;
+  requestNixosConfig.qute.sops.secrets."vaultwarden/client-id".owner = constant.user.name;
+  requestNixosConfig.qute.sops.secrets."vaultwarden/client-secret".owner = constant.user.name;
 }

@@ -54,6 +54,6 @@ with nixpkgs.lib; {
       inherit system;
       specialArgs = specialArgs';
       modules = modules ++ (builtins.attrValues
-        preprocess.config.home-manager.users.${constant.user.name}.nixosConfig);
+        preprocess.config.home-manager.users.${constant.user.name}.requestNixosConfig);
     };
 }

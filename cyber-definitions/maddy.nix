@@ -65,6 +65,7 @@ in
               require_mx_record
               dkim
               spf
+              dnsbl zen.spamhaus.org
           }
       
           source $(local_domains) {

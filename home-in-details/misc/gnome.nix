@@ -1,8 +1,8 @@
-{ config, lib, pkgs, constant, out-of-world, inputs, ... }:
+{ config, lib, pkgs, constant, out-of-world, inputs, nixosConfig, ... }:
 let
   inherit (constant) proxy;
   inherit (out-of-world) dirs;
-  inherit (lib) concatMapStringsSep;
+  inherit (lib) concatMapStringsSep optionalAttrs;
   inherit (lib.hm.gvariant) mkTuple;
 in with pkgs;
 with pkgs.gnomeExtensions;
@@ -28,7 +28,12 @@ with pkgs.nixos-cn.gnome-themes; {
     file:///space/Share Share
   '';
 
-  dconf.settings = {
+  dconf.settings = optionalAttrs (!nixosConfig.powersave.enable) {
+    "org/gnome/settings-daemon/plugins/power" = {
+      idle-dim = false;
+      sleep-inactive-ac-type = "nothing";
+    };
+  } // {
     "org/gnome/settings-daemon/plugins/color" = {
       night-light-enabled = true;
       night-light-schedule-automatic = true;
@@ -83,10 +88,9 @@ with pkgs.nixos-cn.gnome-themes; {
     "org/gnome/shell".favorite-apps = [
       "gnome-control-center.desktop"
       "org.gnome.Nautilus.desktop"
-      "org.gnome.Geary.desktop"
+      "thunderbird.desktop"
       "virt-manager.desktop"
       "FeelUOwn.desktop"
-      "org.keepassxc.KeePassXC.desktop"
       "telegramdesktop.desktop"
       "org.qutebrowser.qutebrowser.desktop"
       "steam.desktop"
@@ -104,7 +108,7 @@ with pkgs.nixos-cn.gnome-themes; {
     };
     "org/gnome/desktop/calendar".show-weekdate = true;
     "org/gnome/desktop/background".picture-uri =
-      "file://${inputs.data.content.resources + /wallpapers/mountain.jpg}";
+      "file://${inputs.data.content.resources + /wallpapers/night.png}";
 
     # Extensions
 
@@ -142,6 +146,5 @@ with pkgs.nixos-cn.gnome-themes; {
     "org/gnome/shell/extensions/ncom/github/hermes83/compiz-windows-effect" = {
       js-engine = false;
     };
-
   };
 }

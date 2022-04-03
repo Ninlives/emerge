@@ -1,12 +1,6 @@
 { pkgs, config, nixosConfig, ... }:
 let
   inherit (pkgs) writeShellScript findutils coreutils;
-  fixSoundScript = writeShellScript "fix" ''
-    ${nixosConfig.hardware.pulseaudio.package}/bin/pactl \
-      set-sink-port 3 '[Out] Speaker'
-    ${nixosConfig.hardware.pulseaudio.package}/bin/pactl \
-      set-sink-volume 3 70%
-  '';
 in {
   systemd.user.services.archive-downloads = {
     Unit = {

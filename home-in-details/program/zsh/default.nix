@@ -1,6 +1,6 @@
 { config, pkgs, lib, constant, ... }:
 let
-  inherit (pkgs) fetchFromGitHub sqlite zsh-syntax-highlighting runCommandLocal zsh-vi-mode zsh-autopair zsh-history-substring-search;
+  inherit (pkgs) fetchFromGitHub sqlite zsh-syntax-highlighting runCommandLocal zsh-vi-mode zsh-autopair zsh-history-substring-search keyutils;
   inherit (lib) optionalAttrs;
   inherit (constant.proxy) address port;
   inherit (config.home) homeDirectory;
@@ -72,6 +72,7 @@ in {
       };
 
       initExtra = ''
+        ${keyutils}/bin/keyctl new_session shell > /dev/null
         # <<<sh>>>
         source ${zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
         source ${zsh-history-substring-search}/share/zsh-history-substring-search/zsh-history-substring-search.zsh

@@ -45,4 +45,5 @@ in {
   };
   netease-cloud-music = fakeFS { drv = final.nixos-cn.netease-cloud-music; };
   feeluown = fakeFS { drv = final.re-export.feeluown; };
+  thunderbird = fakeFS { drv = prev.thunderbird; };
 }

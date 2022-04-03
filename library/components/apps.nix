@@ -73,10 +73,11 @@ with pkgs;
         dir = "/var/lib/sops";
         host = node.secrets.decrypted.v2ray.host;
       in writeShellScriptBin "net" ''
-        export PATH=${makeBinPath [ git openssh coreutils nixFlakes ]}
+        export PATH=${makeBinPath [ git openssh coreutils nixFlakes keyutils ]}
         # <<<sh>>>
-        set -ex
+        set -e
         tmp=$(mktemp -d)
+        chmod 700 "$tmp"
         reboot=0
         if [[ "$1" == "-r" ]];then
           reboot=1
@@ -97,9 +98,26 @@ with pkgs;
         }
         trap cleanup EXIT
 
+        function getpass(){
+          if ! key_id=$(keyctl request user emerge:ssh_keypass @s 2> /dev/null);then
+            echo -n 'Input passphrase: ' >&2
+            read -s ssh_keypass
+            echo "$ssh_keypass"|keyctl padd user emerge:ssh_keypass @s > /dev/null
+            echo "$ssh_keypass"
+          else
+            echo $(keyctl pipe "$key_id")
+          fi
+        }
+
+        clearpass(){
+          if key_id=$(keyctl request user emerge:ssh_keypass @s 2> /dev/null);then
+            keyctl revoke "$key_id"
+          fi
+        }
+
         cp "$keyFile" "$key"
         echo Decrypt Key File
-        ssh-keygen -p -N "" -f "$key"
+        ssh-keygen -p -P "$(getpass)" -N "" -f "$key" || { clearpass; exit 1; }
         ssh root@${host} 'mkdir -p ${dir};if [[ -e ${key} ]];then rm ${key};fi'
         scp "$key" root@${host}:${key}
         rm "$key"
