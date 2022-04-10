@@ -153,6 +153,20 @@ in
     '';
   };
 
+  systemd.paths.resolv-watcher = {
+    pathConfig.PathChanged = "/etc/resolv.conf";
+    wantedBy = [ "multi-user.target" ];
+  };
+  systemd.services.resolv-watcher = {
+    script = ''
+      ${config.systemd.package}/bin/systemctl restart maddy.service
+    '';
+    serviceConfig = {
+      Type = "oneshot";
+      Restart = "on-failure";
+    };
+  };
+
   networking.firewall.allowedTCPPorts = [ 25 143 587 ];
   services.nginx.virtualHosts.${dp.mail-server.host} = {
     forceSSL = true;

@@ -4,8 +4,7 @@ let
   dp = config.secrets.decrypted;
   user = config.users.users.note.name;
   group = config.users.groups.note.name;
-  emanote = inputs.emanote.defaultPackage.${system}.overrideAttrs
-    (a: { patches = a.patches or [ ] ++ [ ./superscript.patch ]; });
+  emanote = inputs.emanote.defaultPackage.${system};
   stateDir = "note";
   rootDir = "/var/lib/${stateDir}";
   bookDir = "${rootDir}/book";

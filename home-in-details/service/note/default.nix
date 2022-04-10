@@ -5,7 +5,6 @@ in {
   services.emanote = {
     enable = true;
     notes = [ (home "Documents/Zettelkasten") ];
-    package = inputs.emanote.defaultPackage.${system}.overrideAttrs
-      (a: { patches = a.patches or [ ] ++ [ ./superscript.patch ]; });
+    package = inputs.emanote.defaultPackage.${system};
   };
 }
