@@ -2,7 +2,7 @@
 let
   inherit (pkgs)
     qutebrowser substituteAll symlinkJoin makeWrapper keyutils writeShellScript
-    resholveScript xclip jq bitwarden-cli rofi bash coreutils gnused;
+    resholve xclip jq bitwarden-cli rofi bash coreutils gnused;
   inherit (constant) proxy;
   inherit (lib) fold optionalAttrs mkMerge mkIf;
   inherit (builtins) readFile;
@@ -11,7 +11,7 @@ let
 
   mergeFiles = files: fold (s1: s2: s1 + s2) "" (map readFile files);
   outPath = placeholder "out";
-  vaultwardenScript = resholveScript "vaultwarden-fill" {
+  vaultwardenScript = resholve.writeScript "vaultwarden-fill" {
     inputs = [ keyutils rofi xclip jq bitwarden-cli coreutils gnused ];
     interpreter = "${bash}/bin/bash";
     execer = [
