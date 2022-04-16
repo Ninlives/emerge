@@ -86,7 +86,7 @@ with pkgs.nixos-cn.gnome-themes; {
     # Appearance
 
     "org/gnome/shell".favorite-apps = [
-      "gnome-control-center.desktop"
+      "org.gnome.Settings.desktop"
       "org.gnome.Nautilus.desktop"
       "thunderbird.desktop"
       "virt-manager.desktop"
