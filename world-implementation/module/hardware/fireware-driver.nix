@@ -9,21 +9,6 @@ in {
   hardware.pulseaudio.package = pulseaudioFull;
   hardware.pulseaudio.enable = true;
   hardware.pulseaudio.support32Bit = true;
-
-  nixpkgs.overlays = [
-    (self: super: {
-      vaapiIntel = super.vaapiIntel.override { enableHybridCodec = true; };
-    })
-  ];
-  hardware.opengl = {
-    extraPackages = with pkgs; [
-      vaapiIntel
-      # vaapiVdpau
-      libvdpau-va-gl
-      intel-media-driver
-    ];
-    setLdLibraryPath = true;
-  };
   hardware.opengl.driSupport32Bit = true;
 
   boot.kernelParams = [
