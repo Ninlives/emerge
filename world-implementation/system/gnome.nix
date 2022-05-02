@@ -20,7 +20,6 @@ in {
     epiphany
     gnome-maps
     gedit
-    geary
     gnome-todo
     gnome-contacts
     gnome-packagekit
@@ -45,6 +44,14 @@ in {
     {
       src = /Programs/gnome/state/goa;
       dst = "/home/${mainUser}/.config/goa-1.0";
+    }
+    {
+      src = /Programs/gnome/data/geary;
+      dst = "/home/${mainUser}/.local/share/geary";
+    }
+    {
+      src = /Programs/gnome/state/geary;
+      dst = "/home/${mainUser}/.config/geary";
     }
   ];
 }
