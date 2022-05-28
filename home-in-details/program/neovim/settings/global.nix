@@ -19,7 +19,7 @@ in {
         gruvbox
         hs-plug
         dynamic-syntax
-        context
+        # context
         codi
         vim-signify
         context-filetype
@@ -71,7 +71,7 @@ in {
       \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 
       " Context
-      let g:context_border_char = '-'
+      " let g:context_border_char = '-'
 
       " Nerd Tree
       nmap <Leader>f :NERDTreeToggle<CR>

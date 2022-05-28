@@ -6,7 +6,7 @@
     keepassxc
     tdesktop
     element-desktop
-    libreoffice
+    # libreoffice
   ];
   services.flameshot.enable = true;
 
