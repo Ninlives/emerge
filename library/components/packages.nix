@@ -13,6 +13,7 @@ with out-of-world; {
       os = nixpkgs.lib.nixosSystem {
         inherit system specialArgs;
         modules = [
+          (dirs.secrets + /decrypted.nix)
           (dirs.cyber.top-level + /image.nix)
           (dirs.world.option + /secrets.nix)
         ];

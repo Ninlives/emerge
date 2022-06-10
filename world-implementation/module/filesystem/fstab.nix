@@ -37,8 +37,9 @@
   };
 
   fileSystems."/space/Windows" = {
-    devices = "/dev/disk/by-label/windows";
+    device = "/dev/disk/by-label/windows";
     fsType = "ntfs";
+    options = [ "dmask=022" "fmask=133" ];
   };
 
   boot.supportedFilesystems = [ "ntfs" ];

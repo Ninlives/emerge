@@ -36,7 +36,7 @@ let
       };
     }) (filter (f: f != ./data/${profile}/tokens.yaml) files));
 in {
-  secrets.decrypted = import ./encrypt;
+  imports = [ ./decrypted.nix ];
   sops.defaultSopsFile = ./data/general/tokens.yaml;
   sops.secrets = keys "general" // keys profile // binaries "general"
     // binaries profile;

@@ -50,4 +50,6 @@ in {
   users.mutableUsers = false;
 
   nix.settings.auto-optimise-store = true;
+
+  system.stateVersion = "22.05";
 }
