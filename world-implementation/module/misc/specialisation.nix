@@ -32,7 +32,7 @@ in {
   powersave.enable = mkDefault false;
   nvidia.asPrimaryGPU = mkDefault true;
 
-  hack.specialisation = {
+  specialisation = {
     power-save.configuration = {
       boot.loader.grub.configurationName = "Power Save";
       powersave.enable = true;

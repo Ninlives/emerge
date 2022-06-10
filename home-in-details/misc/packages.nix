@@ -26,6 +26,7 @@ in {
 
   programs = {
     man.enable = true;
+    zathura.enable = true;
     git = {
       enable = true;
       userName = "mlatus";

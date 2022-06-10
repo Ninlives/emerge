@@ -108,7 +108,7 @@ with pkgs.nixos-cn.gnome-themes; {
     };
     "org/gnome/desktop/calendar".show-weekdate = true;
     "org/gnome/desktop/background".picture-uri =
-      "file://${inputs.data.content.resources + /wallpapers/night.png}";
+      "file://${inputs.data.content.resources + /wallpapers/gojira.jpg}";
 
     # Extensions
 

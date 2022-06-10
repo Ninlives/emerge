@@ -42,4 +42,10 @@ in {
       };
     };
   };
+
+  nixpkgs.overlays = [
+    (self: super: {
+      fish = super.fish.overrideAttrs(_: { doCheck = false; });
+    })
+  ];
 }

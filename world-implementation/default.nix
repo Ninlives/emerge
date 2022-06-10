@@ -7,7 +7,6 @@ let
 in {
   imports = [
     desktopConf
-    ./hack.nix
     ./registry.nix
   ] ++ (flatten (map dotNixFilesFromRecur [
     dirs.world.d-mail
