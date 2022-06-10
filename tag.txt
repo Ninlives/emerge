@@ -1,1 +1,1 @@
-fix_image_build
+fix_nix_command_error
