@@ -17,7 +17,7 @@ in
     export root=$TMPDIR/root
     export NIX_STATE_DIR=$TMPDIR/state
     ${nix}/bin/nix-store --load-db < ${db}/registration
-    ${nix}/bin/nix --extra-experimental-features copy --no-check-sigs --to $root ${toplevel}
+    ${nix}/bin/nix --extra-experimental-features nix-command copy --no-check-sigs --to $root ${toplevel}
     ${nix}/bin/nix-env --store $root -p $root/nix/var/nix/profiles/system --set ${toplevel}
     ${fakeroot}/bin/fakeroot ${libguestfs-with-appliance}/bin/guestfish -N $out=fs:${rootfs.fsType}:1536M -m /dev/sda1 << EOT
     set-label /dev/sda1 ${rootfs.label}

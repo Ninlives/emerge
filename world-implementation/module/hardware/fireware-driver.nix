@@ -19,4 +19,5 @@ in {
   
   services.fwupd.enable = true;
   boot.loader.grub.fontSize = 72;
+  hardware.cpu.intel.updateMicrocode = true;
 }
