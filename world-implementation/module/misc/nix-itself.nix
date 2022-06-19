@@ -18,8 +18,4 @@ in {
     "data.cachix.org-1:we/1k8A3S5cx8aM9wb6ig/DWL1cidVQluhJwD8V3VXM="
   ];
   nix.settings.auto-optimise-store = true;
-  nix.extraOptions = ''
-    keep-outputs = true
-    keep-derivations = true
-  '';
 }
