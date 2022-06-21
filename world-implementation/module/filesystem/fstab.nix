@@ -36,15 +36,9 @@
     options = [ "zfsutil" ];
   };
 
-  fileSystems."/space/Windows" = {
-    device = "/dev/disk/by-label/windows";
-    fsType = "ntfs";
-    options = [ "dmask=022" "fmask=133" ];
-  };
-
   boot.supportedFilesystems = [ "ntfs" ];
 
-  swapDevices = [ ];
+  swapDevices = [{ device = "/dev/disk/by-label/swap"; }];
 
   nix.settings.max-jobs = lib.mkDefault 12;
   # High-DPI console
