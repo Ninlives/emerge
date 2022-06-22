@@ -7,8 +7,8 @@ My personal config files for my daily environment, configured for Dell Inspiron 
 ## Usage
 
 ```sh
-git clone https://github.com/Ninlives/nixos-config.git
-cd nixos-config
+git clone https://github.com/Ninlives/emerge.git
+cd emerge
 
 # Activate the system
 sudo nix run .#world -- boot # switch/test

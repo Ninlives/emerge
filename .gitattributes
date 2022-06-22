@@ -1,1 +1,1 @@
-secrets/encrypt/** filter=sops-nix diff=sops-nix
+bombe/encrypt/** filter=sops-nix diff=sops-nix

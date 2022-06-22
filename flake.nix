@@ -11,22 +11,14 @@
     url = "github:nix-community/home-manager";
     inputs.nixpkgs.follows = "nixpkgs";
   };
-  inputs.flake-utils.url = "github:numtide/flake-utils";
   inputs.external.url = "github:nixos-cn/flakes";
   inputs.data.url = "github:Ninlives/data";
 
-  outputs = { self, ... }@inputs:
+  outputs = { self, nixpkgs, ... }@inputs:
     let
-      variables = import ./library/components/variables.nix inputs;
-      functions =
-        import ./library/components/functions.nix (inputs // variables);
-      args = inputs // variables // functions;
-      hosts = import ./library/components/hosts.nix args;
-      apps = import ./library/components/apps.nix (args // hosts);
-      packages = import ./library/components/packages.nix args;
-    in {
-      inherit (hosts) nixosConfigurations;
-      inherit (apps) apps devShell;
-      inherit (packages) legacyPackages packages;
-    };
+      inherit (nixpkgs) lib;
+      fn  = import ./fn  { inherit lib var; };
+      var = import ./var { inherit lib pkgs; };
+      pkgs = nixpkgs.legacyPackages.x86_64-linux;
+    in import ./def { inherit fn lib var pkgs self inputs; };
 }
