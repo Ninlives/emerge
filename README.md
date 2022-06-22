@@ -11,5 +11,5 @@ git clone https://github.com/Ninlives/emerge.git
 cd emerge
 
 # Activate the system
-sudo nix run .#world -- boot # switch/test
+sudo nix run .#apply -- boot # switch/test
 ```
