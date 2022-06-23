@@ -2,7 +2,7 @@
 with pkgs;
 fn.mkApp {
   drv = let
-    toplevel = self.nixosConfigurations.machine.config.system.build.toplevel;
+    toplevel = self.nixosConfigurations.lego.config.system.build.toplevel;
   in writeShellScriptBin "apply" ''
     if [[ $1 == "build" ]];then
       echo "Build finished"

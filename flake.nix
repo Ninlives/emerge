@@ -13,6 +13,7 @@
   };
   inputs.external.url = "github:nixos-cn/flakes";
   inputs.data.url = "github:Ninlives/data";
+  inputs.d-mail.url = "github:Ninlives/D-mail";
 
   outputs = { self, nixpkgs, ... }@inputs:
     let

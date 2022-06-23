@@ -1,12 +1,12 @@
 { fn, lib, var, self, inputs }:
 with lib;
 with inputs;
-let
+fn.mkCube {
   specialArgs = {
     inherit fn var self inputs;
     profile = "local";
   };
-  modules = fn.dotNixFromRecursive ../impl/machine ++ [
+  modules = fn.dotNixFromRecursive ../impl/lego ++ [
     ../bombe
     home-manager.nixosModule
     sops-nix.nixosModules.sops
@@ -20,18 +20,8 @@ let
         (fn.dotNixFromRecursive ../pkg);
 
       home-manager.users.${var.user.name} = { ... }: {
-        imports = fn.dotNixFromRecursive ../impl/home;
+        imports = fn.dotNixFromRecursive ../impl/neko;
       };
     }
   ];
-
-  preprocess = nixosSystem {
-    inherit (var) system;
-    inherit specialArgs modules;
-  };
-in nixosSystem {
-  inherit specialArgs;
-  inherit (var) system;
-  modules = modules ++ (builtins.attrValues
-    preprocess.config.home-manager.users.${var.user.name}.requestNixOSConfig);
 }

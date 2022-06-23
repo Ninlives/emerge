@@ -2,7 +2,7 @@
 with pkgs;
 fn.mkApp {
   drv = let
-    node = self.nixosConfigurations.cyber.config;
+    node = self.nixosConfigurations.echo.config;
     def = node.system.build.toplevel;
     key = "/var/lib/sops/key";
     dir = "/var/lib/sops";

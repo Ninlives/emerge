@@ -2,7 +2,6 @@
 with pkgs;
 let
   ifname = "ens3";
-  dp = config.secrets.decrypted;
 in {
   imports = [
     (modulesPath + "/profiles/qemu-guest.nix")
@@ -46,7 +45,9 @@ in {
     passwordAuthentication = false;
   };
 
-  users.users.root.openssh.authorizedKeys.keys = [ dp.ssh.auth ];
+  users.users.root.openssh.authorizedKeys.keys = [
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEFnTuV16kTR18LPUzQBb0yhPwp0xAJXR/fRFsTrLQ5C cardno:000615452495"
+  ];
   users.mutableUsers = false;
 
   nix.settings.auto-optimise-store = true;

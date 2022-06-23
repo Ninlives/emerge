@@ -1,5 +1,18 @@
 {
   "nodes": {
+    "d-mail": {
+      "locked": {
+        "lastModified": 1656002797,
+        "narHash": "sha256-P8YKXhNqnNLjqtrolaxvOXTjBBn3dYdsSKSOzLlwbpk=",
+        "path": "/home/mlatus/Documents/Develop/Nix/d-mail",
+        "type": "path"
+      },
+      "original": {
+        "owner": "Ninlives",
+        "repo": "D-mail",
+        "type": "github"
+      }
+    },
     "data": {
       "inputs": {
         "nixpkgs": "nixpkgs"
@@ -206,6 +219,7 @@
     },
     "root": {
       "inputs": {
+        "d-mail": "d-mail",
         "data": "data",
         "external": "external",
         "home-manager": "home-manager",

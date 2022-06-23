@@ -31,7 +31,7 @@
     self.flake = self;
     emerge.to = {
       type = "git";
-      url = "file://${toString var.path.entry}";
+      url = "${toString var.path.entry}";
     };
   };
 

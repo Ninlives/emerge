@@ -10,13 +10,13 @@ with inputs; {
   };
 
   apps.${system} = {
-    apply = import ./apply.nix { inherit fn pkgs self; };
+    apply  = import ./apply.nix  { inherit fn pkgs self; };
+    cast   = import ./cast.nix   { inherit fn pkgs self; };
     commit = import ./commit.nix { inherit fn lib var pkgs; };
-    upload = import ./upload.nix { inherit fn pkgs self; };
   };
 
-  nixosConfigurations.machine =
-    import ./machine.nix { inherit fn lib var self inputs; };
+  nixosConfigurations.lego =
+    import ./lego.nix { inherit fn lib var self inputs; };
 
   legacyPackages.${system} = import nixpkgs {
     inherit system;
@@ -31,6 +31,6 @@ with inputs; {
       inherit fn var self inputs;
       profile = "server";
     };
-    modules = [ ../bombe ../impl/cyber/image.nix sops-nix.nixosModules.sops ];
+    modules = [ ../impl/echo/image.nix ];
   }).config.system.build.image;
 }
