@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+
+  <enum id="org.gnome.shell.extensions.indicator.mode">
+    <value value="0" nick="LAPTOP"/>
+    <value value="1" nick="TABLET"/>
+  </enum>
+
+  <schema id="org.gnome.shell.extensions.indicator"
+    path="/org/gnome/shell/extensions/indicator/">
+
+    <key name="mode"
+      enum="org.gnome.shell.extensions.indicator.mode">
+      <default>'LAPTOP'</default>
+      <summary>Mode</summary>
+      <description>Mode</description>
+    </key>
+
+  </schema>
+</schemalist>

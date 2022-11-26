@@ -1,0 +1,26 @@
+keys:
+  - &server age1s6hznqs4cukna8ernacyh29fx6znpucmplvt3udvd7xxexwymg3suz0x37
+  - &local age17asv6vjafasyup5fz0l30muu96h2xdrrga0u5fwf7qxuch2n7yfsu5zjln
+  - &home age1xz7t3w8l36ls8ds264875zqtulv9vwvj37ayy87u3ccacqxax9hs6nfq8r
+creation_rules:
+
+  - path_regex: .*/server/.*
+    age: *server
+
+  - path_regex: .*/local/.*
+    age: *local
+
+  - path_regex: .*/home/.*
+    age: *home
+
+  - path_regex: .*/infra/.*
+    age: *server
+
+  - path_regex: .*/tfstate.json
+    age: *server
+
+  - key_groups:
+    - age:
+      - *server
+      - *local
+      - *home

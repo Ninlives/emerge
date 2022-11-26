@@ -1,0 +1,8 @@
+{
+  "name": "Indicator",
+  "description": "Indicator",
+  "uuid": "indicator@mlatus",
+  "shell-version": [
+    "42"
+  ]
+}

@@ -1,0 +1,16 @@
+(defsrc
+  volu vold missing248 prog1
+)
+
+(deflayer default
+  volu vold @fn @prof
+)
+
+(deflayer alt
+  brup brdn @fn @prof
+)
+
+(defalias
+  fn (layer-toggle alt)
+  prof (cmd-button "asusctl profile -n")
+)

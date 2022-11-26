@@ -1,0 +1,63 @@
+(defsrc
+
+  esc    f1   f2   f3   f4   f5   f6   f7   f8   f9  f10  f11  f12
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab     q    w    e    r    t    y    u    i    o    p    [    ]    \
+  capslock  a    s    d    f    g    h    j    k    l    ;    '   enter
+  leftshift   z    x    c    v    b    n    m    ,    .    /     rshift
+  leftctrl    lmet lalt           spc                 rctl        up
+                                                            left down right
+)
+
+(deflayer laptop-mode
+
+  esc    f1   f2   f3   f4   f5   f6   f7   f8   f9  f10  f11  f12
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab     q    w    e    r    t    y    u    i    o    p    [    ]   \\
+  @vim      a    s    d    f    g    h    j    k    l    ;    '   enter
+  leftshift   z    x    c    v    b    n    m    ,    .    /     rshift
+  leftctrl    lmet lalt           spc                 @swi        up
+                                                            left down right
+)
+
+(deflayer vim-navigation
+
+  XX     XX   XX   XX   XX   XX   XX   XX   XX   XX  XX   XX   XX
+  XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX
+  XX      XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX  XX
+  XX        XX   XX   XX   XX   XX   lft  down  up  rght  XX   XX  XX
+  XX          XX   XX   XX   XX   XX   XX   XX   XX   XX   XX    XX
+  XX          XX   XX             XX                  XX          XX
+                                                            XX   XX   XX
+)
+
+(deflayer tablet-mode
+
+  XX     XX   XX   XX   XX   XX   XX   XX   XX   XX  XX   XX   XX
+  XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX
+  XX      XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX  XX
+  XX        XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX
+  XX          XX   XX   XX   XX   XX   XX   XX   XX   XX   XX    XX
+  XX          XX   XX             XX                  @swi        XX
+                                                            XX   XX   XX
+)
+
+(deflayer mode-switch
+
+  XX     XX   XX   XX   XX   XX   XX   XX   XX   XX  XX   XX   XX
+  XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX
+  XX      XX   XX   XX   XX   @tab XX   XX   XX   XX   XX   XX   XX  XX
+  XX        XX   XX   XX   XX   @gam XX   XX   XX   @lap  XX   XX  XX
+  XX          XX   XX   XX   XX   XX   XX   XX   XX   XX   XX    XX
+  XX          XX   XX             XX                  XX          XX
+                                                            XX   XX   XX
+)
+
+
+(defalias
+  vim (layer-toggle vim-navigation)
+  swi (layer-toggle mode-switch)
+  lap (around (cmd-button "mode-change LAPTOP") (layer-switch laptop-mode))
+  tab (around (cmd-button "mode-change TABLET") (layer-switch tablet-mode))
+  gam g
+)
