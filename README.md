@@ -1,8 +1,6 @@
-# nixos-config
-
 ## Info
 
-My personal config files for my daily environment, configured for Dell Inspiron 7590.
+My personal config files for my daily environment, configured for Asus Flow X13.
 
 ## Usage
 
