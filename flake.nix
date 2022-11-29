@@ -1,6 +1,6 @@
 {
   description =
-    "My personal config files for my daily environment, configured for Dell Inspiron 7590. Now with flakes!";
+    "My personal config files for my daily environment, configured for Asus Flow X13. Now with flakes!";
 
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
   inputs.sops-nix = {
@@ -15,6 +15,7 @@
   inputs.data.url = "github:Ninlives/data";
   inputs.kmonad.url = "github:kmonad/kmonad?dir=nix";
   inputs.terrasops.url = "github:Ninlives/terrasops";
+  inputs.terranix.url = "github:terranix/terranix";
   inputs.resign.url = "github:NickCao/resign";
 
   outputs = { self, nixpkgs, ... }@inputs:

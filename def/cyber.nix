@@ -20,13 +20,6 @@ fix (self: {
       }
     ];
   };
-  nano = fn.mkCube {
-    specialArgs = {
-      inherit fn var self inputs;
-      profile = "server";
-    };
-    modules = [ ../impl/nano ];
-  };
 
   coco = fn.mkCube {
     specialArgs = {

@@ -10,14 +10,13 @@ with inputs; {
 
   apps.${system} = {
     apply  = import ./apply.nix  { inherit fn pkgs self; };
-    cast   = import ./cast.nix   { inherit fn pkgs self; };
     commit = import ./commit.nix { inherit fn lib var pkgs; };
   };
 
   nixosConfigurations = {
     lego = import ./lego.nix { inherit fn lib var self inputs; };
     inherit (import ./cyber.nix { inherit fn lib var self inputs; })
-    echo nano coco;
+    echo coco;
   };
 
   legacyPackages.${system} = import nixpkgs {
