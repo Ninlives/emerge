@@ -1,1 +1,1 @@
-cleanup
+migrate_to_terranix

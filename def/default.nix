@@ -19,6 +19,16 @@ with inputs; {
     echo coco;
   };
 
+  terraformConfigurations.zero = inputs.terranix.lib.terranixConfiguration {
+    inherit pkgs;
+    inherit (var) system;
+    extraArgs = {
+      inherit var;
+      inherit (self.nixosConfigurations) echo;
+    };
+    modules = fn.dotNixFromRecursive ../infra ++ [ ../bombe/secrets.nix ];
+  };
+
   legacyPackages.${system} = import nixpkgs {
     inherit system;
     overlays = map (o: import o { inherit fn var inputs; })

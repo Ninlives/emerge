@@ -359,12 +359,13 @@
         "terranix-examples": "terranix-examples"
       },
       "locked": {
-        "lastModified": 1662478785,
-        "narHash": "sha256-5s9YFvbYMp8x0uoXM/jOCPPdjau6+4zeK/rGRkXBdx0=",
-        "owner": "terranix",
-        "repo": "terranix",
-        "rev": "fa51201238fd2a739d2e3dacefd985ff348107f9",
-        "type": "github"
+        "lastModified": 1669832511,
+        "narHash": "sha256-PDorwUjo8F5Qtl8YY+wd4tUvJiRnuxCNfaLEwUNMM7A=",
+        "ref": "refs/heads/main",
+        "rev": "a957fcedbff898b13c9b5008a5a84f4952705ff7",
+        "revCount": 339,
+        "type": "git",
+        "url": "file:///home/mlatus/Documents/Develop/Nix/terranix"
       },
       "original": {
         "owner": "terranix",

@@ -1,9 +1,10 @@
-{ config, pkgs, lib, modulesPath, var, ... }:
+{ lib, var, inputs, ... }:
 with lib;
 let
-  build = config.system.build;
-  kernelTarget = pkgs.stdenv.hostPlatform.linux-kernel.target;
-  netboot-config = {
+  netboot-config = { config, pkgs, modulesPath, ... }: let
+    build = config.system.build;
+    kernelTarget = pkgs.stdenv.hostPlatform.linux-kernel.target;
+  in {
     imports = [
       (modulesPath + "/profiles/minimal.nix")
       (modulesPath + "/profiles/qemu-guest.nix")
