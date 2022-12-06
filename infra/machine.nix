@@ -9,6 +9,7 @@ let
   ipxe-url = config.resource.shell_script.netboot "output.ipxe-url";
 in {
   provider.vultr.api_key = ref.local.secrets.api-key.vultr;
+  provider.cloudflare.api_token = ref.local.secrets.api-key.cloudflare;
   resource.vultr_startup_script.install = {
     name = "install";
     type = "pxe";
@@ -21,7 +22,7 @@ in {
       )}'';
   };
   resource.vultr_instance.server = {
-    region = "cdg";
+    region = "nrt";
     plan = "vc2-1c-2gb";
     os_id = 159;
     user_data = ''
@@ -39,13 +40,38 @@ in {
     script_id = config.resource.vultr_startup_script.install "id";
   };
   resource.vultr_dns_domain.main = {
-    domain = dp.host;
+    domain = dp.ptr;
     ip = config.resource.vultr_instance.server "main_ip";
   };
-  resource.vultr_dns_record = mapAttrs (name: value: {
-    domain = config.resource.vultr_dns_domain.main "id";
+  # resource.vultr_dns_record = mapAttrs (name: value: {
+  #   domain = config.resource.vultr_dns_domain.main "id";
+  #   name = value.subdomain;
+  #   data = config.resource.vultr_instance.server "main_ip";
+  #   type = "A";
+  #   ttl  = "300";
+  # }) (filterAttrs (_: v: v ? subdomain) dp);
+  resource.cloudflare_zone.main = {
+    zone = dp.host;
+    jump_start = false;
+    plan = "free";
+    type = "full";
+  };
+  resource.cloudflare_record = mapAttrs (name: value: {
+    zone_id = config.resource.cloudflare_zone.main "id";
     name = value.subdomain;
-    data = config.resource.vultr_instance.server "main_ip";
+    value = config.resource.vultr_instance.server "main_ip";
     type = "A";
+    ttl  = 1;
+    proxied = true;
   }) (filterAttrs (_: v: v ? subdomain) dp);
+  resource.cloudflare_page_rule.acme = {
+    zone_id = config.resource.cloudflare_zone.main "id";
+    target   = "*.${dp.host}/.well-known/acme-challenge/*";
+    priority = 1;
+    actions = {
+      automatic_https_rewrites = "off";
+      ssl                      = "off";
+    };
+  };
+  output.cloudflare_nameservers.value = config.resource.cloudflare_zone.main "name_servers";
 }

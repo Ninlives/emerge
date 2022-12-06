@@ -3,6 +3,7 @@ sign-key: ENC[AES256_GCM,data:3SqzswF85cw/wrGici+hDBbZonRW9AY/uiaUJZcim21pPeHweX
 restic-passwd: ENC[AES256_GCM,data:aTyNti1W7JBAQWFAK2foff/QrYytbDQFTMfPUbIwGqYZOncos+nCM0AtwekdWCSIhThGY+z72KGiPFtFUfe5fQ==,iv:kapoz75Et4kRK21p4jCm1f89XmCJLpm5HJD3DOApKPA=,tag:sTKfR+gj1gc+8QwG4mYYmw==,type:str]
 api-key:
     vultr: ENC[AES256_GCM,data:Dw6z38ouNVvK/GpC2JVmM0uiNTsxJ6lLVGMf7PEeDp8s/Tof,iv:gTE86S1u0D2+yYFSMq2JYtxcFMS8azp1SXbP0dYWrvY=,tag:UkLSfr2YsBnONWcVO33kAg==,type:str]
+    cloudflare: ENC[AES256_GCM,data:e98SnqEn+l2ixg6PbjCr88gDcIONih+LKKh2wMPAtd9GkppKs/z8Wg==,iv:E6EtOLyogEOIlWuBNal6ozSQsPEslf9Nf9CZCYQjNUw=,tag:0MWP6cYduRNDCVRjjo4/dA==,type:str]
     github: ENC[AES256_GCM,data:bommqRSGRlu73QfEJ2cfJrzwRNbZ67JKexP9gZqlaF1LCAuQLLUZUw==,iv:HzxOkZ1JQ4vaJxzxkNRi2CIsHvxY0+W5gIb6tSu7E60=,tag:cULMeBfeOUOsZnRsdlvOPw==,type:str]
     b2:
         id: ENC[AES256_GCM,data:S+SRbb1PKyXCnn72tE63HfYlRsJocf7NXQ==,iv:CmbY3he8lZHbk2R8y9mZc5jL/lCrKMP0rAyO/bCKfVA=,tag:DxSV4M4eBwdxBkWQCJigYQ==,type:str]
@@ -23,8 +24,8 @@ sops:
             OHFXSmlNSGJldi9GMkNDMXJXc1B4UjgK5irPfdZ5lk+2SJ6rgMFLY2RiqFZZ34Sb
             EG38r133Hu68ZIsVThXbftzkTjrL4qOOFv2CGgQrcMENSlj41+SYsQ==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2022-10-15T16:08:27Z"
-    mac: ENC[AES256_GCM,data:1uGUe/YDGVWAlTPZvnarGaZYL374GO9m2NRYhb5Fp8WAmJhzmRF0hZh621FoLocwluUgZo5Dn81igaSYvjmlVa2CCUrjkSeD9SWIsU+OWAptj5QFLjrHX7oeqzAJX66fmvi12hsssO3WHOvq5X1Pqa9Llu9/hsEB5vpARdISjYE=,iv:n2F1jlc+bbeNVbA2LHlz6jvkCMYg4kIJxPdi2NHuvsY=,tag:nrmPcStF2pHu5G8j5KFPJg==,type:str]
+    lastmodified: "2022-12-06T12:25:33Z"
+    mac: ENC[AES256_GCM,data:uVD/aqDpzfyJTFGUfI8bKpt+adCD6I2sf45m7C9lMpIYd5tgtgI7oAgyMpo1UThCxfVWTDCCN+rFGVuiwNK2f7pgk8wwUBDESmDgZ9HsvtBtorxOB11EvQdXdfYmI4GVQu8Npz2JIHC54gX/SOO9mosPCP00RMkhzDEqAFVsxCE=,iv:PogQK+ok6RcgWgeeTLmyhdLrRFRcLZs0rBzO4CFzY5E=,tag:xWwP6/L2R//caF65eZf2zQ==,type:str]
     pgp: []
     unencrypted_suffix: _unencrypted
     version: 3.7.3

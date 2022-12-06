@@ -9,6 +9,7 @@ with inputs; {
   };
 
   apps.${system} = {
+    cast   = import ./cast.nix { inherit fn var self pkgs inputs; };
     apply  = import ./apply.nix  { inherit fn pkgs self; };
     commit = import ./commit.nix { inherit fn lib var pkgs; };
   };
@@ -19,7 +20,7 @@ with inputs; {
     echo coco;
   };
 
-  terraformConfigurations.zero = inputs.terranix.lib.terranixConfiguration {
+  terraformConfigurations.zero = (inputs.terranix.lib.terranixConfiguration {
     inherit pkgs;
     inherit (var) system;
     extraArgs = {
@@ -27,7 +28,7 @@ with inputs; {
       inherit (self.nixosConfigurations) echo;
     };
     modules = fn.dotNixFromRecursive ../infra ++ [ ../bombe/secrets.nix ];
-  };
+  }).overrideAttrs(_: { allowSubstitutes = false; });
 
   legacyPackages.${system} = import nixpkgs {
     inherit system;

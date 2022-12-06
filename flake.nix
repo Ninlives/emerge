@@ -14,8 +14,8 @@
   inputs.external.url = "github:nixos-cn/flakes";
   inputs.data.url = "github:Ninlives/data";
   inputs.kmonad.url = "github:kmonad/kmonad?dir=nix";
-  inputs.terrasops.url = "github:Ninlives/terrasops";
-  inputs.terranix.url = "github:terranix/terranix";
+  inputs.terrasops.url = "github:NickCao/terrasops";
+  inputs.terranix.url = "github:Ninlives/terranix";
   inputs.resign.url = "github:NickCao/resign";
 
   outputs = { self, nixpkgs, ... }@inputs:

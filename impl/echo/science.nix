@@ -18,14 +18,13 @@ let
       }
     '';
   };
-  mkInbound = port: id: path: {
+  mkInbound = port: password: path: {
     inherit port;
     listen = "127.0.0.1";
-    protocol = "vmess";
+    protocol = "trojan";
     settings = {
       clients = [{
-        inherit id;
-        alterId = 0;
+        inherit password;
       }];
     };
     streamSettings = {
@@ -48,7 +47,7 @@ in {
     enableACME = true;
     locations = {
       "/".proxyPass = "http://${libredditHost}";
-      "/${dp.v2ray.secret-path}" = mkProxy dp.v2ray.port;
+      "/${dp.trojan.secret-path}" = mkProxy dp.trojan.port;
     };
   };
 
@@ -76,7 +75,7 @@ in {
       loglevel = "info";
     };
     inbounds =
-      [ (mkInbound dp.v2ray.port plh."v2ray/id" "/${dp.v2ray.secret-path}") ];
+      [ (mkInbound dp.trojan.port plh."trojan/password" "/${dp.trojan.secret-path}") ];
     outbounds = [
       {
         tag = "free";

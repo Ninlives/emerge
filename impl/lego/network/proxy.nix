@@ -86,22 +86,20 @@ let
     streamSettings.sockopt.mark = mark;
   };
 
-  vmessConfig = template // {
+  trojanConfig = template // {
     outbounds = template.outbounds ++ [
       (lib.recursiveUpdate {
-        protocol = "vmess";
-        settings.vnext = [{
+        protocol = "trojan";
+        settings.servers = [{
           address = "${dp.libreddit.subdomain}.${dp.host}";
           port = 443;
-          users = [{
-            id = plh."v2ray/id";
-            alterId = 0;
-          }];
+          password = plh."trojan/password";
+          level = 0;
         }];
         streamSettings = {
           network = "ws";
           security = "tls";
-          wsSettings.path = "/${dp.v2ray.secret-path}";
+          wsSettings.path = "/${dp.trojan.secret-path}";
         };
       } common)
     ];
@@ -141,7 +139,7 @@ in {
     isSystemUser = true;
   };
 
-  sops.templates.v2ray = mkTemplate vmessConfig;
+  sops.templates.v2ray = mkTemplate trojanConfig;
   sops.templates.v2ray-template = mkTemplate template;
   sops.templates.v2ray-common = mkTemplate common;
 

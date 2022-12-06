@@ -37,11 +37,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1669684789,
-        "narHash": "sha256-2KAKqBhgAtUVG1fFhLRf3m4oPmc2CtqOip4827WKDKA=",
+        "lastModified": 1669857747,
+        "narHash": "sha256-QQjudsZMQQmhkWZTD4Ok+LanDPnHT3FK4uNgrO1coxg=",
         "owner": "Ninlives",
         "repo": "data",
-        "rev": "e074ef2c6310fb7de075fc4eb4c5369a6604749e",
+        "rev": "9799a98e8b981ee6eb87806d637255320b75866d",
         "type": "github"
       },
       "original": {
@@ -56,11 +56,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1669686873,
-        "narHash": "sha256-5HnoIZbXC5uealRODO5Ikg+0mN1thTnK5Jf9s1m1dXU=",
+        "lastModified": 1669860362,
+        "narHash": "sha256-1wCjkVg2UYf///qr6iRcTi5gWXBYFUoYx232VO9j18o=",
         "owner": "nixos-cn",
         "repo": "flakes",
-        "rev": "a701301b80ae8b2591ed0cc2f313429455f4cfe6",
+        "rev": "f062844ec4087c0c2bb93473dbdac54fe53353cb",
         "type": "github"
       },
       "original": {
@@ -137,11 +137,11 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1669573161,
-        "narHash": "sha256-UAOXq+LIX+goAAY2MiC0+zCxdNPaO7NAPTvCQExpIBs=",
+        "lastModified": 1669825171,
+        "narHash": "sha256-HxlZHSiRGXnWAFbIJMeujqBe2KgACYx5XDRY0EA9P+4=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "50c9bccb6abc52811a59db620606e016fcde32bd",
+        "rev": "478610aa37c8339eacabfa03f07dacf5574edd47",
         "type": "github"
       },
       "original": {
@@ -236,11 +236,11 @@
     },
     "nixpkgs_4": {
       "locked": {
-        "lastModified": 1669612762,
-        "narHash": "sha256-0q2lWQHxfq249KTbHzY51kRTNd63/BkJ/DHq0WRJnrM=",
+        "lastModified": 1669867399,
+        "narHash": "sha256-Z8RXSFYOsIsTG96ROKtV0eZ8Q7u4irFWm6ELqfw7mT8=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "f2f39a2aff7a458d05f205a63d805029ae8f5be5",
+        "rev": "38e591dd05ffc8bdf79dc752ba78b05e370416fa",
         "type": "github"
       },
       "original": {
@@ -337,11 +337,11 @@
         "nixpkgs-22_05": "nixpkgs-22_05"
       },
       "locked": {
-        "lastModified": 1669520266,
-        "narHash": "sha256-NY0lyWC5djlvAiAhGb9xvT0bknBVLh/egvd3TqmJasc=",
+        "lastModified": 1669714206,
+        "narHash": "sha256-9aiMbzRL8REsyi9U0eZ+lT4s7HaILA1gh9n2apKzLxU=",
         "owner": "Mic92",
         "repo": "sops-nix",
-        "rev": "a01f386f34a854fe4f8754e62a6837748bc84a8a",
+        "rev": "8295b8139ef7baadeb90c5cad7a40c4c9297ebf7",
         "type": "github"
       },
       "original": {
@@ -361,14 +361,13 @@
       "locked": {
         "lastModified": 1669832511,
         "narHash": "sha256-PDorwUjo8F5Qtl8YY+wd4tUvJiRnuxCNfaLEwUNMM7A=",
-        "ref": "refs/heads/main",
+        "owner": "Ninlives",
+        "repo": "terranix",
         "rev": "a957fcedbff898b13c9b5008a5a84f4952705ff7",
-        "revCount": 339,
-        "type": "git",
-        "url": "file:///home/mlatus/Documents/Develop/Nix/terranix"
+        "type": "github"
       },
       "original": {
-        "owner": "terranix",
+        "owner": "Ninlives",
         "repo": "terranix",
         "type": "github"
       }
@@ -396,13 +395,13 @@
       "locked": {
         "lastModified": 1662712380,
         "narHash": "sha256-RQp708VcJlPOcP7mjuTLsgtgANre+oY+9BbvshePCc0=",
-        "owner": "Ninlives",
+        "owner": "NickCao",
         "repo": "terrasops",
         "rev": "289ca942dac63895c68c05c028b46c5e4adb64c3",
         "type": "github"
       },
       "original": {
-        "owner": "Ninlives",
+        "owner": "NickCao",
         "repo": "terrasops",
         "type": "github"
       }

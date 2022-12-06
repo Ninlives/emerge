@@ -1,5 +1,5 @@
-v2ray:
-    id: ENC[AES256_GCM,data:vkKVp2IR5fiGtqE2oeGf6H5InRRAbxB0sLm9K4mCJOpFaW84,iv:rce/2x3vwd0vKVDBB/qpLdwsdZi3+d/+jjbl6Z3yzco=,tag:80vTbtI3ntlFaE4cO/D9pg==,type:str]
+trojan:
+    password: ENC[AES256_GCM,data:9UQANgWPCA2mfAme0YZ9e/TRWvrp4yw/kykF+SQ27H6V3mRnIPvLWPrYMWoAY1g7403IpM8ibgNzUxy4wgirYA==,iv:P8N2LEg1d7jMXO5kdcB8p8KodzKOhhzajw/mtZMExqg=,tag:ct9FJ91aFLw+1WwUauW+wA==,type:str]
 rathole:
     token:
         immich: ENC[AES256_GCM,data:UVfuWy8FjYVLFYrg6SBYj7FJgcoJ+bpIL+dLlk2oSER0rRTtwHUmaqzipckvffIirqSbdu1GXoTjYc/MuL/Y6Q==,iv:VOVbM0cYbtK+O2VVE6b/xs8aNdBfJ4e6lp2roUUNIus=,tag:fuLPsKVZkqU50cMXsIT5Dw==,type:str]
@@ -38,8 +38,8 @@ sops:
             T2V2aVZGbnltVGNqVzdLYTM4YkVORDgK8ZJqQYrgDqrzxg09iCISK4KWHcvI2Pvp
             cFN7RqI1btkJyKy6vtzrwOMx/ic0IG/HLjoLhD0gAxi8fkfs/KfeZA==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2022-11-04T08:25:15Z"
-    mac: ENC[AES256_GCM,data:LMS6G4I1Fmd8vHS5a3ECDYPfDhGyS123bXNhyWp0dSyvNgIvxQkN1Tr7nxZRciRMR9yRGK6u7N6YO+BMiMMi49S8OeoA7shrvf36Sc5e1CTo55VziZENCs0GglKJBkslzuvT504oI9wVl54jKQ/MU6FGp2n9vVpx3ZB+rlpHXWs=,iv:k+wa0E5Q5vx3WxibciaczhjQOBKqKw0ATt2rlsDbWbo=,tag:T/btVbCYJZ7DqWfzg9VjQw==,type:str]
+    lastmodified: "2022-12-04T08:27:18Z"
+    mac: ENC[AES256_GCM,data:4wPPI1LrxIknMulhw33XXlOR7a22ytgZytI4yGzvQzF22U7TDhIh8vK3gbRYgQi/i4kSzEyPvNRRYEt+mgutQGFPxmj6ZDeP13KHclE91lcXfPnQCqxOIf8ickDXDfAZrU5Nuv37227whT0l7tcbKTR4MUkumdXzGhkAIKkpi5A=,iv:QAqJD7i3RrQTmY9mNLZGVGDet+1ejJnu9CyvD0fPNfE=,tag:3CIkHxZSVBafl0oYLkvl7g==,type:str]
     pgp: []
     unencrypted_suffix: _unencrypted
     version: 3.7.3

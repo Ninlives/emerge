@@ -91,7 +91,7 @@ mkIf nixosConfig.services.xserver.desktopManager.gnome.enable {
       "virt-manager.desktop"
       "bitwarden.desktop"
       "FeelUOwn.desktop"
-      "telegramdesktop.desktop"
+      "org.telegram.desktop.desktop"
       "org.qutebrowser.qutebrowser.desktop"
       "chromium-browser.desktop"
       "steam.desktop"
