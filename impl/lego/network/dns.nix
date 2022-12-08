@@ -31,6 +31,7 @@ in {
       bind = "127.0.0.1:53";
       prefetch-domain = true;
       speed-check-mode = "ping,tcp:80";
+      audit-enable = true;
       inherit conf-file;
     };
   };

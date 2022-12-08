@@ -1,6 +1,7 @@
-{ lib, var, inputs, ... }:
+{ lib, var, inputs, config, ... }:
 with lib;
 let
+  dp = config.secrets.decrypted;
   netboot-config = { config, pkgs, modulesPath, ... }: let
     build = config.system.build;
     kernelTarget = pkgs.stdenv.hostPlatform.linux-kernel.target;
@@ -63,6 +64,13 @@ let
 
         mkdir -p /tmp
         curl -s http://169.254.169.254/latest/user-data -o /tmp/sensitive-data.json
+        INSTANCE_ID=$(curl -s http://169.254.169.254/v1/instance-v2-id)
+        API_KEY=$(jq -r -e '.["api-key"]' /tmp/sensitive-data.json)
+        curl -s "https://api.vultr.com/v2/instances/$INSTANCE_ID" \
+          -X PATCH \
+          -H "Authorization: Bearer $API_KEY" \
+          -H "Content-Type: application/json" \
+          --data '{ "user_data" : "SmFja3BvdCEK" }'
 
         function create_sensitive_file(){
           mkdir -p "$(dirname "$1")" 
@@ -96,7 +104,7 @@ let
         nixos-install --root /mnt --system "''${SYSTEM_PATH}" \
           --no-channel-copy --no-root-passwd \
           --option extra-substituters "file:///mnt/chest/Cache/store" \
-          --option extra-trusted-public-keys "echo:N1ZMw86s6T6yWF1KptpZBWH+3U3XbgibiCC97kmlT4E="
+          --option extra-trusted-public-keys "${dp.nix.store.pubkey}"
 
         reboot
       '';

@@ -32,6 +32,13 @@
     options = [ "subvol=chest" "noatime" "compress-force=zstd" "space_cache=v2" ];
   };
 
+  fileSystems."/swap" = {
+    device = "/dev/mapper/tower";
+    fsType = "btrfs";
+    options = [ "subvol=swap" "noatime" "compress=none" ];
+  };
+  swapDevices = [ { device = "/swap/file"; } ];
+
   boot.supportedFilesystems = [ "ntfs" ];
 
   nix.settings.max-jobs = lib.mkDefault 12;

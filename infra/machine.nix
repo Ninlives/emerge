@@ -27,6 +27,7 @@ in {
     os_id = 159;
     user_data = ''
       {
+        "api-key": "${ref.local.secrets.api-key.vultr}",
         "age-key": "${ref.local.secrets.server-age-key}",
         "restic-passwd": "${ref.local.secrets.restic-passwd}",
         "b2-id": "${

@@ -1,7 +1,7 @@
 { fetchurl }:
 fetchurl {
-  url = "https://github.com/Kareadita/Kavita/releases/download/v0.5.6/kavita-linux-x64.tar.gz";
-  hash = "sha256-twjJbair8ILWEMkCivTm4qqxSt1v074FCGPCLHlVlJo=";
+  url = "https://github.com/Kareadita/Kavita/releases/download/v0.6.1/kavita-linux-x64.tar.gz";
+  hash = "sha256-0/wycYBHQ4S6G3LdIj1YhRkH8QIE9F471QKcBSIning=";
   downloadToTemp = true;
   recursiveHash = true;
   postFetch = ''

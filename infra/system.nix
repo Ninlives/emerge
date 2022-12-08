@@ -2,6 +2,7 @@
 with pkgs;
 let
   inherit (config) ref;
+  dp = config.secrets.decrypted;
 
   system = echo.config.system.build.toplevel;
   netboot = echo.config.nano;
@@ -212,8 +213,7 @@ in {
       create = "${createInitSystem}";
       delete = "${deleteInitSystem}";
     };
-    environment.SERVER_PUB =
-      "age1s6hznqs4cukna8ernacyh29fx6znpucmplvt3udvd7xxexwymg3suz0x37";
+    environment.SERVER_PUB = dp.age.server.pubkey;
     sensitive_environment = {
       GITHUB_TOKEN = ref.local.secrets.api-key.github;
       SIGN_KEY = ref.local.secrets.sign-key;

@@ -1,12 +1,12 @@
 { buildDotnetModule, fetchFromGitHub, dotnet-aspnetcore }:
 buildDotnetModule {
   pname = "Kavita";
-  version = "0.5.6";
+  version = "0.6.1";
   src = fetchFromGitHub {
     owner = "Kareadita";
     repo = "Kavita";
-    rev = "e649f5cf9dadf8dfb869d538f2c9e8fd36ef823f";
-    sha256 = "sha256-U5hIpQon+cWDZUccSj31/rpqNvS5pO9+seFuCxy236Q=";
+    rev = "f907486c74592104dc9511cf5bf8ecbedfbe4ccb";
+    sha256 = "sha256-Wuy/ypYUb33KfzFCGV+0b9xrXomlIjq3JTa9sndS2ng=";
   };
 
   nugetDeps = ./nuget-deps.nix;
