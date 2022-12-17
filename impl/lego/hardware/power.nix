@@ -2,10 +2,8 @@
     freq = pkgs.writeShellScript "freq" ''
       if [[ "$1" == "powersave" ]]; then
         ${config.boot.kernelPackages.cpupower}/bin/cpupower frequency-set --governor powersave
-        ${pkgs.asusctl}/bin/asusctl profile -P Quiet
       elif [[ "$1" == "performance" ]]; then
-        ${config.boot.kernelPackages.cpupower}/bin/cpupower frequency-set --governor schedutil
-        ${pkgs.asusctl}/bin/asusctl profile -P Performance
+        ${config.boot.kernelPackages.cpupower}/bin/cpupower frequency-set --governor performance
       fi
     '';
   in {
