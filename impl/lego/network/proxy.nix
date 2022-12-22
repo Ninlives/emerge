@@ -139,13 +139,13 @@ in {
     isSystemUser = true;
   };
 
-  sops.templates.v2ray = mkTemplate trojanConfig;
+  sops.templates.v2ray-trojan = mkTemplate trojanConfig;
   sops.templates.v2ray-template = mkTemplate template;
   sops.templates.v2ray-common = mkTemplate common;
 
-  systemd.services.v2ray = mkService "$CREDENTIALS_DIRECTORY/config" {
+  systemd.services.v2ray-trojan = mkService "$CREDENTIALS_DIRECTORY/config" {
     wantedBy = [ "multi-user.target" ];
-  } { LoadCredential = "config:${tpl.v2ray.path}"; };
+  } { LoadCredential = "config:${tpl.v2ray-trojan.path}"; };
   systemd.services.v2ray-fallback = mkService "$RUNTIME_DIRECTORY/config.json" {
     preStart = ''
       CRED=$CREDENTIALS_DIRECTORY

@@ -11,6 +11,7 @@ in {
     fakeHome = "$HOME/.local/fakefs/android-studio";
   };
   zoom-us = fakeFS { drv = prev.zoom-us; };
+  wechat-uos = fakeFS { drv = prev.wechat-uos; };
   steam-wrapped = fakeFS {
     drv = prev.steam;
   };

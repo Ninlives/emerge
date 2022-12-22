@@ -3,18 +3,17 @@ with lib;
 with inputs;
 fix (self: {
   echo = fn.mkCube {
-    specialArgs = {
-      inherit fn var self inputs;
-      profile = "server";
-    };
+    specialArgs = { inherit fn var self inputs; };
     modules = [
       ../impl/echo
       ../bombe
       ../opt/revive.nix
       ../opt/rathole.nix
+      ../opt/sops-profiles.nix
       sops-nix.nixosModules.sops
       external.nixosModules.nixos-cn
       {
+        sops.profiles = [ "general" "server" ];
         nixpkgs.overlays = map (o: import o { inherit fn var inputs; })
           (fn.dotNixFromRecursive ../pkg);
       }
@@ -22,17 +21,16 @@ fix (self: {
   };
 
   coco = fn.mkCube {
-    specialArgs = {
-      inherit fn var self inputs;
-      profile = "home";
-    };
+    specialArgs = { inherit fn var self inputs; };
     modules = [
       ../impl/coco
       ../bombe
       ../opt/revive.nix
       ../opt/rathole.nix
+      ../opt/sops-profiles.nix
       sops-nix.nixosModules.sops
       external.nixosModules.nixos-cn
+      { sops.profiles = [ "general" "home" ]; }
     ];
   };
 })

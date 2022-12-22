@@ -1,1 +1,1 @@
-{ lib, var }: import ./file.nix { inherit lib var; } // import ./builder.nix { inherit lib var; }
+{ lib, var, pkgs }: import ./file.nix { inherit lib var pkgs; } // import ./builder.nix { inherit lib var; }

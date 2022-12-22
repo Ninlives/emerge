@@ -1,4 +1,4 @@
-{ lib, var }:
+{ lib, var, pkgs }:
 with lib;
 let
   # data PathT = PathT { path :: Path, type :: String }
@@ -54,7 +54,12 @@ let
       (f: f.type == "directory" && !(pathExists (defNix f.path)))
     ];
 
+  # importYAML :: Path -> Attrs
+  importYAML = with pkgs; path:
+    builtins.fromJSON (readFile (runCommandLocal "content.json" { }
+      "${yaml2json}/bin/yaml2json < ${path} > $out"));
+
 in {
-  inherit filesFromWith filesFromWithRecursive dotNixFrom dotNixFromRecursive;
+  inherit filesFromWith filesFromWithRecursive dotNixFrom dotNixFromRecursive importYAML;
   home = path: "${var.user.home}/${path}";
 }

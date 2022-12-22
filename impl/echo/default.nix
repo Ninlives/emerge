@@ -11,6 +11,7 @@ in {
     ./vaultwarden.nix
     ./vikunja.nix
     ./kavita.nix
+    ./jellyfin.nix
   ] ++ (fn.dotNixFrom ../taco);
 
   security.acme.acceptTerms = true;

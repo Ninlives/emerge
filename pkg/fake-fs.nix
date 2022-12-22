@@ -36,6 +36,17 @@ final: prev: {
       cat > $out/bin/$i <<'EOF'
       #!${stdenv.shell}
       mkdir -p "${fakeHome}"
+      for dof in $(${findutils}/bin/find "${fakeHome}" -mindepth 1 -maxdepth 1);do
+        if [[ -d "$dof" ]];then
+          if [[ -z "$(ls -A "$dof")" ]];then
+            rmdir "$dof"
+          fi
+        else
+          if [[ ! -s "$dof" ]];then
+            rm "$dof"
+          fi
+        fi
+      done
       blacklist=(/dev /proc /home)
       cmd=(
         ${bwrap}

@@ -2,13 +2,11 @@
 with lib;
 with inputs;
 fn.mkCube {
-  specialArgs = {
-    inherit fn var self inputs;
-    profile = "local";
-  };
+  specialArgs = { inherit fn var self inputs; };
   modules = fn.dotNixFromRecursive ../impl/lego ++ [
     ../bombe
     ../opt/revive.nix
+    ../opt/sops-profiles.nix
     home-manager.nixosModule
     sops-nix.nixosModules.sops
     external.nixosModules.nixos-cn
@@ -19,6 +17,8 @@ fn.mkCube {
 
       nixpkgs.overlays = map (o: import o { inherit fn var inputs; })
         (fn.dotNixFromRecursive ../pkg);
+
+      sops.profiles = [ "general" "local" ];
 
       home-manager.users.${var.user.name} = { ... }: {
         imports = fn.dotNixFromRecursive ../impl/neko;

@@ -231,7 +231,10 @@ in {
               echo Same as init, no need to switch
             else
               ${nix} copy --to ssh://root@${ip} ${system}
-              ${ssh} root@${ip} '${system}/bin/switch-to-configuration boot && reboot'
+              ${ssh} root@${ip} \
+                'nix-env -p /nix/var/nix/profiles/system --set ${system} \
+                && ${system}/bin/switch-to-configuration boot \
+                && reboot'
             fi
             echo '{ "path": "${system}" }'
           '';

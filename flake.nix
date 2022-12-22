@@ -13,7 +13,6 @@
   };
   inputs.external.url = "github:nixos-cn/flakes";
   inputs.data.url = "github:Ninlives/data";
-  inputs.kmonad.url = "github:kmonad/kmonad?dir=nix";
   inputs.terrasops.url = "github:NickCao/terrasops";
   inputs.terranix.url = "github:Ninlives/terranix";
   inputs.resign.url = "github:NickCao/resign";
@@ -21,7 +20,7 @@
   outputs = { self, nixpkgs, ... }@inputs:
     let
       inherit (nixpkgs) lib;
-      fn  = import ./fn  { inherit lib var; };
+      fn  = import ./fn  { inherit lib var pkgs; };
       var = import ./var { inherit lib pkgs; };
       pkgs = nixpkgs.legacyPackages.x86_64-linux;
     in import ./def { inherit fn lib var pkgs self inputs; };
