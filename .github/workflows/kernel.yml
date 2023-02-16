@@ -1,5 +1,7 @@
-name: "Build and Cache"
+name: "Build the Kernel"
 on:
+  schedule:
+    - cron: '0 0 * * *'
   push:
   pull_request:
   workflow_dispatch:
@@ -30,7 +32,7 @@ jobs:
     - name: Update dependencies
       run: nix flake update
     - name: Build system
-      run: nix build .#nixosConfigurations.lego.config.system.build.toplevel
+      run: nix build .#nixosConfigurations.lego.config.boot.kernelPackages.kernel
     - name: Commit if build succeed
       run: |
         git diff-index --quiet HEAD \

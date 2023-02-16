@@ -1,1 +1,1 @@
-github_actions
+Build_kernel_only_and_regularly
