@@ -19,9 +19,9 @@ with lib;
   time.timeZone = "Asia/Shanghai";
 
   users.mutableUsers = false;
-  users.users.${var.user.name} = {
-    inherit (var.user) home shell;
-    uid = 1000;
+  users.users.${config.workspace.user.name} = {
+    inherit (config.workspace.user) uid home;
+    inherit (var.user) shell;
     createHome = true;
     isNormalUser = true;
     extraGroups = var.user.groups;

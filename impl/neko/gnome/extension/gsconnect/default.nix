@@ -22,20 +22,7 @@ in {
     [ "gsconnect@andyholmes.github.io" ];
 
   home.activation.gsconnectSettings = hm.dag.entryBetween [ "dconfSettings" ] [ "installPackages" ] (script "load" "<");
-  systemd.user.services.gsconnect-save = {
-    Unit = {
-      Description = "Save gsconnect settings";
-    };
-
-    Install = { WantedBy = [ "default.target" ]; };
-
-    Service = {
-      ExecStart = "${coreutils}/bin/true";
-      RemainAfterExit = true;
-      ExecStop = toString (writeShellScript "save" (script "dump" ">"));
-      Type = "oneshot";
-    };
-  };
+  job.cleanup = toString (writeShellScript "save" (script "dump" ">"));
 
   persistent.boxes = [
     {

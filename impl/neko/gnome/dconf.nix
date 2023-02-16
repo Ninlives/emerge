@@ -1,6 +1,5 @@
 { config, lib, pkgs, var, inputs, nixosConfig, ... }:
 let
-  inherit (var) proxy;
   inherit (lib) concatMapStringsSep optionalAttrs mkIf;
   inherit (lib.hm.gvariant) mkTuple;
 in with pkgs;
@@ -64,12 +63,6 @@ mkIf nixosConfig.services.xserver.desktopManager.gnome.enable {
         [ "xkb" "us" ]
         [ "ibus" "rime" ]
       ];
-    };
-
-    "system/proxy".mode = "manual";
-    "system/proxy/socks" = {
-      host = proxy.address;
-      port = proxy.port.acl;
     };
 
     "org/gnome/desktop/sound".allow-volume-above-100-percent = true;

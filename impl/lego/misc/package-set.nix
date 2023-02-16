@@ -1,15 +1,15 @@
-{ fn, var, lib, pkgs, ... }: {
+{ fn, var, lib, pkgs, config, ... }: {
   programs.zsh = {
     enable = true;
     promptInit = "";
   };
 
   programs.adb.enable = true;
-  users.users.${var.user.name}.extraGroups = [ "adbusers" ];
+  users.users.${config.workspace.user.name}.extraGroups = [ "adbusers" ];
   nixpkgs.config.android_sdk.accept_license = true;
   revive.specifications.user.boxes = [{
     src = /Programs/adb;
-    dst = fn.home ".android";
+    dst = "${config.workspace.user.home}/.android";
   }];
 
   environment.systemPackages = with pkgs; [

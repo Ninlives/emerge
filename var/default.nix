@@ -3,8 +3,8 @@ with lib;
 recursiveUpdate (fix (self: {
 
   system = "x86_64-linux";
-  path.entry = "${self.user.home}/Emerge";
-  path.secrets = "${self.user.home}/Secrets";
+  # path.entry = "${self.user.home}/Emerge";
+  # path.secrets = "${self.user.home}/Secrets";
 
   proxy = {
     mark = 187;
@@ -14,10 +14,9 @@ recursiveUpdate (fix (self: {
   };
 
   user = {
-    name = "mlatus";
-    home = "/home/mlatus";
-    groups =
-      [ "users" "pulseaudio" "audio" "video" "power" "wheel" "networkmanager" ];
+    # name = "mlatus";
+    # home = "/home/mlatus";
+    groups = [ "users" "pulseaudio" "audio" "video" "power" "wheel" "networkmanager" ];
     shell = pkgs.zsh;
   };
 

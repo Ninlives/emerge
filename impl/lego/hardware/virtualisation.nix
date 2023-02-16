@@ -1,4 +1,4 @@
-{ pkgs, var, ... }:
+{ config, pkgs, var, ... }:
 let
   inherit (pkgs) qemu_kvm virt-manager spice-gtk;
 in {
@@ -6,8 +6,9 @@ in {
     src = /Programs/libvirt;
     dst = /var/lib/libvirt;
   }];
-  users.users.${var.user.name}.extraGroups = [ "libvirtd" "kvm" ];
+  users.users.${config.workspace.user.name}.extraGroups = [ "libvirtd" "kvm" ];
 
+  boot.kernelModules = [ "kvm-amd" ];
   virtualisation.libvirtd = {
     enable = true;
     qemu.package = qemu_kvm;

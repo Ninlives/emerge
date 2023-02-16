@@ -1,24 +1,8 @@
 from qutebrowser.api import cmdutils, message
 from subprocess import call
 
-config.load_autoconfig(True)
-
 acl_proxy    = 'socks://@sPROXY_ADDRESS@:@sACL_PORT@'
 global_proxy = 'socks://@sPROXY_ADDRESS@:@sLOCAL_PORT@'
-
-c.content.javascript.can_access_clipboard = True;
-c.content.proxy = acl_proxy
-c.scrolling.smooth = True
-c.auto_save.session = True
-c.content.pdfjs = True
-c.qt.highdpi = True
-
-c.logging.level.console = "info"
-c.logging.level.ram = "info"
-
-config.bind('J', 'tab-prev')
-config.bind('K', 'tab-next')
-config.bind('<Ctrl-p>', 'spawn --userscript @sVAULTWARDEN_SCRIPT@', mode='insert')
 
 @cmdutils.register()
 def toggle_proxy():

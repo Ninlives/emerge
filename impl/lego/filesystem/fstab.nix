@@ -1,11 +1,15 @@
 { config, lib, pkgs, ... }:
-
-{
-  boot.initrd.availableKernelModules =
-    [ "ahci" "nvme" "xhci_pci" "usbhid" "uas" "usb_storage" "sd_mod" ];
-  boot.initrd.kernelModules = [ ];
-  boot.extraModulePackages = [ ];
-
+let
+  btrfsOptions = volume: extraOptions:
+    [
+      "subvol=${volume}"
+      "noatime"
+      "lazytime"
+      "space_cache=v2"
+      "autodefrag"
+      "ssd_spread"
+    ] ++ extraOptions;
+in {
   fileSystems."/" = {
     device = "tmpfs";
     fsType = "tmpfs";
@@ -17,26 +21,24 @@
     fsType = "vfat";
   };
 
-  boot.initrd.luks.devices."tower".device = "/dev/disk/by-partlabel/tower";
-
   fileSystems."/nix" = {
-    device = "/dev/mapper/tower";
+    device = "/dev/disk/by-label/tower";
     fsType = "btrfs";
-    options = [ "subvol=nix" "noatime" "compress-force=zstd" "space_cache=v2" ];
+    options = btrfsOptions "nix" [ "compress-force=zstd" ];
   };
 
   fileSystems."/chest" = {
-    device = "/dev/mapper/tower";
+    device = "/dev/disk/by-label/tower";
     fsType = "btrfs";
-    options = [ "subvol=chest" "noatime" "compress-force=zstd" "space_cache=v2" ];
+    options = btrfsOptions (config.workspace.chestVolume) [ "compress-force=zstd" ];
   };
 
-  fileSystems."/swap" = {
-    device = "/dev/mapper/tower";
+  fileSystems."/deck" = {
+    device = "/dev/disk/by-label/tower";
     fsType = "btrfs";
-    options = [ "subvol=swap" "noatime" "compress=none" ];
+    options = btrfsOptions "deck" [ "compress=none" ];
   };
-  swapDevices = [ { device = "/swap/file"; } ];
+  swapDevices = [{ device = "/deck/swap"; }];
 
   boot.supportedFilesystems = [ "ntfs" ];
 

@@ -31,14 +31,13 @@ let
       sLOCAL_PORT = proxy.port.local;
       sACL_PORT = proxy.port.acl;
       sKEYCTL = "${keyutils}/bin/keyctl";
-      sVAULTWARDEN_SCRIPT = vaultwardenScript;
     })
     ./gruvbox.py
   ];
+  enabled = config.programs.qutebrowser.enable;
 in {
-  xdg.configFile."qutebrowser/config.py".text = configPy;
-  home.packages = [
-    (symlinkJoin {
+  programs.qutebrowser = {
+    package = symlinkJoin {
       name = "qutebrowser";
       paths = [ qutebrowser ];
       nativeBuildInputs = [ makeWrapper ];
@@ -49,10 +48,34 @@ in {
         --add-flags "--qt-flag enable-native-gpu-memory-buffers" \
         --add-flags "--qt-flag enable-accelerated-video-decode"
       '';
-    })
-  ];
+    };
 
-  persistent.boxes = [
+    loadAutoconfig = true;
+    settings = {
+      content.javascript.can_access_clipboard = true;
+      content.proxy = "socks://${proxy.address}:${toString proxy.port.acl}";
+      scrolling.smooth = true;
+      auto_save.session = true;
+      content.pdfjs = true;
+      qt.highdpi = true;
+      logging.level.console = "info";
+      logging.level.ram = "info";
+    };
+
+    keyBindings = {
+      normal = {
+        J = "tab-prev";
+        K = "tab-next";
+      };
+      insert = {
+        "<Ctrl-p>" = "spawn --userscript ${vaultwardenScript}";
+      };
+    };
+
+    extraConfig = configPy;
+  };
+
+  persistent.boxes = lib.mkIf enabled [
     {
       src = /Programs/qute/data;
       dst = ".local/share/qutebrowser";
@@ -63,6 +86,8 @@ in {
     }
   ];
 
-  requestNixOSConfig.qute.sops.secrets."vaultwarden/client-id".owner = var.user.name;
-  requestNixOSConfig.qute.sops.secrets."vaultwarden/client-secret".owner = var.user.name;
+  requestNixOSConfig.qute.sops.secrets."vaultwarden/client-id".owner =
+    nixosConfig.workspace.user.name;
+  requestNixOSConfig.qute.sops.secrets."vaultwarden/client-secret".owner =
+    nixosConfig.workspace.user.name;
 }

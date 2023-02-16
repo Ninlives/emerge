@@ -1,3 +1,3 @@
 { config, var, ... }: {
-  d-mail = config.home-manager.users.${var.user.name}.requestNixOSConfig;
+  d-mail = config.home-manager.users.${config.workspace.user.name}.requestNixOSConfig;
 }

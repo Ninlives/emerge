@@ -82,31 +82,40 @@ in {
   config = mkIf (cfg.enable && cfg.specifications != { }) {
 
     system.activationScripts.revive = stringAfter [ "etc" "users" "groups" ]
-      (concatMapStringsSep "\n" (pair:
-        with pair;
-        let run = "${util-linux}/bin/runuser -u ${runUser} -g ${runGroup} --";
+      ((concatStringsSep "\n" (mapAttrsToList (name: cfg:
+        let
+          seal = toString cfg.seal;
+          user = cfg.user;
+          group = cfg.group;
         in ''
-          echo Reviving ${dst} from ${if pair ? src then src else "no where"}
-          ${optionalString (pair ? src) ''
-            ${if type == "scroll" then ''
-              ${run} mkdir -p '${dirOf src}'
-              ${run} touch '${src}' 
-            '' else ''
-              ${run} mkdir -p '${src}'
+          echo Setup seal for ${name}
+          mkdir -p ${seal}
+          ${coreutils}/bin/chown ${user}:${group} ${seal} 
+        '') specs)) + (concatMapStringsSep "\n" (pair:
+          with pair;
+          let run = "${util-linux}/bin/runuser -u ${runUser} -g ${runGroup} --";
+          in ''
+            echo Reviving ${dst} from ${if pair ? src then src else "no where"}
+            ${optionalString (pair ? src) ''
+              ${if type == "scroll" then ''
+                ${run} mkdir -p '${dirOf src}'
+                ${run} touch '${src}' 
+              '' else ''
+                ${run} mkdir -p '${src}'
+              ''}
+              ${coreutils}/bin/chown ${user}:${group} '${src}'
             ''}
-            ${coreutils}/bin/chown ${user}:${group} '${src}'
-          ''}
-          ${if type == "scroll" then ''
-            ${run} mkdir -p '${dirOf dst}'
-            ${run} touch '${dst}'
-          '' else ''
-            ${run} mkdir -p '${dst}'
-          ''}
-          ${coreutils}/bin/chown ${user}:${group} '${dst}'
-          ${util-linux}/bin/mountpoint -q '${dst}' && ${util-linux}/bin/umount '${dst}'
-          ${optionalString (pair ? src) ''
-            ${util-linux}/bin/mountpoint -q '${dst}' || ${util-linux}/bin/mount --bind '${src}' '${dst}'
-          ''}
-        '') pairs);
+            ${if type == "scroll" then ''
+              ${run} mkdir -p '${dirOf dst}'
+              ${run} touch '${dst}'
+            '' else ''
+              ${run} mkdir -p '${dst}'
+            ''}
+            ${util-linux}/bin/mountpoint -q '${dst}' && ${util-linux}/bin/umount '${dst}'
+            ${optionalString (pair ? src) ''
+              ${util-linux}/bin/mountpoint -q '${dst}' || ${util-linux}/bin/mount --bind '${src}' '${dst}'
+            ''}
+            ${coreutils}/bin/chown ${user}:${group} '${dst}'
+          '') pairs));
   };
 }

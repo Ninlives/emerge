@@ -1,6 +1,6 @@
 { config, pkgs, lib, var, ... }:
 let
-  inherit (var) proxy user;
+  inherit (var) proxy;
   inherit (pkgs) iptables writeShellScriptBin gnugrep;
   inherit (lib) concatMapStringsSep optionalString;
   # Switch
@@ -55,7 +55,7 @@ in {
   environment.systemPackages = [ speech speechless ];
 
   security.sudo.extraRules = [{
-    users = [ user.name ];
+    users = [ config.workspace.user.name ];
     commands = [
       {
         command = "${speech}/bin/speech";

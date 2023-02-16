@@ -61,5 +61,4 @@ let
 
 in {
   inherit filesFromWith filesFromWithRecursive dotNixFrom dotNixFromRecursive importYAML;
-  home = path: "${var.user.home}/${path}";
 }

@@ -5,7 +5,7 @@ fn.mkApp {
   drv = writeShellScriptBin "commit" (''
     export EDITOR=$(${coreutils}/bin/realpath $(which $EDITOR))
     export PATH=${makeBinPath [ git nix coreutils sops bash ]}
-    pushd ${var.path.entry}
+    pushd $HOME/Emerge
 
     echo Install hooks
 

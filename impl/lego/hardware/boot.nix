@@ -10,28 +10,33 @@ let
   };
 
 in {
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  # boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.grub = {
+    enable = true;
+    efiSupport = true;
+  };
+  boot.loader.grub.efiInstallAsRemovable = true;
+  # boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  boot.loader.grub.extraPrepareConfig = ''
-    test -d /boot/grub/fallout && rm -rf /boot/grub/fallout
-    cp -rpf ${falloutTheme}/. /boot/grub/fallout/
-  '';
-  boot.loader.grub.extraConfig = ''
-    set theme=($drive1)//grub/fallout/theme.txt
-  '';
-  boot.loader.grub.memtest86.enable = true;
+  # boot.loader.grub.extraPrepareConfig = ''
+  #   test -d /boot/grub/fallout && rm -rf /boot/grub/fallout
+  #   cp -rpf ${falloutTheme}/. /boot/grub/fallout/
+  # '';
+  # boot.loader.grub.extraConfig = ''
+  #   set theme=($drive1)//grub/fallout/theme.txt
+  # '';
 
-  boot.loader.grub.splashImage = "${falloutTheme}/background.png";
-  boot.loader.grub.backgroundColor = "#7EBAE4";
+  # boot.loader.grub.splashImage = "${falloutTheme}/background.png";
+  # boot.loader.grub.backgroundColor = "#7EBAE4";
   boot.loader.timeout = 65535;
 
-  boot.loader.grub.font =
-    "${fixedsys-excelsior}/share/fonts/truetype/fixedsys-excelsior-3.00.ttf";
+  # boot.loader.grub.font =
+  #   "${fixedsys-excelsior}/share/fonts/truetype/fixedsys-excelsior-3.00.ttf";
 
   boot.cleanTmpDir = true;
 
-  console.font = "ter-i32b";
-  console.packages = [ terminus_font ];
+  # console.font = "ter-i32b";
+  # console.packages = [ terminus_font ];
   console.earlySetup = true;
 
   revive.specifications.system.boxes = [
@@ -39,13 +44,13 @@ in {
       src = /Log;
       dst = /var/log;
     }
-    {
-      src = /Cache/fwupd;
-      dst = /var/cache/fwupd;
-    }
-    {
-      src = /Data/fwupd;
-      dst = /var/lib/fwupd;
-    }
+    # {
+    #   src = /Cache/fwupd;
+    #   dst = /var/cache/fwupd;
+    # }
+    # {
+    #   src = /Data/fwupd;
+    #   dst = /var/lib/fwupd;
+    # }
   ];
 }

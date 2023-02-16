@@ -11,6 +11,10 @@
     url = "github:nix-community/home-manager";
     inputs.nixpkgs.follows = "nixpkgs";
   };
+  inputs.jovian = {
+    url = "github:Jovian-Experiments/Jovian-NixOS";
+    flake = false;
+  };
   inputs.external.url = "github:nixos-cn/flakes";
   inputs.data.url = "github:Ninlives/data";
   inputs.terrasops.url = "github:NickCao/terrasops";

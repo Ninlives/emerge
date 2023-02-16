@@ -3,6 +3,7 @@ with fn;
 with lib;
 with lib.types;
 let
+  home = path: "${config.home.homeDirectory}/${path}";
   mapRevive = p:
     if builtins.isAttrs p then
       p // { dst = home p.dst; }

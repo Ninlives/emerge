@@ -11,7 +11,7 @@ let
         makeBinPath [ sops nix nixfmt coreutils findutils gawk age jq ]
       }
       export SOPS_AGE_RECIPIENTS="age1z45qh5zan89fy9swamy40rrvsnragat4jsuerl8ufk7fq5kl43mstre7m3"
-      export SOPS_AGE_KEY_FILE="${var.path.secrets}/keys/git/age.key"
+      export SOPS_AGE_KEY_FILE="$HOME/Secrets/keys/git/age.key"
       ${action}
     '';
 in {

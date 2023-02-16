@@ -1,10 +1,10 @@
-{ var, pkgs, self, ... }: {
+{ var, pkgs, self, config, ... }: {
   nix.nixPath = [ "nixpkgs=${pkgs.path}" ];
   nix.package = pkgs.nixVersions.unstable;
 
   nix.settings.sandbox = true;
   nix.settings.keep-going = true;
-  nix.settings.trusted-users = [ var.user.name ];
+  nix.settings.trusted-users = [ config.workspace.user.name ];
   nix.settings.substituters = [
     "https://mirror.sjtu.edu.cn/nix-channels/store?priority=0"
     "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store?priority=5"
@@ -26,13 +26,11 @@
       version = 2;
     });
 
-  nixpkgs.config.allowUnfree = true;
-
   nix.registry = {
     self.flake = self;
     emerge.to = {
       type = "git";
-      url = "file://${toString var.path.entry}";
+      url = "file://${config.workspace.user.home}/Emerge";
     };
   };
 
@@ -43,4 +41,6 @@
       nix run emerge#$app -- $@
     '')
   ];
+
+  nixpkgs.config.allowUnfree = true;
 }

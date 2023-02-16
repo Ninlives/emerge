@@ -1,6 +1,5 @@
 { pkgs, config, lib, system, fn, ... }:
-let
-  dp = config.secrets.decrypted;
+let dp = config.secrets.decrypted;
 in {
   imports = [
     ./nano.nix
@@ -19,12 +18,18 @@ in {
   security.acme.defaults.renewInterval = "weekly";
   users.users.acme.uid = 999;
   users.groups.acme.gid = 999;
-  revive.specifications.system.boxes = [{
-    src = /Cache/acme;
-    dst = /var/lib/acme;
-    user = config.users.users.acme.name;
-    group = config.users.groups.acme.name;
-  }];
+  revive.specifications.system.boxes = [
+    {
+      src = /Cache/acme;
+      dst = /var/lib/acme;
+      user = config.users.users.acme.name;
+      group = config.users.groups.acme.name;
+    }
+    {
+      src = /Cache/log;
+      dst = /var/log;
+    }
+  ];
 
   networking.firewall.allowedTCPPorts = [ 80 443 ];
   networking.firewall.allowedUDPPorts = [ 443 ];

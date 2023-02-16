@@ -7,12 +7,13 @@ fn.mkCube {
     ../bombe
     ../opt/revive.nix
     ../opt/sops-profiles.nix
+    ../opt/workspace.nix
     home-manager.nixosModule
     sops-nix.nixosModules.sops
     external.nixosModules.nixos-cn
     external.nixosModules.nixos-cn-registries
 
-    {
+    ({ config, ... }: {
       system.nixos.tags = mkAfter [ (builtins.readFile ../tag.txt) ];
 
       nixpkgs.overlays = map (o: import o { inherit fn var inputs; })
@@ -20,9 +21,9 @@ fn.mkCube {
 
       sops.profiles = [ "general" "local" ];
 
-      home-manager.users.${var.user.name} = { ... }: {
+      home-manager.users.${config.workspace.user.name} = { ... }: {
         imports = fn.dotNixFromRecursive ../impl/neko;
       };
-    }
+    })
   ];
 }

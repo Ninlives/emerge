@@ -7,7 +7,6 @@ let
   conf-file = "${inputs.data.content.smartdns}";
 in {
   services.smartdns = {
-    enable = true;
     settings = {
       server = [
         "1.1.1.1:53"
@@ -35,5 +34,4 @@ in {
       inherit conf-file;
     };
   };
-  networking.resolvconf.useLocalResolver = true;
 }

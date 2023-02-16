@@ -11,11 +11,11 @@ in fn.mkApp {
   drv = writeShellScriptBin "cast" ''
     set -e
 
-    export SOPS_AGE_KEY_FILE=${var.path.secrets}/keys/vultr/age.key 
+    export SOPS_AGE_KEY_FILE=$HOME/Secrets/keys/vultr/age.key 
     export TF_LOG=DEBUG
-    export TF_DATA_DIR=${var.path.entry}/infra/.terraform
+    export TF_DATA_DIR=$HOME/Emerge/infra/.terraform
 
-    ${terrasops} -rules ${var.path.entry}/.sops.yaml -state ${var.path.entry}/infra/tfstate.json &
+    ${terrasops} -rules $HOME/Emerge/.sops.yaml -state $HOME/Emerge/infra/tfstate.json &
     sleep 3
     TF_SOPS_PID=$(pidof ${terrasops})
 

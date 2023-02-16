@@ -1,4 +1,4 @@
-{ var, pkgs, ... }: {
+{ var, pkgs, config, ... }: {
   sound.enable = true;
   sound.mediaKeys.enable = true;
 
@@ -12,8 +12,8 @@
     };
   };
 
-  users.users.${var.user.name}.extraGroups = [ "input" ];
-  services.xserver.desktopManager.xterm.enable = false;
+  users.users.${config.workspace.user.name}.extraGroups = [ "input" ];
+  # services.xserver.desktopManager.xterm.enable = false;
 
   environment.sessionVariables = {
     QT_AUTO_SCREEN_SCALE_FACTOR = "1";

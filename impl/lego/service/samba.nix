@@ -1,4 +1,4 @@
-{ var, ... }: {
+{ var, config, ... }: {
   services.samba = {
     enable = true;
     securityType = "user";
@@ -8,7 +8,7 @@
       netbios name   = smbnix
       hosts allow    = 192.168.*.* localhost
       hosts deny     = 0.0.0.0/0
-      guest account  = ${var.user.name}
+      guest account  = ${config.workspace.user.name}
       map to guest   = bad user
       browseable     = yes
       read only      = no
@@ -22,6 +22,11 @@
       };
       external = {
         path = "/run/media";
+        "guest ok" = "no";
+        "map to guest" = "never";
+      };
+      extra = {
+        path = "/chest/Data/samba";
         "guest ok" = "no";
         "map to guest" = "never";
       };

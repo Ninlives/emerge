@@ -15,7 +15,8 @@ let
 
   socksInbound = port: tag: {
     inherit port tag sniffing;
-    listen = address;
+    # FIXME: Temporary
+    # listen = address;
     protocol = "socks";
     settings = {
       auth = "noauth";
@@ -30,6 +31,12 @@ let
       loglevel = "info";
     };
     inbounds = [
+      {
+        port = port.http;        
+        tag = "http";
+        protocol = "http";
+        settings.allowTransparent = false;
+      }
       {
         inherit sniffing;
         port = port.redir;
@@ -74,7 +81,7 @@ let
         }
         {
           type = "field";
-          inboundTag = [ "acl" "proxy" "transparent" ];
+          inboundTag = [ "acl" "proxy" "transparent" "http" ];
           outboundTag = "proxy";
         }
       ];
@@ -159,4 +166,7 @@ in {
       "fallback:/chest/System/Data/v2ray/fallback.json"
     ];
   };
+
+  # FIXME: Temporary
+  networking.firewall.interfaces.virbr0.allowedTCPPorts = with port; [ local acl ];
 }
