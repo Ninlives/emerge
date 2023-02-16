@@ -1,6 +1,6 @@
 ## Info
 
-My personal config files for my daily environment, configured for Asus Flow X13.
+My personal config files for my daily environment
 
 ## Usage
 
