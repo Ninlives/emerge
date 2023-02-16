@@ -1,7 +1,13 @@
-{ config, nixosConfig, lib, pkgs, ... }: {
+{ config, nixosConfig, lib, pkgs, inputs, ... }: {
   config = lib.mkIf (nixosConfig.workspace.identity == "workstation") {
 
-    dconf.settings."system/proxy".mode = "auto";
+    dconf.settings = {
+      "system/proxy".mode = "auto";
+      "org/gnome/desktop/background".picture-uri =
+        "file://${inputs.data.content.resources "wallpapers/jez.jpg"}";
+      "org/gnome/desktop/background".picture-uri-dark =
+        "file://${inputs.data.content.resources "wallpapers/jez.jpg"}";
+    };
 
     home.activation.updateFavoriteApps = let
       dconf = "${pkgs.dconf}/bin/dconf";

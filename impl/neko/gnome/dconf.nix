@@ -103,10 +103,6 @@ mkIf nixosConfig.services.xserver.desktopManager.gnome.enable {
     };
     "org/gnome/shell/extensions/user-theme".name = "Gruvbox-Dark-B";
     "org/gnome/desktop/calendar".show-weekdate = true;
-    "org/gnome/desktop/background".picture-uri =
-      "file://${inputs.data.content.resources "wallpapers/gruvbox.png"}";
-    "org/gnome/desktop/background".picture-uri-dark =
-      "file://${inputs.data.content.resources "wallpapers/gruvbox.png"}";
     "org/gnome/desktop/wm/preferences" = {
       button-layout = "appmenu:minimize,maximize,close";
     };

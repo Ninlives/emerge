@@ -1,0 +1,38 @@
+name: "Build and Cache"
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+    - name: Install nixFlake
+      uses: cachix/install-nix-action@v17
+      with:
+        install_url: https://github.com/numtide/nix-unstable-installer/releases/latest/download/install
+        extra_nix_config: |
+          experimental-features = nix-command flakes
+          extra-trusted-public-keys = nixos-cn.cachix.org-1:L0jEaL6w7kwQOPlLoCR3ADx+E3Q8SEFEcB9Jaibl0Xg= emerge.cachix.org-1:Zvw8m0TXudK0MtylBFvUZCUEHlOfTgfvE2bbIexGhVw=
+          extra-substituters = https://nixos-cn.cachix.org https://emerge.cachix.org
+
+    - uses: cachix/cachix-action@v12
+      with:
+        name: emerge
+        signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
+    - name: Configure git
+      run: |
+        git config --global user.name 'Automation - Ninlives'
+        git config --global user.email 'wqseleven@gmail.com'
+    - name: Update dependencies
+      run: nix flake update
+    - name: Build system
+      run: nix build .#nixosConfigurations.lego.config.system.build.toplevel
+    - name: Commit if build succeed
+      run: |
+        git diff-index --quiet HEAD \
+        || (git commit -am "Update dependencies - Automated Commit" && git push || git stash)
+

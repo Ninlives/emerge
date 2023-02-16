@@ -1,4 +1,4 @@
-{ config, nixosConfig, var, lib, ... }: {
+{ config, nixosConfig, var, lib, inputs, ... }: {
   config = lib.mkIf (nixosConfig.workspace.identity == "private") {
     dconf.settings = {
       "system/proxy".mode = "manual";
@@ -6,6 +6,10 @@
         host = var.proxy.address;
         port = var.proxy.port.acl;
       };
+      "org/gnome/desktop/background".picture-uri =
+        "file://${inputs.data.content.resources "wallpapers/gruvbox.png"}";
+      "org/gnome/desktop/background".picture-uri-dark =
+        "file://${inputs.data.content.resources "wallpapers/gruvbox.png"}";
     };
   };
 }

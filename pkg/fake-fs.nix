@@ -17,6 +17,7 @@ final: prev: {
       readlink = "${coreutils}/bin/readlink";
       bwrap = "${bubblewrap}/bin/bwrap";
       fd = "${final.fd}/bin/fd";
+      basename = "${coreutils}/bin/basename";
     in runCommand "${drv.name}-fake-fs" {
       inherit (drv) passthru;
       preferLocalBuild = true;
@@ -68,7 +69,7 @@ final: prev: {
       for dir in $(${findutils}/bin/find $HOME -maxdepth 1);do
         if [[ ! "${concatStringsSep " " exclude}" =~ "$dir" ]];then
           if [[ -L "$dir" ]];then
-            rm -rf "${fakeHome}/$dir"
+            rm -rf "${fakeHome}/$(${basename} $dir)"
             cmd+=(--symlink "$(${readlink} "$dir")" "$dir")
           else
             cmd+=(--bind "$dir" "$dir")
