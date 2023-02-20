@@ -32,7 +32,7 @@ let
     };
     inbounds = [
       {
-        port = port.http;        
+        port = port.http;
         tag = "http";
         protocol = "http";
         settings.allowTransparent = false;
@@ -117,7 +117,7 @@ let
       description = "v2ray Daemon";
       after = [ "network.target" ];
       script = ''
-        ${pkgs.v2ray}/bin/v2ray run -config $CREDENTIALS_DIRECTORY/config
+        ${pkgs.v2ray}/bin/v2ray run -config ${path}
       '';
       serviceConfig = {
         LimitNPROC = 500;
@@ -128,7 +128,6 @@ let
         NoNewPrivileges = true;
         Restart = "on-failure";
         RestartPreventExitStatus = 23;
-        LoadCredential = "config:${path}";
       } // srvConfig;
     } // config;
 
@@ -163,10 +162,13 @@ in {
     LoadCredential = [
       "template:${tpl.v2ray-template.path}"
       "common:${tpl.v2ray-common.path}"
-      "fallback:/chest/System/Data/v2ray/fallback.json"
+      "fallback:/chest/System/Data/proxy/v2ray/fallback.json"
     ];
   };
 
   # FIXME: Temporary
-  networking.firewall.interfaces.virbr0.allowedTCPPorts = with port; [ local acl ];
+  networking.firewall.interfaces.virbr0.allowedTCPPorts = with port; [
+    local
+    acl
+  ];
 }

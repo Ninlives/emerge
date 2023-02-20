@@ -17,6 +17,8 @@
   };
   inputs.external.url = "github:nixos-cn/flakes";
   inputs.data.url = "github:Ninlives/data";
+  inputs.values.url = "git+ssh://git@github.com/Ninlives/values.git";
+
   inputs.terrasops.url = "github:NickCao/terrasops";
   inputs.terranix.url = "github:Ninlives/terranix";
   inputs.resign.url = "github:NickCao/resign";

@@ -16,12 +16,11 @@ in {
     gnome-software
     epiphany
     gnome-maps
-    gedit
-    geary
-    gnome-todo
     gnome-contacts
     gnome-packagekit
   ];
+  programs.geary.enable = false;
+  services.packagekit.enable = false;
   services.gnome.gnome-user-share.enable = false;
   services.gnome.tracker-miners.enable = false;
   services.gnome.tracker.enable = false;
@@ -33,13 +32,14 @@ in {
   systemd.packages = [ touchegg ];
   systemd.services.touchegg.wantedBy = [ "multi-user.target" ];
 
-  revive.specifications.user.boxes = [{
-    src = /Programs/gnome/data/keyrings;
-    dst = home ".local/share/keyrings";
-  }
-  # {
-  #   src = /Programs/gnome/state/goa;
-  #   dst = home ".config/goa-1.0";
-  # }
-    ];
+  revive.specifications.user.boxes = [
+    {
+      src = /Programs/gnome/data/keyrings;
+      dst = home ".local/share/keyrings";
+    }
+    {
+      src = /Programs/gnome/state/goa;
+      dst = home ".config/goa-1.0";
+    }
+  ];
 }

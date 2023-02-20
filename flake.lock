@@ -306,7 +306,8 @@
         "resign": "resign",
         "sops-nix": "sops-nix",
         "terranix": "terranix",
-        "terrasops": "terrasops"
+        "terrasops": "terrasops",
+        "values": "values"
       }
     },
     "sops-nix": {
@@ -399,6 +400,21 @@
         "owner": "numtide",
         "repo": "flake-utils",
         "type": "github"
+      }
+    },
+    "values": {
+      "locked": {
+        "lastModified": 1676900958,
+        "narHash": "sha256-rSSAfdQOLut5D5JVBGIIbJRfk8j3R/lqTJ2ptPYMdkQ=",
+        "ref": "refs/heads/main",
+        "rev": "b167baa8096c73b1cbabcd8910db582576343409",
+        "revCount": 1,
+        "type": "git",
+        "url": "ssh://git@github.com/Ninlives/values.git"
+      },
+      "original": {
+        "type": "git",
+        "url": "ssh://git@github.com/Ninlives/values.git"
       }
     }
   },

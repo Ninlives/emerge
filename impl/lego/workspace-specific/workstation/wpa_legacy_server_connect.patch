@@ -1,0 +1,11 @@
+diff --color -uar wpa_supplicant-2.10.orig/src/crypto/tls_openssl.c wpa_supplicant-2.10/src/crypto/tls_openssl.c
+--- wpa_supplicant-2.10.orig/src/crypto/tls_openssl.c	2022-01-17 04:51:29.000000000 +0800
++++ wpa_supplicant-2.10/src/crypto/tls_openssl.c	2023-02-17 12:03:54.322102251 +0800
+@@ -1048,6 +1048,7 @@
+ 
+ 	SSL_CTX_set_options(ssl, SSL_OP_NO_SSLv2);
+ 	SSL_CTX_set_options(ssl, SSL_OP_NO_SSLv3);
++	SSL_CTX_set_options(ssl, SSL_OP_LEGACY_SERVER_CONNECT);
+ 
+ 	SSL_CTX_set_mode(ssl, SSL_MODE_AUTO_RETRY);
+ 

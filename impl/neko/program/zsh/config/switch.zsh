@@ -32,12 +32,12 @@ function vpns(){
 function vpnt(){
     local f=$HOME/.cache/proxy
     if [[ ! -e $f || "$(cat $f)" == "v2ray" ]];then
-        systemctl stop v2ray.service
+        systemctl stop v2ray-trojan.service
         systemctl start v2ray-fallback.service
         echo fallback > $f
     else
         systemctl stop v2ray-fallback.service
-        systemctl start v2ray.service
+        systemctl start v2ray-trojan.service
         echo v2ray > $f
     fi
 }
