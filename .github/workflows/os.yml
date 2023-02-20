@@ -30,7 +30,7 @@ jobs:
         git config --global user.name 'Automation - Ninlives'
         git config --global user.email 'wqseleven@gmail.com'
     - name: Configure ssh
-      run: echo "${{ secrets.VALUES_SSH_KEY }}"|ssh-add -
+      run: ssh-agent sh -c 'echo "${{ secrets.VALUES_SSH_KEY }}"'|ssh-add -
     - name: Update dependencies
       run: nix flake update
     - name: Build system

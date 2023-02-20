@@ -27,11 +27,6 @@ fn.mkApp {
     '' + /* bash */ ''
     chmod +x .git/hooks/post-commit
 
-    echo Setup filter
-    git config filter.sops-nix.clean sops-git-filter-clean
-    git config filter.sops-nix.smudge sops-git-filter-smudge
-    git config filter.sops-nix.required true
-
     echo Commit
     git add .
     git commit
