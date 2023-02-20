@@ -1,4 +1,4 @@
-name: "Build the Kernel"
+name: "Build the System"
 on:
   schedule:
     - cron: '0 0 * * *'
@@ -29,6 +29,8 @@ jobs:
       run: |
         git config --global user.name 'Automation - Ninlives'
         git config --global user.email 'wqseleven@gmail.com'
+    - name: Configure ssh
+      run: echo "${{ secrets.VALUES_SSH_KEY }}"|ssh-add -
     - name: Update dependencies
       run: nix flake update
     - name: Build system
