@@ -29,14 +29,13 @@ jobs:
       run: |
         git config --global user.name 'Automation - Ninlives'
         git config --global user.email 'wqseleven@gmail.com'
-    - name: Configure ssh
+    - name: Update dependencies
       run: |
         eval $(ssh-agent)
         echo "${{ secrets.VALUES_SSH_KEY }}"|ssh-add -
-    - name: Update dependencies
-      run: nix flake update
+        nix flake update
     - name: Build system
-      run: nix build .#nixosConfigurations.lego.config.boot.kernelPackages.kernel
+      run: nix build .#nixosConfigurations.lego.config.system.build.toplevel
     - name: Commit if build succeed
       run: |
         git diff-index --quiet HEAD \
