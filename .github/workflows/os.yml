@@ -10,8 +10,11 @@ jobs:
   update:
     runs-on: ubuntu-latest
     steps:
-    - name: Check space
+    - name: Maximize space
       run: |
+        sudo rm -rf /usr/share/dotnet
+        sudo rm -rf /usr/local/lib/android
+        sudo rm -rf /opt/ghc
         echo "Availabel space:"
         df -h
     - name: Checkout
