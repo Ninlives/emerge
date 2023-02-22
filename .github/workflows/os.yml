@@ -10,14 +10,11 @@ jobs:
   update:
     runs-on: ubuntu-latest
     steps:
-    - name: Maximize build space
+    - name: Check space
       uses: easimon/maximize-build-space@master
-      with:
-        root-reserve-mb: 512
-        swap-size-mb: 1024
-        remove-dotnet: true
-        remove-android: true
-        remove-haskell: true
+      run: |
+        echo "Availabel space:"
+        df -h
     - name: Checkout
       uses: actions/checkout@v3
     - name: Install nixFlake
