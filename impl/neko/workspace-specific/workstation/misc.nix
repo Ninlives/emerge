@@ -35,6 +35,7 @@
       unset DCONF_RUN
       unset APPS
     '';
+    home.packages = [ pkgs.gnome-pomodora ];
 
     persistent.boxes = [
       {
@@ -48,6 +49,10 @@
       {
         src = /Data/icons;
         dst = ".local/share/icons";
+      }
+      {
+        src = /Programs/gnome-pomodora;
+        dst = ".local/share/gnome-pomodora";
       }
     ];
   };
