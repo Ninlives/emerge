@@ -1,5 +1,5 @@
 { var, pkgs, self, config, ... }: {
-  nix.nixPath = [ "nixpkgs=${pkgs.path}" ];
+  nix.nixPath = [ "nixpkgs=${toString pkgs.path}" ];
   nix.package = pkgs.nixVersions.unstable;
 
   nix.settings.sandbox = true;
