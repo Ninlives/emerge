@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, inputs, var, ... }:
 let
   btrfsOptions = volume: extraOptions:
     [
@@ -30,7 +30,8 @@ in {
   fileSystems."/chest" = {
     device = "/dev/disk/by-label/tower";
     fsType = "btrfs";
-    options = btrfsOptions (config.workspace.chestVolume) [ "compress-force=zstd" ];
+    options =
+      btrfsOptions (config.workspace.chestVolume) [ "compress-force=zstd" ];
   };
 
   fileSystems."/deck" = {
@@ -45,4 +46,29 @@ in {
   nix.settings.max-jobs = lib.mkDefault 12;
   hardware.video.hidpi.enable = true;
   boot.loader.grub.device = "nodev";
+
+  boot.initrd.kernelModules = [ "uinput" "evdev" "hid_steam" ];
+  boot.initrd.postDeviceCommands = 
+  let
+    deckbd = "${inputs.deckbd.packages.${var.system}.default}/bin/deckbd";
+  in
+  ''
+    try=10
+    while true;do
+      ${deckbd} query && break
+      if test $try -le 0;then break; fi
+      sleep 1
+      echo $try Waiting for controller to appear...
+      try=$((try - 1))
+    done
+    echo Run deckbd
+    ${deckbd} &
+    deckbd_pid=$!
+    echo PID: $deckbd_pid
+    echo Reading input
+    read sdpass
+    echo Read sdpass: $sdpass
+    kill $deckbd_pid
+    sleep 10
+  '';
 }

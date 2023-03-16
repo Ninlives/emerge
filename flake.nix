@@ -22,6 +22,10 @@
   inputs.terrasops.url = "github:NickCao/terrasops";
   inputs.terranix.url = "github:Ninlives/terranix";
   inputs.resign.url = "github:NickCao/resign";
+  inputs.deckbd = {
+    url = "github:Ninlives/deckbd";
+    inputs.nixpkgs.follows = "nixpkgs";
+  };
 
   outputs = { self, nixpkgs, ... }@inputs:
     let

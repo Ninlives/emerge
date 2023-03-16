@@ -50,6 +50,24 @@
         "type": "github"
       }
     },
+    "deckbd": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1678947597,
+        "narHash": "sha256-8VQt6yAcGKhn8VHz6pTWSxDUjOewx2VSQms9K9YRHvo=",
+        "type": "git",
+        "url": "file:///home/mlatus/Documents/Develop/Misc/deckbd"
+      },
+      "original": {
+        "owner": "Ninlives",
+        "repo": "deckbd",
+        "type": "github"
+      }
+    },
     "external": {
       "inputs": {
         "flake-utils": "flake-utils",
@@ -299,6 +317,7 @@
     "root": {
       "inputs": {
         "data": "data",
+        "deckbd": "deckbd",
         "external": "external",
         "home-manager": "home-manager",
         "jovian": "jovian",
@@ -318,11 +337,11 @@
         "nixpkgs-stable": "nixpkgs-stable"
       },
       "locked": {
-        "lastModified": 1678590185,
-        "narHash": "sha256-scvu8HegWwbcvPKjh6M1DnpPYAv4EnP1krsRPItoQ+E=",
-        "owner": "Mic92",
+        "lastModified": 1678859811,
+        "narHash": "sha256-5duOEEV/U/SmU8oUHrj68Wmw4tZBqolP0xVCdi5uZEE=",
+        "owner": "Ninlives",
         "repo": "sops-nix",
-        "rev": "9e98f7a442b0e318de9cce757675c2ab922bdf2b",
+        "rev": "efd85fbf514de24aa865a66445e1ffd28f19a767",
         "type": "github"
       },
       "original": {

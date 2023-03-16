@@ -1,6 +1,6 @@
 { pkgs, inputs, ... }: {
-  boot.plymouth = {
-    enable = true;
-    theme = "spinner"; 
-  };
+  # boot.plymouth = {
+  #   enable = true;
+  #   theme = "spinner"; 
+  # };
 }

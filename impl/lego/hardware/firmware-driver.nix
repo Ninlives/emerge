@@ -5,15 +5,15 @@
   imports = [ "${inputs.jovian}/modules" ];
   jovian.devices.steamdeck.enable = true;
 
-  users.groups.opensd = { };
-  users.users."${config.workspace.user.name}".extraGroups = [ "opensd" ];
-  services.udev.packages = [ pkgs.opensd ];
+  # users.groups.opensd = { };
+  # users.users."${config.workspace.user.name}".extraGroups = [ "opensd" ];
+  # services.udev.packages = [ pkgs.opensd ];
 
-  home-manager.users."${config.workspace.user.name}".systemd.user.services.opensd =
-    {
-      Install = { WantedBy = [ "default.target" ]; };
-      Service = { ExecStart = "${pkgs.opensd}/bin/opensdd -l info"; };
-    };
+  # home-manager.users."${config.workspace.user.name}".systemd.user.services.opensd =
+  #   {
+  #     Install = { WantedBy = [ "default.target" ]; };
+  #     Service = { ExecStart = "${pkgs.opensd}/bin/opensdd -l info"; };
+  #   };
 
   environment.systemPackages = with pkgs; [
     steamdeck-firmware

@@ -6,7 +6,6 @@
   nix.settings.keep-going = true;
   nix.settings.trusted-users = [ config.workspace.user.name ];
   nix.settings.substituters = [
-    "https://mirror.sjtu.edu.cn/nix-channels/store?priority=0"
     "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store?priority=5"
     "https://nixos-cn.cachix.org"
     "https://emerge.cachix.org"

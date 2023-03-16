@@ -10,7 +10,7 @@ fn.mkCube {
     ../opt/workspace.nix
     home-manager.nixosModule
     sops-nix.nixosModules.sops
-    external.nixosModules.nixos-cn
+    # external.nixosModules.nixos-cn
     external.nixosModules.nixos-cn-registries
 
     ({ config, ... }: {
