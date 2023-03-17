@@ -5,7 +5,6 @@
   sops.age.sshKeyPaths = [];
   sops.gnupg.sshKeyPaths = [];
 
-  nixpkgs.config.allowUnfree = true;
   nix.settings.auto-optimise-store = true;
 
   users.mutableUsers = false;

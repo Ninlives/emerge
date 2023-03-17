@@ -17,7 +17,6 @@
     git-crypt
     openconnect
     zip
-    unrar
     unzip
     ntfs3g
     exfat

@@ -34,6 +34,5 @@ with inputs; {
     inherit system;
     overlays = map (o: import o { inherit fn var inputs; })
       (fn.dotNixFromRecursive ../pkg);
-    config.allowUnfree = true;
   };
 }

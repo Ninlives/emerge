@@ -34,6 +34,13 @@ in {
     services.xserver.displayManager.job.preStart =
       "${set-session}/bin/set-session";
 
+    allowUnfreePackageNames = [
+      "steam"
+      "steam-run"
+      "steamdeck-hw-theme"
+      "steam-jupiter-original"
+    ];
+
     revive.specifications.deck = {
       seal = "/chest/Deck";
       user = config.users.users.deck.name;

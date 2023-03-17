@@ -1,4 +1,4 @@
-{ var, pkgs, self, config, ... }: {
+{ var, pkgs, self, config, lib, ... }: {
   nix.nixPath = [ "nixpkgs=${toString pkgs.path}" ];
   nix.package = pkgs.nixVersions.unstable;
 
@@ -40,6 +40,4 @@
       nix run emerge#$app -- $@
     '')
   ];
-
-  nixpkgs.config.allowUnfree = true;
 }

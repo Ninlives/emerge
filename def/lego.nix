@@ -8,6 +8,7 @@ fn.mkCube {
     ../opt/revive.nix
     ../opt/sops-profiles.nix
     ../opt/workspace.nix
+    ../opt/unfree.nix
     home-manager.nixosModule
     sops-nix.nixosModules.sops
     # external.nixosModules.nixos-cn
