@@ -7,11 +7,9 @@
   nix.settings.trusted-users = [ config.workspace.user.name ];
   nix.settings.substituters = [
     "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store?priority=5"
-    "https://nixos-cn.cachix.org"
     "https://emerge.cachix.org"
   ];
   nix.settings.trusted-public-keys = [
-    "nixos-cn.cachix.org-1:L0jEaL6w7kwQOPlLoCR3ADx+E3Q8SEFEcB9Jaibl0Xg="
     "emerge.cachix.org-1:Zvw8m0TXudK0MtylBFvUZCUEHlOfTgfvE2bbIexGhVw="
   ];
   nix.settings.auto-optimise-store = true;

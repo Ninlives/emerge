@@ -27,7 +27,7 @@ let
     "-d 240.0.0.0/4"
   ];
 
-  noproxy = "/chest/System/Data/proxy/noproxy";
+  noproxy = "/${config.workspace.disk.persist}/System/Data/proxy/noproxy";
   speech = writeShellScriptBin "speech" ''
     ${ip46tables} -t nat -F ${tag} 2>/dev/null || true
     ${ip46tables} -t nat -N ${tag} 2>/dev/null || true

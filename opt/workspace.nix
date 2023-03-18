@@ -16,7 +16,11 @@
       type = int;
       default = 1000;
     };
-    chestVolume = mkOption {
+    disk.persist = mkOption {
+      type = str;
+      default = "garden";
+    };
+    disk.swap = mkOption {
       type = str;
       default = "chest";
     };

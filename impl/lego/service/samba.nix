@@ -1,4 +1,8 @@
-{ var, config, ... }: {
+{ var, config, ... }: 
+let
+  inherit (config.workspace.disk) persist;
+in
+{
   services.samba = {
     enable = true;
     securityType = "user";
@@ -18,7 +22,7 @@
     '';
     shares = {
       public = {
-        path = "/chest/Share";
+        path = "/${persist}/Share";
       };
       external = {
         path = "/run/media";
@@ -26,7 +30,7 @@
         "map to guest" = "never";
       };
       extra = {
-        path = "/chest/Data/samba";
+        path = "/${persist}/Data/samba";
         "guest ok" = "no";
         "map to guest" = "never";
       };

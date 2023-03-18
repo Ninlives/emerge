@@ -2,7 +2,6 @@
 let
   inherit (pkgs)
     writeShellScript writeShellScriptBin coreutils gnugrep gnused gnumake git;
-  inherit (var.seal) chest;
   inherit (var.proxy) port;
   conf-file = "${inputs.data.content.smartdns}";
 in {

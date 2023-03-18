@@ -162,7 +162,7 @@ in {
     LoadCredential = [
       "template:${tpl.v2ray-template.path}"
       "common:${tpl.v2ray-common.path}"
-      "fallback:/chest/System/Data/proxy/v2ray/fallback.json"
+      "fallback:/${config.workspace.disk.persist}/System/Data/proxy/v2ray/fallback.json"
     ];
   };
 

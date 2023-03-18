@@ -11,7 +11,6 @@ fix (self: {
       ../opt/rathole.nix
       ../opt/sops-profiles.nix
       sops-nix.nixosModules.sops
-      external.nixosModules.nixos-cn
       {
         sops.profiles = [ "general" "server" ];
         nixpkgs.overlays = map (o: import o { inherit fn var inputs; })
@@ -29,7 +28,6 @@ fix (self: {
       ../opt/rathole.nix
       ../opt/sops-profiles.nix
       sops-nix.nixosModules.sops
-      external.nixosModules.nixos-cn
       { sops.profiles = [ "general" "home" ]; }
     ];
   };

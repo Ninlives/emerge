@@ -35,6 +35,7 @@ in {
     { src = /Programs/nix/data; dst = ".local/share/nix"; }
     { src = /Programs/nix/cache; dst = ".cache/nix"; }
     { src = /Programs/nix/index; dst = ".cache/nix-index"; }
+    { src = /Programs/nix/state; dst = ".local/state/nix"; }
   ];
 
   home.activation.scratch = dag.entryAfter [ "writeBoundary" ] ''

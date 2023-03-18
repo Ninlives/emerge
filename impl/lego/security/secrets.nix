@@ -1,3 +1,3 @@
 { config, lib, var, ... }: {
-  sops.age.keyFile = "/chest/System/Data/sops/age.key";
+  sops.age.keyFile = "/${config.workspace.disk.persist}/System/Data/sops/age.key";
 }

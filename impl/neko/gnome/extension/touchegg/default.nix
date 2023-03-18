@@ -1,7 +1,6 @@
 { pkgs, nixosConfig, lib, ... }:
 let
-  inherit (pkgs) writeShellScript crow-translate dbus substituteAll;
-  inherit (pkgs.nixos-cn) touchegg;
+  inherit (pkgs) touchegg writeShellScript crow-translate dbus substituteAll;
   translate = writeShellScript "translate" ''
     ${dbus}/bin/dbus-send --session --type=method_call --dest=io.crow_translate.CrowTranslate /io/crow_translate/CrowTranslate/MainWindow io.crow_translate.CrowTranslate.MainWindow.translateSelection
   '';

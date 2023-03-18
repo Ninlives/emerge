@@ -25,7 +25,6 @@ in {
         vim-devicons
         nerdtree-syntax-highlight
 
-        kmonad-vim
         vim-terraform
       ];
 

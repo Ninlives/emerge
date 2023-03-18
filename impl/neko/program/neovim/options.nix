@@ -7,9 +7,8 @@ let
   inherit (builtins) concatLists filter;
   inherit (pkgs.vimPlugins) vim-plug;
   inherit (pkgs) vimPlugins callPackage makeWrapper runCommand gnvim;
-  inherit (pkgs.nixos-cn) vim-packages;
 
-  pluginSet = vimPlugins // (callPackage ./vim-packages { }) // vim-packages;
+  pluginSet = vimPlugins // (callPackage ./vim-packages { });
 
   pluginType = mkOptionType {
     name = "vim-plugins";

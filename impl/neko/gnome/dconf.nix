@@ -4,17 +4,13 @@ let
   inherit (lib.hm.gvariant) mkTuple;
 in with pkgs;
 with pkgs.gnomeExtensions;
-with pkgs.nixos-cn.gnome-extensions;
-with pkgs.nixos-cn.gnome-themes; 
 mkIf nixosConfig.services.xserver.desktopManager.gnome.enable {
   home.packages = [
     dash-to-dock
     mpris-indicator-button
     appindicator
-    steal-my-focus
-    dynamic-panel-transparent
     pixel-saver
-    x11gestures
+    x11-gestures
 
     bibata-cursors
     gruvbox-gtk-theme
@@ -23,7 +19,7 @@ mkIf nixosConfig.services.xserver.desktopManager.gnome.enable {
   ];
 
   xdg.configFile."gtk-3.0/bookmarks".text = ''
-    file:///chest/Share Share
+    file:///${nixosConfig.workspace.disk.persist}/Share Share
   '';
 
   xdg.configFile."gtk-4.0".source = "${gruvbox-gtk-theme}/share/themes/Gruvbox-Dark-B/gtk-4.0";

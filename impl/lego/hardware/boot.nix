@@ -1,42 +1,35 @@
-{ config, pkgs, lib, ... }:
-let
-  inherit (pkgs) fetchFromGitHub fixedsys-excelsior terminus_font;
+{ config, pkgs, lib, ... }: {
 
-  falloutTheme = fetchFromGitHub {
-    owner = "Ninlives";
-    repo = "fallout-grub-theme";
-    rev = "70dbb3959d090f6bcd7acfffd1245ba88e0a19ea";
-    sha256 = "11wrfjxvxsyf23ipjfgqx2hkhw9lid8dmadqssyxkrj14m7wdvjn";
-  };
+  system.nixos.tags = [ config.boot.kernelPackages.kernel.version ];
+  system.nixos.label = with lib; concatStringsSep "-" (sort (x: y: x < y) config.system.nixos.tags);
 
-in {
-  # boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.grub = {
-    enable = true;
-    efiSupport = true;
-  };
-  boot.loader.grub.efiInstallAsRemovable = true;
-  # boot.kernelPackages = pkgs.linuxPackages_latest;
-
-  boot.loader.grub.extraPrepareConfig = ''
-    test -d /boot/grub/fallout && rm -rf /boot/grub/fallout
-    cp -rpf ${falloutTheme}/. /boot/grub/fallout/
-  '';
-  boot.loader.grub.extraConfig = ''
-    set theme=($drive1)//grub/fallout/theme.txt
-  '';
-
-  boot.loader.grub.splashImage = "${falloutTheme}/background.png";
-  boot.loader.grub.backgroundColor = "#7EBAE4";
+  boot.loader.efi.efiSysMountPoint = "/boot";
+  boot.bootspec.enable = true;
+  boot.loader.systemd-boot.enable = false;
   boot.loader.timeout = 65535;
 
-  boot.loader.grub.font =
-    "${fixedsys-excelsior}/share/fonts/truetype/fixedsys-excelsior-3.00.ttf";
+  boot.loader.systemd-boot.consoleMode = "auto";
+  boot.lanzaboote = {
+    enable = true;
+    pkiBundle = "/etc/secureboot";
+  };
+  sops.secrets."secureboot/GUID".mode = "0444";
+  environment.etc = with lib;
+    (listToAttrs (map (file: {
+      name = file;
+      value.source = config.sops.secrets.${file}.path;
+    }) [
+      "secureboot/GUID"
+      "secureboot/keys/db/db.key"
+      "secureboot/keys/db/db.pem"
+      "secureboot/keys/KEK/KEK.key"
+      "secureboot/keys/KEK/KEK.pem"
+      "secureboot/keys/PK/PK.key"
+      "secureboot/keys/PK/PK.pem"
+    ]));
+  environment.systemPackages = [ pkgs.sbctl ];
 
   boot.cleanTmpDir = true;
-
-  console.font = "ter-i32b";
-  console.packages = [ terminus_font ];
   console.earlySetup = true;
 
   revive.specifications.system.boxes = [

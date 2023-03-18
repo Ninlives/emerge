@@ -11,8 +11,7 @@ fn.mkCube {
     ../opt/unfree.nix
     home-manager.nixosModule
     sops-nix.nixosModules.sops
-    # external.nixosModules.nixos-cn
-    external.nixosModules.nixos-cn-registries
+    inputs.lanzaboote.nixosModules.lanzaboote
 
     ({ config, ... }: {
       system.nixos.tags = mkAfter [ (builtins.readFile ../tag.txt) ];

@@ -1,13 +1,9 @@
 { config, pkgs, lib, fn, var, ... }:
 let
   inherit (pkgs) gnome writeText;
-  inherit (pkgs.nixos-cn) touchegg;
   inherit (lib) concatMapStringsSep mkForce;
   home = path: "${config.workspace.user.home}/${path}";
 in {
-  system.nixos.tags =
-    [ "Gnome-${config.boot.kernelPackages.kernel.modDirVersion}" ];
-
   services.xserver.desktopManager.gnome.enable = true;
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.displayManager.job.logToFile = mkForce false;
@@ -29,8 +25,7 @@ in {
 
   environment.systemPackages = [ gnome.gnome-tweaks pkgs.networkmanagerapplet ];
 
-  systemd.packages = [ touchegg ];
-  systemd.services.touchegg.wantedBy = [ "multi-user.target" ];
+  services.touchegg.enable = true;
 
   revive.specifications.user.boxes = [
     {

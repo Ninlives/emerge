@@ -42,7 +42,7 @@ in {
     ];
 
     revive.specifications.deck = {
-      seal = "/chest/Deck";
+      seal = "/${config.workspace.disk.persist}/Deck";
       user = config.users.users.deck.name;
       group = config.users.groups.users.name;
     };

@@ -7,7 +7,8 @@ in {
     workspace.user.name = dp.workstation.username;
     workspace.user.home = "/home/${dp.workstation.username}";
     workspace.user.uid = 2048;
-    workspace.chestVolume = "workstation";
+    workspace.disk.persist = "institute";
+    workspace.disk.swap = "depot";
     workspace.hostName = dp.workstation.hostname;
 
     boot.loader.grub.configurationName = "Work Station";
