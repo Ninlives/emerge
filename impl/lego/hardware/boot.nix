@@ -1,7 +1,9 @@
 { config, pkgs, lib, ... }: {
 
   system.nixos.tags = [ config.boot.kernelPackages.kernel.version ];
-  system.nixos.label = with lib; concatStringsSep "-" (sort (x: y: x < y) config.system.nixos.tags);
+  system.nixos.label = with lib;
+    concatStringsSep "-" ([ config.specialisation-name ]
+      ++ (sort (x: y: x < y) config.system.nixos.tags));
 
   boot.loader.efi.efiSysMountPoint = "/boot";
   boot.bootspec.enable = true;
@@ -30,7 +32,6 @@
   environment.systemPackages = [ pkgs.sbctl ];
 
   boot.cleanTmpDir = true;
-  console.earlySetup = true;
 
   revive.specifications.system.boxes = [
     {

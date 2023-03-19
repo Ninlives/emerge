@@ -2,7 +2,7 @@
 with lib;
 let dp = config.secrets.decrypted;
 in {
-  specialisation.workstation.configuration = { config, ... }: {
+  specialisation.institute.configuration = { config, ... }: {
     workspace.identity = "workstation";
     workspace.user.name = dp.workstation.username;
     workspace.user.home = "/home/${dp.workstation.username}";
@@ -11,7 +11,6 @@ in {
     workspace.disk.swap = "depot";
     workspace.hostName = dp.workstation.hostname;
 
-    boot.loader.grub.configurationName = "Work Station";
     services.xserver.displayManager.defaultSession = "gnome-xorg";
 
     system.activationScripts.update-ca-certs = stringAfter [ "etc" ] ''

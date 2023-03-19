@@ -20,19 +20,39 @@ let
         chmod +x $out/bin/set-session
       '';
     };
+  systemctl = "${config.systemd.package}/bin/systemctl";
 in {
   config = lib.mkIf (config.workspace.identity == "private") {
     jovian.steam.enable = true;
     users.users.deck = {
       isNormalUser = true;
       extraGroups = [ "networkmanager" ];
-      hashedPassword = "";
+      passwordFile = config.sops.secrets.hashed-password-deck.path;
       home = "/home/deck";
       createHome = true;
       uid = 1001;
     };
+    sops.secrets.hashed-password-deck.neededForUsers = true;
+    home-manager.users.deck.home = { 
+      stateVersion = "22.05";
+      packages = [ pkgs.steam ];
+    };
+
+    fileSystems."/tavern" = {
+      device = "/dev/disk/by-label/tavern";
+      fsType = "ext4";
+    };
+
     services.xserver.displayManager.job.preStart =
       "${set-session}/bin/set-session";
+    environment.etc."gdm/PreSession/Default".source = pkgs.writeShellScript "presession" ''
+      if [[ "$USERNAME" = "deck" ]];then
+        ${systemctl} stop opensd.service || true
+      fi
+    '';
+    environment.etc."gdm/PostSession/Default".source = pkgs.writeShellScript "postsession" ''
+      ${systemctl} start opensd.service || true
+    '';
 
     allowUnfreePackageNames = [
       "steam"

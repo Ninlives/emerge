@@ -29,7 +29,7 @@
       spec-d-mails =
         (mapAttrs (_: v: builtins.attrValues v.configuration.d-mail)
           alpha-world-line.config.specialisation) // {
-            default = builtins.attrValues (alpha-world-line.config.d-mail);
+            garden = builtins.attrValues (alpha-world-line.config.d-mail);
           };
 
     in alpha-world-line.extendModules {
@@ -38,7 +38,7 @@
         {
           options.specialisation-name = mkOption {
             type = str;
-            default = "default";
+            default = "garden";
           };
         }
         {

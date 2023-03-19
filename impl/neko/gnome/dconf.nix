@@ -1,6 +1,6 @@
 { config, lib, pkgs, var, inputs, nixosConfig, ... }:
 let
-  inherit (lib) concatMapStringsSep optionalAttrs mkIf;
+  inherit (lib) mkIf;
   inherit (lib.hm.gvariant) mkTuple;
 in with pkgs;
 with pkgs.gnomeExtensions;
@@ -16,6 +16,7 @@ mkIf nixosConfig.services.xserver.desktopManager.gnome.enable {
     gruvbox-gtk-theme
     gtk-engine-murrine
     gnome-themes-extra
+    gruvbox-plus-icon-pack
   ];
 
   xdg.configFile."gtk-3.0/bookmarks".text = ''
@@ -89,7 +90,7 @@ mkIf nixosConfig.services.xserver.desktopManager.gnome.enable {
     "org/gnome/desktop/interface" = {
       color-scheme = "prefer-dark";
       cursor-theme = "Bibata-Modern-Classic";
-      icon-theme = "Gruvbox-Dark";
+      icon-theme = "GruvboxPlus";
       gtk-theme = "Gruvbox-Dark-B";
 
       clock-show-weekday = true;

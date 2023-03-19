@@ -19,11 +19,6 @@
     nixfmt
     moreutils
     encfs
-    git-crypt
-
-    # Git Filters
-    sops-git-filter-clean
-    sops-git-filter-smudge
   ];
 
   programs = {
