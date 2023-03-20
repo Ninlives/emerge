@@ -1,1 +1,1 @@
-new_iconpack
+enable_proxy_for_deck

@@ -33,9 +33,9 @@ in {
       uid = 1001;
     };
     sops.secrets.hashed-password-deck.neededForUsers = true;
-    home-manager.users.deck.home = { 
+    home-manager.users.deck.home = {
       stateVersion = "22.05";
-      packages = [ pkgs.steam ];
+      packages = with pkgs; [ steam yuzu ];
     };
 
     fileSystems."/tavern" = {
@@ -45,21 +45,21 @@ in {
 
     services.xserver.displayManager.job.preStart =
       "${set-session}/bin/set-session";
-    environment.etc."gdm/PreSession/Default".source = pkgs.writeShellScript "presession" ''
-      if [[ "$USERNAME" = "deck" ]];then
-        ${systemctl} stop opensd.service || true
-      fi
-    '';
-    environment.etc."gdm/PostSession/Default".source = pkgs.writeShellScript "postsession" ''
-      ${systemctl} start opensd.service || true
-    '';
+    environment.etc."gdm/PreSession/Default".source =
+      pkgs.writeShellScript "presession" ''
+        if [[ "$USERNAME" = "deck" ]];then
+          ${config.lib.commands.speech} || true
+          ${systemctl} stop opensd.service || true
+        fi
+      '';
+    environment.etc."gdm/PostSession/Default".source =
+      pkgs.writeShellScript "postsession" ''
+        ${config.lib.commands.speechless} || true
+        ${systemctl} start opensd.service || true
+      '';
 
-    allowUnfreePackageNames = [
-      "steam"
-      "steam-run"
-      "steamdeck-hw-theme"
-      "steam-jupiter-original"
-    ];
+    allowUnfreePackageNames =
+      [ "steam" "steam-run" "steamdeck-hw-theme" "steam-jupiter-original" ];
 
     revive.specifications.deck = {
       seal = "/${config.workspace.disk.persist}/Deck";

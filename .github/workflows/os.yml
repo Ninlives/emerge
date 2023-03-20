@@ -10,15 +10,11 @@ jobs:
   update:
     runs-on: ubuntu-latest
     steps:
-    - name: Maximize space
-      run: |
-        sudo rm -rf /usr/share/dotnet
-        sudo rm -rf /usr/local/lib/android
-        sudo rm -rf /opt/ghc
-        echo "Availabel space:"
-        df -h
     - name: Checkout
       uses: actions/checkout@v3
+    - name: Maximize space
+      run: |
+        bash .github/scripts/cleanup.sh
     - name: Install nixFlake
       uses: cachix/install-nix-action@v20
       with:

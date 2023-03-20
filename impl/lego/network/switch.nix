@@ -55,6 +55,10 @@ let
   '';
 
 in {
+  lib.commands = {
+    speech = "${speech}/bin/speech";
+    speechless = "${speechless}/bin/speechless";
+  };
   environment.systemPackages = [ speech speechless ];
 
   security.sudo.extraRules = [{
