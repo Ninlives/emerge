@@ -41,6 +41,7 @@ in {
     fileSystems."/tavern" = {
       device = "/dev/disk/by-label/tavern";
       fsType = "ext4";
+      options = [ "x-systemd.automount" "noauto" ];
     };
 
     services.xserver.displayManager.job.preStart =

@@ -1,1 +1,1 @@
-enable_proxy_for_deck
+remove_centered_nvim_config
