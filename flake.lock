@@ -67,11 +67,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1677115097,
-        "narHash": "sha256-8AJ/kgWVqnV7C7LUByi1zGF64HPTRmFni15I1ws44kE=",
+        "lastModified": 1679411643,
+        "narHash": "sha256-D+pWa8OTD4SRX1F1bornIn/T5zLqL+RrnxwKgDg+hRk=",
         "owner": "Ninlives",
         "repo": "data",
-        "rev": "7b45b2624b96b015ccaeb9f930e9d3685520500e",
+        "rev": "fd7b446c54208c0b5ae1e9ff862402e90d4799a4",
         "type": "github"
       },
       "original": {
@@ -256,11 +256,11 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1679265143,
-        "narHash": "sha256-5RDMW+O4owjdPz7t4K4YxH2fOHCNOcyVmSiKRUikiv0=",
+        "lastModified": 1679394816,
+        "narHash": "sha256-1V1esJt2YAxsKmRuGuB62RF5vhDAVFDvJXVNhtEO22A=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "1b8bf5c3270386a1b6850bd77d79dbdbaf0d7a7c",
+        "rev": "e386ec640e16dc91120977285cb8c72c77078164",
         "type": "github"
       },
       "original": {
@@ -299,11 +299,11 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1679304893,
-        "narHash": "sha256-NGQ3YunIGKS4s1AWYSnCBkqZDPdPrZkhQBltoupYhdg=",
+        "lastModified": 1679410195,
+        "narHash": "sha256-O0QKWaIeX/QRQcOaf1RJofuRu+WnT+zHHHnqeAjAI0E=",
         "owner": "nix-community",
         "repo": "lanzaboote",
-        "rev": "bdcada4bc2c62ba633e3a9b50746cbba6c9c32a3",
+        "rev": "7c55847aaf804398c0cd1c75f20591075eafcdee",
         "type": "github"
       },
       "original": {
@@ -380,27 +380,27 @@
     },
     "nixpkgs-test": {
       "locked": {
-        "lastModified": 1671812130,
-        "narHash": "sha256-GALBK+qB9rhnB+lVnxdgtMoXCySXughZZ3+qGO1Ke/k=",
-        "owner": "RaitoBezarius",
+        "lastModified": 1679009563,
+        "narHash": "sha256-jizICiQOqUcYFNHRNNOo69bfyNo36iyuRAHem5z68LQ=",
+        "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "e51bf8cc8e2c75192e930ad83ed272938729e7be",
+        "rev": "371d3778c4f9cee7d5cf014e6ce400d57366570f",
         "type": "github"
       },
       "original": {
-        "owner": "RaitoBezarius",
-        "ref": "simplified-qemu-boot-disks",
+        "owner": "NixOS",
+        "ref": "qemu-boot-disk-using-make-disk-image",
         "repo": "nixpkgs",
         "type": "github"
       }
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1679307304,
-        "narHash": "sha256-wyhof6C1TnXxISFhcB/8U1tYNeYbPeka6hJr8K8ADGI=",
+        "lastModified": 1679336545,
+        "narHash": "sha256-uCo+tABLP0XmtUb9R5NeEoVWguR/MaW1LTZTMsRlxhY=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "28376bd3853ccc16451a407ac0882edf207adf40",
+        "rev": "8d86d5b7e098f8e0c9bc7ebe76c00c2eb2511ecb",
         "type": "github"
       },
       "original": {
@@ -552,11 +552,11 @@
         "nixpkgs-stable": "nixpkgs-stable_2"
       },
       "locked": {
-        "lastModified": 1678859811,
-        "narHash": "sha256-5duOEEV/U/SmU8oUHrj68Wmw4tZBqolP0xVCdi5uZEE=",
+        "lastModified": 1679405000,
+        "narHash": "sha256-8GlZ+fvx3r0XwZdtLDJHNOKGdmVPcb2+oOT1jQVmB7g=",
         "owner": "Ninlives",
         "repo": "sops-nix",
-        "rev": "efd85fbf514de24aa865a66445e1ffd28f19a767",
+        "rev": "d93c3bf08e140b09fb4e3aaa87d1591b81f72e9a",
         "type": "github"
       },
       "original": {
