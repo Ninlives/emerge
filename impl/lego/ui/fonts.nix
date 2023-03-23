@@ -15,7 +15,7 @@ in
       wqy_zenhei
     ];
 
-    fontDir.enable = true;
+    # fontDir.enable = true;
     fontconfig.cache32Bit = true;
 
     fontconfig.defaultFonts = {

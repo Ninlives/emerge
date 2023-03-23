@@ -1,1 +1,1 @@
-remove_centered_nvim_config
+update_packages

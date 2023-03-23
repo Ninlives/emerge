@@ -11,8 +11,8 @@ final: prev: {
       src = fetchFromGitHub {
         owner = "SylEleuth";
         repo = pname;
-        rev = "0d35e18f91764b34fd78b10ef2eedd0e51d70be1";
-        sha256 = "sha256-PhA3BwVIC5y9Xwibnqn/g9Fo4qr4a5dTWbzalC2LZPM=";
+        rev = "b616f6fca3c15f61f3a5ddb819858e26965a967e";
+        sha256 = "sha256-cqTC284yQok+I2WS38JHObVKYamK4Chmwbq2zSfhE4U=";
       };
 
       nativeBuildInputs = [ gtk3 ];
@@ -26,9 +26,6 @@ final: prev: {
         find|grep ' '|while read broken;do
           mv "$broken" "''${broken// /_}"
         done
-        # make onscreen keyboard happy
-        find -name 'keyboard.svg'|xargs rm
-        find -name 'keyboard-symbolic.svg'|xargs rm
         cp -r * ${iconDir}
         gtk-update-icon-cache ${iconDir}
       '';
