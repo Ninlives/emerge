@@ -1,4 +1,4 @@
-{ config, pkgs, lib, inputs, ... }:
+{ pkgs, lib, ... }:
 with pkgs;
 let
   font-list =[ "ShureTechMono Nerd Font Mono" "Sarasa Mono Slab SC" ];
@@ -16,7 +16,14 @@ in
     ];
 
     # fontDir.enable = true;
-    fontconfig.cache32Bit = true;
+    fontconfig = {
+      cache32Bit = true;
+      antialias = true;
+      subpixel = {
+        rgba = "none";
+        lcdfilter = "none";
+      };
+    };
 
     fontconfig.defaultFonts = {
       monospace = font-list;

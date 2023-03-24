@@ -66,39 +66,7 @@ in {
     kill $DECKBD_PID
   '';
 
-  # fileSystems."/deck" = {
-  #   device = "/dev/disk/by-label/tower";
-  #   fsType = "btrfs";
-  #   options = btrfsOptions "deck" [ "compress=none" ];
-  # };
-  # swapDevices = [{ device = "/deck/swap"; }];
-
   boot.supportedFilesystems = [ "ntfs" ];
 
   nix.settings.max-jobs = lib.mkDefault 12;
-  hardware.video.hidpi.enable = true;
-
-  # boot.initrd.postDeviceCommands = 
-  # let
-  #   deckbd = "${inputs.deckbd.packages.${var.system}.default}/bin/deckbd";
-  # in
-  # ''
-  #   try=10
-  #   while true;do
-  #     ${deckbd} query && break
-  #     if test $try -le 0;then break; fi
-  #     sleep 1
-  #     echo $try Waiting for controller to appear...
-  #     try=$((try - 1))
-  #   done
-  #   echo Run deckbd
-  #   ${deckbd} &
-  #   deckbd_pid=$!
-  #   echo PID: $deckbd_pid
-  #   echo Reading input
-  #   read sdpass
-  #   echo Read sdpass: $sdpass
-  #   kill $deckbd_pid
-  #   sleep 10
-  # '';
 }
