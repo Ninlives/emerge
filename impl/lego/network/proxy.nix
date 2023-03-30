@@ -137,6 +137,8 @@ let
     group = var.proxy.group;
   };
 
+  default = config.workspace.defaultProxy;
+
 in {
 
   users.groups.${var.proxy.group} = { };
@@ -150,9 +152,10 @@ in {
   sops.templates.v2ray-common = mkTemplate common;
 
   systemd.services.v2ray-trojan = mkService "$CREDENTIALS_DIRECTORY/config" {
-    wantedBy = [ "multi-user.target" ];
+    wantedBy = lib.mkIf (default == "v2ray-trojan") [ "multi-user.target" ];
   } { LoadCredential = "config:${tpl.v2ray-trojan.path}"; };
   systemd.services.v2ray-fallback = mkService "$RUNTIME_DIRECTORY/config.json" {
+    wantedBy = lib.mkIf (default == "v2ray-fallback") [ "multi-user.target" ];
     preStart = ''
       CRED=$CREDENTIALS_DIRECTORY
       ${pkgs.jq}/bin/jq -s '.[0].outbounds += [.[1] * .[2]]|.[0]' $CRED/template $CRED/fallback $CRED/common > $RUNTIME_DIRECTORY/config.json

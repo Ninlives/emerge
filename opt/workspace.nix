@@ -28,5 +28,9 @@
       type = str;
       default = "nixos";
     };
+    defaultProxy = mkOption {
+      type = str;
+      default = "v2ray-trojan";
+    };
   };
 }

@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, ... }:
 with lib;
 let dp = config.secrets.decrypted;
 in {
@@ -10,6 +10,7 @@ in {
     workspace.disk.persist = "institute";
     workspace.disk.swap = "depot";
     workspace.hostName = dp.workstation.hostname;
+    workspace.defaultProxy = "v2ray-fallback";
 
     services.xserver.displayManager.defaultSession = "gnome-xorg";
 
