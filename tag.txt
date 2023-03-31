@@ -1,1 +1,1 @@
-lanzaboote_unfollow_nixpkgs
+rollback_lanzabootenixpkgs
