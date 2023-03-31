@@ -1,1 +1,1 @@
-different_proxy_for_workspace
+lanzaboote_unfollow_nixpkgs

@@ -15,10 +15,7 @@
     url = "github:Jovian-Experiments/Jovian-NixOS";
     flake = false;
   };
-  inputs.lanzaboote = {
-    url = "github:nix-community/lanzaboote";
-    inputs.nixpkgs.follows = "nixpkgs";
-  };
+  inputs.lanzaboote.url = "github:nix-community/lanzaboote";
 
   inputs.data.url = "github:Ninlives/data";
   inputs.values.url = "git+ssh://git@github.com/Ninlives/values.git";
