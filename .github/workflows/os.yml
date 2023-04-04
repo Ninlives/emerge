@@ -38,7 +38,7 @@ jobs:
         echo "${{ secrets.VALUES_SSH_KEY }}"|ssh-add -
         nix flake update
     - name: Build system
-      run: nix build .#nixosConfigurations.lego.config.system.build.toplevel
+      run: nix build .#nixosConfigurations.lego.config.system.build.toplevel --verbose --print-build-logs
     - name: Commit if build succeed
       run: |
         git diff-index --quiet HEAD \
