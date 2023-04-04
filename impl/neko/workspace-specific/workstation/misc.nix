@@ -35,7 +35,7 @@
       unset DCONF_RUN
       unset APPS
     '';
-    home.packages = [ pkgs.gnome.pomodoro ];
+    home.packages = [ pkgs.gnome.pomodoro pkgs.cool-retro-term ];
 
     persistent.boxes = [
       {
@@ -53,6 +53,10 @@
       {
         src = /Programs/gnome-pomodoro;
         dst = ".local/share/gnome-pomodoro";
+      }
+      {
+        src = /Programs/cool-retro-term;
+        dst = ".local/share/cool-retro-term";
       }
     ];
   };
