@@ -31,7 +31,7 @@
     ]));
   environment.systemPackages = [ pkgs.sbctl ];
 
-  boot.cleanTmpDir = true;
+  boot.tmp.cleanOnBoot = true;
 
   revive.specifications.system.boxes = [
     {

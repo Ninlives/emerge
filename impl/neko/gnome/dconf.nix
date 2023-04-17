@@ -64,6 +64,7 @@ mkIf nixosConfig.services.xserver.desktopManager.gnome.enable {
 
     "org/gnome/desktop/sound".allow-volume-above-100-percent = true;
     "org/gnome/shell".welcome-dialog-last-shown-version = "40.1";
+    "org/gnome/mutter".edge-tiling = true;
 
     # Applications
 
@@ -98,6 +99,7 @@ mkIf nixosConfig.services.xserver.desktopManager.gnome.enable {
 
       text-scaling-factor = 1.5;
     };
+    "org/gnome/mutter".dynamic-workspaces = true;
     "org/gnome/shell/extensions/user-theme".name = "Gruvbox-Dark-B";
     "org/gnome/desktop/calendar".show-weekdate = true;
     "org/gnome/desktop/wm/preferences" = {
