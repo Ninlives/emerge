@@ -1,11 +1,11 @@
-{ pkgs, inputs, ... }: {
+{ pkgs, inputs, system, ... }: {
 
   boot.initrd.availableKernelModules =
     [ "nvme" "xhci_pci" "usb_storage" "usbhid" "sd_mod" "sdhci_pci" ];
   # Temporary
   imports = [
     "${
-      pkgs.applyPatches {
+      inputs.nixpkgs.legacyPackages.${system}.applyPatches {
         src = inputs.jovian;
         patches = builtins.toFile "fhs.patch" ''
           diff --git a/modules/steam.nix b/modules/steam.nix
