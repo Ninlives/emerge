@@ -5,7 +5,7 @@
   # Temporary
   imports = [
     "${
-      inputs.nixpkgs.legacyPackages.x86_64.applyPatches {
+      inputs.nixpkgs.legacyPackages.x86_64-linux.applyPatches {
         src = inputs.jovian;
         patches = builtins.toFile "fhs.patch" ''
           diff --git a/modules/steam.nix b/modules/steam.nix
