@@ -67,11 +67,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1681434679,
-        "narHash": "sha256-fdg6eFq2QE8mlMnXCyUYAfhQMCxVLxgcRB7au+5ON3A=",
+        "lastModified": 1681780497,
+        "narHash": "sha256-pFesvxD4PPEK4Zn1Zrcr4MaKYlez1odJQwW6wRDVGro=",
         "owner": "Ninlives",
         "repo": "data",
-        "rev": "1adbe4959c0dbe061600380c6ffce5f1efbd9427",
+        "rev": "c5087e0a8d707883e1e53b09a1fccfb301fbba15",
         "type": "github"
       },
       "original": {
@@ -565,15 +565,15 @@
         "nixpkgs-stable": "nixpkgs-stable_2"
       },
       "locked": {
-        "lastModified": 1681449320,
-        "narHash": "sha256-bibTfiYkzg8nCCqAFofS14X7FpyA476s6xXzlir1WWM=",
-        "owner": "Ninlives",
+        "lastModified": 1681721408,
+        "narHash": "sha256-NWCbZKOQEXz1hA2YDFxdd+fVrrw9edbG1DvbbLf7KUY=",
+        "owner": "Mic92",
         "repo": "sops-nix",
-        "rev": "77aacab6fa7296361a301cccd79f0914e0f0d77f",
+        "rev": "de6514f8fe1b3c2b57307569a0898bc4be9ae1c5",
         "type": "github"
       },
       "original": {
-        "owner": "Ninlives",
+        "owner": "Mic92",
         "repo": "sops-nix",
         "type": "github"
       }
