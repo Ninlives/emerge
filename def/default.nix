@@ -24,7 +24,7 @@ with inputs; {
     inherit pkgs;
     inherit (var) system;
     extraArgs = {
-      inherit var;
+      inherit var inputs;
       inherit (self.nixosConfigurations) echo;
     };
     modules = fn.dotNixFromRecursive ../infra ++ [ ../bombe/secrets.nix ];

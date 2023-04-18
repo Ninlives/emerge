@@ -1,4 +1,4 @@
-{ pkgs, config, var, ... }: {
+{ pkgs, config, ... }: {
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   sops.age.keyFile = "/chest/Static/sops/age.key";
@@ -9,7 +9,7 @@
 
   users.mutableUsers = false;
 
-  users.users.${var.user.name} = {
+  users.users.mlatus = {
     uid = 1000;
     createHome = true;
     isNormalUser = true;

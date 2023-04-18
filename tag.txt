@@ -1,1 +1,1 @@
-update_deps
+update_ci

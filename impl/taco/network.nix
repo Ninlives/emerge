@@ -8,7 +8,7 @@
 
   services.openssh = {
     enable = true;
-    passwordAuthentication = false;
+    settings.PasswordAuthentication = false;
   };
   systemd.services.sshd.preStart = mkAfter
     (flip concatMapStrings config.services.openssh.hostKeys (k: ''
