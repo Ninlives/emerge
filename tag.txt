@@ -1,1 +1,1 @@
-workaround_mangohud
+revert_changes
