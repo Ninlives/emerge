@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }: {
+{ pkgs, inputs, lib, ... }: {
 
   boot.initrd.availableKernelModules =
     [ "nvme" "xhci_pci" "usb_storage" "usbhid" "sd_mod" "sdhci_pci" ];
@@ -26,6 +26,16 @@
       }
     }/modules"
   ];
+  nixpkgs.overlays = [
+    (final: prev: {
+      mangohud = prev.mangohud.overrideAttrs (p: {
+        patches = builtins.filter
+          (pa: !(lib.hasSuffix "preload-nix-workaround.patch" pa))
+          (p.patches or [ ]);
+      });
+    })
+  ];
+
   jovian.devices.steamdeck.enable = true;
 
   environment.systemPackages = with pkgs; [
