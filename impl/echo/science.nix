@@ -72,7 +72,7 @@ in {
     log = {
       access = "/tmp/v2ray_access.log";
       error = "/tmp/v2ray_error.log";
-      loglevel = "info";
+      loglevel = "error";
     };
     inbounds =
       [ (mkInbound dp.trojan.port plh."trojan/password" "/${dp.trojan.secret-path}") ];

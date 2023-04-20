@@ -2,30 +2,28 @@
 
   boot.initrd.availableKernelModules =
     [ "nvme" "xhci_pci" "usb_storage" "usbhid" "sd_mod" "sdhci_pci" ];
-  imports = [ "${inputs.jovian}/modules" ];
-  # imports = [
-  #   "${
-  #     inputs.nixpkgs.legacyPackages.x86_64-linux.applyPatches {
-  #       name = "jovian";
-  #       src = inputs.jovian;
-  #       patches = builtins.toFile "fhs.patch" ''
-  #         diff --git a/modules/steam.nix b/modules/steam.nix
-  #         index f726a8b..d1ddb11 100644
-  #         --- a/modules/steam.nix
-  #         +++ b/modules/steam.nix
-  #         @@ -31,7 +31,7 @@ let
-  #            # can't run a binary with such a capability without being Setuid
-  #            # itself.
-  #            steam = pkgs.steam.override {
-  #         -    buildFHSUserEnv = pkgs.buildFHSUserEnvBubblewrap.override {
-  #         +    buildFHSEnv = pkgs.buildFHSEnv.override {
-  #                bubblewrap = "''${config.security.wrapperDir}/..";
-  #              };
-  #            };
-  #       '';
-  #     }
-  #   }/modules"
-  # ];
+  # imports = [ "${inputs.jovian}/modules" ];
+  imports = let nixpkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
+  in [
+    "${
+      nixpkgs.applyPatches {
+        name = "jovian";
+        src = inputs.jovian;
+        patches = [
+          (nixpkgs.fetchpatch {
+            url =
+              "https://github.com/Jovian-Experiments/Jovian-NixOS/commit/dc365da27a3119a2ba1e858c46d7a67edae1822d.patch";
+            sha256 = "sha256-1167i4aYe3MvpRlDXuigGn0nvbubz9HJXCboOEv4A+M=";
+          })
+          (nixpkgs.fetchpatch {
+            url =
+              "https://github.com/Jovian-Experiments/Jovian-NixOS/commit/7b754a9c444085a78386823d8ff23097cf9b7ae3.patch";
+            sha256 = "sha256-+QkuDE1OEH3AyKxXxCRVRDtEmXep4Ub0rW/gtFSuL5U=";
+          })
+        ];
+      }
+    }/modules"
+  ];
   # nixpkgs.overlays = [
   #   (final: prev: {
   #     mangohud = prev.mangohud.overrideAttrs (p: {
