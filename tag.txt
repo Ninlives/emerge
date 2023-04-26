@@ -1,1 +1,1 @@
-restore_gestures
+enable_ungoogled-chromium,_WeTab_extension,_ltex-ls
