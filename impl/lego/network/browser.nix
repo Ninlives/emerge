@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }: {
+{ config, pkgs, ... }: {
   programs.chromium = {
     enable = true;
     extensions = [
@@ -7,13 +7,7 @@
       "aikflfpejipbpjdlfabpgclhblkpaafo" # WeTab
     ];
   };
-  environment.systemPackages = [ (pkgs.ungoogled-chromium.override { commandLineArgs = lib.concatStringsSep " " [
-    "--disable-search-engine-collection"
-    "--fingerprinting-canvas-image-data-noise"
-    "--fingerprinting-canvas-measuretext-noise"
-    "--fingerprinting-client-rects-noise"
-    "--enable-features=DisableLinkDrag"
-  ]; }) ];
+  environment.systemPackages = [ pkgs.chromium ];
 
   revive.specifications.user.boxes = [{
     src = /Programs/chromium;

@@ -1,1 +1,1 @@
-enable_ungoogled-chromium,_WeTab_extension,_ltex-ls
+update_lsp

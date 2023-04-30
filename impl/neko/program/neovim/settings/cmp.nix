@@ -1,15 +1,14 @@
-{ pkgs, lib, config, fn, nixosConfig, ... }:
+{ pkgs, lib, fn, nixosConfig, ... }:
 let
   inherit (pkgs) rime-data librime fetchFromGitHub;
   inherit (lib.hm.dag) entryAfter;
-  inherit (lib) optional optionals optionalAttrs optionalString;
+  inherit (lib) optional optionals optionalString;
   no-im = nixosConfig.i18n.inputMethod.enabled == null;
 in {
   programs.neovim.settings.cmp = entryAfter [ "basic" ] {
     plugins = p:
       with p;
       [
-        nvim-lspconfig
         nvim-cmp
         luasnip
 
@@ -93,7 +92,6 @@ in {
       local opts = { noremap=true, silent=true }
       local on_attach = function(client, bufnr)
       end
-
       local capabilities = require('cmp_nvim_lsp').default_capabilities()
     '';
   };
