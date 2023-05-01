@@ -15,6 +15,9 @@ in {
   home.file.".bashrc".text = ''
     export HISTFILE=${homeDirectory}/.local/history/bash_history
   '';
+  home.file.".bash_profile".text = ''
+    exec ${zsh}/bin/zsh
+  '';
   persistent.boxes = [
     {
       src = /Programs/shell/history;

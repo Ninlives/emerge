@@ -1,1 +1,1 @@
-homeConfigurations
+force_zsh
