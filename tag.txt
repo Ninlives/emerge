@@ -1,1 +1,1 @@
-remove_patches_for_jovian
+homeConfigurations

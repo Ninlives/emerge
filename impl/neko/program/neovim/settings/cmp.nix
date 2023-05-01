@@ -1,4 +1,4 @@
-{ pkgs, lib, fn, nixosConfig, ... }:
+{ pkgs, lib, fn, config, nixosConfig, ... }:
 let
   inherit (pkgs) rime-data librime fetchFromGitHub;
   inherit (lib.hm.dag) entryAfter;
@@ -81,7 +81,7 @@ in {
             optionalString no-im ''
               { name = 'rime', option = {
                 shared_data_dir = '${rime-data}/share/rime-data',
-                user_data_dir = '${fn.home ".config/ibus/rime"}'
+                user_data_dir = '${config.home.homeDirectory}/.config/ibus/rime'
               } },
               { name = 'punc' }
             ''

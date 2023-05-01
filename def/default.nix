@@ -20,6 +20,24 @@ with inputs; {
     echo coco;
   };
 
+  homeConfigurations.nemo = let 
+    ttyOnly = lib.nixosSystem {
+      inherit (var) system;
+      modules = [];
+    };
+  in inputs.home-manager.lib.homeManagerConfiguration {
+    inherit pkgs;
+    extraSpecialArgs = { inherit fn var self inputs; nixosConfig = ttyOnly.config; };
+    modules = (fn.dotNixFromRecursive ../impl/neko/option)
+      ++ (fn.dotNixFromRecursive ../impl/neko/misc) ++ [
+      ../impl/neko/program/zsh
+      ../impl/neko/program/neovim
+      ../impl/neko/program/ranger
+      ../impl/neko/program/dircolors
+      { home.username = builtins.getEnv "USER"; home.homeDirectory = builtins.getEnv "HOME"; }
+    ];
+  };
+
   terraformConfigurations.zero = (inputs.terranix.lib.terranixConfiguration {
     inherit pkgs;
     inherit (var) system;
