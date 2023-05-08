@@ -96,16 +96,16 @@ in {
         wrapProgram ${placeholder "out"}/bin/${p} ${wrapArgs}
       '') [ "vi" "vim" "nvim" ]}
     '';
-    home.packages = [
-      (runCommand "gnvim" { buildInputs = [ makeWrapper ]; } ''
-        mkdir -p $out/bin
-        makeWrapper ${gnvim}/bin/gnvim $out/bin/gnvim \
-          --add-flags '--nvim=${config.programs.neovim.finalPackage}/bin/nvim' \
-          ${wrapArgs}
+    # home.packages = [
+    #   (runCommand "gnvim" { buildInputs = [ makeWrapper ]; } ''
+    #     mkdir -p $out/bin
+    #     makeWrapper ${gnvim}/bin/gnvim $out/bin/gnvim \
+    #       --add-flags '--nvim=${config.programs.neovim.finalPackage}/bin/nvim' \
+    #       ${wrapArgs}
 
-        ln -s ${gnvim}/share $out/share
-      '')
-    ];
+    #     ln -s ${gnvim}/share $out/share
+    #   '')
+    # ];
 
     programs.neovim = {
       inherit plugins extraPackages;

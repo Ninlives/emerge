@@ -1,1 +1,1 @@
-force_zsh
+remove_gnvim
