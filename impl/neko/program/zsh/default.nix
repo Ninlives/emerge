@@ -1,7 +1,7 @@
 { config, pkgs, lib, var, nixosConfig, ... }:
 with pkgs;
 let
-  inherit (lib) optionalAttrs optionalString;
+  inherit (lib) optionalString;
   inherit (var.proxy) address port;
   inherit (config.home) homeDirectory;
   histdb = fetchFromGitHub {
@@ -38,7 +38,6 @@ in {
       enable = true;
       dotDir = ".config/zsh";
       enableCompletion = true;
-      enableAutosuggestions = true;
       history.path = "${homeDirectory}/.local/history/zsh_history";
 
       shellAliases = {
@@ -76,9 +75,7 @@ in {
 
       initExtra = ''
         ${optionalString nixosConfig.services.xserver.enable "${keyutils}/bin/keyctl new_session shell > /dev/null"}
-        # <<<sh>>>
         source ${zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-        source ${zsh-history-substring-search}/share/zsh-history-substring-search/zsh-history-substring-search.zsh
         source ${zsh-autopair}/share/zsh/zsh-autopair/autopair.zsh
         source ${histdb}/sqlite-history.zsh
         ZVM_INIT_MODE=sourcing
@@ -88,21 +85,24 @@ in {
         ZVM_NORMAL_MODE_CURSOR=$ZVM_CURSOR_BLOCK
         ZVM_OPPEND_MODE_CURSOR=$ZVM_CURSOR_BEAM
 
-        _zsh_autosuggest_strategy_histdb_top() {
-          local query="select commands.argv from
-                       history left join commands on history.command_id = commands.rowid
-                       left join places on history.place_id = places.rowid
-                       where commands.argv LIKE '$(sql_escape $1)%' and history.exit_status = 0
-                       order by places.dir != '$(sql_escape $PWD)', history.start_time desc limit 1"
-          suggestion=$(_histdb_query "$query")
-        }
-        ZSH_AUTOSUGGEST_STRATEGY=histdb_top
-
+        source ${zsh-history-substring-search}/share/zsh-history-substring-search/zsh-history-substring-search.zsh
         bindkey '^[[A' history-substring-search-up
         bindkey '^[[B' history-substring-search-down
         zvm_bindkey vicmd 'k' history-substring-search-up
         zvm_bindkey vicmd 'j' history-substring-search-down
-        # >>>sh<<<
+
+        if [[ $(${ncurses}/bin/tput cols) -ge 100 ]];then
+          source ${zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+          _zsh_autosuggest_strategy_histdb_top() {
+            local query="select commands.argv from
+                         history left join commands on history.command_id = commands.rowid
+                         left join places on history.place_id = places.rowid
+                         where commands.argv LIKE '$(sql_escape $1)%' and history.exit_status = 0
+                         order by places.dir != '$(sql_escape $PWD)', history.start_time desc limit 1"
+            suggestion=$(_histdb_query "$query")
+          }
+          ZSH_AUTOSUGGEST_STRATEGY=histdb_top
+        fi
       '';
 
     };

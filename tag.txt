@@ -1,1 +1,1 @@
-remove_gnvim
+disable_zsh_autosuggestion_on_small_window
