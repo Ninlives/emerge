@@ -1,4 +1,4 @@
-{ var, pkgs, self, config, lib, ... }: {
+{ pkgs, self, config, ... }: {
   nix.nixPath = [ "nixpkgs=${toString pkgs.path}" ];
   nix.package = pkgs.nixVersions.unstable;
 
@@ -22,6 +22,7 @@
       flakes = [ ];
       version = 2;
     });
+  nix.settings.narinfo-cache-negative-ttl = 86400;
 
   nix.registry = {
     self.flake = self;

@@ -1,8 +1,8 @@
 from qutebrowser.api import cmdutils, message
 from subprocess import call
 
-acl_proxy    = 'socks://@sPROXY_ADDRESS@:@sACL_PORT@'
-global_proxy = 'socks://@sPROXY_ADDRESS@:@sLOCAL_PORT@'
+acl_proxy    = 'socks://@proxy_address@:@acl_port@'
+global_proxy = 'socks://@proxy_address@:@local_port@'
 
 @cmdutils.register()
 def toggle_proxy():
@@ -16,4 +16,4 @@ def toggle_proxy():
         c.content.proxy = global_proxy
         message.info(f"Switch to global proxy: {global_proxy}")
 
-call(['@sKEYCTL@', 'new_session', 'qute'])
+call(['@keyctl@', 'new_session', 'qute'])

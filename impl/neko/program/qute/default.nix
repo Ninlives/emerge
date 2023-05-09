@@ -2,7 +2,7 @@
 with pkgs;
 let
   inherit (var) proxy;
-  inherit (lib) fold optionalAttrs mkMerge mkIf;
+  inherit (lib) fold mkIf;
   inherit (builtins) readFile;
   dp = nixosConfig.secrets.decrypted;
   scrt = nixosConfig.sops.secrets;
@@ -26,16 +26,15 @@ let
   configPy = mergeFiles [
     (substituteAll {
       src = ./config.py;
-
-      sPROXY_ADDRESS = proxy.address;
-      sLOCAL_PORT = proxy.port.local;
-      sACL_PORT = proxy.port.acl;
-      sKEYCTL = "${keyutils}/bin/keyctl";
+      proxy_address = proxy.address;
+      local_port = proxy.port.local;
+      acl_port = proxy.port.acl;
+      keyctl = "${keyutils}/bin/keyctl";
     })
     ./gruvbox.py
   ];
   enabled = config.programs.qutebrowser.enable;
-in {
+in mkIf config.programs.qutebrowser.enable {
   programs.qutebrowser = {
     package = symlinkJoin {
       name = "qutebrowser";

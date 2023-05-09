@@ -1,1 +1,1 @@
-disable_zsh_autosuggestion_on_small_window
+increase_negative_lookup_ttl_
