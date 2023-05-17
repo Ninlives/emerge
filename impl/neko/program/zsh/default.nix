@@ -14,6 +14,10 @@ in {
   home.packages = [ sqlite ];
   home.file.".bashrc".text = ''
     export HISTFILE=${homeDirectory}/.local/history/bash_history
+    # For remote builders running on non-NixOS
+    if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
+      . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+    fi
   '';
   home.file.".bash_profile".text = ''
     exec ${zsh}/bin/zsh
