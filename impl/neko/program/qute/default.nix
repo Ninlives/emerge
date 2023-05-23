@@ -51,14 +51,21 @@ in mkIf config.programs.qutebrowser.enable {
 
     loadAutoconfig = true;
     settings = {
-      content.javascript.can_access_clipboard = true;
-      content.proxy = "socks://${proxy.address}:${toString proxy.port.acl}";
-      scrolling.smooth = true;
       auto_save.session = true;
+      editor.command = [
+        "${config.lib.packages.gnvim}/bin/gnvim"
+        "--"
+        "{file}"
+        "-c"
+        "normal {line}G{column0}l"
+      ];
+      content.javascript.can_access_clipboard = true;
       content.pdfjs = true;
-      qt.highdpi = true;
+      content.proxy = "socks://${proxy.address}:${toString proxy.port.acl}";
       logging.level.console = "info";
       logging.level.ram = "info";
+      qt.highdpi = true;
+      scrolling.smooth = true;
     };
 
     keyBindings = {
@@ -66,9 +73,7 @@ in mkIf config.programs.qutebrowser.enable {
         J = "tab-prev";
         K = "tab-next";
       };
-      insert = {
-        "<Ctrl-p>" = "spawn --userscript ${vaultwardenScript}";
-      };
+      insert = { "<Ctrl-p>" = "spawn --userscript ${vaultwardenScript}"; };
     };
 
     extraConfig = configPy;

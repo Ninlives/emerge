@@ -1,4 +1,4 @@
-{ config, lib, pkgs, inputs, var, ... }:
+{ config, lib, inputs, var, ... }:
 let
   inherit (config.workspace) disk;
   btrfsOpts = [
@@ -13,7 +13,7 @@ in {
   fileSystems."/" = {
     device = "tmpfs";
     fsType = "tmpfs";
-    options = [ "mode=0755" "defaults" ];
+    options = [ "mode=0755" "defaults" "size=75%" ];
   };
 
   fileSystems."/boot" = {
@@ -70,3 +70,4 @@ in {
 
   nix.settings.max-jobs = lib.mkDefault 12;
 }
+

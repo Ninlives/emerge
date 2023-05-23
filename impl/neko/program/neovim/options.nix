@@ -4,9 +4,8 @@ with lib.types;
 with lib.hm.types;
 let
   inherit (lib.hm) dag;
-  inherit (builtins) concatLists filter;
-  inherit (pkgs.vimPlugins) vim-plug;
-  inherit (pkgs) vimPlugins callPackage makeWrapper runCommand gnvim;
+  inherit (builtins) filter;
+  inherit (pkgs) vimPlugins callPackage makeWrapper runCommand;
 
   pluginSet = vimPlugins // (callPackage ./vim-packages { });
 
@@ -45,6 +44,14 @@ let
     mapAttrsToList (n: v: ''--set ${n} "${v}"'') environment;
   wrapArgs = concatStringsSep " \\\n"
     (flatten (map (v: wrapEnvironment v.data.environment) settings));
+
+  gnvim = runCommand "gnvim" { buildInputs = [ makeWrapper ]; } ''
+    mkdir -p $out/bin
+    makeWrapper ${pkgs.gnvim}/bin/gnvim $out/bin/gnvim \
+      --add-flags '--nvim=${config.programs.neovim.finalPackage}/bin/nvim' \
+      ${wrapArgs}
+    ln -s ${pkgs.gnvim}/share $out/share
+  '';
 
 in {
   options.programs.neovim.settings = mkOption {
@@ -96,16 +103,8 @@ in {
         wrapProgram ${placeholder "out"}/bin/${p} ${wrapArgs}
       '') [ "vi" "vim" "nvim" ]}
     '';
-    # home.packages = [
-    #   (runCommand "gnvim" { buildInputs = [ makeWrapper ]; } ''
-    #     mkdir -p $out/bin
-    #     makeWrapper ${gnvim}/bin/gnvim $out/bin/gnvim \
-    #       --add-flags '--nvim=${config.programs.neovim.finalPackage}/bin/nvim' \
-    #       ${wrapArgs}
-
-    #     ln -s ${gnvim}/share $out/share
-    #   '')
-    # ];
+    home.packages = [ gnvim ];
+    lib.packages = { inherit gnvim; };
 
     programs.neovim = {
       inherit plugins extraPackages;
