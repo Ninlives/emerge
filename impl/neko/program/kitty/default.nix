@@ -1,8 +1,6 @@
-{ config, pkgs, lib, ... }:
+{ pkgs, ... }:
 let
   inherit (pkgs) callPackage page;
-  inherit (lib) concatMapStringsSep splitString;
-  inherit (config.lib) dirs;
 in {
   imports = [ ./extra-config.nix ];
   home.packages = [ (callPackage ./drop-down-kitty.nix { }) page ];
@@ -13,6 +11,8 @@ in {
         include = "${./gruvbox.conf}";
 
         font_size = 12;
+        # Make tdrop work, until an alternative on wayland is found
+        linux_display_server = "x11";
 
         disable_ligatures = "always";
         cursor_shape = "underline";

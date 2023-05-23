@@ -1,1 +1,1 @@
-qute_editor
+wayland

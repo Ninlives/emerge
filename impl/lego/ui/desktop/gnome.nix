@@ -1,7 +1,7 @@
-{ config, pkgs, lib, fn, var, ... }:
+{ config, pkgs, lib, ... }:
 let
-  inherit (pkgs) gnome writeText;
-  inherit (lib) concatMapStringsSep mkForce;
+  inherit (pkgs) gnome;
+  inherit (lib) mkForce;
   home = path: "${config.workspace.user.home}/${path}";
 in {
   services.xserver.desktopManager.gnome.enable = true;

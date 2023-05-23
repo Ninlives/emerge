@@ -1,4 +1,4 @@
-{ lib, pkgs, fn, var, config, ... }:
+{ lib, pkgs, config, ... }:
 let
   set-session = with pkgs;
     python3.pkgs.buildPythonApplication {

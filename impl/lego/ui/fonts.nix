@@ -1,7 +1,7 @@
 { pkgs, lib, ... }:
 with pkgs;
 let
-  font-list =[ "ShureTechMono Nerd Font Mono" "Sarasa Mono Slab SC" ];
+  font-list =[ "ShareTechMono Nerd Font Mono" "Sarasa Mono Slab SC" ];
 in
 {
   fonts = {

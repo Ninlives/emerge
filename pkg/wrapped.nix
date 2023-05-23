@@ -12,9 +12,6 @@ in {
   };
   zoom-us = fakeFS { drv = prev.zoom-us; };
   wechat-uos = fakeFS { drv = prev.wechat-uos; };
-  steam-wrapped = fakeFS {
-    drv = prev.steam;
-  };
 
   feeluown = fakeFS { drv = final.re-export.feeluown; };
   thunderbird = fakeFS { drv = prev.thunderbird; };

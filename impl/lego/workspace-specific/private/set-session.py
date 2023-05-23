@@ -12,9 +12,9 @@ def main():
     user_manager.list_users()
 
     mlatus = user_manager.get_user("mlatus")
-    mlatus.set_x_session("gnome-xorg")
-    mlatus.set_session("gnome-xorg")
-    mlatus.set_session_type("x11")
+    mlatus.set_x_session("gnome")
+    mlatus.set_session("gnome")
+    mlatus.set_session_type("wayland")
 
     deck = user_manager.get_user("deck")
     deck.set_session("steam-wayland")
