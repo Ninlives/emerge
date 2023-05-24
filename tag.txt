@@ -1,1 +1,1 @@
-wayland
+fix_pinentry

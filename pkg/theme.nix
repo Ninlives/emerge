@@ -21,7 +21,7 @@ final: prev: {
       installPhase = ''
         mkdir -p ${iconDir}
         rm README.md
-        rm icon-theme.cache
+        rm .icon-theme.cache
         # name contains space breaks cache generation
         find|grep ' '|while read broken;do
           mv "$broken" "''${broken// /_}"

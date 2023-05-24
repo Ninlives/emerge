@@ -27,6 +27,7 @@
     "facetimehd-calibration"
     "facetimehd-firmware"
   ];
+  hardware.pulseaudio.enable = false;
 
   hardware.bluetooth.enable = true;
   hardware.bluetooth.settings.General = {
@@ -36,21 +37,7 @@
     "FastConnectable" = true;
   };
 
-  hardware.pulseaudio.enable = false;
-  # services.pipewire = {
-  #   enable = true;
-  #   alsa.enable = true;
-  #   alsa.support32Bit = true;
-  #   pulse.enable = true;
-  # };
-
-  # hardware.opengl.driSupport32Bit = true;
-
-  # services.fwupd.enable = true;
-  # boot.loader.grub.fontSize = 72;
-
   hardware.xpadneo.enable = true;
-  # hardware.steam-hardware.enable = true;
 
   services.power-profiles-daemon.enable = false;
   services.tlp = {

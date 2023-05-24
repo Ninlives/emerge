@@ -32,6 +32,8 @@
             RPadTouch = "None";
             RPadPress = "Mouse BTN_LEFT";
             LPadPress = "Mouse BTN_RIGHT";
+            LPadRelX = "Mouse REL_HWHEEL_HI_RES";
+            LPadRelY = "Mouse REL_WHEEL_HI_RES";
             L4 = "Profile navigate.profile";
             R4 = "Profile numpad.profile";
           } // bindings;

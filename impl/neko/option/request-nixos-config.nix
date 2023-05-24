@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ lib, ... }:
 with lib;
 with lib.types; {
   options.requestNixOSConfig = mkOption {
