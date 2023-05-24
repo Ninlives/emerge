@@ -28,6 +28,7 @@
     "facetimehd-firmware"
   ];
   hardware.pulseaudio.enable = false;
+  services.pipewire.alsa.support32Bit = true;
 
   hardware.bluetooth.enable = true;
   hardware.bluetooth.settings.General = {
