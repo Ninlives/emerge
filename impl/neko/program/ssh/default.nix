@@ -1,6 +1,5 @@
 { pkgs, lib, var, inputs, ... }: {
   home.sessionVariables.SSH_AUTH_SOCK = "$XDG_RUNTIME_DIR/resign.ssh";
-  requestNixOSConfig.wtf-gnome.services.gnome.gnome-keyring.enable = lib.mkForce false;
   systemd.user = {
     services.resign = {
       Install.WantedBy = [ "graphical-session.target" ];
@@ -15,4 +14,9 @@
       };
     };
   };
+  xdg.configFile."autostart/gnome-keyring-ssh.desktop".text = ''
+    ${lib.fileContents
+    "${pkgs.gnome3.gnome-keyring}/etc/xdg/autostart/gnome-keyring-ssh.desktop"}
+    Hidden=true
+  '';
 }

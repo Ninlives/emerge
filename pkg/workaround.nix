@@ -24,6 +24,14 @@ final: prev: {
       };
   });
 
+  alsa-ucm-conf = prev.alsa-ucm-conf.overrideAttrs (p: {
+    src = assert p.src.outputHash == "sha256-N09oM7/XfQpGdeSqK/t53v6FDlpGpdRUKkWWL0ueJyo=";
+      final.fetchurl {
+        url = "mirror://alsa/lib/alsa-ucm-conf-1.2.8.tar.bz2";
+        hash = "sha256-/uSnN4MP0l+WnYPaRqKyMb6whu/ZZvzAfSJeeCMmCug=";
+      };
+  });
+
   tdesktop = final.runCommandLocal "tdesktop" {
     nativeBuildInputs = [ final.makeWrapper ];
   } ''
