@@ -230,7 +230,9 @@ in {
             }" ]];then
               echo Same as init, no need to switch
             else
+              echo Copying paths...
               ${nix} copy --to ssh://root@${ip} ${system}
+              echo Switching...
               ${ssh} root@${ip} \
                 'nix-env -p /nix/var/nix/profiles/system --set ${system} \
                 && ${system}/bin/switch-to-configuration boot \

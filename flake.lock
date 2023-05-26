@@ -614,11 +614,11 @@
     },
     "values": {
       "locked": {
-        "lastModified": 1676900958,
-        "narHash": "sha256-rSSAfdQOLut5D5JVBGIIbJRfk8j3R/lqTJ2ptPYMdkQ=",
+        "lastModified": 1685077514,
+        "narHash": "sha256-L48DO/Urp9JXznut1c/xuptL9wOPYrxo0rv4pYdWOcQ=",
         "ref": "refs/heads/main",
-        "rev": "b167baa8096c73b1cbabcd8910db582576343409",
-        "revCount": 1,
+        "rev": "0249988807c57a585270ed63962f9bf32f446d45",
+        "revCount": 2,
         "type": "git",
         "url": "ssh://git@github.com/Ninlives/values.git"
       },

@@ -1,11 +1,11 @@
-{ config, var, pkgs, ... }:
+{ config, pkgs, ... }:
 let
   plh = config.sops.placeholder;
   tpl = config.sops.templates;
   dp = config.secrets.decrypted;
-  scrt = config.sops.secrets;
 
-  domain = "${dp.libreddit.subdomain}.${dp.host}";
+  reddit = "${dp.libreddit.subdomain}.${dp.host}";
+  cache = "${dp.cache.subdomain}.${dp.host}";
   libredditHost = "${config.services.libreddit.address}:${
       toString config.services.libreddit.port
     }";
@@ -42,7 +42,12 @@ in {
   # networking.firewall.allowedUDPPorts = [ dp.w-internal-port ];
   # networking.firewall.allowedTCPPorts = [ dp.ssh.port ];
 
-  services.nginx.virtualHosts."${domain}" = {
+  services.nginx.virtualHosts.${cache} = {
+    forceSSL = true;
+    enableACME = true;
+    locations."/".proxyPass = "https://cache.nixos.org";
+  };
+  services.nginx.virtualHosts.${reddit} = {
     forceSSL = true;
     enableACME = true;
     locations = {

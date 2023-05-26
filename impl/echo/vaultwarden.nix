@@ -1,9 +1,8 @@
-{ config, lib, pkgs, var, ... }:
+{ config, ... }:
 let
   plh = config.sops.placeholder;
   tpl = config.sops.templates;
   dp = config.secrets.decrypted;
-  scrt = config.sops.secrets;
 in {
   services.nginx.virtualHosts."${dp.vaultwarden.subdomain}.${dp.host}" = {
     forceSSL = true;
