@@ -18,7 +18,7 @@
   console.packages = [ pkgs.terminus_font ];
   console.earlySetup = true;
 
-  users.users.${var.user.name}.extraGroups = var.user.groups;
+  users.users.mlatus.extraGroups = var.user.groups;
 
   fileSystems."/boot" = {
     device = "/dev/disk/by-partlabel/BOOT";

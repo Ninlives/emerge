@@ -27,9 +27,11 @@ in {
   config = mkIf cfg.enable {
     sops.templates.rathole.content = ''
       [${cfg.role}]
-      ${
-        if cfg.role == "server" then "bind_addr" else "remote_addr"
-      } = "127.0.0.1:${toString dp.rathole.port}"
+      ${if cfg.role == "server" then ''
+          bind_addr = "0.0.0.0:${toString dp.rathole.port}"
+        '' else ''
+          remote_addr = "${dp.ptr}:${dp.rathole.port}"
+        ''}
 
       [${cfg.role}.transport]
       type = "noise"

@@ -20,51 +20,51 @@ in {
     local_addr = "127.0.0.1:${toString dp.ssh.port}"
   '';
 
-  services.v2ray = {
-    enable = true;
-    configFile = tpl.v2ray.path;
-  };
-  systemd.services.v2ray = {
-    restartTriggers = [ tpl.v2ray.file ];
-    serviceConfig = {
-      ExecStart = [
-        ""
-        (pkgs.writeShellScript "start" ''
-          ${pkgs.v2ray}/bin/v2ray run -config $CREDENTIALS_DIRECTORY/config
-        '')
-      ];
-      LoadCredential = "config:${tpl.v2ray.path}";
-    };
-  };
+  # services.v2ray = {
+  #   enable = true;
+  #   configFile = tpl.v2ray.path;
+  # };
+  # systemd.services.v2ray = {
+  #   restartTriggers = [ tpl.v2ray.file ];
+  #   serviceConfig = {
+  #     ExecStart = [
+  #       ""
+  #       (pkgs.writeShellScript "start" ''
+  #         ${pkgs.v2ray}/bin/v2ray run -config $CREDENTIALS_DIRECTORY/config
+  #       '')
+  #     ];
+  #     LoadCredential = "config:${tpl.v2ray.path}";
+  #   };
+  # };
 
 
-  sops.templates.v2ray.content = builtins.toJSON {
-    inbounds = [{
-      inherit (dp.rathole) port;
-      sniffing = {
-        enabled = true;
-        destOverride = [ "http" "tls" ];
-      };
-      protocol = "dokodemo-door";
-      settings = {
-        network = "tcp,udp";
-        address = "127.0.0.1";
-        inherit (dp.rathole) port;
-      };
-    }];
-    outbounds = [{
-      protocol = "trojan";
-      settings.servers = [{
-        address = "${dp.libreddit.subdomain}.${dp.host}";
-        port = 443;
-        password = plh."trojan/password";
-        level = 0;
-      }];
-      streamSettings = {
-        network = "ws";
-        security = "tls";
-        wsSettings.path = "/${dp.trojan.secret-path}";
-      };
-    }];
-  };
+  # sops.templates.v2ray.content = builtins.toJSON {
+  #   inbounds = [{
+  #     inherit (dp.rathole) port;
+  #     sniffing = {
+  #       enabled = true;
+  #       destOverride = [ "http" "tls" ];
+  #     };
+  #     protocol = "dokodemo-door";
+  #     settings = {
+  #       network = "tcp,udp";
+  #       address = "127.0.0.1";
+  #       inherit (dp.rathole) port;
+  #     };
+  #   }];
+  #   outbounds = [{
+  #     protocol = "trojan";
+  #     settings.servers = [{
+  #       address = "${dp.libreddit.subdomain}.${dp.host}";
+  #       port = 443;
+  #       password = plh."trojan/password";
+  #       level = 0;
+  #     }];
+  #     streamSettings = {
+  #       network = "ws";
+  #       security = "tls";
+  #       wsSettings.path = "/${dp.trojan.secret-path}";
+  #     };
+  #   }];
+  # };
 }
