@@ -1,9 +1,8 @@
-{ config, var, pkgs, ... }:
+{ config, pkgs, ... }:
 let
   plh = config.sops.placeholder;
   tpl = config.sops.templates;
   dp = config.secrets.decrypted;
-  scrt = config.sops.secrets;
 in {
   networking.networkmanager.enable = true;
   services.openssh.listenAddresses = [{

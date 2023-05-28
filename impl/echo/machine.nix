@@ -1,4 +1,4 @@
-{ pkgs, config, lib, var, modulesPath, ... }:
+{ lib, modulesPath, ... }:
 with lib; {
   imports = [ (modulesPath + "/profiles/qemu-guest.nix") ];
   boot = {
