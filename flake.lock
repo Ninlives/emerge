@@ -70,11 +70,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1685237368,
-        "narHash": "sha256-w7eaze3IOXMIVgCHcdZxolJeE5O5BVoO6POYMI0UQOA=",
+        "lastModified": 1685323435,
+        "narHash": "sha256-y3kVOSChqycHYJlT4ljxglZfIoys8lKM+P14LlHV+CY=",
         "owner": "Ninlives",
         "repo": "data",
-        "rev": "21cfcd7ee2a321bc3cadc38318940db5699afb8b",
+        "rev": "ed97dc2ae04a5b19102d5cda41c8d2024d9335cc",
         "type": "github"
       },
       "original": {
@@ -275,11 +275,11 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1685227956,
-        "narHash": "sha256-OmCOMt1lHySoT3+WtW2ftIejhnHe5AkJ9IPf5kOAD6s=",
+        "lastModified": 1685349926,
+        "narHash": "sha256-c1rKI1glJWdJIPefp9aiyhAkEZ4Sc6Rh/J5VumEXu1M=",
         "owner": "nix-community",
         "repo": "lanzaboote",
-        "rev": "e9003f12e63588736dde12acf95a4d0361b215e5",
+        "rev": "2e62c11babeead4b26efbb7f2cd4488baaa2e897",
         "type": "github"
       },
       "original": {
@@ -354,11 +354,11 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1685259514,
-        "narHash": "sha256-QYqxkmN6hvCxnuCREHwJ3b5xJPNr3kMj89DyagWxdO4=",
+        "lastModified": 1685349480,
+        "narHash": "sha256-hBBxs/Bv3JwNIGWHryR0ab9uQ+V1Y359LtqRbDNrLCA=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "4f4d0cc9397b63e9344a626b9a59d530fd274de1",
+        "rev": "a4a8624d74c99b44c19427cf4fdfd6e5b319efd8",
         "type": "github"
       },
       "original": {
@@ -614,11 +614,11 @@
     },
     "values": {
       "locked": {
-        "lastModified": 1685077514,
-        "narHash": "sha256-L48DO/Urp9JXznut1c/xuptL9wOPYrxo0rv4pYdWOcQ=",
+        "lastModified": 1685325296,
+        "narHash": "sha256-epxxOx9u/d+ZJYl0UDXIdEkspsAkGm+p2nS/lrl8T3c=",
         "ref": "refs/heads/main",
-        "rev": "0249988807c57a585270ed63962f9bf32f446d45",
-        "revCount": 2,
+        "rev": "5470fe122ffacf2e6920047748ea10223f3d9441",
+        "revCount": 4,
         "type": "git",
         "url": "ssh://git@github.com/Ninlives/values.git"
       },
