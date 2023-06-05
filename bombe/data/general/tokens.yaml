@@ -3,6 +3,7 @@ trojan:
 rathole:
     token:
         immich: ENC[AES256_GCM,data:2mlmM/88ea+s7HGdNzdP4p3rd+/8LozWY4qYWEwDZ8BXm+do3pG6Iq6WYlibaNKEhuAtqBKCRevwVgUnCAg/cQ==,iv:io2JLlqIuH/L8bhKNZWd4I1rRCs/Vipg+eDVwaWUdK8=,tag:snU+jUmneKD7rjPy4WNfcQ==,type:str]
+        jellyfin: ENC[AES256_GCM,data:7irsbWcl4BLFl/gC1FkKGkNyzOZkMm6PuhEn/4ziiDWajKdSHtzsaj7AcOJp5bd2VNC2ZRSrwLOYT7ge/0MTRw==,iv:EI5YwriU/500GHZJl7NXrebpPkO9nh0h0LNzT1NgU8A=,tag:LQVljHeiOQgVt2Djuop7aA==,type:str]
         ssh: ENC[AES256_GCM,data:4hzyVfqz5kAYyUULl74cF67UIxmuOYZbfUP5xNGb3F0R+axtt2tkYF+yRMPu7lsKpcdlDpL74QwRiY2Y7HNDLw==,iv:XtKxQhRGlvzYye7/g7U9Yukfe4fd0av0UgLU8Ckl9Z4=,tag:Rt1Gun//InuKA3VazobikQ==,type:str]
         nfs: ENC[AES256_GCM,data:rzAifnTG2XPER2FkLmNaM6KRU/rrvu098mHNSasnNDM8BHYQW/Kv+Q9eL1/eGz/J+InLdOxfmffNtPa5nHcGuw==,iv:LanMUK4Q+fdNYmklMqsF9eXnTvSS7bugw5R1USOrNu4=,tag:8/Iih/MP8ukp2pcb0tCh4Q==,type:str]
 sops:
@@ -38,8 +39,8 @@ sops:
             cWdGcGJvSFFzSE4ray9BUzRGWHBWWjgK+9bG7cpezPElH8/UJ574CywVYwRsJ4ZI
             r0TLUmqOwQb/PFSNZatKu/Dywtct+GOfLEAB5VgIArFnKKTNbJgMDA==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2022-12-08T08:00:34Z"
-    mac: ENC[AES256_GCM,data:Qkqxrs9d4f2AUTRBTdbOKZNc2t5XGt1QcwdXGByZLDp8tGD0/CyEQ65Z+1Lt61/5QcYmM8V8NE/MkugtrEvuiQu+TeeCbLCmhbDoYAaZh/gKVadBrKhJxynTUHad8mwnIxVnRmCr/X4kZdUGCmFd0lp2Pxw71WDAF5x4nnp6aDw=,iv:0hYicZF/HCaPjStfCEA0fpPKnLR8CNDVXwKqmeXLa+k=,tag:RBgWYthutH9qSB6lpYo75g==,type:str]
+    lastmodified: "2023-05-29T01:53:24Z"
+    mac: ENC[AES256_GCM,data:4gShdT4NCIeN81reMjc6a9lL2BafFr5Pt10GpOHnyVLSjS5LOhZWn+9nNcibLvyM2su7hQkLE/Reu5RBQ+lCdjDPl1bVtzPg2zKCBNEG4+xU1VFN3BZhBQHwXPmFCjcWgSKVdvSzDapIuown9DHlREjRb7mc0d5BdN3REkp35M0=,iv:IdPQ67wDLoie7rI+63vVBgKBDGPqe5gAx2vmC1eO2Rw=,tag:g4kZvX8T6IiDVPB5LupUkA==,type:str]
     pgp: []
     unencrypted_suffix: _unencrypted
     version: 3.7.3

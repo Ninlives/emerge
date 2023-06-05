@@ -1,9 +1,5 @@
-{ config, lib, pkgs, var, inputs, ... }:
-let
-  inherit (pkgs)
-    writeShellScript writeShellScriptBin coreutils gnugrep gnused gnumake git;
-  inherit (var.proxy) port;
-  conf-file = "${inputs.data.content.smartdns}";
+{ inputs, ... }:
+let conf-file = "${inputs.data.content.smartdns}";
 in {
   services.smartdns = {
     settings = {

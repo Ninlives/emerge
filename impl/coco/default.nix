@@ -1,11 +1,15 @@
-{ pkgs, fn, var, ... }: {
-  imports = [ ./network.nix ./immich.nix ./installer.nix ./nfs.nix ]
+{ pkgs, fn, var, lib, ... }: {
+  imports = [ ./network.nix ./immich.nix ./installer.nix ./jellyfin.nix ]
     ++ (fn.dotNixFrom ../taco);
 
   services.logind.lidSwitch = "ignore";
 
-  hardware.enableAllFirmware = true;
-  hardware.video.hidpi.enable = true;
+  hardware.enableRedistributableFirmware = true;
+  services.xserver.videoDrivers = [ "nvidia" ];
+  nixpkgs.config.allowUnfreePredicate = pkg:
+    builtins.elem (lib.getName pkg) [ "nvidia-x11" "nvidia-settings" ];
+  hardware.opengl.enable = true;
+
   boot.initrd.availableKernelModules =
     [ "xhci_pci" "ahci" "nvme" "usb_storage" "uas" "sd_mod" ];
   boot.loader.efi.canTouchEfiVariables = true;
@@ -23,12 +27,5 @@
   fileSystems."/boot" = {
     device = "/dev/disk/by-partlabel/BOOT";
     fsType = "vfat";
-  };
-
-  services.kmscon = {
-    enable = true;
-    extraConfig = ''
-      font-size=30
-    '';
   };
 }

@@ -5,6 +5,7 @@ fn.mkCube {
   specialArgs = { inherit fn var self inputs; };
   modules = fn.dotNixFromRecursive ../impl/lego ++ [
     ../bombe
+    ../opt/smartdns.nix
     ../opt/revive.nix
     ../opt/sops-profiles.nix
     ../opt/workspace.nix

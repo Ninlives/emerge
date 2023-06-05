@@ -1,3 +1,5 @@
+freshrss:
+    password: ENC[AES256_GCM,data:5PFZDSmhsWtq+JJE/ti42rUJ,iv:YiJVj3Jah+MIrUyJkuQSzNwNvxqb8Jw1pNIlkbWOMqU=,tag:a9iFs/qlvXTgdf8cYG29mw==,type:str]
 vikunja:
     smtp-username: ENC[AES256_GCM,data:S71m7Buh8RIVBYUVEj/A7l2qWg==,iv:fkjNZq0thNlnd451LkCPXC8hBNKGygPqku2uYDs1R48=,tag:kHP1iW69X6coO+qS2elXiQ==,type:str]
     smtp-password: ENC[AES256_GCM,data:PcbymWc+vg/DQ/bI26gJsr4qwD++no00,iv:C07O5ObaVn/PgGoOHn/zBuVKg2Ed1PVJLXe7xwX1DHk=,tag:54nAMMutxcdHfRgXdMmN4Q==,type:str]
@@ -25,8 +27,8 @@ sops:
             aGE4MXlNZmJ6Rm9YUUZYMUZvVXQvYncKZT/n/Dio/H66PTLS/1+7d1mYhF4D1oM9
             gZBPD+5dfojl8eNVUqc5qZEWYMC1rLfqdKc5W5RxoVldZpbE3rim2g==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2022-12-18T07:51:18Z"
-    mac: ENC[AES256_GCM,data:uW8ZtR5DqbbqYCCbrnAnh6CX5KVv1FRrdvcJwMKY5BBoB3YhHJetCeNscGo+bp8NnFYGezojlKmQcFktMvCWga+mcOsketbZLUyHjlLN/4gYsw8zX7yXnhPcuIp6Xoe18wpDAlrpKh7vHk0j3s4XRWcnIgKndtqKOwPRwOVPN6g=,iv:a9v26hOi91sFpyRhn2XewMqIk1N7CofA4MjnoN9tp/M=,tag:gPtcFqxot6Jk1AFriscUsA==,type:str]
+    lastmodified: "2023-05-28T19:00:40Z"
+    mac: ENC[AES256_GCM,data:8KrRl4eK4lR4vr2wFrn2WIfP/bDSq5MWf0cxH94nJY53XWfSRwWldQdcT0NIOqtbDlEeqQaGpFM2Ft7rI+eeX4dM7+1ub62FCNXO1QXBl24XrwkhY0dHEmmnBhqCNbI7UGuEOffeMuTrpJXPoFjgm/2XGnJsNWX8FL02Kywe46U=,iv:2yHN6PzlTQWvPs+6naQi5HJCxfVnEDztOzNkuHuhudE=,tag:x9B0qd1927qaWlvGuyB64A==,type:str]
     pgp: []
     unencrypted_suffix: _unencrypted
     version: 3.7.3

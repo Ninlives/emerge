@@ -24,11 +24,16 @@ fix (self: {
     modules = [
       ../impl/coco
       ../bombe
+      ../opt/smartdns.nix
       ../opt/revive.nix
       ../opt/rathole.nix
       ../opt/sops-profiles.nix
       sops-nix.nixosModules.sops
-      { sops.profiles = [ "general" "home" ]; }
+      { 
+        sops.profiles = [ "general" "home" ];
+        nixpkgs.overlays = map (o: import o { inherit fn var inputs; })
+          (fn.dotNixFromRecursive ../pkg);
+      }
     ];
   };
 })

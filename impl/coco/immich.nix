@@ -1,59 +1,44 @@
-{ pkgs, config, var, ... }:
+{ pkgs, config, ... }:
 let
   plh = config.sops.placeholder;
   tpl = config.sops.templates;
   dp = config.secrets.decrypted;
-  net = var.net.default;
-  scrt = config.sops.secrets;
 
   upload-box = "/chest/Data/immich/upload";
   database-box = "/chest/Data/immich/database";
 
   inherit (pkgs.dockerTools) pullImage;
   immich-server-image = pullImage {
-    imageName = "altran1502/immich-server";
-    imageDigest =
-      "sha256:69b8f2b3add2b42e853938f871d4b744adc9391ab8d121462b7e3d670fe2eaa6";
-    sha256 = "0ivn0g973h119ilfsf06r8yrdh21mg0b9x354m8pdv32j95zkz58";
-    finalImageName = "altran1502/immich-server";
-    finalImageTag = "release";
-  };
-  immich-machine-learning-image = pullImage {
-    imageName = "altran1502/immich-machine-learning";
-    imageDigest =
-      "sha256:37d8bbe15bbc4fc010ed7a968d355e8e2bc398c39c7dfe80f8ff29689f442b76";
-    sha256 = "0dmfk0vs6iglk1j86325ap58fp415q2a7dgldwdr1wr24jp5lnf4";
-    finalImageName = "altran1502/immich-machine-learning";
+    imageName = "ghcr.io/immich-app/immich-server";
+    imageDigest = "sha256:54fdba947976dd64c47b51b50905a76c5ecea950b24163f146e57459b846d3c2";
+    sha256 = "0wl5936pn4l7v30g34x7l7fcvqr74p6ylgd6s99j1zq0blbk04zr";
+    finalImageName = "ghcr.io/immich-app/immich-server";
     finalImageTag = "release";
   };
   immich-web-image = pullImage {
-    imageName = "altran1502/immich-web";
-    imageDigest =
-      "sha256:a09d6b8141061717935122fd246b7922ef1ba16ca1166ecadd6db97293f9c57c";
-    sha256 = "19n4ks4fnl7k3rldc2hm9zci1w5bmxz4x4xlci5mvdsh394zkrny";
-    finalImageName = "altran1502/immich-web";
+    imageName = "ghcr.io/immich-app/immich-web";
+    imageDigest = "sha256:381ef4e192e9a8caeb76862ad46ce15965cc35add2e729243e5cbe9d106c2c12";
+    sha256 = "1lpp57jbg1i8z7rcf9gqskrn0m6zvj0159y4y0l4mjwxsjk5iggj";
+    finalImageName = "ghcr.io/immich-app/immich-web";
     finalImageTag = "release";
   };
   immich-proxy-image = pullImage {
-    imageName = "altran1502/immich-proxy";
-    imageDigest =
-      "sha256:508681901ad29476e7247a4d20f24775ead441a600def463da3f39f7c687d443";
-    sha256 = "1mbc3hj2i62bj1i3nqlh6bnig51mgcda1avqdhnfm4c0516s0mbr";
-    finalImageName = "altran1502/immich-proxy";
+    imageName = "ghcr.io/immich-app/immich-proxy";
+    imageDigest = "sha256:efaa57f3fdee0aa27d96eb944d75ddf93160dc82c657d49c825addd484fdc3d6";
+    sha256 = "11q1n3fnmx6c95xz96gbl6hg00rvykwz5m4dywxpavv8i1k720pj";
+    finalImageName = "ghcr.io/immich-app/immich-proxy";
     finalImageTag = "release";
   };
   redis-image = pullImage {
     imageName = "redis";
-    imageDigest =
-      "sha256:a93c14584715ec5bd9d2648d58c3b27f89416242bee0bc9e5fb2edc1a4cbec1d";
-    sha256 = "0dny2vk6la7y2h7dpamxyv9zwkkkkc9ha3k4xra2q1djn9634ign";
+    imageDigest = "sha256:423276a3cea98336607ec04db7cf69ed2b7a27d8d306ec37074956f058da79bc";
+    sha256 = "0bm362kzr59lriplb52mqgv4kgcs9gv0zwvxixarja5p2viylzab";
     finalImageName = "redis";
     finalImageTag = "6.2";
   };
   database-image = pullImage {
     imageName = "postgres";
-    imageDigest =
-      "sha256:18050649e69395b9b76e38af69055b0e522c307c2fc5951c5289324832876aae";
+    imageDigest = "sha256:18050649e69395b9b76e38af69055b0e522c307c2fc5951c5289324832876aae";
     sha256 = "00fm7wj1mjg5zx1lmy5s9mzhy9cqp6caq4hcjasaq5bdlqh3db94";
     finalImageName = "postgres";
     finalImageTag = "14";
@@ -75,13 +60,18 @@ in {
     POSTGRES_USER=${plh."immich/postgres/username"}
     POSTGRES_PASSWORD=${plh."immich/postgres/password"}
     PG_DATA=/var/lib/postgresql/data
+
+    # TODO
+    IMMICH_MACHINE_LEARNING_URL=false
+    TYPESENSE_ENABLED=false
   '';
 
   virtualisation.oci-containers.backend = "podman";
-  virtualisation.podman.defaultNetwork.dnsname.enable = true;
+  virtualisation.podman.defaultNetwork.settings.dns_enabled = true;
+  networking.firewall.trustedInterfaces = [ "podman0" ];
   virtualisation.oci-containers.containers = {
     immich-server = {
-      image = "altran1502/immich-server:release";
+      image = "ghcr.io/immich-app/immich-server:release";
       imageFile = immich-server-image;
       entrypoint = "/bin/sh";
       cmd = [ "./start-server.sh" ];
@@ -91,7 +81,7 @@ in {
     };
 
     immich-microservice = {
-      image = "altran1502/immich-server:release";
+      image = "ghcr.io/immich-app/immich-server:release";
       imageFile = immich-server-image;
       entrypoint = "/bin/sh";
       cmd = [ "./start-microservices.sh" ];
@@ -100,18 +90,18 @@ in {
       dependsOn = [ "immich-redis" "immich-database" ];
     };
 
-    immich-machine-learning = {
-      image = "altran1502/immich-machine-learning:release";
-      imageFile = immich-machine-learning-image;
-      entrypoint = "/bin/sh";
-      cmd = [ "./entrypoint.sh" ];
-      volumes = [ "${upload-box}:/usr/src/app/upload" ];
-      environmentFiles = [ tpl.immich-env.path ];
-      dependsOn = [ "immich-database" ];
-    };
+    # immich-machine-learning = {
+    #   image = "altran1502/immich-machine-learning:release";
+    #   imageFile = immich-machine-learning-image;
+    #   entrypoint = "/bin/sh";
+    #   cmd = [ "./entrypoint.sh" ];
+    #   volumes = [ "${upload-box}:/usr/src/app/upload" ];
+    #   environmentFiles = [ tpl.immich-env.path ];
+    #   dependsOn = [ "immich-database" ];
+    # };
 
     immich-web = {
-      image = "altran1502/immich-web:release";
+      image = "ghcr.io/immich-app/immich-web:release";
       imageFile = immich-web-image;
       entrypoint = "/bin/sh";
       cmd = [ "./entrypoint.sh" ];
@@ -131,7 +121,7 @@ in {
     };
 
     immich-proxy = {
-      image = "altran1502/immich-proxy:release";
+      image = "ghcr.io/immich-app/immich-proxy:release";
       imageFile = immich-proxy-image;
       ports = [ "127.0.0.1:${toString dp.immich.port}:8080" ];
       dependsOn = [ "immich-server" ];

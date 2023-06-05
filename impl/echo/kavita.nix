@@ -38,10 +38,4 @@ in {
     user = config.users.users.kavita.name;
     group = config.users.groups.kavita.name;
   }];
-
-  fileSystems."/chest/Data/kavita" = {
-    device = "127.0.0.1:/chest/Data/kavita";
-    fsType = "nfs";
-    options = [ "x-systemd.automount" "noauto" "fsc" ];
-  };
 }

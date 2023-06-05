@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 let
   plh = config.sops.placeholder;
   tpl = config.sops.templates;
@@ -115,5 +115,34 @@ in {
     enable = true;
     address = "127.0.0.1";
     port = dp.libreddit.port;
+  };
+  systemd.services.libreddit.environment = {
+    LIBREDDIT_BANNER = "Cheers!";
+    LIBREDDIT_ROBOTS_DISABLE_INDEXING = "on";
+
+    LIBREDDIT_DEFAULT_THEME = "gruvboxdark";
+    LIBREDDIT_DEFAULT_SHOW_NSFW = "on";
+    LIBREDDIT_DEFAULT_USE_HLS = "on";
+    LIBREDDIT_DEFAULT_SUBSCRIPTIONS = lib.concatStringsSep "+" [
+      "bindingofisaac"
+      "commandline"
+      "Cyberpunk"
+      "exapunks"
+      "geek"
+      "HiFiRush"
+      "homelab"
+      "itsaunixsystem"
+      "linux"
+      "linux_gaming"
+      "linuxmasterrace"
+      "linuxmemes"
+      "NixOS"
+      "oddlysatisfying"
+      "ProgrammerHumor"
+      "SteamDeck"
+      "steampunk"
+      "unixporn"
+      "xkcd"
+    ];
   };
 }

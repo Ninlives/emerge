@@ -1,4 +1,4 @@
-{ pkgs, config, lib, system, fn, ... }:
+{ config, fn, ... }:
 let dp = config.secrets.decrypted;
 in {
   imports = [
@@ -11,6 +11,7 @@ in {
     ./vikunja.nix
     ./kavita.nix
     ./jellyfin.nix
+    ./freshrss.nix
   ] ++ (fn.dotNixFrom ../taco);
 
   security.acme.acceptTerms = true;
