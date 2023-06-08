@@ -29,7 +29,7 @@ in {
       {
         "api-key": "${ref.local.secrets.api-key.vultr}",
         "age-key": "${ref.local.secrets.server-age-key}",
-        "restic-passwd": "${ref.local.secrets.restic-passwd}",
+        "restic-passwd": "${ref.local.secrets.restic-password}",
         "b2-id": "${
           config.resource.b2_application_key.chest "application_key_id"
         }",

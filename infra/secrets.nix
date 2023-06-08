@@ -1,7 +1,7 @@
 { pkgs, lib, ... }:
 with pkgs;
 with lib;
-let file = "${../bombe/data/server/infra.yaml}";
+let file = "${../bombe/data/infra/tokens.yaml}";
 in {
   options.ref = mkOption { type = types.attrs; };
   config = {

@@ -11,7 +11,7 @@ in fn.mkApp {
   drv = writeShellScriptBin "cast" ''
     set -e
 
-    export SOPS_AGE_KEY_FILE=$HOME/Secrets/keys/vultr/age.key 
+    export SOPS_AGE_KEY_FILE=$HOME/Secrets/keys/infra/age.key 
     export TF_LOG=DEBUG
     export TF_DATA_DIR=$HOME/Emerge/infra/.terraform
 
