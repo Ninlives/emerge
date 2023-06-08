@@ -1,5 +1,6 @@
 { pkgs, fn, var, lib, ... }: {
-  imports = [ ./network.nix ./immich.nix ./installer.nix ./jellyfin.nix ]
+  imports =
+    [ ./network.nix ./immich.nix ./installer.nix ./jellyfin.nix ./kavita.nix ]
     ++ (fn.dotNixFrom ../taco);
 
   services.logind.lidSwitch = "ignore";

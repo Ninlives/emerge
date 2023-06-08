@@ -12,5 +12,9 @@ in {
       token = plh."rathole/token/jellyfin";
       port = dp.jellyfin.port;
     };
+    kavita = {
+      token = plh."rathole/token/kavita";
+      port = dp.kavita.port;
+    };
   };
 }

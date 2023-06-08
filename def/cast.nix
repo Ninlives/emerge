@@ -24,6 +24,11 @@ in fn.mkApp {
     }
     trap cleanup EXIT
 
-    ${terraform}/bin/terraform -chdir="${terra}" "$@"
+    if [[ "$1" == "update" ]];then
+      ln -s "${self.terraformConfigurations.zero}" config.tf.json
+      ${terraform}/bin/terraform init -upgrade
+    else
+      ${terraform}/bin/terraform -chdir="${terra}" "$@"
+    fi
   '';
 }

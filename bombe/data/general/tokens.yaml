@@ -6,6 +6,7 @@ rathole:
         jellyfin: ENC[AES256_GCM,data:7irsbWcl4BLFl/gC1FkKGkNyzOZkMm6PuhEn/4ziiDWajKdSHtzsaj7AcOJp5bd2VNC2ZRSrwLOYT7ge/0MTRw==,iv:EI5YwriU/500GHZJl7NXrebpPkO9nh0h0LNzT1NgU8A=,tag:LQVljHeiOQgVt2Djuop7aA==,type:str]
         ssh: ENC[AES256_GCM,data:4hzyVfqz5kAYyUULl74cF67UIxmuOYZbfUP5xNGb3F0R+axtt2tkYF+yRMPu7lsKpcdlDpL74QwRiY2Y7HNDLw==,iv:XtKxQhRGlvzYye7/g7U9Yukfe4fd0av0UgLU8Ckl9Z4=,tag:Rt1Gun//InuKA3VazobikQ==,type:str]
         nfs: ENC[AES256_GCM,data:rzAifnTG2XPER2FkLmNaM6KRU/rrvu098mHNSasnNDM8BHYQW/Kv+Q9eL1/eGz/J+InLdOxfmffNtPa5nHcGuw==,iv:LanMUK4Q+fdNYmklMqsF9eXnTvSS7bugw5R1USOrNu4=,tag:8/Iih/MP8ukp2pcb0tCh4Q==,type:str]
+        kavita: ENC[AES256_GCM,data:Iet4yGRdwdPX9teJFmWUTkDSbGIzz5kgcbU6psQMUE1wWjr6uQsZEsy7SqQu0DhAu9JqqFfPW04f401FNgpqwQ==,iv:MuaBDrU8pE0e//JyYI85XN7egdto5S14Ztvs3svH2Tg=,tag:safcj/53tiP+ncY6F8dvsw==,type:str]
 sops:
     kms: []
     gcp_kms: []
@@ -39,8 +40,8 @@ sops:
             cWdGcGJvSFFzSE4ray9BUzRGWHBWWjgK+9bG7cpezPElH8/UJ574CywVYwRsJ4ZI
             r0TLUmqOwQb/PFSNZatKu/Dywtct+GOfLEAB5VgIArFnKKTNbJgMDA==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2023-05-29T01:53:24Z"
-    mac: ENC[AES256_GCM,data:4gShdT4NCIeN81reMjc6a9lL2BafFr5Pt10GpOHnyVLSjS5LOhZWn+9nNcibLvyM2su7hQkLE/Reu5RBQ+lCdjDPl1bVtzPg2zKCBNEG4+xU1VFN3BZhBQHwXPmFCjcWgSKVdvSzDapIuown9DHlREjRb7mc0d5BdN3REkp35M0=,iv:IdPQ67wDLoie7rI+63vVBgKBDGPqe5gAx2vmC1eO2Rw=,tag:g4kZvX8T6IiDVPB5LupUkA==,type:str]
+    lastmodified: "2023-06-08T06:25:15Z"
+    mac: ENC[AES256_GCM,data:8uF1xC0mM+5PDqwUB3xAujrgevUdyJmlF47Tna8rjPXunC9IyAexGWYQwbaq5wjQA48wQYbX4c3phZp9rnPjhuwZcRcw5ln1WiCZm6JJzM7/FyOvNuDI1tF32zZt/eCbj+y4wfURZkZ++8XzmzduhTn+BFocrqUD0q6myJM8a5c=,iv:Syjc3oTlwKCjr2zfmEP/mcp1ahG0qPa8OqFwKmmr7OU=,tag:/U8Le6oyrdUmJylLrba+aQ==,type:str]
     pgp: []
     unencrypted_suffix: _unencrypted
     version: 3.7.3

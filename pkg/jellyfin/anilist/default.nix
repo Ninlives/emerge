@@ -1,13 +1,13 @@
 { buildDotnetModule, fetchFromGitHub, fn }:
 buildDotnetModule rec {
   pname = "anilist";
-  version = "5.0.0.0";
+  version = "unstable-2023-01-19";
   src = fetchFromGitHub {
     owner = "jellyfin";
     repo = "jellyfin-plugin-anilist";
-    rev = "e222c3b6e551265d5eeccd0bc10170d562f5bb9a";
-    sha256 = "10c4cgr0xzl37ia4gbj4hac6wadvlp0khr4i4yjc13ayz4kha4nk";
+    rev = "8c18a1359991ab946b87d415b0a317ffe3a865ef";
+    sha256 = "19y8xzpabyzk94d3x98d5kbndrhzgb6yzf3qr3pl7jwam1krazwz";
   };
-  nugetDeps = ./anilist-deps.nix;
+  nugetDeps = ./deps.nix;
   passthru.artifacts = (fn.importYAML "${src}/build.yaml").artifacts;
 }

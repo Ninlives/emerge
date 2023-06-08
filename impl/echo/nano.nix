@@ -55,6 +55,7 @@ let
         btrfs subvol create /fsroot/boot
         btrfs subvol create /fsroot/nix
         btrfs subvol create /fsroot/chest
+        btrfs subvol create /fsroot/tmp
 
         OPTS=compress-force=zstd,space_cache=v2
         mkdir -p /mnt/{boot,nix,chest}

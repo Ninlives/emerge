@@ -21,6 +21,12 @@ with lib; {
     '') (builtins.attrValues jellyfinPlugins)}
   '';
 
+  users.users.jellyfin = {
+    uid = 953;
+    group = "jellyfin";
+    isSystemUser = true;
+  };
+  users.groups.jellyfin.gid = 953;
   revive.specifications.system.boxes = [
     {
       src = /Services/jellyfin;

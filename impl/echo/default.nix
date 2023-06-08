@@ -12,6 +12,7 @@ in {
     ./kavita.nix
     ./jellyfin.nix
     ./freshrss.nix
+    ./immich.nix
   ] ++ (fn.dotNixFrom ../taco);
 
   security.acme.acceptTerms = true;

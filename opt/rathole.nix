@@ -30,15 +30,6 @@ in {
       ${
         if cfg.role == "server" then "bind_addr" else "remote_addr"
       } = "127.0.0.1:${toString dp.rathole.port}"
-
-      [${cfg.role}.transport]
-      type = "tcp"
-
-      [${cfg.role}.transport.tcp]
-      nodelay = false
-      keepalive_secs = 5
-      keepalive_interval = 2
-
     '' + concatStringsSep "\n" (mapAttrsToList (name: tunnel: ''
       [${cfg.role}.services.${name}]
       type = "${tunnel.type}"

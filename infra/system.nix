@@ -232,6 +232,8 @@ in {
             else
               echo Copying paths...
               ${nix} copy --to ssh://root@${ip} ${system}
+              echo Transferring secrets...
+              printenv B2_ENV|${ssh} root@${ip} 'cat > /chest/Static/b2/env'
               echo Switching...
               ${ssh} root@${ip} \
                 'nix-env -p /nix/var/nix/profiles/system --set ${system} \
@@ -241,6 +243,12 @@ in {
             echo '{ "path": "${system}" }'
           '';
         delete = /* bash */ "echo No-op for switch";
+      };
+      sensitive_environment = {
+        B2_ENV = ''
+          B2_ACCOUNT_ID='${config.resource.b2_application_key.chest "application_key_id"}'
+          B2_ACCOUNT_KEY='${config.resource.b2_application_key.chest "application_key"}'
+        '';
       };
       triggers.when_value_changed = "${system}";
     };

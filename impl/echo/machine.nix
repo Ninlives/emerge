@@ -29,11 +29,4 @@ with lib; {
     options =
       [ "subvol=boot" "noatime" "compress-force=zstd" "space_cache=v2" ];
   };
-
-  services.rpcbind.enable = mkForce false;
-  services.cachefilesd = {
-    enable = true;
-    cacheDir = "/chest/Cache/fs";
-  };
-  revive.specifications.system.boxes = [{ dst = /chest/Cache/fs; }];
 }

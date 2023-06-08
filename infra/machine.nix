@@ -9,7 +9,7 @@ let
   ipxe-url = config.resource.shell_script.netboot "output.ipxe-url";
 in {
   provider.vultr.api_key = ref.local.secrets.api-key.vultr;
-  provider.cloudflare.api_token = ref.local.secrets.api-key.cloudflare;
+  provider.cloudflare.api_token = ref.local.secrets.api-key.cloudflare.key;
   resource.vultr_startup_script.install = {
     name = "install";
     type = "pxe";
@@ -39,19 +39,16 @@ in {
       } 
     '';
     script_id = config.resource.vultr_startup_script.install "id";
+    lifecycle.ignore_changes = [
+      "user_data"
+    ];
   };
   resource.vultr_dns_domain.main = {
     domain = dp.ptr;
     ip = config.resource.vultr_instance.server "main_ip";
   };
-  # resource.vultr_dns_record = mapAttrs (name: value: {
-  #   domain = config.resource.vultr_dns_domain.main "id";
-  #   name = value.subdomain;
-  #   data = config.resource.vultr_instance.server "main_ip";
-  #   type = "A";
-  #   ttl  = "300";
-  # }) (filterAttrs (_: v: v ? subdomain) dp);
   resource.cloudflare_zone.main = {
+    account_id = ref.local.secrets.api-key.cloudflare.account;
     zone = dp.host;
     jump_start = false;
     plan = "free";

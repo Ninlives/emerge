@@ -21,6 +21,12 @@ in {
     group = config.users.groups.freshrss.name;
   };
 
+  users.users.freshrss = {
+    uid = 997;
+    group = "freshrss";
+    isSystemUser = true;
+  };
+  users.groups.freshrss.gid = 997;
   revive.specifications.system.boxes = [
     {
       src = /Cache/freshrss;

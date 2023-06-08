@@ -9,12 +9,10 @@ in {
     enableACME = true;
     locations."/" = {
       proxyPass = "http://127.0.0.1:${port}";
-      recommendedProxySettings = true;
     };
     locations."/socket" = {
       proxyPass = "http://127.0.0.1:${port}";
       proxyWebsockets = true;
-      recommendedProxySettings = true;
     };
   };
 }
