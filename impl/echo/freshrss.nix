@@ -1,5 +1,6 @@
 { config, ... }:
 let
+  inherit (config.lib.path) persistent;
   dp = config.secrets.decrypted;
   domain = "${dp.freshrss.subdomain}.${dp.host}";
   scrt = config.sops.secrets;
@@ -9,7 +10,7 @@ in {
     defaultUser = "mlatus";
     passwordFile = scrt."freshrss/password".path;
     baseUrl = "https://${domain}";
-    dataDir = "/chest/Services/freshrss";
+    dataDir = "${persistent.services}/freshrss";
     virtualHost = domain;
   };
   services.nginx.virtualHosts.${domain} = {
@@ -35,7 +36,7 @@ in {
       group = config.users.groups.freshrss.name;
     }
     {
-      dst = /chest/Services/freshrss;
+      dst = "${persistent.services}/freshrss";
       user = config.users.users.freshrss.name;
       group = config.users.groups.freshrss.name;
     }

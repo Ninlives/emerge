@@ -67,6 +67,27 @@ provider "registry.terraform.io/hashicorp/time" {
   ]
 }
 
+provider "registry.terraform.io/ninlives/shell" {
+  version = "1.7.12"
+  hashes = [
+    "h1:LEtOcnzCn/ugRWWrCPj9MUHS43UN2Rkz9DTktrK3Hmg=",
+    "zh:175fcc4434007c6e012bb3ca18635b0dddfb6999912f298f68e16189a9eab1cd",
+    "zh:3b406451035953071ae680d3bd471735fe9edd7f76c49abe7e0ba297afe51609",
+    "zh:51effb964ee208270903d9220bdc10a4e6492f7c9150b04c21430f11e3022745",
+    "zh:5708ef986d7aade63f59c311b6416a2b0f0963cf8d665768e1de94043e459639",
+    "zh:5f71c87913ce1c7b67452a602c4100c209d63163899f606d002b3eecbbb0a64a",
+    "zh:68287ea8411ac7db0a5ec76245509a00060186009eddebfbab56fac1cee2718c",
+    "zh:6bcc05e858d4c08765dd6072a0fb647247310ae112a7b74277a49f85799e5983",
+    "zh:717c3eb71c2200f5989f4c39391f20424e96d14e4657340a4d68cdb6cb086c1d",
+    "zh:7398c45a1bfe8908f9176a724158e26f83511476d0b33739660502ff6ae24576",
+    "zh:99762be5265aac06de975e4f3e71be5cccdd2fcf9383f0303b7a9c7ad67c1994",
+    "zh:d2e4bd40fd535089654b684409314062fc9a91a205cb28966649e25c5f981de7",
+    "zh:d5d4bdefda27175cf1904d9618325eff6484bcd475f6ee44cb0ecead5c92dbbc",
+    "zh:ecebae0883022c2bf37db951d79648a01491724a1d54617e9d6fc8ef47edb63b",
+    "zh:f2a1c8547128e8575b17b7a40e6ca21d67eeadc84aaeef3f3d4473d06c6ca3e5",
+  ]
+}
+
 provider "registry.terraform.io/scottwinkler/shell" {
   version = "1.7.10"
   hashes = [

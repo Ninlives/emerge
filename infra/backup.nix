@@ -17,6 +17,7 @@ in {
 
     lifecycle.prevent_destroy = true;
   };
+
   resource.b2_application_key.chest = {
     key_name = "mlatus-chest-${config.resource.time_rotating.weekly "unix"}";
     bucket_id = config.resource.b2_bucket.chest "id";
@@ -32,7 +33,10 @@ in {
       "writeBucketEncryption"
       "writeFiles"
     ];
+
+    lifecycle.create_before_destroy = true;
   };
+
   resource.time_rotating.weekly = {
     rotation_days = 7;
   };

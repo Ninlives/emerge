@@ -1,11 +1,12 @@
 { pkgs, config, ... }:
 let
+  inherit (config.lib.path) persistent;
   plh = config.sops.placeholder;
   tpl = config.sops.templates;
   dp = config.secrets.decrypted;
 
-  upload-box = "/chest/Data/immich/upload";
-  database-box = "/chest/Data/immich/database";
+  upload-box = "${persistent.data}/immich/upload";
+  database-box = "${persistent.data}/immich/database";
 
   inherit (pkgs.dockerTools) pullImage;
   immich-server-image = pullImage {

@@ -1,11 +1,12 @@
 { config, ... }:
 let
+  inherit (config.lib.path) persistent;
   scrt = config.sops.secrets;
 in
 {
   services.kavita = {
     enable = true;
-    dataDir = "/chest/Services/kavita";
+    dataDir = "${persistent.services}/kavita";
     tokenKeyFile = scrt."kavita/key".path;
     ipAdresses = [ "127.0.0.1" "::1" ];
   };

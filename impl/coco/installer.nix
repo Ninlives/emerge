@@ -1,6 +1,7 @@
 { config, pkgs, modulesPath, lib, inputs, var, ... }:
 with lib;
 let
+  inherit (config.lib.path) persistent;
   installer-config = {
     imports = [
       (modulesPath + "/installer/cd-dvd/iso-image.nix")
@@ -35,19 +36,19 @@ let
         mount $NIXOS /fsroot
 
         btrfs subvol create /fsroot/nix
-        btrfs subvol create /fsroot/chest
+        btrfs subvol create /fsroot/${persistent.volume}
         btrfs subvol create /fsroot/tmp
 
         OPTS=compress-force=zstd,space_cache=v2
-        mkdir -p /mnt/{boot,nix,chest}
+        mkdir -p /mnt/{boot,nix,${persistent.root}}
         mount $BOOT /mnt/boot
         mount -o subvol=nix,$OPTS   $NIXOS /mnt/nix
-        mount -o subvol=chest,$OPTS $NIXOS /mnt/chest
+        mount -o subvol=${persistent.volume},$OPTS $NIXOS /mnt/${persistent.root}
 
-        mkdir -p /mnt/chest/Static/sops
-        cp /iso/age.key /mnt/chest/Static/sops
-        chmod 400 /mnt/chest/Static/sops/age.key
-        chmod 700 /mnt/chest/Static/sops
+        mkdir -p /mnt/${persistent.static}/sops
+        cp /iso/age.key /mnt/${persistent.static}/sops
+        chmod 400 /mnt/${persistent.static}/sops/age.key
+        chmod 700 /mnt/${persistent.static}/sops
 
         nixos-install --root /mnt --system "${config.system.build.toplevel}" --no-channel-copy --no-root-passwd
       '')

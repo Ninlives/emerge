@@ -1,6 +1,7 @@
-{ ... }:
+{ config, ... }:
 let
-  device = "/dev/disk/by-partlabel/NIXOS";
+  inherit (config.lib.path) persistent;
+  device = "/dev/disk/by-partlabel/${persistent.label}";
   fsType = "btrfs";
   options = [ "noatime" "compress-force=zstd" "space_cache=v2" ];
 in
@@ -16,9 +17,9 @@ in
       options = [ "subvol=nix" ] ++ options;
     };
 
-    "/chest" = {
+    ${persistent.root} = {
       inherit device fsType;
-      options = [ "subvol=chest" ] ++ options;
+      options = [ "subvol=${persistent.volume}" ] ++ options;
       neededForBoot = true;
     };
 
@@ -29,5 +30,5 @@ in
   };
   boot.tmp.cleanOnBoot = true;
 
-  revive.specifications.system.seal = "/chest";
+  revive.specifications.system.seal = persistent.root;
 }

@@ -1,7 +1,7 @@
 { pkgs, config, ... }: {
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  sops.age.keyFile = "/chest/Static/sops/age.key";
+  sops.age.keyFile = "${config.lib.path.persistent.static}/sops/age.key";
   sops.age.sshKeyPaths = [];
   sops.gnupg.sshKeyPaths = [];
 
