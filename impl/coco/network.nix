@@ -1,8 +1,8 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 let
   plh = config.sops.placeholder;
   tpl = config.sops.templates;
-  dp = config.secrets.decrypted;
+  dp = inputs.values.secret;
 in {
   networking.networkmanager.enable = true;
   services.openssh.listenAddresses = [{
@@ -55,7 +55,7 @@ in {
     outbounds = [{
       protocol = "trojan";
       settings.servers = [{
-        address = "${dp.libreddit.subdomain}.${dp.host}";
+        address = "${dp.host.private.libreddit.fqdn}";
         port = 443;
         password = plh."trojan/password";
         level = 0;
@@ -71,7 +71,7 @@ in {
     enable = true;
     settings = {
       address = [
-        "/${dp.libreddit.subdomain}.${dp.host}/#6"
+        "/${dp.host.private.libreddit.fqdn}/#6"
       ];
     };
   };

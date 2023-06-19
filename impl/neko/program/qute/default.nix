@@ -1,10 +1,10 @@
-{ config, pkgs, lib, var, nixosConfig, ... }:
+{ config, pkgs, lib, var, nixosConfig, inputs, ... }:
 with pkgs;
 let
   inherit (var) proxy;
   inherit (lib) fold mkIf;
   inherit (builtins) readFile;
-  dp = nixosConfig.secrets.decrypted;
+  dp = inputs.values.secret;
   scrt = nixosConfig.sops.secrets;
 
   mergeFiles = files: fold (s1: s2: s1 + s2) "" (map readFile files);
@@ -19,7 +19,7 @@ let
     ];
   } (readFile (substituteAll {
     src = ./bitwarden.sh;
-    sVAULTWARDEN_HOST = "${dp.vaultwarden.subdomain}.${dp.host}";
+    sVAULTWARDEN_HOST = dp.host.private.services.vaultwarden.fqdn;
     sVAULTWARDEN_CLIENTID = scrt."vaultwarden/client-id".path;
     sVAULTWARDEN_CLIENTSECRET = scrt."vaultwarden/client-secret".path;
   }));

@@ -1,13 +1,13 @@
-{ config, lib, ... }:
+{ config, lib, inputs, ... }:
 with lib;
 let
   inherit (config) ref;
   inherit (config.resource.shell_script) init-system;
-  dp = config.secrets.decrypted;
+  dp = inputs.values.secret;
   system-path = init-system "output.system-path";
   system-url = init-system "output.system-url";
   ipxe-url = config.resource.shell_script.netboot "output.ipxe-url";
-in {
+in mkMerge ([{
   provider.vultr.api_key = ref.local.secrets.api-key.vultr;
   provider.cloudflare.api_token = ref.local.secrets.api-key.cloudflare.key;
   resource.vultr_startup_script.install = {
@@ -39,37 +39,31 @@ in {
       } 
     '';
     script_id = config.resource.vultr_startup_script.install "id";
-    lifecycle.ignore_changes = [
-      "user_data"
-    ];
+    lifecycle.ignore_changes = [ "user_data" ];
   };
-  resource.vultr_dns_domain.main = {
-    domain = dp.ptr;
-    ip = config.resource.vultr_instance.server "main_ip";
-  };
-  resource.cloudflare_zone.main = {
+}] ++ (mapAttrsToList (host: cfg: {
+  resource.cloudflare_zone.${host} = {
     account_id = ref.local.secrets.api-key.cloudflare.account;
-    zone = dp.host;
+    zone = cfg.domain;
     jump_start = false;
     plan = "free";
     type = "full";
   };
-  resource.cloudflare_record = mapAttrs (name: value: {
-    zone_id = config.resource.cloudflare_zone.main "id";
-    name = value.subdomain;
+  resource.cloudflare_record = mapAttrs (_: value: {
+    zone_id = config.resource.cloudflare_zone.${host} "id";
+    name = if value.subdomain == "" then "@" else value.subdomain;
     value = config.resource.vultr_instance.server "main_ip";
     type = "A";
-    ttl  = 1;
+    ttl = 1;
     proxied = true;
-  }) (filterAttrs (_: v: v ? subdomain) dp);
-  resource.cloudflare_page_rule.acme = {
-    zone_id = config.resource.cloudflare_zone.main "id";
-    target   = "*.${dp.host}/.well-known/acme-challenge/*";
+  }) (cfg.services);
+  resource.cloudflare_page_rule."${host}-acme" = {
+    zone_id = config.resource.cloudflare_zone.${host} "id";
+    target = "*.${cfg.domain}/.well-known/acme-challenge/*";
     priority = 1;
     actions = {
       automatic_https_rewrites = "off";
-      ssl                      = "off";
+      ssl = "off";
     };
   };
-  output.cloudflare_nameservers.value = config.resource.cloudflare_zone.main "name_servers";
-}
+}) dp.host))

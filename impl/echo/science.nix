@@ -1,11 +1,11 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, inputs, ... }:
 let
   plh = config.sops.placeholder;
   tpl = config.sops.templates;
-  dp = config.secrets.decrypted;
+  dp = inputs.values.secret;
 
-  reddit = "${dp.libreddit.subdomain}.${dp.host}";
-  cache = "${dp.cache.subdomain}.${dp.host}";
+  reddit = "${dp.host.private.services.libreddit.fqdn}";
+  cache = "${dp.host.private.services.cache.fqdn}";
   libredditHost = "${config.services.libreddit.address}:${
       toString config.services.libreddit.port
     }";
@@ -114,7 +114,7 @@ in {
   services.libreddit = {
     enable = true;
     address = "127.0.0.1";
-    port = dp.libreddit.port;
+    port = dp.host.private.services.libreddit.port;
   };
   systemd.services.libreddit.environment = {
     LIBREDDIT_BANNER = "Cheers!";

@@ -1,21 +1,21 @@
-{ config, ... }:
+{ config, inputs, ... }:
 let
-  dp = config.secrets.decrypted;
+  dp = inputs.values.secret;
   plh = config.sops.placeholder;
   tpl = config.sops.templates;
 in {
   services.vikunja = {
     enable = true;
     frontendScheme = "https";
-    frontendHostname = "${dp.vikunja.subdomain}.${dp.host}";
+    frontendHostname = "${dp.host.private.services.vikunja.fqdn}";
     settings = {
       timezone = "PRC";
-      mailer = {
-        enabled = false;
-        host = dp.mail-server.host;
-        port = 587;
-        fromemail = "vikunja@${dp.mail-server.domain}";
-      };
+      # mailer = {
+      #   enabled = false;
+      #   host = dp.mail-server.host;
+      #   port = 587;
+      #   fromemail = "vikunja@${dp.mail-server.domain}";
+      # };
     };
     environmentFiles = [ tpl.vikunja.path ];
   };

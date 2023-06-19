@@ -20,7 +20,7 @@ fn.mkCube {
       nixpkgs.overlays = map (o: import o { inherit fn var inputs; })
         (fn.dotNixFromRecursive ../pkg);
 
-      sops.profiles = [ "general" "local" ];
+      sops.profiles = [ "net" "phys" ];
 
       home-manager.users.${config.workspace.user.name} = { ... }: {
         imports = fn.dotNixFromRecursive ../impl/neko;

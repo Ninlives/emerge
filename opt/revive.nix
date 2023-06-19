@@ -35,6 +35,7 @@ let
           runGroup = group;
           user = mapping.user or user;
           group = mapping.group or group;
+          mode = mapping.mode or "g-rwx,o-rwx";
           dst = builtins.toPath (toString mapping.dst);
         } // (optionalAttrs (mapping ? src) {
           src = builtins.toPath "${prefix}/${toString mapping.src}";
@@ -63,6 +64,10 @@ in {
             type = str;
             default = "root";
           };
+          mode = mkOption {
+            type = str;
+            default = "g-rwx,o-rwx";
+          };
           boxes = mkOption {
             type = listOf (either mapping path);
             default = [ ];
@@ -87,13 +92,16 @@ in {
           seal = toString cfg.seal;
           user = cfg.user;
           group = cfg.group;
+          mode = cfg.mode;
         in ''
           echo Setup seal for ${name}
           mkdir -p ${seal}
+          ${coreutils}/bin/chmod ${mode} ${seal}
           ${coreutils}/bin/chown ${user}:${group} ${seal} 
         '') specs)) + (concatMapStringsSep "\n" (pair:
-          with pair;
-          let run = "${util-linux}/bin/runuser -u ${runUser} -g ${runGroup} --";
+          let 
+            inherit (pair) runUser runGroup user type group mode src dst;
+            run = "${util-linux}/bin/runuser -u ${runUser} -g ${runGroup} --";
           in ''
             echo Reviving ${dst} from ${if pair ? src then src else "no where"}
             ${optionalString (pair ? src) ''
@@ -115,6 +123,7 @@ in {
             ${optionalString (pair ? src) ''
               ${util-linux}/bin/mountpoint -q '${dst}' || ${util-linux}/bin/mount --bind '${src}' '${dst}'
             ''}
+            ${coreutils}/bin/chmod ${mode} '${dst}'
             ${coreutils}/bin/chown ${user}:${group} '${dst}'
           '') pairs));
   };

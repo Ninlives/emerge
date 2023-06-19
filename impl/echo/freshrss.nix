@@ -1,8 +1,8 @@
-{ config, ... }:
+{ config, inputs, ... }:
 let
   inherit (config.lib.path) persistent;
-  dp = config.secrets.decrypted;
-  domain = "${dp.freshrss.subdomain}.${dp.host}";
+  dp = inputs.values.secret;
+  domain = "${dp.host.private.services.freshrss.fqdn}";
   scrt = config.sops.secrets;
 in {
   services.freshrss = {

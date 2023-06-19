@@ -1,4 +1,4 @@
-{ lib, config, ... }: with lib; {
+{ lib, config, inputs, ... }: with lib; {
   boot.kernel.sysctl = {
     "net.ipv6.conf.ethernet.use_tempaddr" = 0;
     "net.core.default_qdisc" = "fq";
@@ -22,5 +22,5 @@
     '');
 
   users.users.root.openssh.authorizedKeys.keys =
-    [ config.secrets.decrypted.ssh.auth ];
+    [ inputs.values.secret.ssh.auth ];
 }

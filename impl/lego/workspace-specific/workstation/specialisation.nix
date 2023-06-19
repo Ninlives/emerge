@@ -1,6 +1,6 @@
-{ config, lib, ... }:
+{ lib, inputs, ... }:
 with lib;
-let dp = config.secrets.decrypted;
+let dp = inputs.values.secret;
 in {
   specialisation.institute.configuration = { config, ... }: {
     workspace.identity = "workstation";
@@ -12,7 +12,7 @@ in {
     workspace.hostName = dp.workstation.hostname;
     workspace.defaultProxy = "v2ray-fallback";
 
-    services.xserver.displayManager.defaultSession = "gnome-xorg";
+    sops.profiles = [ "work" ];
 
     system.activationScripts.update-ca-certs = stringAfter [ "etc" ] ''
       mkdir -p /etc/ssl/ca-anchors

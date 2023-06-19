@@ -1,7 +1,7 @@
-{ config, ... }:
+{ config, inputs, ... }:
 let
   plh = config.sops.placeholder;
-  dp = config.secrets.decrypted;
+  dp = inputs.values.secret;
 in {
   rathole = {
     enable = true;

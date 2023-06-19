@@ -2,7 +2,7 @@
 with lib;
 let
   inherit (config.lib.path) persistent;
-  dp = config.secrets.decrypted;
+  dp = inputs.values.secret;
   netboot-config = { config, pkgs, modulesPath, ... }: let
     build = config.system.build;
     kernelTarget = pkgs.stdenv.hostPlatform.linux-kernel.target;

@@ -1,19 +1,20 @@
-{ config, ... }:
+{ config, inputs, ... }:
 let
   plh = config.sops.placeholder;
   tpl = config.sops.templates;
-  dp = config.secrets.decrypted;
+  dp = inputs.values.secret;
+  srv = dp.host.private.services.vaultwarden;
 in {
-  services.nginx.virtualHosts."${dp.vaultwarden.subdomain}.${dp.host}" = {
+  services.nginx.virtualHosts."${srv.fqdn}" = {
     forceSSL = true;
     enableACME = true;
     locations = {
-      "/".proxyPass = "http://127.0.0.1:${toString dp.vaultwarden.port}";
+      "/".proxyPass = "http://127.0.0.1:${toString srv.port}";
       "/notifications/hub/negotiate".proxyPass =
-        "http://127.0.0.1:${toString dp.vaultwarden.port}";
+        "http://127.0.0.1:${toString srv.port}";
       "/notifications/hub" = {
         proxyPass =
-          "http://127.0.0.1:${toString dp.vaultwarden.websocket-port}";
+          "http://127.0.0.1:${toString srv.ext.websocket-port}";
         proxyWebsockets = true;
       };
     };
@@ -26,14 +27,14 @@ in {
   services.vaultwarden = {
     enable = true;
     config = {
-      domain = "https://${dp.vaultwarden.subdomain}.${dp.host}";
+      domain = "https://${srv.fqdn}";
       signupsAllowed = false;
       emergencyAccessAllowed = false;
       websocketEnabled = true;
       websocketAddress = "127.0.0.1";
-      websocketPort = dp.vaultwarden.websocket-port;
+      websocketPort = srv.ext.websocket-port;
       rocketAddress = "127.0.0.1";
-      rocketPort = dp.vaultwarden.port;
+      rocketPort = srv.port;
     };
     environmentFile = tpl.vaultwarden.path;
   };

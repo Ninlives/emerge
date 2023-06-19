@@ -1,27 +1,44 @@
 keys:
   - &server age1qeedh900k3lx5vr8gpd4mdl7q8hyq74wgguqeuzgrn0fxh7hpq7s00v8zm
-  - &local age17asv6vjafasyup5fz0l30muu96h2xdrrga0u5fwf7qxuch2n7yfsu5zjln
-  - &home age1xz7t3w8l36ls8ds264875zqtulv9vwvj37ayy87u3ccacqxax9hs6nfq8r
+  - &private age17asv6vjafasyup5fz0l30muu96h2xdrrga0u5fwf7qxuch2n7yfsu5zjln
+  - &work age13687eekxx0j2u3kra6jerxmpdlu49c5a3ecnqhfu8mwckck5w3qsnzk4us
+  - &lab age1xz7t3w8l36ls8ds264875zqtulv9vwvj37ayy87u3ccacqxax9hs6nfq8r
   - &infra age1rf242hcde4xvq4pjwpz67m5xq9cxduq4wlupneyl3kf45an4uqeqh42pzg
 creation_rules:
+
+  - path_regex: .*/private/.*
+    age: *private
+
+  - path_regex: .*/work/.*
+    age: *work
 
   - path_regex: .*/server/.*
     age: *server
 
-  - path_regex: .*/local/.*
-    age: *local
+  - path_regex: .*/phys/.*
+    key_groups:
+      - age:
+        - *private
+        - *work
 
-  - path_regex: .*/home/.*
-    age: *home
+  - path_regex: .*/lab/.*
+    age: *lab
+
+  - path_regex: .*/connect/.*
+    key_groups:
+      - age:
+        - *server
+        - *lab
+
+  - path_regex: .*/net/.*
+    key_groups:
+    - age:
+      - *server
+      - *private
+      - *lab
 
   - path_regex: .*/infra/.*
     age: *infra
 
   - path_regex: .*/tfstate.json
     age: *infra
-
-  - key_groups:
-    - age:
-      - *server
-      - *local
-      - *home

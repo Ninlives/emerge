@@ -30,5 +30,8 @@ in
   };
   boot.tmp.cleanOnBoot = true;
 
-  revive.specifications.system.seal = persistent.root;
+  revive.specifications.system = {
+    seal = persistent.root;
+    mode = "0755";
+  };
 }

@@ -1,20 +1,13 @@
-{ config, ... }:
+{ config, inputs, lib, ... }:
 let
   plh = config.sops.placeholder;
-  dp = config.secrets.decrypted;
+  dp = inputs.values.secret;
 in {
-  rathole.tunnels = {
-    immich = {
-      token = plh."rathole/token/immich";
-      port = dp.immich.port;
+  rathole.tunnels = lib.listToAttrs (map (srv: {
+    name = srv;
+    value = {
+      token = plh."rathole/token/${srv}";
+      port = dp.host.private.services.${srv}.port;
     };
-    jellyfin = {
-      token = plh."rathole/token/jellyfin";
-      port = dp.jellyfin.port;
-    };
-    kavita = {
-      token = plh."rathole/token/kavita";
-      port = dp.kavita.port;
-    };
-  };
+  }) [ "immich" "jellyfin" "kavita" ]);
 }

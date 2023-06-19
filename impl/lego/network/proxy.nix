@@ -1,11 +1,9 @@
-{ config, pkgs, lib, var, ... }:
+{ config, pkgs, lib, var, inputs, ... }:
 with var.proxy;
 let
   plh = config.sops.placeholder;
   tpl = config.sops.templates;
-  scrt = config.sops.secrets;
-  dp = config.secrets.decrypted;
-  net = var.net.default;
+  dp = inputs.values.secret;
 
   # Template
   sniffing = {
@@ -98,7 +96,7 @@ let
       (lib.recursiveUpdate {
         protocol = "trojan";
         settings.servers = [{
-          address = "${dp.libreddit.subdomain}.${dp.host}";
+          address = "${dp.host.private.services.libreddit.fqdn}";
           port = 443;
           password = plh."trojan/password";
           level = 0;

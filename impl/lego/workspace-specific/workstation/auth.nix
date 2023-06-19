@@ -1,5 +1,5 @@
-{ config, ... }:
-let dp = config.secrets.decrypted;
+{ inputs, ... }:
+let dp = inputs.values.secret;
 in {
   programs.chromium.extraOpts = {
     AuthServerAllowlist = "*.${dp.workstation.host}";

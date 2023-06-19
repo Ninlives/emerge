@@ -45,7 +45,7 @@ with inputs; {
       inherit var inputs;
       inherit (self.nixosConfigurations) echo;
     };
-    modules = fn.dotNixFromRecursive ../infra ++ [ ../bombe/secrets.nix ];
+    modules = fn.dotNixFromRecursive ../infra;
   }).overrideAttrs(_: { allowSubstitutes = false; });
 
   legacyPackages.${system} = import nixpkgs {

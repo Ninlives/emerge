@@ -1,8 +1,8 @@
-{ config, pkgs, echo, ... }:
+{ config, pkgs, echo, inputs, ... }:
 with pkgs;
 let
   inherit (config) ref;
-  dp = config.secrets.decrypted;
+  dp = inputs.values.secret;
 
   system = echo.config.system.build.toplevel;
   netboot = echo.config.nano;

@@ -1,5 +1,5 @@
-{ config, fn, ... }:
-let dp = config.secrets.decrypted;
+{ config, fn, inputs, ... }:
+let dp = inputs.values.secret;
 in {
   imports = [
     ./nano.nix
@@ -13,6 +13,8 @@ in {
     ./jellyfin.nix
     ./freshrss.nix
     ./immich.nix
+    ./misskey.nix
+    ./postgresql.nix
   ] ++ (fn.dotNixFrom ../taco);
 
   security.acme.acceptTerms = true;

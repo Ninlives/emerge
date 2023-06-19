@@ -27,6 +27,14 @@
     url = "github:Ninlives/deckbd";
     inputs.nixpkgs.follows = "nixpkgs";
   };
+  inputs.misskey = {
+    url = "github:Ninlives/misskey.nix";
+    inputs.nixpkgs.follows = "nixpkgs";
+  };
+  inputs.buzzrelay = {
+    url = "github:astro/buzzrelay";
+    inputs.nixpkgs.follows = "nixpkgs";
+  };
 
   outputs = { self, nixpkgs, ... }@inputs:
     let

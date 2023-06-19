@@ -1,11 +1,10 @@
-{ lib, config, pkgs, ... }:
+{ lib, config, pkgs, inputs, ... }:
 with lib;
 with lib.types;
 let
   cfg = config.rathole;
-  plh = config.sops.placeholder;
   tpl = config.sops.templates;
-  dp = config.secrets.decrypted;
+  dp = inputs.values.secret;
 in {
   options.rathole = {
     enable = mkEnableOption "rathole";

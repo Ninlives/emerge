@@ -1,9 +1,9 @@
-{ pkgs, config, ... }:
+{ pkgs, config, inputs, ... }:
 let
   inherit (config.lib.path) persistent;
   plh = config.sops.placeholder;
   tpl = config.sops.templates;
-  dp = config.secrets.decrypted;
+  dp = inputs.values.secret;
 
   upload-box = "${persistent.data}/immich/upload";
   database-box = "${persistent.data}/immich/database";
@@ -69,6 +69,7 @@ in {
 
   virtualisation.oci-containers.backend = "podman";
   virtualisation.podman.defaultNetwork.settings.dns_enabled = true;
+  virtualisation.podman.enableNvidia = true;
   networking.firewall.trustedInterfaces = [ "podman0" ];
   virtualisation.oci-containers.containers = {
     immich-server = {
@@ -124,7 +125,7 @@ in {
     immich-proxy = {
       image = "ghcr.io/immich-app/immich-proxy:release";
       imageFile = immich-proxy-image;
-      ports = [ "127.0.0.1:${toString dp.immich.port}:8080" ];
+      ports = [ "127.0.0.1:${toString dp.host.private.services.immich.port}:8080" ];
       dependsOn = [ "immich-server" ];
     };
   };

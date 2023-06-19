@@ -1,6 +1,6 @@
-{ config, ... }: 
+{ config, inputs, ... }: 
 let
-  dp = config.secrets.decrypted;
+  dp = inputs.values.secret;
   cfg = config.services.maddy;
   cert = config.security.acme.certs.${dp.mail-server.host};
 in

@@ -12,7 +12,7 @@ fix (self: {
       ../opt/sops-profiles.nix
       sops-nix.nixosModules.sops
       {
-        sops.profiles = [ "general" "server" ];
+        sops.profiles = [ "net" "connect" "server" ];
         nixpkgs.overlays = map (o: import o { inherit fn var inputs; })
           (fn.dotNixFromRecursive ../pkg);
       }
@@ -30,7 +30,7 @@ fix (self: {
       ../opt/sops-profiles.nix
       sops-nix.nixosModules.sops
       { 
-        sops.profiles = [ "general" "home" ];
+        sops.profiles = [ "net" "connect" "home" ];
         nixpkgs.overlays = map (o: import o { inherit fn var inputs; })
           (fn.dotNixFromRecursive ../pkg);
       }

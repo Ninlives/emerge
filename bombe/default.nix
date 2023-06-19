@@ -7,10 +7,13 @@ with lib.filesystem;
 
 let
   isYAML = f: hasSuffix ".yaml" (toString f);
+  listFilesIfExists = path: if pathExists path then
+                              listFilesRecursive path
+                            else [];
 
   keys = profile:
     let
-      sources = filter (f: isYAML f) (listFilesRecursive ./data/${profile});
+      sources = filter (f: isYAML f) (listFilesIfExists ./data/${profile});
       contents = map (f: {
         file = f;
         content = removeAttrs (fn.importYAML f) [ "sops" ];
@@ -33,7 +36,7 @@ let
     }) (concatLists (map keyFiles contents)));
 
   binaries = profile:
-    let files = listFilesRecursive ./data/${profile};
+    let files = listFilesIfExists ./data/${profile};
     in listToAttrs (map (f: {
       name = removePrefix ((toString ./data) + "/${profile}/") (toString f);
       value = {
@@ -42,8 +45,7 @@ let
       };
     }) (filter (f: !(isYAML f)) files));
 in {
-  imports = [ ./secrets.nix ];
-  sops.defaultSopsFile = ./data/general/tokens.yaml;
+  sops.defaultSopsFile = ./data/net/tokens.yaml;
   sops.secrets = foldl (a: b: a // b) { }
     (map (profile: keys profile // binaries profile) config.sops.profiles);
 }
