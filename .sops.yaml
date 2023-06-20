@@ -34,8 +34,9 @@ creation_rules:
     key_groups:
     - age:
       - *server
-      - *private
       - *lab
+      - *private
+      - *work
 
   - path_regex: .*/infra/.*
     age: *infra

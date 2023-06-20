@@ -23,12 +23,10 @@
 
   programs = {
     man.enable = true;
-    zathura.enable = true;
     git = {
       enable = true;
       userName = "mlatus";
       userEmail = "wqseleven@gmail.com";
-      ignores = [ ".nixify" ];
     };
   };
 

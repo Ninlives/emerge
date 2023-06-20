@@ -59,7 +59,7 @@ show_all_items(){
 }
 
 action(){
-    bw list items|jq -r '.[]|select(.id == "'"$1"'")|(.login.username,.login.password)'| {
+    bw get item "$1"|jq -r '(.login.username,.login.password)'| {
         read -r username;
         read -r password;
         case "$2" in
@@ -133,39 +133,5 @@ fill_password(){
     echo "jseval -q $(js "$1" "$2"|sed 's,//.*$,,'|tr '\n' ' ')" >> "$QUTE_FIFO"
 }
 
-ask_password(){
-    mpw=$(rofi -dmenu -p "Master Password" -password -lines 0 -font 'Mono 27') || exit_error "Unlock Failed."
-    echo $mpw | bw unlock --raw || exit_error "Unlock Failed."
-}
-
-set_session_key(){
-    need_reset=0
-
-    if ! key_id=$(keyctl request user bw:session @s 2> /dev/null);then
-        need_reset=1
-    fi
-
-    export BW_SESSION=$(keyctl pipe "$key_id")
-    if [[ $(bw status|jq -r '.["status"]') != "unlocked" ]];then
-        need_reset=1
-    fi
-    
-    if [[ "$need_reset" == "1" ]];then
-        session_key=$(ask_password)
-        [[ -z "$session_key" ]] && echo "Could not unlock vault." && exit 1
-        key_id=$(echo "$session_key" | keyctl padd user bw:session @s)
-        export BW_SESSION=$session_key
-    fi
-}
-
-echo 'message-info "Checking authentication status..."' >> "$QUTE_FIFO"
-if [[ $(bw status | jq -r '.["status"]') == "unauthenticated" ]];then
-    echo 'message-info "Logging in..."' >> "$QUTE_FIFO"
-    bw config server https://@sVAULTWARDEN_HOST@
-    export BW_CLIENTID=$(cat '@sVAULTWARDEN_CLIENTID@')
-    export BW_CLIENTSECRET=$(cat '@sVAULTWARDEN_CLIENTSECRET@')
-    bw login --apikey || exit_error "Login Failed."
-fi
-
-set_session_key
+echo 'message-info "Loading items..."' >> "$QUTE_FIFO"
 show_items

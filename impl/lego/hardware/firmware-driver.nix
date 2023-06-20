@@ -4,7 +4,10 @@
     [ "nvme" "xhci_pci" "usb_storage" "usbhid" "sd_mod" "sdhci_pci" ];
   imports = [ "${inputs.jovian}/modules" ];
 
-  jovian.devices.steamdeck.enable = true;
+  jovian.devices.steamdeck = {
+    enable = true;
+    enableDefaultCmdlineConfig = false;
+  };
 
   environment.systemPackages = with pkgs; [
     steamdeck-firmware

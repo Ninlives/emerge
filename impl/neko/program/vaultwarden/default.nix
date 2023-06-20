@@ -1,5 +1,60 @@
-{ config, lib, pkgs, ... }: {
-  home.packages = with pkgs; [ bitwarden bitwarden-cli ];
+{ pkgs, inputs, nixosConfig, ... }:
+let
+  dp = inputs.values.secret;
+  scrt = nixosConfig.sops.secrets;
+  bitwarden-cli-wrapper = with pkgs;
+    let bw = "${pkgs.bitwarden-cli}/bin/bw";
+    in writeShellApplication {
+      name = "bw";
+      runtimeInputs = [ keyutils jq gnused pinentry-gnome ];
+      text = ''
+        need_reset=0
+        if key_id=$(keyctl search @u user bw:session 2> /dev/null);then
+            BW_SESSION=$(keyctl pipe "$key_id")
+            export BW_SESSION
+            if [[ $(${bw} status|jq -r '.["status"]') != "unlocked" ]];then
+                keyctl revoke "$key_id"
+                need_reset=1
+            fi
+        else
+            need_reset=1
+            if [[ $(${bw} status | jq -r '.["status"]') == "unauthenticated" ]];then
+              BW_CLIENTID=$(cat '${scrt."vaultwarden/client-id".path}')
+              BW_CLIENTSECRET=$(cat '${scrt."vaultwarden/client-secret".path}')
+              export BW_CLIENTID
+              export BW_CLIENTSECRET
+              ${bw} config server 'https://${dp.host.private.services.vaultwarden.fqdn}' > /dev/null
+              ${bw} login --apikey
+            fi
+        fi
+
+        ask_password(){
+        (cat <<EOC
+        SETTITLE Vault Warden
+        SETPROMPT Master Password:
+        GETPIN
+        EOC
+        )| pinentry | sed -n 's/D \(.*\)/\1/p'
+        }
+
+        if [[ "$need_reset" == "1" ]];then
+            password=$(ask_password)
+            [[ -z "$password" ]] && exit 1
+            session_key=$(echo "$password" | ${bw} unlock --raw 2> /dev/null)
+            key_id=$(echo "$session_key" | keyctl padd user bw:session @s)
+            keyctl link "$key_id" @u || true
+            keyctl setperm "$key_id" 0x3f3f0000 || true
+            BW_SESSION="$session_key"
+            export BW_SESSION
+        fi
+
+        ${bw} "$@"
+      '';
+    };
+in {
+  requestNixOSConfig.vaultwarden.nixpkgs.overlays =
+    [ (final: prev: { inherit bitwarden-cli-wrapper; }) ];
+  home.packages = with pkgs; [ bitwarden bitwarden-cli-wrapper ];
   persistent.boxes = [
     {
       src = /Programs/vaultwarden/gui;

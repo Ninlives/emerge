@@ -10,18 +10,15 @@ let
   mergeFiles = files: fold (s1: s2: s1 + s2) "" (map readFile files);
   outPath = placeholder "out";
   vaultwardenScript = resholve.writeScript "vaultwarden-fill" {
-    inputs = [ keyutils rofi xclip jq bitwarden-cli coreutils gnused ];
+    inputs = [ keyutils rofi xclip jq bitwarden-cli-wrapper coreutils gnused ];
     interpreter = "${bash}/bin/bash";
     execer = [
       "cannot:${keyutils}/bin/keyctl"
-      "cannot:${bitwarden-cli}/bin/bw"
+      "cannot:${bitwarden-cli-wrapper}/bin/bw"
       "cannot:${rofi}/bin/rofi"
     ];
   } (readFile (substituteAll {
     src = ./bitwarden.sh;
-    sVAULTWARDEN_HOST = dp.host.private.services.vaultwarden.fqdn;
-    sVAULTWARDEN_CLIENTID = scrt."vaultwarden/client-id".path;
-    sVAULTWARDEN_CLIENTSECRET = scrt."vaultwarden/client-secret".path;
   }));
   configPy = mergeFiles [
     (substituteAll {
