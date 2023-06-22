@@ -21,17 +21,8 @@
     encfs
   ];
 
-  programs = {
-    man.enable = true;
-    git = {
-      enable = true;
-      userName = "mlatus";
-      userEmail = "wqseleven@gmail.com";
-    };
-  };
-
   persistent.boxes = [{
     src = /Programs/tldr;
-    dst = ".local/tldrc";
+    dst = ".tldrc";
   }];
 }

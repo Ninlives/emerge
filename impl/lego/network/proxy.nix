@@ -135,7 +135,7 @@ let
     group = var.proxy.group;
   };
 
-  default = config.workspace.defaultProxy;
+  default = config.workspace.proxy.default;
 
 in {
 

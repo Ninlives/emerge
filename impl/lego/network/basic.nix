@@ -1,4 +1,4 @@
-{ lib, config, ... }: {
-  networking.hostName = config.workspace.hostName;
+{ config, ... }: {
+  networking.hostName = config.workspace.hostname;
   networking.networkmanager.enable = true;
 }

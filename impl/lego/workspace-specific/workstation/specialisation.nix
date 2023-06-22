@@ -9,8 +9,9 @@ in {
     workspace.user.uid = 2048;
     workspace.disk.persist = "institute";
     workspace.disk.swap = "depot";
-    workspace.hostName = dp.workstation.hostname;
-    workspace.defaultProxy = "v2ray-fallback";
+    workspace.email.account.default = "opensource";
+    workspace.hostname = dp.workstation.hostname;
+    workspace.proxy.default = "v2ray-fallback";
 
     sops.profiles = [ "work" ];
 

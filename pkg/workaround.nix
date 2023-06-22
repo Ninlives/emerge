@@ -32,13 +32,13 @@ final: prev: {
   #     };
   # });
 
-  # tdesktop = final.runCommandLocal "tdesktop" {
-  #   nativeBuildInputs = [ final.makeWrapper ];
-  # } ''
-  #   mkdir -p $out
-  #   ${final.xorg.lndir}/bin/lndir ${prev.tdesktop} $out
-  #   wrapProgram $out/bin/telegram-desktop \
-  #     --set QT_SCREEN_SCALE_FACTORS 2 \
-  #     --set QT_QPA_PLATFORM xcb
-  # '';
+  tdesktop = final.runCommandLocal "tdesktop" {
+    nativeBuildInputs = [ final.makeWrapper ];
+  } ''
+    mkdir -p $out
+    ${final.xorg.lndir}/bin/lndir ${prev.tdesktop} $out
+    wrapProgram $out/bin/telegram-desktop \
+      --set QT_SCREEN_SCALE_FACTORS 2 \
+      --set QT_QPA_PLATFORM xcb
+  '';
 }

@@ -30,8 +30,8 @@ let
 
         ask_password(){
         (cat <<EOC
-        SETTITLE Vault Warden
-        SETPROMPT Master Password:
+        SETPROMPT Vaultwarden
+        SETDESC Master Password:
         GETPIN
         EOC
         )| pinentry | sed -n 's/D \(.*\)/\1/p'
@@ -55,6 +55,12 @@ in {
   requestNixOSConfig.vaultwarden.nixpkgs.overlays =
     [ (final: prev: { inherit bitwarden-cli-wrapper; }) ];
   home.packages = with pkgs; [ bitwarden bitwarden-cli-wrapper ];
+
+  requestNixOSConfig.qute.sops.secrets."vaultwarden/client-id".owner =
+    nixosConfig.workspace.user.name;
+  requestNixOSConfig.qute.sops.secrets."vaultwarden/client-secret".owner =
+    nixosConfig.workspace.user.name;
+
   persistent.boxes = [
     {
       src = /Programs/vaultwarden/gui;

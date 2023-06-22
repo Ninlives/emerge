@@ -24,11 +24,15 @@
       type = str;
       default = "chest";
     };
-    hostName = mkOption {
+    email.account.default = mkOption {
+      type = str;
+      default = "private";
+    };
+    hostname = mkOption {
       type = str;
       default = "nixos";
     };
-    defaultProxy = mkOption {
+    proxy.default = mkOption {
       type = str;
       default = "v2ray-trojan";
     };

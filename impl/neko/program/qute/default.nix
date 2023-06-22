@@ -86,9 +86,4 @@ in mkIf config.programs.qutebrowser.enable {
       dst = ".config/qutebrowser";
     }
   ];
-
-  requestNixOSConfig.qute.sops.secrets."vaultwarden/client-id".owner =
-    nixosConfig.workspace.user.name;
-  requestNixOSConfig.qute.sops.secrets."vaultwarden/client-secret".owner =
-    nixosConfig.workspace.user.name;
 }
