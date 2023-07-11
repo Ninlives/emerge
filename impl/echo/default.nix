@@ -18,7 +18,7 @@ in {
   ] ++ (fn.dotNixFrom ../taco);
 
   security.acme.acceptTerms = true;
-  security.acme.defaults.email = "${dp.email}";
+  security.acme.defaults.email = "${dp.email.private.address}";
   security.acme.defaults.renewInterval = "weekly";
   users.users.acme.uid = 999;
   users.groups.acme.gid = 999;

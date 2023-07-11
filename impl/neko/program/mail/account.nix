@@ -44,6 +44,8 @@ in {
       (umask 0077; cat ${mailfilter} > ${config.home.homeDirectory}/.mailfilter)
       mkdir -p ${mainAct.maildir.absPath}
     '' + concatMapStringsSep "\n" (folder: ''
-      ${pkgs.maildrop}/bin/maildirmake ${mainAct.maildir.absPath}/${folder}
+      if [[ ! -d "${mainAct.maildir.absPath}/${folder}" ]];then
+        ${pkgs.maildrop}/bin/maildirmake "${mainAct.maildir.absPath}/${folder}"
+      fi
     '') (filter isString (attrValues mainAct.folders))));
 }

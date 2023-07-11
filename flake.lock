@@ -42,11 +42,9 @@
       },
       "locked": {
         "lastModified": 1686943938,
-        "narHash": "sha256-9CR/wvwa4FmaG4WZzTuhKfkAltYJfCZQWo2ct7fLRjY=",
-        "owner": "astro",
-        "repo": "buzzrelay",
-        "rev": "427acb073172f8db27694ef099c6cc848c32ff24",
-        "type": "github"
+        "narHash": "sha256-o9Z6KAq++68V6w/XHZwjytDdLH+4n7asoMcVwgf1Xas=",
+        "type": "git",
+        "url": "file:///home/mlatus/Documents/Develop/Fediverse/buzzrelay"
       },
       "original": {
         "owner": "astro",
@@ -59,11 +57,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1687397475,
-        "narHash": "sha256-FaXT6u0Wl3DdhwfH2sgIKA3zgmdxC5CMKd67QpRoG00=",
+        "lastModified": 1687484166,
+        "narHash": "sha256-7TrJO1kvzZgEi0DdCt2m0Z9T0lYjsWN05fXyKcxB3oA=",
         "owner": "Ninlives",
         "repo": "data",
-        "rev": "87b5ea9931f49064161593f42531e2c20d40593f",
+        "rev": "d9514ca96bdc1c0c14871cd5d6b317878fec8b16",
         "type": "github"
       },
       "original": {
@@ -152,11 +150,11 @@
         "systems": "systems_3"
       },
       "locked": {
-        "lastModified": 1685518550,
-        "narHash": "sha256-o2d0KcvaXzTrPRIo0kOLV0/QXHhDQ5DTi+OxcjO8xqY=",
+        "lastModified": 1687171271,
+        "narHash": "sha256-BJlq+ozK2B1sJDQXS3tzJM5a+oVZmi1q0FlBK/Xqv7M=",
         "owner": "numtide",
         "repo": "flake-utils",
-        "rev": "a1720a10a6cfe8234c0e93907ffe81be440f4cef",
+        "rev": "abfb11bd1aec8ced1c9bb9adfe68018230f4fb3c",
         "type": "github"
       },
       "original": {
@@ -242,15 +240,15 @@
         ]
       },
       "locked": {
-        "lastModified": 1687444533,
-        "narHash": "sha256-9IdCN7s7Dr1uKt0uRoYT15cpOjN1qYHpTRPKRHCMc3o=",
-        "owner": "nix-community",
+        "lastModified": 1687454689,
+        "narHash": "sha256-3wWgDIDSVV01zWsAo2z8Cygby7T+M8jDgXjKjOS2c+0=",
+        "owner": "Ninlives",
         "repo": "home-manager",
-        "rev": "6c78ba7932567331fb8ebabf34a143b998bb5f23",
+        "rev": "8117dfc5045d81559a2b34313fedd7101e80b48e",
         "type": "github"
       },
       "original": {
-        "owner": "nix-community",
+        "owner": "Ninlives",
         "repo": "home-manager",
         "type": "github"
       }
@@ -302,11 +300,11 @@
         "pnpm2nix": "pnpm2nix"
       },
       "locked": {
-        "lastModified": 1687014240,
-        "narHash": "sha256-iaeRhWqetURy0e3qUGZwcsyRmMrUg1ZsoNdOGgc3/qg=",
+        "lastModified": 1688286945,
+        "narHash": "sha256-Hu4aHCv4K4efROW237YHx/uBMe6ugQWNER2Rbgq3fOs=",
         "owner": "Ninlives",
         "repo": "misskey.nix",
-        "rev": "30c0e2f205fcfdbbac7022f2342e990f7032d1f5",
+        "rev": "3015d59372b09d2878b2ed45d51acd07bf3bbba4",
         "type": "github"
       },
       "original": {
@@ -403,11 +401,11 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1687398276,
-        "narHash": "sha256-CAm3FiJcuIdbc6F0LelchFcAav3HgWgjeFWRq/rFPmM=",
+        "lastModified": 1687459895,
+        "narHash": "sha256-yd7BX2OBtbye9hPPrSGG1b2tPukccqJXYLybS8dOtfY=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "e999e93d55c6298d151159c9e5ca4e773ff29d1f",
+        "rev": "faef939f4688e702dcc950dc2bb35dd175aa2a32",
         "type": "github"
       },
       "original": {
@@ -731,11 +729,11 @@
         "nixpkgs": "nixpkgs_7"
       },
       "locked": {
-        "lastModified": 1686818234,
-        "narHash": "sha256-WqKEFVlOn3gblRGtf1aCHWe0P2PSsmDBb8Fm/YXtl9U=",
+        "lastModified": 1687455664,
+        "narHash": "sha256-SI4BVMU8I91cCm7Hh1jnGNy5rEPJlLBK3sMzzh575Go=",
         "ref": "refs/heads/main",
-        "rev": "794bd60143caa401256c3c034e11e4d67c0388d5",
-        "revCount": 7,
+        "rev": "c897ffa594009887c36443b8b944eb97d70d12cd",
+        "revCount": 8,
         "type": "git",
         "url": "ssh://git@github.com/Ninlives/values.git"
       },

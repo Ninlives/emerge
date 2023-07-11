@@ -1,4 +1,4 @@
-{ config, lib, inputs, ... }:
+{ config, lib, inputs, pkgs, ... }:
 let
   dp = inputs.values.secret;
   scrt = config.sops.secrets;
@@ -17,6 +17,14 @@ in {
   ];
   services.misskey = {
     enable = true;
+    package = pkgs.misskey.overrideAttrs (p: {
+      patches = p.patches or [ ] ++ [
+        (pkgs.fetchpatch {
+          url = "https://github.com/misskey-dev/misskey/commit/c2c2bec5c0af82f86e76ca041ad44302caff26b3.patch";
+          sha256 = "";
+        })
+      ];
+    });
     data.directory = fileDir;
   };
   systemd.services.misskey = {
@@ -66,10 +74,9 @@ in {
       };
       id = "aid";
       signToActivityPubGet = true;
-
-      allowedPrivateNetworks = [
-        "127.0.0.1/32"
-      ];
+      # allowedPrivateNetworks = [
+      #   "127.0.0.1/32"
+      # ];
     };
   };
 
@@ -114,29 +121,39 @@ in {
   };
 
   # Relay
-  # services.buzzrelay = {
-  #   enable = true;
-  #   # streams = [ "https://${srv.fedibuzz.fqdn}/api/v1/streaming/public" ];
-  #   streams = lib.mkForce [];
-  #   listenPort = srv.fedibuzz.port;
-  #   hostName = srv.fedibuzz.fqdn;
-  #   privKeyFile = scrt."buzzrelay/keys/private.pem".path;
-  #   pubKeyFile = scrt."buzzrelay/keys/public.pem".path;
-  # };
-  # services.nginx.virtualHosts.${srv.fedibuzz.fqdn} = {
-  #   forceSSL = true;
-  #   enableACME = true;
-  #   locations."/" = {
-  #     proxyPass = "http://127.0.0.1:${toString srv.fedibuzz.port}";
-  #     proxyWebsockets = true;
-  #   };
-  # };
-  # sops.secrets."buzzrelay/keys/private.pem" = {
-  #   owner = config.services.buzzrelay.user;
-  #   group = config.services.buzzrelay.group;
-  # };
-  # sops.secrets."buzzrelay/keys/public.pem" = {
-  #   owner = config.services.buzzrelay.user;
-  #   group = config.services.buzzrelay.group;
-  # };
+  services.buzzrelay = {
+    enable = true;
+    extraConfig = {
+      streams = [ "https://fedi.buzz/api/v1/streaming/public" ];
+      instances.include = [
+        "mastodon.gamedev.place"
+        "fosstodon.org"
+        "infosec.exchange"
+        "hachyderm.io"
+        "social.kernel.org"
+      ];
+      listen_port = srv.fedibuzz.port;
+      hostname = srv.fedibuzz.fqdn;
+      activity_type = "Relay";
+      priv_key_file = scrt."buzzrelay/keys/private.pem".path;
+      pub_key_file = scrt."buzzrelay/keys/public.pem".path;
+    };
+  };
+  services.nginx.virtualHosts.${srv.fedibuzz.fqdn} = {
+    forceSSL = true;
+    enableACME = true;
+    locations."/" = {
+      proxyPass = "http://127.0.0.1:${toString srv.fedibuzz.port}";
+      proxyWebsockets = true;
+      recommendedProxySettings = true;
+    };
+  };
+  sops.secrets."buzzrelay/keys/private.pem" = {
+    owner = config.services.buzzrelay.user;
+    group = config.services.buzzrelay.group;
+  };
+  sops.secrets."buzzrelay/keys/public.pem" = {
+    owner = config.services.buzzrelay.user;
+    group = config.services.buzzrelay.group;
+  };
 }

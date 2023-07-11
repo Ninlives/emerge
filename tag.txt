@@ -1,1 +1,1 @@
-mail_and_vaultwarden_cli
+snapshotSigned-off-by_"mlatus"_<wqseleven@gmail.com>

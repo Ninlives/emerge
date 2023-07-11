@@ -30,7 +30,7 @@ in {
     "Videos"
   ] ++ [
     { src = /Programs/ssh; dst = ".ssh"; }
-    { src = /Programs/gnupg; dst = ".gnupg"; }
+    # { src = /Programs/gnupg; dst = ".gnupg"; }
     { src = /Programs/wrapped; dst = ".local/fakefs"; }
     { src = /Programs/nix/data; dst = ".local/share/nix"; }
     { src = /Programs/nix/cache; dst = ".cache/nix"; }

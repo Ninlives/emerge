@@ -42,6 +42,7 @@
   };
 
   hardware.xpadneo.enable = true;
+  services.joycond.enable = true;
 
   services.power-profiles-daemon.enable = false;
   services.tlp = {
