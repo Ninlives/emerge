@@ -41,8 +41,8 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1686943938,
-        "narHash": "sha256-o9Z6KAq++68V6w/XHZwjytDdLH+4n7asoMcVwgf1Xas=",
+        "lastModified": 1688292919,
+        "narHash": "sha256-KN5glkROgWI4QtCdb0sqlHWDRo0m0NzsKSUr8oYKgBI=",
         "type": "git",
         "url": "file:///home/mlatus/Documents/Develop/Fediverse/buzzrelay"
       },
@@ -57,11 +57,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1687484166,
-        "narHash": "sha256-7TrJO1kvzZgEi0DdCt2m0Z9T0lYjsWN05fXyKcxB3oA=",
+        "lastModified": 1688952479,
+        "narHash": "sha256-JwoJOB6GzYtHIIzWaJyA0sB3P2zTVg8VcigStM1qwOU=",
         "owner": "Ninlives",
         "repo": "data",
-        "rev": "d9514ca96bdc1c0c14871cd5d6b317878fec8b16",
+        "rev": "dd106e72cf504760417a6081deebbd692daeae15",
         "type": "github"
       },
       "original": {
@@ -256,11 +256,11 @@
     "jovian": {
       "flake": false,
       "locked": {
-        "lastModified": 1687034006,
-        "narHash": "sha256-H3BKqE/LqJ7Fn92vYafAtRX4Nz/dZ4yT+BAk9gaNoEA=",
+        "lastModified": 1688784595,
+        "narHash": "sha256-BWkLBVPu1vaQxXXS7OW1EaI4OrSL/2Abmm7PFcR+Itg=",
         "owner": "Jovian-Experiments",
         "repo": "Jovian-NixOS",
-        "rev": "7b85bd1de57ee685535029c0aead77050fa734c4",
+        "rev": "8b4fa13979cb5f3d995d607aa86bca98b52227e9",
         "type": "github"
       },
       "original": {
@@ -369,11 +369,11 @@
     },
     "nixpkgs-stable_2": {
       "locked": {
-        "lastModified": 1687031877,
-        "narHash": "sha256-yMFcVeI+kZ6KD2QBrFPNsvBrLq2Gt//D0baHByMrjFY=",
+        "lastModified": 1688868408,
+        "narHash": "sha256-RR9N5XTAxSBhK8MCvLq9uxfdkd7etC//seVXldy0k48=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "e2e2059d19668dab1744301b8b0e821e3aae9c99",
+        "rev": "510d721ce097150ae3b80f84b04b13b039186571",
         "type": "github"
       },
       "original": {
@@ -401,11 +401,11 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1687459895,
-        "narHash": "sha256-yd7BX2OBtbye9hPPrSGG1b2tPukccqJXYLybS8dOtfY=",
+        "lastModified": 1689053138,
+        "narHash": "sha256-x5dUdMIacdoblcHTnVhGQ94ltoQ9Dz2M3CLtKKvMhUU=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "faef939f4688e702dcc950dc2bb35dd175aa2a32",
+        "rev": "547a750222e2dc5a07a3d085dc5a165b7b44cdd8",
         "type": "github"
       },
       "original": {
@@ -577,11 +577,11 @@
         "nixpkgs-stable": "nixpkgs-stable_2"
       },
       "locked": {
-        "lastModified": 1687398569,
-        "narHash": "sha256-e/umuIKFcFtZtWeX369Hbdt9r+GQ48moDmlTcyHWL28=",
+        "lastModified": 1688873469,
+        "narHash": "sha256-9TMSXvXmrr7bDYi+WeskWe/yho9UP01dGbV9vW5bRVc=",
         "owner": "Mic92",
         "repo": "sops-nix",
-        "rev": "2ff6973350682f8d16371f8c071a304b8067f192",
+        "rev": "b2047c8fc963407916ad3834165309007dc5a1f7",
         "type": "github"
       },
       "original": {
