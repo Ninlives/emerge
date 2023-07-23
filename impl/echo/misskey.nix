@@ -123,21 +123,10 @@ in {
   # Relay
   services.buzzrelay = {
     enable = true;
-    extraConfig = {
-      streams = [ "https://fedi.buzz/api/v1/streaming/public" ];
-      instances.include = [
-        "mastodon.gamedev.place"
-        "fosstodon.org"
-        "infosec.exchange"
-        "hachyderm.io"
-        "social.kernel.org"
-      ];
-      listen_port = srv.fedibuzz.port;
-      hostname = srv.fedibuzz.fqdn;
-      activity_type = "Relay";
-      priv_key_file = scrt."buzzrelay/keys/private.pem".path;
-      pub_key_file = scrt."buzzrelay/keys/public.pem".path;
-    };
+    listenPort = srv.fedibuzz.port;
+    hostName = srv.fedibuzz.fqdn;
+    privKeyFile = scrt."buzzrelay/keys/private.pem".path;
+    pubKeyFile = scrt."buzzrelay/keys/public.pem".path;
   };
   services.nginx.virtualHosts.${srv.fedibuzz.fqdn} = {
     forceSSL = true;
