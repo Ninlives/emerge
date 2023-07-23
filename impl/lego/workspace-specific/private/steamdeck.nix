@@ -26,7 +26,7 @@ in {
     jovian.steam.enable = true;
     users.users.deck = {
       isNormalUser = true;
-      extraGroups = [ "networkmanager" ];
+      extraGroups = [ "networkmanager" "input" ];
       passwordFile = config.sops.secrets.hashed-password-deck.path;
       home = "/home/deck";
       createHome = true;

@@ -91,7 +91,7 @@ mkIf nixosConfig.services.xserver.desktopManager.gnome.enable {
     "org/gnome/desktop/interface" = {
       color-scheme = "prefer-dark";
       cursor-theme = "Bibata-Modern-Classic";
-      icon-theme = "GruvboxPlus";
+      icon-theme = "Gruvbox-Plus-Dark";
       gtk-theme = "Gruvbox-Dark-B";
 
       clock-show-weekday = true;
