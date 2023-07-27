@@ -32,7 +32,7 @@
         "type": "github"
       }
     },
-    "buzzrelay": {
+    "courier": {
       "inputs": {
         "naersk": "naersk",
         "nixpkgs": [
@@ -41,14 +41,16 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1689235434,
-        "narHash": "sha256-1VbZrZBpsBRGoZkfWW7QsW3IjT5D9j+SpM16Ryemdkc=",
-        "type": "git",
-        "url": "file:///home/mlatus/Documents/Develop/Fediverse/buzzrelay"
+        "lastModified": 1690443381,
+        "narHash": "sha256-50OVqtTJnk1qUrt2hwt2y1OfQkjGWhe4L8uSFy+qcnE=",
+        "owner": "Ninlives",
+        "repo": "courier",
+        "rev": "b471336100488485e4065d238ecff077059bc832",
+        "type": "github"
       },
       "original": {
-        "owner": "astro",
-        "repo": "buzzrelay",
+        "owner": "Ninlives",
+        "repo": "courier",
         "type": "github"
       }
     },
@@ -316,7 +318,7 @@
     "naersk": {
       "inputs": {
         "nixpkgs": [
-          "buzzrelay",
+          "courier",
           "nixpkgs"
         ]
       },
@@ -464,11 +466,11 @@
     },
     "nixpkgs_7": {
       "locked": {
-        "lastModified": 1686804192,
-        "narHash": "sha256-+VyQUManoec9GcNAS10HM83DkvFuS8IB/efIfSbNU5A=",
+        "lastModified": 1690083312,
+        "narHash": "sha256-I3egwgNXavad1eIjWu1kYyi0u73di/sMmlnQIuzQASk=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "979b4232b33873e4e52692e7d1d0ebadc87d0633",
+        "rev": "af8cd5ded7735ca1df1a1174864daab75feeb64a",
         "type": "github"
       },
       "original": {
@@ -554,7 +556,7 @@
     },
     "root": {
       "inputs": {
-        "buzzrelay": "buzzrelay",
+        "courier": "courier",
         "data": "data",
         "deckbd": "deckbd",
         "home-manager": "home-manager",
@@ -729,11 +731,11 @@
         "nixpkgs": "nixpkgs_7"
       },
       "locked": {
-        "lastModified": 1690086644,
-        "narHash": "sha256-12kJadSCwMneh4Ll2iYQBtJWxsG78PYeLKN2KAjYBNQ=",
+        "lastModified": 1690444025,
+        "narHash": "sha256-P3hX6jTkjEN11FzoruxzPfwd5pf9lsraUhgi4wiRELI=",
         "ref": "refs/heads/main",
-        "rev": "ad8b0be1df5fdf022592c6a27a31b3c04689c6a6",
-        "revCount": 9,
+        "rev": "c65018f9d3c571ef984216f364e75635c88fa17a",
+        "revCount": 10,
         "type": "git",
         "url": "ssh://git@github.com/Ninlives/values.git"
       },

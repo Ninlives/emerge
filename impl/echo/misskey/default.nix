@@ -2,7 +2,6 @@
 let
   dp = inputs.values.secret;
   scrt = config.sops.secrets;
-  plh = config.sops.placeholder;
   tpl = config.sops.templates;
   srv = dp.host.public.services;
   inherit (config.lib.path) persistent;
@@ -13,16 +12,15 @@ let
 in {
   imports = [
     inputs.misskey.nixosModules.default
-    inputs.buzzrelay.nixosModules.default
+    inputs.courier.nixosModules.default
   ];
   services.misskey = {
     enable = true;
     package = pkgs.misskey.overrideAttrs (p: {
       patches = p.patches or [ ] ++ [
-        (pkgs.fetchpatch {
-          url = "https://github.com/misskey-dev/misskey/commit/c2c2bec5c0af82f86e76ca041ad44302caff26b3.patch";
-          sha256 = "";
-        })
+        ./relay-announce.patch
+        ./unlimited-replies.patch
+        dp.patches.misskey.deepl
       ];
     });
     data.directory = fileDir;
@@ -121,28 +119,27 @@ in {
   };
 
   # Relay
-  services.buzzrelay = {
+  services.courier = {
     enable = true;
-    listenPort = srv.fedibuzz.port;
-    hostName = srv.fedibuzz.fqdn;
-    privKeyFile = scrt."buzzrelay/keys/private.pem".path;
-    pubKeyFile = scrt."buzzrelay/keys/public.pem".path;
+    listenPort = srv.courier.port;
+    hostName = srv.courier.fqdn;
+    privKeyFile = scrt."courier/keys/private.pem".path;
+    pubKeyFile = scrt."courier/keys/public.pem".path;
   };
-  services.nginx.virtualHosts.${srv.fedibuzz.fqdn} = {
+  services.nginx.virtualHosts.${srv.courier.fqdn} = {
     forceSSL = true;
     enableACME = true;
     locations."/" = {
-      proxyPass = "http://127.0.0.1:${toString srv.fedibuzz.port}";
-      proxyWebsockets = true;
+      proxyPass = "http://127.0.0.1:${toString srv.courier.port}";
       recommendedProxySettings = true;
     };
   };
-  sops.secrets."buzzrelay/keys/private.pem" = {
-    owner = config.services.buzzrelay.user;
-    group = config.services.buzzrelay.group;
+  sops.secrets."courier/keys/private.pem" = {
+    owner = config.services.courier.user;
+    group = config.services.courier.group;
   };
-  sops.secrets."buzzrelay/keys/public.pem" = {
-    owner = config.services.buzzrelay.user;
-    group = config.services.buzzrelay.group;
+  sops.secrets."courier/keys/public.pem" = {
+    owner = config.services.courier.user;
+    group = config.services.courier.group;
   };
 }

@@ -31,8 +31,8 @@
     url = "github:Ninlives/misskey.nix";
     inputs.nixpkgs.follows = "nixpkgs";
   };
-  inputs.buzzrelay = {
-    url = "github:astro/buzzrelay";
+  inputs.courier = {
+    url = "github:Ninlives/courier";
     inputs.nixpkgs.follows = "nixpkgs";
   };
 

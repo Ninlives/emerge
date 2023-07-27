@@ -13,7 +13,7 @@ in {
     ./jellyfin.nix
     ./freshrss.nix
     ./immich.nix
-    ./misskey.nix
+    ./misskey
     ./postgresql.nix
   ] ++ (fn.dotNixFrom ../taco);
 

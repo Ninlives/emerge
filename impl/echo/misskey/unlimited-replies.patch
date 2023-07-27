@@ -1,0 +1,70 @@
+diff --git a/packages/backend/src/server/api/endpoints/notes/children.ts b/packages/backend/src/server/api/endpoints/notes/children.ts
+index 26f2d6772..c50e7cae7 100644
+--- a/packages/backend/src/server/api/endpoints/notes/children.ts
++++ b/packages/backend/src/server/api/endpoints/notes/children.ts
+@@ -26,7 +26,7 @@ export const paramDef = {
+ 	type: 'object',
+ 	properties: {
+ 		noteId: { type: 'string', format: 'misskey:id' },
+-		limit: { type: 'integer', minimum: 1, maximum: 100, default: 10 },
++		limit: { type: 'integer', minimum: -1, maximum: 100, default: 10 },
+ 		sinceId: { type: 'string', format: 'misskey:id' },
+ 		untilId: { type: 'string', format: 'misskey:id' },
+ 	},
+@@ -68,7 +68,7 @@ export default class extends Endpoint<typeof meta, typeof paramDef> {
+ 				this.queryService.generateBlockedUserQuery(query, me);
+ 			}
+ 
+-			const notes = await query.take(ps.limit).getMany();
++			const notes = await query.take(ps.limit > -1 ? ps.limit : null).getMany();
+ 
+ 			return await this.noteEntityService.packMany(notes, me);
+ 		});
+diff --git a/packages/backend/src/server/api/endpoints/notes/replies.ts b/packages/backend/src/server/api/endpoints/notes/replies.ts
+index f2af71d55..f5768094c 100644
+--- a/packages/backend/src/server/api/endpoints/notes/replies.ts
++++ b/packages/backend/src/server/api/endpoints/notes/replies.ts
+@@ -27,7 +27,7 @@ export const paramDef = {
+ 		noteId: { type: 'string', format: 'misskey:id' },
+ 		sinceId: { type: 'string', format: 'misskey:id' },
+ 		untilId: { type: 'string', format: 'misskey:id' },
+-		limit: { type: 'integer', minimum: 1, maximum: 100, default: 10 },
++		limit: { type: 'integer', minimum: -1, maximum: 100, default: 10 },
+ 	},
+ 	required: ['noteId'],
+ } as const;
+@@ -55,7 +55,7 @@ export default class extends Endpoint<typeof meta, typeof paramDef> {
+ 			if (me) this.queryService.generateMutedUserQuery(query, me);
+ 			if (me) this.queryService.generateBlockedUserQuery(query, me);
+ 
+-			const timeline = await query.take(ps.limit).getMany();
++			const timeline = await query.take(ps.limit > -1 ? ps.limit : null).getMany();
+ 
+ 			return await this.noteEntityService.packMany(timeline, me);
+ 		});
+diff --git a/packages/frontend/src/components/MkNoteDetailed.vue b/packages/frontend/src/components/MkNoteDetailed.vue
+index a65039277..4f29404de 100644
+--- a/packages/frontend/src/components/MkNoteDetailed.vue
++++ b/packages/frontend/src/components/MkNoteDetailed.vue
+@@ -421,7 +421,7 @@ function blur() {
+ 
+ os.api('notes/children', {
+ 	noteId: appearNote.id,
+-	limit: 30,
++	limit: -1,
+ }).then(res => {
+ 	replies.value = res;
+ });
+diff --git a/packages/frontend/src/components/MkNoteSub.vue b/packages/frontend/src/components/MkNoteSub.vue
+index 9ac0b7858..f693d2fbd 100644
+--- a/packages/frontend/src/components/MkNoteSub.vue
++++ b/packages/frontend/src/components/MkNoteSub.vue
+@@ -52,7 +52,7 @@ let replies: misskey.entities.Note[] = $ref([]);
+ if (props.detail) {
+ 	os.api('notes/children', {
+ 		noteId: props.note.id,
+-		limit: 5,
++		limit: -1,
+ 	}).then(res => {
+ 		replies = res;
+ 	});
