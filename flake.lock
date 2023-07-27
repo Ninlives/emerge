@@ -41,11 +41,11 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1690443381,
-        "narHash": "sha256-50OVqtTJnk1qUrt2hwt2y1OfQkjGWhe4L8uSFy+qcnE=",
+        "lastModified": 1690456697,
+        "narHash": "sha256-WY3SVbM+tuedOwT3CEonQ94g9F7NFUqDZ0AU9gfDubc=",
         "owner": "Ninlives",
         "repo": "courier",
-        "rev": "b471336100488485e4065d238ecff077059bc832",
+        "rev": "301bd58ef0e30e557e9e12e75068cd6295417692",
         "type": "github"
       },
       "original": {
