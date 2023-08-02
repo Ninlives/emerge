@@ -13,8 +13,6 @@ let
 
   socksInbound = port: tag: {
     inherit port tag sniffing;
-    # FIXME: Temporary
-    # listen = address;
     protocol = "socks";
     settings = {
       auth = "noauth";

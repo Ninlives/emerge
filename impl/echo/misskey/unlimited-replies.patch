@@ -15,8 +15,8 @@ index 26f2d6772..c50e7cae7 100644
  				this.queryService.generateBlockedUserQuery(query, me);
  			}
  
--			const notes = await query.take(ps.limit).getMany();
-+			const notes = await query.take(ps.limit > -1 ? ps.limit : null).getMany();
+-			const notes = await query.limit(ps.limit).getMany();
++			const notes = await query.limit(ps.limit > -1 ? ps.limit : null).getMany();
  
  			return await this.noteEntityService.packMany(notes, me);
  		});
@@ -37,8 +37,8 @@ index f2af71d55..f5768094c 100644
  			if (me) this.queryService.generateMutedUserQuery(query, me);
  			if (me) this.queryService.generateBlockedUserQuery(query, me);
  
--			const timeline = await query.take(ps.limit).getMany();
-+			const timeline = await query.take(ps.limit > -1 ? ps.limit : null).getMany();
+-			const timeline = await query.limit(ps.limit).getMany();
++			const timeline = await query.limit(ps.limit > -1 ? ps.limit : null).getMany();
  
  			return await this.noteEntityService.packMany(timeline, me);
  		});

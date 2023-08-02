@@ -17,23 +17,32 @@ in {
   };
 
   fileSystems."/boot" = {
-    # device = "/dev/disk/by-uuid/B9C5-5EAF";
     device = "/dev/disk/by-label/BOOT";
     fsType = "vfat";
   };
 
   fileSystems."/nix" = {
-    # device = "/dev/disk/by-uuid/ddc3d53f-f0ff-475e-a33b-a9e65ba23fc6";
     device = "/dev/mapper/store";
     fsType = "btrfs";
     options = btrfsOpts;
   };
 
   fileSystems."/${disk.persist}" = {
-    # device = "/dev/disk/by-uuid/ddc3d53f-f0ff-475e-a33b-a9e65ba23fc6";
     device = "/dev/mapper/${disk.persist}";
     fsType = "btrfs";
     options = btrfsOpts;
+  };
+
+  fileSystems."/plateau" = {
+    device = "/dev/mapper/plateau";
+    fsType = "btrfs";
+    options = btrfsOpts;
+  };
+
+  fileSystems."/tavern" = {
+    device = "/dev/disk/by-label/tavern";
+    fsType = "ext4";
+    options = [ "x-systemd.automount" "noauto" ];
   };
 
   swapDevices = [{ device = "/dev/mapper/${disk.swap}"; }];
@@ -44,7 +53,7 @@ in {
       device = "/dev/tower/${dev}";
       preLVM = false;
     };
-  }) [ "store" disk.persist disk.swap ]);
+  }) [ "store" "plateau" disk.persist disk.swap ]);
 
   boot.initrd.kernelModules = [ "uinput" "evdev" "hid_steam" ];
   boot.initrd.preLVMCommands =

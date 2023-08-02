@@ -5,7 +5,7 @@ let
 in
 {
   fonts = {
-    fonts = lib.mkForce [
+    packages = lib.mkForce [
       sarasa-gothic
       (nerdfonts.override { fonts = [ "ShareTechMono" ]; })
       twitter-color-emoji

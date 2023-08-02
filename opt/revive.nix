@@ -7,17 +7,8 @@ let
   mapping = mkOptionType {
     name = "mapping";
     check = x:
-      builtins.isAttrs x && x ? dst
-      && (if x ? src then path.check x.src else true) && path.check x.dst;
+      builtins.isAttrs x && path.check x.src or "" && path.check x.dst or "";
   };
-  pathToMapping = p:
-    if builtins.isAttrs p then
-      p
-    else {
-      src = p;
-      dst = p;
-    };
-  pathsToMappings = map pathToMapping;
 
   specs =
     filterAttrs (n: v: v.seal != null && (v.boxes != [ ] || v.scrolls != [ ]))
@@ -69,14 +60,12 @@ in {
             default = "g-rwx,o-rwx";
           };
           boxes = mkOption {
-            type = listOf (either mapping path);
+            type = listOf mapping;
             default = [ ];
-            apply = pathsToMappings;
           };
           scrolls = mkOption {
-            type = listOf (either mapping path);
+            type = listOf mapping;
             default = [ ];
-            apply = pathsToMappings;
           };
         };
       }));
@@ -104,15 +93,13 @@ in {
             run = "${util-linux}/bin/runuser -u ${runUser} -g ${runGroup} --";
           in ''
             echo Reviving ${dst} from ${if pair ? src then src else "no where"}
-            ${optionalString (pair ? src) ''
-              ${if type == "scroll" then ''
-                ${run} mkdir -p '${dirOf src}'
-                ${run} touch '${src}' 
-              '' else ''
-                ${run} mkdir -p '${src}'
-              ''}
-              ${coreutils}/bin/chown ${user}:${group} '${src}'
+            ${if type == "scroll" then ''
+              ${run} mkdir -p '${dirOf src}'
+              ${run} touch '${src}' 
+            '' else ''
+              ${run} mkdir -p '${src}'
             ''}
+            ${coreutils}/bin/chown ${user}:${group} '${src}'
             ${if type == "scroll" then ''
               ${run} mkdir -p '${dirOf dst}'
               ${run} touch '${dst}'
@@ -120,9 +107,7 @@ in {
               ${run} mkdir -p '${dst}'
             ''}
             ${util-linux}/bin/mountpoint -q '${dst}' && ${util-linux}/bin/umount '${dst}'
-            ${optionalString (pair ? src) ''
-              ${util-linux}/bin/mountpoint -q '${dst}' || ${util-linux}/bin/mount --bind '${src}' '${dst}'
-            ''}
+            ${util-linux}/bin/mountpoint -q '${dst}' || ${util-linux}/bin/mount --bind '${src}' '${dst}'
             ${coreutils}/bin/chmod ${mode} '${dst}'
             ${coreutils}/bin/chown ${user}:${group} '${dst}'
           '') pairs));

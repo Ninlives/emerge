@@ -38,12 +38,6 @@ in {
       packages = with pkgs; [ steam yuzu ];
     };
 
-    fileSystems."/tavern" = {
-      device = "/dev/disk/by-label/tavern";
-      fsType = "ext4";
-      options = [ "x-systemd.automount" "noauto" ];
-    };
-
     services.xserver.displayManager.job.preStart =
       "${set-session}/bin/set-session";
     environment.etc."gdm/PreSession/Default".source =
@@ -59,14 +53,12 @@ in {
         ${systemctl} start opensd.service || true
       '';
 
-    allowUnfreePackageNames =
-      [ "steam" "steam-run" "steamdeck-hw-theme" "steam-jupiter-original" ];
-
     revive.specifications.deck = {
-      seal = "/${config.workspace.disk.persist}/Deck";
+      seal = "/plateau/Deck";
       user = config.users.users.deck.name;
       group = config.users.groups.users.name;
     };
+    fileSystems."/plateau".neededForBoot = true;
     revive.specifications.deck.boxes = [
       {
         src = /Steam;

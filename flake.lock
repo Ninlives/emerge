@@ -302,12 +302,13 @@
         "pnpm2nix": "pnpm2nix"
       },
       "locked": {
-        "lastModified": 1688286945,
-        "narHash": "sha256-Hu4aHCv4K4efROW237YHx/uBMe6ugQWNER2Rbgq3fOs=",
-        "owner": "Ninlives",
-        "repo": "misskey.nix",
-        "rev": "3015d59372b09d2878b2ed45d51acd07bf3bbba4",
-        "type": "github"
+        "lastModified": 1690789666,
+        "narHash": "sha256-HF5mKpsHyEjot2YRNDtrfPMD7JM/qJaQctsW6agadO0=",
+        "ref": "refs/heads/master",
+        "rev": "69e2baac63d0169964327934984c1aea7cd8939f",
+        "revCount": 5,
+        "type": "git",
+        "url": "file:///home/mlatus/Documents/Develop/Nix/misskey.nix"
       },
       "original": {
         "owner": "Ninlives",

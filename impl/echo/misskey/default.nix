@@ -18,15 +18,15 @@ in {
     enable = true;
     package = pkgs.misskey.overrideAttrs (p: {
       patches = p.patches or [ ] ++ [
-        ./relay-announce.patch
         ./unlimited-replies.patch
+        ./fetch-replies.patch
         dp.patches.misskey.deepl
       ];
     });
     data.directory = fileDir;
   };
   systemd.services.misskey = {
-    after = ensureServices [ "postgresql" "redis-misskey" ];
+    after = ensureServices [ "postgresql" "redis-misskey" "meilisearch" ];
     serviceConfig = {
       MemoryMax = "1G";
       NoNewPrivileges = true;
@@ -70,11 +70,16 @@ in {
         host = "127.0.0.1";
         port = 6379;
       };
+      meilisearch = {
+        host = config.services.meilisearch.listenAddress;
+        port = config.services.meilisearch.listenPort;
+        ssl = false;
+        scope = "global";
+        apikey = "";
+        index = "";
+      };
       id = "aid";
       signToActivityPubGet = true;
-      # allowedPrivateNetworks = [
-      #   "127.0.0.1/32"
-      # ];
     };
   };
 
@@ -93,11 +98,6 @@ in {
 
   users.users.misskey.uid = 954;
   users.groups.misskey.gid = 954;
-  revive.specifications.system.boxes = [{
-    dst = "${fileDir}";
-    user = config.users.users.misskey.name;
-    group = config.users.groups.misskey.name;
-  }];
 
   services.postgresql = {
     ensureDatabases = [ "misskey" ];
@@ -117,6 +117,17 @@ in {
     enable = true;
     port = 6379;
   };
+  sops.secrets."courier/keys/private.pem" = {
+    owner = config.services.courier.user;
+    group = config.services.courier.group;
+  };
+  sops.secrets."courier/keys/public.pem" = {
+    owner = config.services.courier.user;
+    group = config.services.courier.group;
+  };
+
+  # Meilisearch
+  services.meilisearch.enable = true;
 
   # Relay
   services.courier = {
@@ -134,12 +145,17 @@ in {
       recommendedProxySettings = true;
     };
   };
-  sops.secrets."courier/keys/private.pem" = {
-    owner = config.services.courier.user;
-    group = config.services.courier.group;
-  };
-  sops.secrets."courier/keys/public.pem" = {
-    owner = config.services.courier.user;
-    group = config.services.courier.group;
-  };
+
+  # Persistent
+  revive.specifications.system.boxes = [
+    {
+      dst = "${fileDir}";
+      user = config.users.users.misskey.name;
+      group = config.users.groups.misskey.name;
+    }
+    {
+      src = "${persistent.data}/meilisearch";
+      dst = "/var/lib/private/meilisearch";
+    }
+  ];
 }
