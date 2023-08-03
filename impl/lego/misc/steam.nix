@@ -40,6 +40,7 @@ let
             --bind "$STEAM_DIR/tavern" /tavern \
             --bind "$STEAM_DIR/deck" "${config.workspace.user.home}" \
             --bind /run/wrappers /run/wrappers \
+            --bind /run/dbus /run/dbus \
             --bind /run/user /run/user \
             --bind /run/opengl-driver /run/opengl-driver \
             --bind /run/opengl-driver-32 /run/opengl-driver-32 \
@@ -67,6 +68,8 @@ in {
     }];
   }];
 
+  hardware.opengl.driSupport32Bit = true;
+  hardware.pulseaudio.support32Bit = true;
   allowUnfreePackageNames =
     [ "steam" "steam-run" "steamdeck-hw-theme" "steam-jupiter-original" ];
   environment.systemPackages = [ steam-application ];

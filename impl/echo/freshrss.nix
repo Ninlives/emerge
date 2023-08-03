@@ -35,10 +35,8 @@ in {
       user = config.users.users.freshrss.name;
       group = config.users.groups.freshrss.name;
     }
-    {
-      dst = "${persistent.services}/freshrss";
-      user = config.users.users.freshrss.name;
-      group = config.users.groups.freshrss.name;
-    }
+  ];
+  systemd.tmpfiles.rules = with config.users; [
+    "d ${persistent.services}/freshrss 0700 ${users.freshrss.name} ${groups.freshrss.name} -"
   ];
 }

@@ -5,9 +5,7 @@ in
 {
   services.postgresql.enable = true;
   services.postgresql.dataDir = "${persistent.data}/postgres"; 
-  revive.specifications.system.boxes = [{
-    dst = "${persistent.data}/postgres";
-    user = config.users.users.postgres.name;
-    group = config.users.groups.postgres.name;
-  }];
+  systemd.tmpfiles.rules = with config.users; [
+    "d ${config.services.postgresql.dataDir} 0700 ${users.postgres.name} ${groups.postgres.name} -"
+  ];
 }

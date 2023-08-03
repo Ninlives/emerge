@@ -147,12 +147,10 @@ in {
   };
 
   # Persistent
+  systemd.tmpfiles.rules = with config.users; [
+    "d ${fileDir} 0700 ${users.misskey.name} ${groups.misskey.name} -"
+  ];
   revive.specifications.system.boxes = [
-    {
-      dst = "${fileDir}";
-      user = config.users.users.misskey.name;
-      group = config.users.groups.misskey.name;
-    }
     {
       src = "${persistent.data}/meilisearch";
       dst = "/var/lib/private/meilisearch";
