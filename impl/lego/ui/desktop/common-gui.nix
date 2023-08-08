@@ -1,4 +1,4 @@
-{ var, pkgs, config, ... }: {
+{ pkgs, config, ... }: {
   sound.enable = true;
   sound.mediaKeys.enable = true;
 
@@ -24,4 +24,12 @@
     enabled = "ibus";
     ibus.engines = [ pkgs.ibus-engines.rime ];
   };
+
+  programs.firejail.wrappedBinaries = {
+    qq = {
+      executable = "${pkgs.qq}/bin/qq";
+      desktop = "${pkgs.qq}/share/applications/qq.desktop";
+    };
+  };
+  allowUnfreePackageNames = [ "qq" ];
 }
