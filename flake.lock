@@ -59,11 +59,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1691543993,
-        "narHash": "sha256-s1IDFfo1O1NvyPACDJ/SOLZxmyJf4UkvdrWQ00JjkrA=",
+        "lastModified": 1691630374,
+        "narHash": "sha256-QltCLejao1Y4h4E/dkAuVUmqtEYEWePmIXwELJU5Gng=",
         "owner": "Ninlives",
         "repo": "data",
-        "rev": "d9155ce36a50444f062576c45a8f3238d5f8bb48",
+        "rev": "163208b0a4c7e5c9009e009661eb85029a3b791a",
         "type": "github"
       },
       "original": {
@@ -242,11 +242,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1687454689,
-        "narHash": "sha256-3wWgDIDSVV01zWsAo2z8Cygby7T+M8jDgXjKjOS2c+0=",
+        "lastModified": 1691649847,
+        "narHash": "sha256-IbQz6AghohVaNu4FGXxPfqsCqBwGc5yLET1v5E6YkVs=",
         "owner": "Ninlives",
         "repo": "home-manager",
-        "rev": "8117dfc5045d81559a2b34313fedd7101e80b48e",
+        "rev": "8b211b9c7a93671d947ce03dff3111a5fe70d6e8",
         "type": "github"
       },
       "original": {
@@ -302,11 +302,11 @@
         "pnpm2nix": "pnpm2nix"
       },
       "locked": {
-        "lastModified": 1690789666,
-        "narHash": "sha256-HF5mKpsHyEjot2YRNDtrfPMD7JM/qJaQctsW6agadO0=",
+        "lastModified": 1691661190,
+        "narHash": "sha256-FtJWJmwF06TlDGH5eSDYs0tevg59PToIdW483jUIpws=",
         "owner": "Ninlives",
         "repo": "misskey.nix",
-        "rev": "69e2baac63d0169964327934984c1aea7cd8939f",
+        "rev": "c93ebaf07333c11ba1c10330e32d26006dcef6ee",
         "type": "github"
       },
       "original": {
@@ -403,11 +403,11 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1691472822,
-        "narHash": "sha256-XVfYZ2oB3lNPVq6sHCY9WkdQ8lHoIDzzbpg8bB6oBxA=",
+        "lastModified": 1691644995,
+        "narHash": "sha256-/OL3sk+9iPv+pto8hs/3cPhGmcS+ugKowQ8FvopLMEA=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "41c7605718399dcfa53dd7083793b6ae3bc969ff",
+        "rev": "f6f59fdce76ca4ee03852417a642b77a960229cd",
         "type": "github"
       },
       "original": {
@@ -491,11 +491,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1686995225,
-        "narHash": "sha256-uZNjBHX8zqFqgWy7vzuJK3E8+ttkL5933gUYelBhQOI=",
+        "lastModified": 1691661013,
+        "narHash": "sha256-m7dhwjnDw2U7PDUatHcVJXd8wrDLpIGlQac0im6+0fk=",
         "owner": "Ninlives",
         "repo": "pnpm2nix",
-        "rev": "59d80cfd39217e130f5a961947cce5e29bc96a41",
+        "rev": "86f8995bbe56a66459b6ca2f790db6272c616e39",
         "type": "github"
       },
       "original": {
