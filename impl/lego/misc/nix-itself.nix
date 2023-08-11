@@ -1,11 +1,11 @@
-{ pkgs, self, config, ... }: {
+{ pkgs, self, config, lib, ... }: {
   nix.nixPath = [ "nixpkgs=${toString pkgs.path}" ];
   nix.package = pkgs.nixVersions.unstable;
 
   nix.settings.sandbox = true;
   nix.settings.keep-going = true;
   nix.settings.trusted-users = [ config.workspace.user.name ];
-  nix.settings.substituters = [
+  nix.settings.substituters = lib.mkForce [
     "https://c.lackof.buzz"
     "https://emerge.cachix.org"
   ];

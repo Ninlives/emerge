@@ -1,4 +1,4 @@
-{ lib, inputs, ... }:
+{ lib, inputs, pkgs, ... }:
 with lib;
 let dp = inputs.values.secret;
 in {
@@ -14,6 +14,8 @@ in {
     workspace.proxy.default = "v2ray-fallback";
 
     sops.profiles = [ "work" ];
+
+    environment.systemPackages = [ pkgs.teams ];
 
     system.activationScripts.update-ca-certs = stringAfter [ "etc" ] ''
       mkdir -p /etc/ssl/ca-anchors

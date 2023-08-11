@@ -731,13 +731,12 @@
         "nixpkgs": "nixpkgs_7"
       },
       "locked": {
+        "dirtyRev": "c65018f9d3c571ef984216f364e75635c88fa17a-dirty",
+        "dirtyShortRev": "c65018f-dirty",
         "lastModified": 1690444025,
-        "narHash": "sha256-P3hX6jTkjEN11FzoruxzPfwd5pf9lsraUhgi4wiRELI=",
-        "ref": "refs/heads/main",
-        "rev": "c65018f9d3c571ef984216f364e75635c88fa17a",
-        "revCount": 10,
+        "narHash": "sha256-bofbzUfOmBYMzxcb1xG5KGXvl8tw6b/LoTC2caxdq8U=",
         "type": "git",
-        "url": "ssh://git@github.com/Ninlives/values.git"
+        "url": "file:///home/mlatus/Secrets/values"
       },
       "original": {
         "type": "git",

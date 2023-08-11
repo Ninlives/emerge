@@ -15,6 +15,8 @@ in {
     ./immich.nix
     ./misskey
     ./postgresql.nix
+    ./mysql.nix
+    ./syncstorage.nix
   ] ++ (fn.dotNixFrom ../taco);
 
   security.acme.acceptTerms = true;

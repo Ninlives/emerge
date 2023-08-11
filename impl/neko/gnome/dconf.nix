@@ -78,13 +78,11 @@ mkIf nixosConfig.services.xserver.desktopManager.gnome.enable {
     "org/gnome/shell".favorite-apps = [
       "org.gnome.Settings.desktop"
       "org.gnome.Nautilus.desktop"
-      "thunderbird.desktop"
       "virt-manager.desktop"
       "bitwarden.desktop"
       "FeelUOwn.desktop"
       "org.telegram.desktop.desktop"
-      "org.qutebrowser.qutebrowser.desktop"
-      "chromium-browser.desktop"
+      "firefox.desktop"
       "steam.desktop"
     ];
 

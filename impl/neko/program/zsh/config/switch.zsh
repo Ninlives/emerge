@@ -2,11 +2,11 @@ function tp(){
     local f=$HOME/.cache/location
     if [[ ! -e $f || "$(cat $f)" == "Matrix" ]];then
         echo Follow the white rabbit
-        sudo speech @redirPort@
+        sudo $(realpath $(which speech)) @redirPort@
         echo Zion > $f
     else
         echo Knock knock Neo
-        sudo speechless
+        sudo $(realpath $(which speechless))
         echo Matrix > $f
     fi
 }

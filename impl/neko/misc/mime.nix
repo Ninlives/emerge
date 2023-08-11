@@ -38,14 +38,8 @@ let
       name = mime;
       value = app;
     }) mimes);
-  assoc = (mkAssoc web-mimes "org.qutebrowser.qutebrowser.desktop")
+  assoc = (mkAssoc web-mimes "firefox.desktop")
     // (mkAssoc image-mimes "org.gnome.eog.desktop");
 in {
-  xdg.mimeApps.associations.removed."application/pdf" = "draw.desktop";
-  xdg.mimeApps.associations.added = {
-    "application/vnd.openxmlformats-officedocument.presentationml.presentation" =
-      "impress.desktop";
-    "application/msword" = "writer.desktop";
-  } // assoc;
   xdg.mimeApps.defaultApplications = assoc;
 }

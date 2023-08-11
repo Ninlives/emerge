@@ -56,9 +56,9 @@ in {
     [ (final: prev: { inherit bitwarden-cli-wrapper; }) ];
   home.packages = with pkgs; [ bitwarden bitwarden-cli-wrapper ];
 
-  requestNixOSConfig.qute.sops.secrets."vaultwarden/client-id".owner =
+  requestNixOSConfig.vault.sops.secrets."vaultwarden/client-id".owner =
     nixosConfig.workspace.user.name;
-  requestNixOSConfig.qute.sops.secrets."vaultwarden/client-secret".owner =
+  requestNixOSConfig.vault.sops.secrets."vaultwarden/client-secret".owner =
     nixosConfig.workspace.user.name;
 
   persistent.boxes = [
