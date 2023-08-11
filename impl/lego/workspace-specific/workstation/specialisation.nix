@@ -2,6 +2,7 @@
 with lib;
 let dp = inputs.values.secret;
 in {
+  allowUnfreePackageNames = [ "teams" ];
   specialisation.institute.configuration = { config, ... }: {
     workspace.identity = "workstation";
     workspace.user.name = dp.workstation.username;
