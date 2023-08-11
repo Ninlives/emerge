@@ -59,11 +59,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1691630374,
-        "narHash": "sha256-QltCLejao1Y4h4E/dkAuVUmqtEYEWePmIXwELJU5Gng=",
+        "lastModified": 1691716306,
+        "narHash": "sha256-sqcrnGue/AJiSxoOaDKYx91VEGPv/aPmgbUNdx4Wozk=",
         "owner": "Ninlives",
         "repo": "data",
-        "rev": "163208b0a4c7e5c9009e009661eb85029a3b791a",
+        "rev": "5f2d20696a69b3d04f14df9b94a692007eae8932",
         "type": "github"
       },
       "original": {
@@ -280,11 +280,11 @@
         "pre-commit-hooks-nix": "pre-commit-hooks-nix"
       },
       "locked": {
-        "lastModified": 1689889377,
-        "narHash": "sha256-ChBawisTCY3Cl06CSG+QNC2ES+G0ASiOxtOVif9uP/0=",
+        "lastModified": 1691761621,
+        "narHash": "sha256-xTPifd7/93/bmBEPMhb0zuU9nzRkUIZHr+PJUHoUld8=",
         "owner": "nix-community",
         "repo": "lanzaboote",
-        "rev": "e7246c6bce1733d373059e6342f67fd53f90c198",
+        "rev": "f13848606f5a313c33b9c9ceb34e0ae4d51b6766",
         "type": "github"
       },
       "original": {
@@ -403,11 +403,11 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1691644995,
-        "narHash": "sha256-/OL3sk+9iPv+pto8hs/3cPhGmcS+ugKowQ8FvopLMEA=",
+        "lastModified": 1691703261,
+        "narHash": "sha256-jUzmIeh+F+XKkuEhfY+VRgbVitTOr5oh5Oi5p5kr9tQ=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "f6f59fdce76ca4ee03852417a642b77a960229cd",
+        "rev": "079f7bd05bf72641e3b5904ed891d44d21ea90ed",
         "type": "github"
       },
       "original": {
@@ -731,12 +731,13 @@
         "nixpkgs": "nixpkgs_7"
       },
       "locked": {
-        "dirtyRev": "c65018f9d3c571ef984216f364e75635c88fa17a-dirty",
-        "dirtyShortRev": "c65018f-dirty",
-        "lastModified": 1690444025,
+        "lastModified": 1691739523,
         "narHash": "sha256-bofbzUfOmBYMzxcb1xG5KGXvl8tw6b/LoTC2caxdq8U=",
+        "ref": "refs/heads/main",
+        "rev": "4f6f637aa882081b120e2347cd22037e1adc408c",
+        "revCount": 11,
         "type": "git",
-        "url": "file:///home/mlatus/Secrets/values"
+        "url": "ssh://git@github.com/Ninlives/values.git"
       },
       "original": {
         "type": "git",
