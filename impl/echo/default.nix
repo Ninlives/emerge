@@ -17,6 +17,7 @@ in {
     ./postgresql.nix
     ./mysql.nix
     ./syncstorage.nix
+    ./matrix.nix
   ] ++ (fn.dotNixFrom ../taco);
 
   security.acme.acceptTerms = true;

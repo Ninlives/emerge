@@ -30,7 +30,7 @@ in {
       {
         from = {
           type = "indirect";
-          id = "fixed";
+          id = "nixpkgs";
         };
         to = pkgsRegistry;
       }
