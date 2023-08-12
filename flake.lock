@@ -59,11 +59,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1691716306,
-        "narHash": "sha256-sqcrnGue/AJiSxoOaDKYx91VEGPv/aPmgbUNdx4Wozk=",
+        "lastModified": 1691803099,
+        "narHash": "sha256-IT3P/+PaoKniIjOoVD2dfVYqhqtnl0acbXj9u6Lgcrs=",
         "owner": "Ninlives",
         "repo": "data",
-        "rev": "5f2d20696a69b3d04f14df9b94a692007eae8932",
+        "rev": "29634d8f7e0096b4a97182a1c0553b7313b14cf1",
         "type": "github"
       },
       "original": {
@@ -371,11 +371,11 @@
     },
     "nixpkgs-stable_2": {
       "locked": {
-        "lastModified": 1690066826,
-        "narHash": "sha256-6L2qb+Zc0BFkh72OS9uuX637gniOjzU6qCDBpjB2LGY=",
+        "lastModified": 1691280485,
+        "narHash": "sha256-/8Ct9092OC1TTNzHgbcE9ejQdS2QxZYGqrWXEwUxdtQ=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "ce45b591975d070044ca24e3003c830d26fea1c8",
+        "rev": "240472b7e47a641e9e7675f58b64d3626ca7824d",
         "type": "github"
       },
       "original": {
@@ -403,11 +403,11 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1691703261,
-        "narHash": "sha256-jUzmIeh+F+XKkuEhfY+VRgbVitTOr5oh5Oi5p5kr9tQ=",
+        "lastModified": 1691732255,
+        "narHash": "sha256-r0Y7ZRst4XC25gMWSnAWd31LJ+etZOePgQlA8n9TU2g=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "079f7bd05bf72641e3b5904ed891d44d21ea90ed",
+        "rev": "32c89128899f61681ed6a59ba7954eda3e70e95b",
         "type": "github"
       },
       "original": {
@@ -579,11 +579,11 @@
         "nixpkgs-stable": "nixpkgs-stable_2"
       },
       "locked": {
-        "lastModified": 1690199016,
-        "narHash": "sha256-yTLL72q6aqGmzHq+C3rDp3rIjno7EJZkFLof6Ika7cE=",
+        "lastModified": 1691830846,
+        "narHash": "sha256-ffR5maL8R4gsoF43YZRSBVzB7qYxzG+Ssjjktg80Wy4=",
         "owner": "Mic92",
         "repo": "sops-nix",
-        "rev": "c36df4fe4bf4bb87759b1891cab21e7a05219500",
+        "rev": "5f5d9a3c8bc247eb574823b9f16a79e054dafe73",
         "type": "github"
       },
       "original": {
@@ -731,11 +731,11 @@
         "nixpkgs": "nixpkgs_7"
       },
       "locked": {
-        "lastModified": 1691739523,
-        "narHash": "sha256-bofbzUfOmBYMzxcb1xG5KGXvl8tw6b/LoTC2caxdq8U=",
+        "lastModified": 1691850055,
+        "narHash": "sha256-fbCt3icNdFjyQvkTM5ELnEfiRuPGgPIJd/ZmsZ7KVBI=",
         "ref": "refs/heads/main",
-        "rev": "4f6f637aa882081b120e2347cd22037e1adc408c",
-        "revCount": 11,
+        "rev": "ae1115f83fca3e0589802dad8218f6f235a146e0",
+        "revCount": 12,
         "type": "git",
         "url": "ssh://git@github.com/Ninlives/values.git"
       },
