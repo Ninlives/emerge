@@ -9,6 +9,6 @@ fn.mkApp {
         $(${nix} eval --raw '${self}#homeInfections.nemo' \
                       --apply 'f: (f "'$USER'" "'$HOME'").activationPackage.drvPath')^out\
     )
-    ${gen}/activate
+    $gen/activate
   '';
 }
