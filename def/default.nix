@@ -11,6 +11,7 @@ with inputs; {
   apps.${system} = {
     cast   = import ./cast.nix { inherit fn var self pkgs inputs; };
     apply  = import ./apply.nix  { inherit fn pkgs self; };
+    infect = import ./infect.nix { inherit fn pkgs self; };
     commit = import ./commit.nix { inherit fn lib var pkgs; };
   };
 
@@ -20,7 +21,7 @@ with inputs; {
     echo coco;
   };
 
-  homeConfigurations.nemo = let 
+  homeInfections.nemo = username: homeDirectory: let 
     ttyOnly = lib.nixosSystem {
       inherit (var) system;
       modules = [];
@@ -34,7 +35,7 @@ with inputs; {
       ../impl/neko/program/neovim
       ../impl/neko/program/ranger
       ../impl/neko/program/dircolors
-      { home.username = builtins.getEnv "USER"; home.homeDirectory = builtins.getEnv "HOME"; }
+      { home = { inherit username homeDirectory; }; }
     ];
   };
 
