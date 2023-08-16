@@ -69,7 +69,10 @@ in
       };
     };
   };
-  systemd.services.matrix-synapse.serviceConfig.MemoryMax = "1G";
+  systemd.services.matrix-synapse.serviceConfig = {
+    CPUQuota = "50%";
+    MemoryMax = "1G";
+  };
 
   environment.systemPackages = [ pkgs.wget ];
 

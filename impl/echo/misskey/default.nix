@@ -29,6 +29,7 @@ in {
     after = ensureServices [ "postgresql" "redis-misskey" "meilisearch" ];
     serviceConfig = {
       MemoryMax = "1G";
+      CPUQuota = "50%";
       NoNewPrivileges = true;
       ProtectSystem = "full";
       ReadWritePaths = "${fileDir}";
