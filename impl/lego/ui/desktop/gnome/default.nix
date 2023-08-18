@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, fn, ... }:
 let
   inherit (pkgs) gnome;
   inherit (lib) mkForce;
@@ -26,6 +26,10 @@ in {
   environment.systemPackages = [ gnome.gnome-tweaks pkgs.networkmanagerapplet ];
 
   services.touchegg.enable = true;
+
+  home-manager.users.${config.workspace.user.name} = { ... }: {
+    imports = fn.dotNixFromRecursive ./home;
+  };
 
   revive.specifications.user.boxes = [
     {

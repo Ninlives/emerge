@@ -1,4 +1,4 @@
-{ fn, var, lib, pkgs, config, ... }: {
+{ fn, config, ... }: {
   programs.zsh = {
     enable = true;
     promptInit = "";
@@ -12,13 +12,7 @@
     dst = "${config.workspace.user.home}/.android";
   }];
 
-  environment.systemPackages = with pkgs; [
-    git
-    git-crypt
-    openconnect
-    zip
-    unzip
-    ntfs3g
-    exfat
-  ];
+  home-manager.users.${config.workspace.user.name} = { ... }: {
+    imports = fn.dotNixFromRecursive ./home;
+  };
 }

@@ -1,4 +1,4 @@
-{ lib, inputs, pkgs, ... }:
+{ lib, inputs, pkgs, fn, ... }:
 with lib;
 let dp = inputs.values.secret;
 in {
@@ -13,6 +13,11 @@ in {
     workspace.email.account.default = "opensource";
     workspace.hostname = dp.workstation.hostname;
     workspace.proxy.default = "v2ray-fallback";
+
+    imports = fn.dotNixFromRecursive ./system;
+    home-manager.users.${config.workspace.user.name} = { ... }: {
+      imports = fn.dotNixFromRecursive ./home;
+    };
 
     sops.profiles = [ "work" ];
 

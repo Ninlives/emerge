@@ -4,8 +4,7 @@ let
   monitor-dst = "${config.home.homeDirectory}/.config/monitors.xml";
   cat = "${pkgs.coreutils}/bin/cat";
   mkdir = "${pkgs.coreutils}/bin/mkdir";
-in
-lib.mkIf nixosConfig.services.xserver.enable {
+in {
 
   home.file.".face".source = inputs.data.content.resources "avatar.jpg";
 

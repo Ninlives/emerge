@@ -1,10 +1,9 @@
-{ config, lib, pkgs, var, inputs, nixosConfig, ... }:
+{ lib, pkgs, nixosConfig, ... }:
 let
-  inherit (lib) mkIf;
   inherit (lib.hm.gvariant) mkTuple;
 in with pkgs;
 with pkgs.gnomeExtensions;
-mkIf nixosConfig.services.xserver.desktopManager.gnome.enable {
+{
   home.packages = [
     dash-to-dock
     mpris-indicator-button

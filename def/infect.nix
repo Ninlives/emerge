@@ -6,9 +6,9 @@ fn.mkApp {
   in writeShellScriptBin "infect" ''
     gen=$(\
       ${nix} build --no-link --print-out-paths \
-        $(${nix} eval --raw '${self}#homeInfections.nemo' \
+        $(${nix} eval --raw '${self}#infections.nemo' \
                       --apply 'f: (f "'$USER'" "'$HOME'").activationPackage.drvPath')^out\
     )
-    $gen/activate
+    HOME_MANAGER_BACKUP_EXT=overridden_by_hm $gen/activate
   '';
 }

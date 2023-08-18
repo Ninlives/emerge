@@ -19,6 +19,8 @@
     nixfmt
     moreutils
     encfs
+    zip
+    unzip
   ];
 
   persistent.boxes = [{
