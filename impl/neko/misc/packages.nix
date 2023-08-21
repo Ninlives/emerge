@@ -22,6 +22,10 @@
     zip
     unzip
   ];
+  programs = {
+    man.enable = true;
+    git.enable = true;
+  };
 
   persistent.boxes = [{
     src = /Programs/tldr;
