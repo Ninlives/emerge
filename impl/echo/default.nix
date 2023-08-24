@@ -15,8 +15,6 @@ in {
     ./immich.nix
     ./misskey
     ./postgresql.nix
-    ./mysql.nix
-    ./syncstorage.nix
     ./matrix.nix
   ] ++ (fn.dotNixFrom ../taco);
 

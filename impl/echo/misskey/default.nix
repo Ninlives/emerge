@@ -153,8 +153,8 @@ in {
   ];
   revive.specifications.system.boxes = [
     {
-      src = "${persistent.data}/meilisearch";
-      dst = "/var/lib/private/meilisearch";
+      src = /Data/meilisearch;
+      dst = /var/lib/private/meilisearch;
     }
   ];
 }

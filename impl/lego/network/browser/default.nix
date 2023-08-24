@@ -28,6 +28,7 @@ in {
     };
     languagePacks = [ "zh-CN" ];
     policies = {
+      DisableFirefoxAccounts = true;
       DisableFirefoxStudies = true;
       PasswordManagerEnabled = false;
       DisablePocket = true;
@@ -69,7 +70,6 @@ in {
     };
     home.file.".mozilla/firefox/zero/user.js".text = mkUserJs {
       "browser.startup.page" = 3;
-      "identity.sync.tokenserver.uri" = "https://${syncserver}/1.0/sync/1.5";
     };
     home.file.".mozilla/firefox/zero/chrome/userChrome.css".source =
       "${pkgs.firefox-extra.csshacks}/chrome/autohide_bookmarks_and_main_toolbars.css";

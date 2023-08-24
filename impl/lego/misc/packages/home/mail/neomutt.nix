@@ -13,7 +13,7 @@ in {
     enable = mkIf email.imap.enable true;
     vimKeys = true;
     settings = {
-      pager = "'${config.programs.neovim.finalPackage}/bin/nvim -R'";
+      pager = "'${config.programs.neovim.finalPackage}/bin/nvim -c \"set ft=gitsendemail\" -R'";
       prompt_after = "no";
     };
     extraConfig = ''

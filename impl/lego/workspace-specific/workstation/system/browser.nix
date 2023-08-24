@@ -2,7 +2,6 @@
 let dp = inputs.values.secret;
 in {
   programs.firefox.policies = {
-    DisableFirefoxAccounts = true;
     Authentication = {
       SPNEGO = [ ".${dp.workstation.host}" ];
       Delegated = [ "*.${dp.workstation.host}" ];
