@@ -21,7 +21,8 @@ in {
 
     sops.profiles = [ "work" ];
 
-    environment.systemPackages = [ pkgs.teams ];
+    services.xserver.displayManager.defaultSession = "gnome-xorg";
+    environment.systemPackages = [ pkgs.teams pkgs.tigervnc ];
 
     system.activationScripts.update-ca-certs = stringAfter [ "etc" ] ''
       mkdir -p /etc/ssl/ca-anchors

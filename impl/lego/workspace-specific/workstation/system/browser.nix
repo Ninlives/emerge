@@ -3,7 +3,7 @@ let dp = inputs.values.secret;
 in {
   programs.firefox.policies = {
     Authentication = {
-      SPNEGO = [ ".${dp.workstation.host}" ];
+      SPNEGO = [ ".${dp.workstation.host}" ".microsoftazuread-sso.com" ];
       Delegated = [ "*.${dp.workstation.host}" ];
     };
   };
