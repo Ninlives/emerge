@@ -1,11 +1,11 @@
-{ fetchFromGitHub
-, mkYarnModules
-, stdenv
-, python3
-, nodejs
-, yarn
-}:
-let
+{
+  fetchFromGitHub,
+  mkYarnModules,
+  stdenv,
+  python3,
+  nodejs,
+  yarn,
+}: let
   src = fetchFromGitHub {
     owner = "tridactyl";
     repo = "tridactyl";
@@ -18,26 +18,27 @@ let
     packageJSON = src + "/package.json";
     yarnLock = src + "/yarn.lock";
   };
-in stdenv.mkDerivation rec {
-  pname = "tridactyl";
-  version = "unstable";
-  inherit src deps;
-  nativeBuildInputs = [ python3 nodejs yarn ];
+in
+  stdenv.mkDerivation rec {
+    pname = "tridactyl";
+    version = "unstable";
+    inherit src deps;
+    nativeBuildInputs = [python3 nodejs yarn];
 
-  configurePhase = ''
-    patchShebangs .
-    cp -r ${deps}/node_modules node_modules
-    chmod -R +w node_modules
-  '';
+    configurePhase = ''
+      patchShebangs .
+      cp -r ${deps}/node_modules node_modules
+      chmod -R +w node_modules
+    '';
 
-  buildPhase = ''
-    mkdir .build_cache
-    echo '<a href="https://github.com/tridactyl/tridactyl/graphs/contributors">Tridactyl Contributors</a>' > .build_cache/authors
-    yarn run build
-    yarn run make-zip
-  '';
+    buildPhase = ''
+      mkdir .build_cache
+      echo '<a href="https://github.com/tridactyl/tridactyl/graphs/contributors">Tridactyl Contributors</a>' > .build_cache/authors
+      yarn run build
+      yarn run make-zip
+    '';
 
-  installPhase = ''
-    install -v -D -m644 web-ext-artifacts/*.zip $out/share/mozilla/extensions/${pname}.xpi
-  '';
-}
+    installPhase = ''
+      install -v -D -m644 web-ext-artifacts/*.zip $out/share/mozilla/extensions/${pname}.xpi
+    '';
+  }

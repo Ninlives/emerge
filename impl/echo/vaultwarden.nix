@@ -1,5 +1,8 @@
-{ config, inputs, ... }:
-let
+{
+  config,
+  inputs,
+  ...
+}: let
   plh = config.sops.placeholder;
   tpl = config.sops.templates;
   dp = inputs.values.secret;
@@ -10,11 +13,9 @@ in {
     enableACME = true;
     locations = {
       "/".proxyPass = "http://127.0.0.1:${toString srv.port}";
-      "/notifications/hub/negotiate".proxyPass =
-        "http://127.0.0.1:${toString srv.port}";
+      "/notifications/hub/negotiate".proxyPass = "http://127.0.0.1:${toString srv.port}";
       "/notifications/hub" = {
-        proxyPass =
-          "http://127.0.0.1:${toString srv.ext.websocket-port}";
+        proxyPass = "http://127.0.0.1:${toString srv.ext.websocket-port}";
         proxyWebsockets = true;
       };
     };
@@ -41,10 +42,12 @@ in {
 
   users.users.vaultwarden.uid = 955;
   users.groups.vaultwarden.gid = 955;
-  revive.specifications.system.boxes = [{
-    src = /Services/vaultwarden;
-    dst = /var/lib/bitwarden_rs;
-    user = config.users.users.vaultwarden.name;
-    group = config.users.groups.vaultwarden.name;
-  }];
+  revive.specifications.system.boxes = [
+    {
+      src = /Services/vaultwarden;
+      dst = /var/lib/bitwarden_rs;
+      user = config.users.users.vaultwarden.name;
+      group = config.users.groups.vaultwarden.name;
+    }
+  ];
 }

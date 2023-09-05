@@ -1,5 +1,9 @@
-{ config, pkgs, lib, ... }:
-let
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}: let
   inherit (lib.hm.dag) entryAnywhere;
   tree-sitter-plugins = p:
     with p; [
@@ -25,17 +29,20 @@ let
 in {
   programs.neovim.settings.tree-sitter = entryAnywhere {
     plugins = p:
-      with p;
-      [
+      with p; [
         (nvim-treesitter.withPlugins tree-sitter-plugins)
       ];
 
-    lua = /* lua */ ''
-      require("nvim-treesitter.configs").setup {
-        highlight = {
-          enable = true
+    lua =
+      /*
+      lua
+      */
+      ''
+        require("nvim-treesitter.configs").setup {
+          highlight = {
+            enable = true
+          }
         }
-      }
-    '';
+      '';
   };
 }

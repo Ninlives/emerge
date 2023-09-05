@@ -1,10 +1,9 @@
-{ ... }:
 final: prev: {
   firefox-extra = {
     addons = with final; {
-      tridactyl = callPackage ./tridactyl.nix { };
-      bitwarden = callPackage ./bitwarden.nix { };
-      ublock = callPackage ./ublock.nix { };
+      tridactyl = callPackage ./tridactyl.nix {};
+      bitwarden = callPackage ./bitwarden.nix {};
+      ublock = callPackage ./ublock.nix {};
     };
     csshacks = final.fetchFromGitHub {
       owner = "MrOtherGuy";

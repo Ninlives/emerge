@@ -1,10 +1,8 @@
-{ ... }:
 final: prev: {
-  gruvbox-plus-icon-pack = with final;
-    let
-      variant = "Gruvbox-Plus-Dark";
-      iconDir = "$out/share/icons/${variant}";
-    in
+  gruvbox-plus-icon-pack = with final; let
+    variant = "Gruvbox-Plus-Dark";
+    iconDir = "$out/share/icons/${variant}";
+  in
     stdenvNoCC.mkDerivation rec {
       pname = "gruvbox-plus-icon-pack";
       version = "unstable-2023-07-17";
@@ -16,8 +14,8 @@ final: prev: {
         sha256 = "0lw8ry5hvrkan51xrcrix0vx5h962gnv6vr49ggwmm22b0g2s3gk";
       };
 
-      nativeBuildInputs = [ gtk3 ];
-      propagatedBuildInputs = [ breeze-icons gnome-icon-theme hicolor-icon-theme ];
+      nativeBuildInputs = [gtk3];
+      propagatedBuildInputs = [breeze-icons gnome-icon-theme hicolor-icon-theme];
 
       installPhase = ''
         cd ${variant}

@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  lib,
+  pkgs,
+  config,
+  ...
+}:
 with pkgs;
 with lib; {
   services.jellyfin.enable = true;
@@ -16,8 +21,9 @@ with lib; {
       pdir=/var/lib/jellyfin/plugins/${plugin.pname}
       mkdir -p "$pdir"
       ${concatMapStringsSep "\n" (art: ''
-        ${coreutils}/bin/ln -s "${plugin}/lib/${plugin.pname}/${art}" "$pdir/${art}"
-      '') plugin.artifacts}
+          ${coreutils}/bin/ln -s "${plugin}/lib/${plugin.pname}/${art}" "$pdir/${art}"
+        '')
+        plugin.artifacts}
     '') (builtins.attrValues jellyfinPlugins)}
   '';
 

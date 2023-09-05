@@ -1,7 +1,6 @@
-{ fn, ... }:
 final: prev: {
   jellyfinPlugins = {
-    anilist = final.callPackage ./anilist { inherit fn; };
-    bookshelf = final.callPackage ./bookshelf { inherit fn; };
+    anilist = final.callPackage ./anilist {};
+    bookshelf = final.callPackage ./bookshelf {};
   };
 }

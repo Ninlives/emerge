@@ -1,5 +1,9 @@
-{ pkgs, config, nixosConfig, ... }:
-let
+{
+  pkgs,
+  config,
+  nixosConfig,
+  ...
+}: let
   inherit (pkgs) writeShellScript findutils coreutils;
 in {
   systemd.user.services.archive-downloads = {
@@ -7,7 +11,7 @@ in {
       Description = "Archive Downloads files";
     };
 
-    Install = { WantedBy = [ "default.target" ]; };
+    Install = {WantedBy = ["default.target"];};
 
     Service = {
       ExecStart = "${writeShellScript "archive" ''

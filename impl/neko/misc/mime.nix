@@ -1,6 +1,5 @@
-{ lib, ... }:
-with lib;
-let
+{lib, ...}:
+with lib; let
   web-mimes = [
     "x-scheme-handler/http"
     "text/html"
@@ -35,10 +34,12 @@ let
   ];
   mkAssoc = mimes: app:
     listToAttrs (map (mime: {
-      name = mime;
-      value = app;
-    }) mimes);
-  assoc = (mkAssoc web-mimes "firefox.desktop")
+        name = mime;
+        value = app;
+      })
+      mimes);
+  assoc =
+    (mkAssoc web-mimes "firefox.desktop")
     // (mkAssoc image-mimes "org.gnome.eog.desktop");
 in {
   xdg.mimeApps.defaultApplications = assoc;

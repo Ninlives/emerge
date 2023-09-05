@@ -1,4 +1,8 @@
-{ pkgs, config, ... }: {
+{
+  pkgs,
+  config,
+  ...
+}: {
   home.packages = with pkgs; [
     # Command Line
     xclip
@@ -27,8 +31,10 @@
     git.enable = true;
   };
 
-  persistent.boxes = [{
-    src = /Programs/tldr;
-    dst = ".tldrc";
-  }];
+  persistent.boxes = [
+    {
+      src = /Programs/tldr;
+      dst = ".tldrc";
+    }
+  ];
 }

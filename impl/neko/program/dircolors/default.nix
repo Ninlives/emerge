@@ -1,5 +1,5 @@
-{ lib, ... }:
-let inherit (lib) mkForce;
+{lib, ...}: let
+  inherit (lib) mkForce;
 in {
   programs.dircolors = {
     enable = true;

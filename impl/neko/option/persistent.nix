@@ -1,32 +1,34 @@
-{ fn, lib, pkgs, config, ... }:
+{
+  fn,
+  lib,
+  config,
+  ...
+}:
 with fn;
 with lib;
-with lib.types;
-let
+with lib.types; let
   home = path: "${config.home.homeDirectory}/${path}";
-  mapRevive = p:
-    if builtins.isAttrs p then
-      p // { dst = home p.dst; }
-    else {
-      inherit (p) src;
-      dst = home p.dst;
-    };
+  mapping = mkOptionType {
+    name = "mapping";
+    check = x:
+      builtins.isAttrs x && x ? src && path.check x.src && x ? dst && str.check x.dst;
+  };
+  applyMapping = m:
+    if hasPrefix config.home.homeDirectory m.dst
+    then m
+    else m // {dst = home m.dst;};
+  apply = map applyMapping;
 in {
   options.persistent = {
     boxes = mkOption {
-      type = listOf (either str attrs);
-      default = [ ];
+      type = listOf mapping;
+      default = [];
+      inherit apply;
     };
     scrolls = mkOption {
-      type = listOf (either str attrs);
-      default = [ ];
+      type = listOf mapping;
+      default = [];
+      inherit apply;
     };
-  };
-
-  config = {
-    requestNixOSConfig.persistent-boxes.revive.specifications.user.boxes =
-      map mapRevive config.persistent.boxes;
-    requestNixOSConfig.persistent-scrolls.revive.specifications.user.scrolls =
-      map mapRevive config.persistent.scrolls;
   };
 }

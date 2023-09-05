@@ -1,30 +1,42 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 with lib;
 with lib.types;
-with lib.hm.types;
-let
+with lib.hm.types; let
   inherit (lib.hm) dag;
   inherit (builtins) filter;
   inherit (pkgs) vimPlugins callPackage makeWrapper runCommand;
 
-  pluginSet = vimPlugins // (callPackage ./vim-packages { });
+  pluginSet = vimPlugins // (callPackage ./vim-packages {});
 
   pluginType = mkOptionType {
     name = "vim-plugins";
     description = "vim plugins";
-    check = x: if isFunction x then isList (x pluginSet) else false;
+    check = x:
+      if isFunction x
+      then isList (x pluginSet)
+      else false;
     merge = mergeOneOption;
   };
 
   extraPythonPackageType = mkOptionType {
     name = "extra-python-packages";
     description = "python packages in python.withPackages format";
-    check = x: if isFunction x then isList (x pkgs.python3Packages) else false;
+    check = x:
+      if isFunction x
+      then isList (x pkgs.python3Packages)
+      else false;
     merge = mergeOneOption;
   };
 
-  settings = (dag.topoSort
-    (filterAttrs (n: v: v.data.enable) config.programs.neovim.settings)).result;
+  settings =
+    (dag.topoSort
+      (filterAttrs (n: v: v.data.enable) config.programs.neovim.settings))
+    .result;
 
   normalConfig = concatMapStringsSep "\n" (v: ''
     " ${v.name}
@@ -42,20 +54,24 @@ let
 
   wrapEnvironment = environment:
     mapAttrsToList (n: v: ''--set ${n} "${v}"'') environment;
-  wrapArgs = concatStringsSep " \\\n"
+  wrapArgs =
+    concatStringsSep " \\\n"
     (flatten (map (v: wrapEnvironment v.data.environment) settings));
 
-  gnvim = runCommand "gnvim" { buildInputs = [ makeWrapper ]; } ''
+  gnvim = runCommand "gnvim" {buildInputs = [makeWrapper];} ''
     mkdir -p $out/bin
     makeWrapper ${pkgs.gnvim}/bin/gnvim $out/bin/gnvim \
       --add-flags '--nvim=${config.programs.neovim.finalPackage}/bin/nvim' \
       ${wrapArgs}
     ln -s ${pkgs.gnvim}/share $out/share
   '';
-
 in {
   options.programs.neovim.settings = mkOption {
-    type = dagOf (submodule ({ config, name, ... }: {
+    type = dagOf (submodule ({
+      config,
+      name,
+      ...
+    }: {
       options = {
         enable = mkOption {
           type = bool;
@@ -64,7 +80,7 @@ in {
 
         plugins = mkOption {
           type = pluginType;
-          default = plugins: [ ];
+          default = plugins: [];
         };
 
         config = mkOption {
@@ -79,21 +95,21 @@ in {
 
         extraPackages = mkOption {
           type = listOf package;
-          default = [ ];
+          default = [];
         };
 
         pythonPackages = mkOption {
           type = extraPythonPackageType;
-          default = _: [ ];
+          default = _: [];
         };
 
         environment = mkOption {
           type = attrsOf str;
-          default = { };
+          default = {};
         };
       };
     }));
-    default = { };
+    default = {};
   };
 
   config = {
@@ -101,10 +117,10 @@ in {
       source ${makeWrapper}/nix-support/setup-hook
       ${concatMapStringsSep "\n" (p: ''
         wrapProgram ${placeholder "out"}/bin/${p} ${wrapArgs}
-      '') [ "vi" "vim" "nvim" ]}
+      '') ["vi" "vim" "nvim"]}
     '';
-    home.packages = [ gnvim ];
-    lib.packages = { inherit gnvim; };
+    home.packages = [gnvim];
+    lib.packages = {inherit gnvim;};
 
     programs.neovim = {
       inherit plugins extraPackages;

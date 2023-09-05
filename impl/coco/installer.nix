@@ -1,6 +1,13 @@
-{ config, pkgs, modulesPath, lib, inputs, var, ... }:
-with lib;
-let
+{
+  lib,
+  pkgs,
+  config,
+  inputs,
+  system,
+  modulesPath,
+  ...
+}:
+with lib; let
   inherit (config.lib.path) persistent;
   installer-config = {
     imports = [
@@ -10,7 +17,7 @@ let
     boot = {
       kernelPackages = pkgs.linuxPackages_latest;
       supportedFilesystems =
-        mkForce [ "btrfs" "reiserfs" "vfat" "f2fs" "xfs" "ntfs" "cifs" ];
+        mkForce ["btrfs" "reiserfs" "vfat" "f2fs" "xfs" "ntfs" "cifs"];
     };
     isoImage.volumeID = "INSTALLER";
 
@@ -58,9 +65,14 @@ let
 in {
   options.installer = mkOption {
     type = types.package;
-    default = (inputs.nixpkgs.lib.nixosSystem {
-      inherit (var) system;
-      modules = [ installer-config ];
-    }).config.system.build.isoImage;
+    default =
+      (inputs.nixpkgs.lib.nixosSystem {
+        inherit system;
+        modules = [installer-config];
+      })
+      .config
+      .system
+      .build
+      .isoImage;
   };
 }

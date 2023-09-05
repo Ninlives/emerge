@@ -1,18 +1,22 @@
-{ pkgs, fn, var, lib, ... }: {
+{
+  fn,
+  lib,
+  pkgs,
+  ...
+}: {
   imports =
-    [ ./network.nix ./immich.nix ./installer.nix ./jellyfin.nix ./kavita.nix ]
+    [./network.nix ./immich.nix ./installer.nix ./jellyfin.nix ./kavita.nix]
     ++ (fn.dotNixFrom ../taco);
 
   services.logind.lidSwitch = "ignore";
 
   hardware.enableRedistributableFirmware = true;
-  services.xserver.videoDrivers = [ "nvidia" ];
+  services.xserver.videoDrivers = ["nvidia"];
   nixpkgs.config.allowUnfreePredicate = pkg:
-    builtins.elem (lib.getName pkg) [ "nvidia-x11" "nvidia-settings" ];
+    builtins.elem (lib.getName pkg) ["nvidia-x11" "nvidia-settings"];
   hardware.opengl.enable = true;
 
-  boot.initrd.availableKernelModules =
-    [ "xhci_pci" "ahci" "nvme" "usb_storage" "uas" "sd_mod" ];
+  boot.initrd.availableKernelModules = ["xhci_pci" "ahci" "nvme" "usb_storage" "uas" "sd_mod"];
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.grub = {
     enable = true;
@@ -20,10 +24,10 @@
     efiSupport = true;
   };
   console.font = "ter-i32b";
-  console.packages = [ pkgs.terminus_font ];
+  console.packages = [pkgs.terminus_font];
   console.earlySetup = true;
 
-  users.users.mlatus.extraGroups = var.user.groups;
+  users.users.mlatus.extraGroups = ["users" "pulseaudio" "audio" "video" "power" "wheel" "networkmanager"];
 
   fileSystems."/boot" = {
     device = "/dev/disk/by-partlabel/BOOT";

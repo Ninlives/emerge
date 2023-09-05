@@ -1,6 +1,10 @@
-{ pkgs, config, lib, ... }:
-with pkgs;
-let
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
+with pkgs; let
   inherit (lib) optionalString;
 
   deviconPlugin = stdenv.mkDerivation {
@@ -11,7 +15,7 @@ let
       rev = "49fe4753c89615a32f14b2f4c78bbd02ee76be3c";
       sha256 = "1kgzv9mqsqzbpjrj3qi8vkha7vij2qsmdnjwl547pnf04hbdhgk1";
     };
-    buildInputs = [ python3 ];
+    buildInputs = [python3];
 
     buildPhase = ''
       python3 -m compileall .
@@ -22,16 +26,15 @@ let
     '';
   };
 
-  compressCommand = runCommand "compress.py" { inherit atool; } ''
+  compressCommand = runCommand "compress.py" {inherit atool;} ''
     substituteAll ${./compress.py} ${placeholder "out"}
   '';
-
 in {
-  home.packages = [ ranger bat ];
+  home.packages = [ranger bat];
 
   xdg.configFile = {
     ranger = {
-      source = runCommand "config" { } ''
+      source = runCommand "config" {} ''
         cp --no-preserve=all -r ${ranger}/share/doc/ranger/config $out
 
         sed -i 's/set colorscheme default/set colorscheme ls_colors/' $out/rc.conf
@@ -58,10 +61,15 @@ in {
     "ranger/colorschemes/ls_colors.py".source = ./ls_colors.py;
   };
 
-  home.sessionVariables = { BAT_THEME = "gruvbox-dark"; RANGER_DEVICONS_SEPARATOR = "  "; };
+  home.sessionVariables = {
+    BAT_THEME = "gruvbox-dark";
+    RANGER_DEVICONS_SEPARATOR = "  ";
+  };
 
-  persistent.boxes = [{
-    src = /Programs/ranger;
-    dst = ".local/share/ranger";
-  }];
+  persistent.boxes = [
+    {
+      src = /Programs/ranger;
+      dst = ".local/share/ranger";
+    }
+  ];
 }

@@ -1,5 +1,5 @@
-{ config, ... }:
-let inherit (config) ref;
+{config, ...}: let
+  inherit (config) ref;
 in {
   provider.b2 = {
     application_key_id = ref.local.secrets.api-key.b2.id;

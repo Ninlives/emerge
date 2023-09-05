@@ -1,5 +1,9 @@
-{ config, inputs, pkgs, ... }:
-let
+{
+  config,
+  inputs,
+  pkgs,
+  ...
+}: let
   inherit (config.lib.path) persistent;
   dp = inputs.values.secret;
   inherit (dp.host.public) domain;
@@ -20,8 +24,7 @@ let
     add_header Access-Control-Allow-Origin *;
     return 200 '${builtins.toJSON data}';
   '';
-in
-{
+in {
   services.matrix-synapse = {
     enable = true;
     withJemalloc = true;
@@ -38,17 +41,21 @@ in
       enable_registration = true;
       registration_requires_token = true;
 
-      listeners = [{
-        bind_addresses = [ "127.0.0.1" ];
-        inherit port;
-        tls = false;
-        type = "http";
-        x_forwarded = true;
-        resources = [{
-          compress = true;
-          names = [ "client" "federation" ];
-        }];
-      }];
+      listeners = [
+        {
+          bind_addresses = ["127.0.0.1"];
+          inherit port;
+          tls = false;
+          type = "http";
+          x_forwarded = true;
+          resources = [
+            {
+              compress = true;
+              names = ["client" "federation"];
+            }
+          ];
+        }
+      ];
 
       media_retention = {
         remote_media_lifetime = "14d";
@@ -74,7 +81,7 @@ in
     MemoryMax = "1G";
   };
 
-  environment.systemPackages = [ pkgs.wget ];
+  environment.systemPackages = [pkgs.wget];
 
   services.nginx.virtualHosts = {
     ${domain} = {
@@ -97,11 +104,13 @@ in
   };
 
   services.postgresql = {
-    ensureDatabases = [ "matrix-synapse" ];
-    ensureUsers = [{
-      name = "matrix-synapse";
-      ensurePermissions."DATABASE \"matrix-synapse\"" = "ALL PRIVILEGES";
-    }];
+    ensureDatabases = ["matrix-synapse"];
+    ensureUsers = [
+      {
+        name = "matrix-synapse";
+        ensurePermissions."DATABASE \"matrix-synapse\"" = "ALL PRIVILEGES";
+      }
+    ];
   };
 
   sops.secrets."matrix/signing-key" = with config.users; {
@@ -115,8 +124,10 @@ in
   systemd.tmpfiles.rules = with config.users; [
     "d ${config.services.matrix-synapse.dataDir} 0700 ${users.matrix-synapse.name} ${groups.matrix-synapse.name} -"
   ];
-  revive.specifications.system.boxes = [{
-    src = /Data/matrix-sliding-sync;
-    dst = /var/lib/private/matrix-sliding-sync;
-  }];
+  revive.specifications.system.boxes = [
+    {
+      src = /Data/matrix-sliding-sync;
+      dst = /var/lib/private/matrix-sliding-sync;
+    }
+  ];
 }

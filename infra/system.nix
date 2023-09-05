@@ -1,6 +1,11 @@
-{ config, pkgs, echo, inputs, ... }:
-with pkgs;
-let
+{
+  config,
+  pkgs,
+  echo,
+  inputs,
+  ...
+}:
+with pkgs; let
   inherit (config) ref;
   dp = inputs.values.secret;
 
@@ -198,7 +203,7 @@ let
   '';
 in {
   provider.shell = {
-    interpreter = [ runtimeShell "-c" ];
+    interpreter = [runtimeShell "-c"];
     enable_parallelism = true;
   };
   resource.shell_script.netboot = {
@@ -219,37 +224,45 @@ in {
       SIGN_KEY = ref.local.secrets.sign-key;
     };
   };
-  resource.shell_script.switch =
-    let ip = config.resource.vultr_instance.server "main_ip";
-    in {
-      lifecycle_commands = {
-        create = /* bash */ ''
-            set -e
-            if [[ "${system}" == "${
-              config.resource.shell_script.init-system "output.system-path"
-            }" ]];then
-              echo Same as init, no need to switch
-            else
-              echo Copying paths...
-              ${nix} copy --to ssh://root@${ip} ${system}
-              echo Transferring secrets...
-              printenv B2_ENV|${ssh} root@${ip} 'cat > /chest/Static/b2/env'
-              echo Switching...
-              ${ssh} root@${ip} \
-                'nix-env -p /nix/var/nix/profiles/system --set ${system} \
-                && ${system}/bin/switch-to-configuration boot \
-                && reboot'
-            fi
-            echo '{ "path": "${system}" }'
-          '';
-        delete = /* bash */ "echo No-op for switch";
-      };
-      sensitive_environment = {
-        B2_ENV = ''
-          B2_ACCOUNT_ID='${config.resource.b2_application_key.chest "application_key_id"}'
-          B2_ACCOUNT_KEY='${config.resource.b2_application_key.chest "application_key"}'
+  resource.shell_script.switch = let
+    ip = config.resource.vultr_instance.server "main_ip";
+  in {
+    lifecycle_commands = {
+      create =
+        /*
+        bash
+        */
+        ''
+          set -e
+          if [[ "${system}" == "${
+            config.resource.shell_script.init-system "output.system-path"
+          }" ]];then
+            echo Same as init, no need to switch
+          else
+            echo Copying paths...
+            ${nix} copy --to ssh://root@${ip} ${system}
+            echo Transferring secrets...
+            printenv B2_ENV|${ssh} root@${ip} 'cat > /chest/Static/b2/env'
+            echo Switching...
+            ${ssh} root@${ip} \
+              'nix-env -p /nix/var/nix/profiles/system --set ${system} \
+              && ${system}/bin/switch-to-configuration boot \
+              && reboot'
+          fi
+          echo '{ "path": "${system}" }'
         '';
-      };
-      triggers.when_value_changed = "${system}";
+      delete =
+        /*
+        bash
+        */
+        "echo No-op for switch";
     };
+    sensitive_environment = {
+      B2_ENV = ''
+        B2_ACCOUNT_ID='${config.resource.b2_application_key.chest "application_key_id"}'
+        B2_ACCOUNT_KEY='${config.resource.b2_application_key.chest "application_key"}'
+      '';
+    };
+    triggers.when_value_changed = "${system}";
+  };
 }

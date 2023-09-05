@@ -1,4 +1,10 @@
-{ lib, config, inputs, ... }: with lib; {
+{
+  lib,
+  config,
+  inputs,
+  ...
+}:
+with lib; {
   boot.kernel.sysctl = {
     "net.ipv6.conf.ethernet.use_tempaddr" = 0;
     "net.core.default_qdisc" = "fq";
@@ -10,17 +16,16 @@
     enable = true;
     settings.PasswordAuthentication = false;
   };
-  systemd.services.sshd.preStart = mkAfter
+  systemd.services.sshd.preStart =
+    mkAfter
     (flip concatMapStrings config.services.openssh.hostKeys (k: ''
       if [ -s "${k.path}.pub" ]; then
         ssh-keygen -s ${config.sops.secrets.sshca.path} -I ${config.networking.hostName} -h ${k.path}.pub
       fi
     ''));
-  services.openssh.extraConfig =
-    flip concatMapStrings config.services.openssh.hostKeys (k: ''
-      HostCertificate ${k.path}-cert.pub
-    '');
+  services.openssh.extraConfig = flip concatMapStrings config.services.openssh.hostKeys (k: ''
+    HostCertificate ${k.path}-cert.pub
+  '');
 
-  users.users.root.openssh.authorizedKeys.keys =
-    [ inputs.values.secret.ssh.auth ];
+  users.users.root.openssh.authorizedKeys.keys = [inputs.values.secret.ssh.auth];
 }

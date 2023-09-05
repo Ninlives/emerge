@@ -1,5 +1,4 @@
-{ inputs, ... }:
-let
+{inputs, ...}: let
   dp = inputs.values.secret;
   srv = dp.host.private.services.immich;
 in {

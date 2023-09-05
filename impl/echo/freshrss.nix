@@ -1,5 +1,8 @@
-{ config, inputs, ... }:
-let
+{
+  config,
+  inputs,
+  ...
+}: let
   inherit (config.lib.path) persistent;
   dp = inputs.values.secret;
   domain = "${dp.host.private.services.freshrss.fqdn}";

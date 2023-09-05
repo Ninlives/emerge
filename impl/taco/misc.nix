@@ -1,4 +1,8 @@
-{ pkgs, config, ... }: {
+{
+  pkgs,
+  config,
+  ...
+}: {
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   sops.age.keyFile = "${config.lib.path.persistent.static}/sops/age.key";
@@ -13,7 +17,7 @@
     uid = 1000;
     createHome = true;
     isNormalUser = true;
-    extraGroups = [ "systemd-journal" ];
+    extraGroups = ["systemd-journal"];
     passwordFile = config.sops.secrets.hashed-password.path;
   };
   sops.secrets.hashed-password.neededForUsers = true;

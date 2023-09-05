@@ -1,0 +1,13 @@
+" General Settings
+set smoothscroll true
+set scrollduration 200
+
+" Binds
+bind O fillcmdline tabopen
+bind / fillcmdline find
+bind ? fillcmdline find --reverse
+bind t fillcmdline tgroupswitch
+bind n findnext --search-from-view
+bind N findnext --search-from-view --reverse
+
+" vim: set filetype=tridactyl

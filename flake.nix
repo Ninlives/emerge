@@ -1,8 +1,8 @@
 {
-  description =
-    "My personal config files for my daily environment, configured for Asus Flow X13. Now with flakes!";
+  description = "My personal config files for my daily environment, configured for Asus Flow X13. Now with flakes!";
 
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
+  inputs.flake-parts.url = "github:hercules-ci/flake-parts";
   inputs.sops-nix = {
     url = "github:Mic92/sops-nix";
     inputs.nixpkgs.follows = "nixpkgs";
@@ -36,11 +36,20 @@
     inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, ... }@inputs:
-    let
-      inherit (nixpkgs) lib;
-      fn  = import ./fn  { inherit lib var pkgs; };
-      var = import ./var { inherit lib pkgs; };
-      pkgs = nixpkgs.legacyPackages.x86_64-linux;
-    in import ./def { inherit fn lib var pkgs self inputs; };
+  outputs = {
+    self,
+    nixpkgs,
+    flake-parts,
+    ...
+  } @ inputs: let
+    inherit (nixpkgs) lib;
+    fn = import ./fn {inherit lib;};
+  in
+    flake-parts.lib.mkFlake {
+      inherit inputs;
+      specialArgs = {inherit fn;};
+    } ({...}: {
+      systems = ["x86_64-linux"];
+      imports = (fn.dotNixFromRecursive ./cmd) ++ (fn.dotNixFromRecursive ./val);
+    });
 }

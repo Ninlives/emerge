@@ -1,4 +1,8 @@
-{ buildDotnetModule, fetchFromGitHub, fn }:
+{
+  buildDotnetModule,
+  fetchFromGitHub,
+  importYAML,
+}:
 buildDotnetModule rec {
   pname = "anilist";
   version = "unstable-2023-01-19";
@@ -9,5 +13,5 @@ buildDotnetModule rec {
     sha256 = "19y8xzpabyzk94d3x98d5kbndrhzgb6yzf3qr3pl7jwam1krazwz";
   };
   nugetDeps = ./deps.nix;
-  passthru.artifacts = (fn.importYAML "${src}/build.yaml").artifacts;
+  passthru.artifacts = (importYAML "${src}/build.yaml").artifacts;
 }

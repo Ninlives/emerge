@@ -1,5 +1,10 @@
-{ config, lib, inputs, pkgs, ... }:
-let
+{
+  config,
+  lib,
+  inputs,
+  pkgs,
+  ...
+}: let
   dp = inputs.values.secret;
   scrt = config.sops.secrets;
   tpl = config.sops.templates;
@@ -7,7 +12,7 @@ let
   inherit (config.lib.path) persistent;
   ensureServices = services:
     assert (lib.all (s: config.systemd.services ? ${s}) services);
-    map (s: "${s}.service") services;
+      map (s: "${s}.service") services;
   fileDir = "${persistent.data}/misskey";
 in {
   imports = [
@@ -17,16 +22,19 @@ in {
   services.misskey = {
     enable = true;
     package = pkgs.misskey.overrideAttrs (p: {
-      patches = p.patches or [ ] ++ [
-        ./unlimited-replies.patch
-        ./fetch-replies.patch
-        dp.patches.misskey.deepl
-      ];
+      patches =
+        p.patches
+        or []
+        ++ [
+          ./unlimited-replies.patch
+          ./fetch-replies.patch
+          dp.patches.misskey.deepl
+        ];
     });
     data.directory = fileDir;
   };
   systemd.services.misskey = {
-    after = ensureServices [ "postgresql" "redis-misskey" "meilisearch" ];
+    after = ensureServices ["postgresql" "redis-misskey" "meilisearch"];
     serviceConfig = {
       MemoryMax = "1G";
       CPUQuota = "50%";
@@ -58,7 +66,7 @@ in {
   sops.templates.misskey = {
     owner = config.users.users.misskey.name;
     group = config.users.groups.misskey.name;
-    content = lib.generators.toYAML { } {
+    content = lib.generators.toYAML {} {
       url = "https://${srv.misskey.fqdn}/";
       port = srv.misskey.port;
       db = {
@@ -101,11 +109,13 @@ in {
   users.groups.misskey.gid = 954;
 
   services.postgresql = {
-    ensureDatabases = [ "misskey" ];
-    ensureUsers = [{
-      name = "misskey";
-      ensurePermissions."DATABASE misskey" = "ALL PRIVILEGES";
-    }];
+    ensureDatabases = ["misskey"];
+    ensureUsers = [
+      {
+        name = "misskey";
+        ensurePermissions."DATABASE misskey" = "ALL PRIVILEGES";
+      }
+    ];
     identMap = ''
       misskey misskey misskey
     '';

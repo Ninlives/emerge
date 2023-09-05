@@ -1,5 +1,9 @@
-{ config, inputs, lib, ... }:
-let
+{
+  config,
+  inputs,
+  lib,
+  ...
+}: let
   plh = config.sops.placeholder;
   dp = inputs.values.secret;
 in {
@@ -9,5 +13,5 @@ in {
       token = plh."rathole/token/${srv}";
       port = dp.host.private.services.${srv}.port;
     };
-  }) [ "immich" "jellyfin" "kavita" ]);
+  }) ["immich" "jellyfin" "kavita"]);
 }

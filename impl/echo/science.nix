@@ -1,5 +1,10 @@
-{ config, lib, pkgs, inputs, ... }:
-let
+{
+  config,
+  lib,
+  pkgs,
+  inputs,
+  ...
+}: let
   plh = config.sops.placeholder;
   tpl = config.sops.templates;
   dp = inputs.values.secret;
@@ -7,8 +12,8 @@ let
   reddit = "${dp.host.private.services.libreddit.fqdn}";
   cache = "${dp.host.private.services.cache.fqdn}";
   libredditHost = "${config.services.libreddit.address}:${
-      toString config.services.libreddit.port
-    }";
+    toString config.services.libreddit.port
+  }";
   mkProxy = port: {
     proxyPass = "http://127.0.0.1:${toString port}";
     proxyWebsockets = true;
@@ -23,13 +28,15 @@ let
     listen = "127.0.0.1";
     protocol = "trojan";
     settings = {
-      clients = [{
-        inherit password;
-      }];
+      clients = [
+        {
+          inherit password;
+        }
+      ];
     };
     streamSettings = {
       network = "ws";
-      wsSettings = { inherit path; };
+      wsSettings = {inherit path;};
     };
   };
 in {
@@ -61,7 +68,7 @@ in {
     configFile = tpl.v2ray.path;
   };
   systemd.services.v2ray = {
-    restartTriggers = [ tpl.v2ray.file ];
+    restartTriggers = [tpl.v2ray.file];
     serviceConfig = {
       ExecStart = [
         ""
@@ -79,21 +86,22 @@ in {
       error = "/tmp/v2ray_error.log";
       loglevel = "error";
     };
-    inbounds =
-      [ (mkInbound dp.trojan.port plh."trojan/password" "/${dp.trojan.secret-path}") ];
+    inbounds = [(mkInbound dp.trojan.port plh."trojan/password" "/${dp.trojan.secret-path}")];
     outbounds = [
       {
         tag = "free";
         protocol = "freedom";
-        settings = { };
+        settings = {};
       }
       {
         tag = "tor";
         protocol = "socks";
-        settings.servers = [{
-          address = "127.0.0.1";
-          port = 9050;
-        }];
+        settings.servers = [
+          {
+            address = "127.0.0.1";
+            port = 9050;
+          }
+        ];
       }
     ];
     routing = {
@@ -101,7 +109,7 @@ in {
       rules = [
         {
           type = "field";
-          domains = [ "regexp:\\.onion$" ];
+          domains = ["regexp:\\.onion$"];
           outboundTag = "tor";
         }
       ];

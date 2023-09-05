@@ -1,5 +1,11 @@
-{ config, lib, var, pkgs, inputs, ... }:
-let
+{
+  config,
+  lib,
+  var,
+  pkgs,
+  inputs,
+  ...
+}: let
   inherit (config.home) homeDirectory;
   inherit (var) seal;
   inherit (lib.hm) dag;
@@ -17,28 +23,48 @@ in {
   };
   home.stateVersion = "20.09";
 
-  home.extraOutputsToInstall = [ "doc" "info" "devdoc" ];
+  home.extraOutputsToInstall = ["doc" "info" "devdoc"];
 
-  persistent.boxes = map Home [
-    "Desktop"
-    "Documents"
-    "Downloads"
-    "Music"
-    "Pictures"
-    "Public"
-    "Templates"
-    "Videos"
-  ] ++ [
-    { src = /Programs/ssh; dst = ".ssh"; }
-    # { src = /Programs/gnupg; dst = ".gnupg"; }
-    { src = /Programs/wrapped; dst = ".local/fakefs"; }
-    { src = /Programs/nix/data; dst = ".local/share/nix"; }
-    { src = /Programs/nix/cache; dst = ".cache/nix"; }
-    { src = /Programs/nix/index; dst = ".cache/nix-index"; }
-    { src = /Programs/nix/state; dst = ".local/state/nix"; }
-  ];
+  persistent.boxes =
+    map Home [
+      "Desktop"
+      "Documents"
+      "Downloads"
+      "Music"
+      "Pictures"
+      "Public"
+      "Templates"
+      "Videos"
+    ]
+    ++ [
+      {
+        src = /Programs/ssh;
+        dst = ".ssh";
+      }
+      # { src = /Programs/gnupg; dst = ".gnupg"; }
+      {
+        src = /Programs/wrapped;
+        dst = ".local/fakefs";
+      }
+      {
+        src = /Programs/nix/data;
+        dst = ".local/share/nix";
+      }
+      {
+        src = /Programs/nix/cache;
+        dst = ".cache/nix";
+      }
+      {
+        src = /Programs/nix/index;
+        dst = ".cache/nix-index";
+      }
+      {
+        src = /Programs/nix/state;
+        dst = ".local/state/nix";
+      }
+    ];
 
-  home.activation.scratch = dag.entryAfter [ "writeBoundary" ] ''
+  home.activation.scratch = dag.entryAfter ["writeBoundary"] ''
     mkdir -p ${homeDirectory}/Scratch
   '';
 }

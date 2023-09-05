@@ -1,5 +1,4 @@
-{ inputs, ... }:
-let
+{inputs, ...}: let
   dp = inputs.values.secret;
   domain = "${dp.host.private.services.jellyfin.fqdn}";
   port = toString dp.host.private.services.jellyfin.port;

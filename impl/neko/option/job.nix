@@ -1,4 +1,9 @@
-{ lib, pkgs, config, ... }:
+{
+  lib,
+  pkgs,
+  config,
+  ...
+}:
 with lib;
 with lib.types; {
   options.job = {
@@ -10,9 +15,9 @@ with lib.types; {
 
   config = {
     systemd.user.services.job = {
-      Unit = { Description = "Various jobs."; };
+      Unit = {Description = "Various jobs.";};
 
-      Install = { WantedBy = [ "default.target" ]; };
+      Install = {WantedBy = ["default.target"];};
 
       Service = {
         ExecStart = "${pkgs.coreutils}/bin/true";

@@ -1,6 +1,5 @@
-{ ... }:
-final: prev:
-let inherit (final) fakeFS;
+final: prev: let
+  inherit (final) fakeFS;
 in {
   idea-community = fakeFS {
     drv = prev.jetbrains.idea-community;
@@ -10,9 +9,9 @@ in {
     drv = final.androidStudioPackages.stable;
     fakeHome = "$HOME/.local/fakefs/android-studio";
   };
-  zoom-us = fakeFS { drv = prev.zoom-us; };
-  wechat-uos = fakeFS { drv = prev.wechat-uos; };
+  zoom-us = fakeFS {drv = prev.zoom-us;};
+  wechat-uos = fakeFS {drv = prev.wechat-uos;};
 
-  feeluown = fakeFS { drv = final.re-export.feeluown; };
-  thunderbird = fakeFS { drv = prev.thunderbird; };
+  feeluown = fakeFS {drv = final.re-export.feeluown;};
+  thunderbird = fakeFS {drv = prev.thunderbird;};
 }

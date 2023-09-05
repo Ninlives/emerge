@@ -1,4 +1,4 @@
-{ ... }: {
+{...}: {
   lib.path.persistent = rec {
     label = "NIXOS";
     volume = "chest";
@@ -10,7 +10,7 @@
     snapshot = {
       root = "${root}/Snapshot";
       data = "${snapshot.root}/Data";
-      services = "${snapshot.root}/Services"; 
+      services = "${snapshot.root}/Services";
     };
   };
 }

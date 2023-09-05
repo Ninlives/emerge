@@ -1,5 +1,9 @@
-{ pkgs, config, inputs, ... }:
-let
+{
+  pkgs,
+  config,
+  inputs,
+  ...
+}: let
   inherit (config.lib.path) persistent;
   plh = config.sops.placeholder;
   tpl = config.sops.templates;
@@ -70,26 +74,26 @@ in {
   virtualisation.oci-containers.backend = "podman";
   virtualisation.podman.defaultNetwork.settings.dns_enabled = true;
   virtualisation.podman.enableNvidia = true;
-  networking.firewall.trustedInterfaces = [ "podman0" ];
+  networking.firewall.trustedInterfaces = ["podman0"];
   virtualisation.oci-containers.containers = {
     immich-server = {
       image = "ghcr.io/immich-app/immich-server:release";
       imageFile = immich-server-image;
       entrypoint = "/bin/sh";
-      cmd = [ "./start-server.sh" ];
-      volumes = [ "${upload-box}:/usr/src/app/upload" ];
-      environmentFiles = [ tpl.immich-env.path ];
-      dependsOn = [ "immich-redis" "immich-database" ];
+      cmd = ["./start-server.sh"];
+      volumes = ["${upload-box}:/usr/src/app/upload"];
+      environmentFiles = [tpl.immich-env.path];
+      dependsOn = ["immich-redis" "immich-database"];
     };
 
     immich-microservice = {
       image = "ghcr.io/immich-app/immich-server:release";
       imageFile = immich-server-image;
       entrypoint = "/bin/sh";
-      cmd = [ "./start-microservices.sh" ];
-      volumes = [ "${upload-box}:/usr/src/app/upload" ];
-      environmentFiles = [ tpl.immich-env.path ];
-      dependsOn = [ "immich-redis" "immich-database" ];
+      cmd = ["./start-microservices.sh"];
+      volumes = ["${upload-box}:/usr/src/app/upload"];
+      environmentFiles = [tpl.immich-env.path];
+      dependsOn = ["immich-redis" "immich-database"];
     };
 
     # immich-machine-learning = {
@@ -106,8 +110,8 @@ in {
       image = "ghcr.io/immich-app/immich-web:release";
       imageFile = immich-web-image;
       entrypoint = "/bin/sh";
-      cmd = [ "./entrypoint.sh" ];
-      environmentFiles = [ tpl.immich-env.path ];
+      cmd = ["./entrypoint.sh"];
+      environmentFiles = [tpl.immich-env.path];
     };
 
     immich-redis = {
@@ -118,18 +122,17 @@ in {
     immich-database = {
       image = "postgres:14";
       imageFile = database-image;
-      environmentFiles = [ tpl.immich-env.path ];
-      volumes = [ "${database-box}:/var/lib/postgresql/data" ];
+      environmentFiles = [tpl.immich-env.path];
+      volumes = ["${database-box}:/var/lib/postgresql/data"];
     };
 
     immich-proxy = {
       image = "ghcr.io/immich-app/immich-proxy:release";
       imageFile = immich-proxy-image;
-      ports = [ "127.0.0.1:${toString dp.host.private.services.immich.port}:8080" ];
-      dependsOn = [ "immich-server" ];
+      ports = ["127.0.0.1:${toString dp.host.private.services.immich.port}:8080"];
+      dependsOn = ["immich-server"];
     };
   };
 
-  revive.specifications.system.boxes =
-    [ { dst = upload-box; } { dst = database-box; } ];
+  revive.specifications.system.boxes = [{dst = upload-box;} {dst = database-box;}];
 }

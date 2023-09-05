@@ -1,5 +1,11 @@
-{ runCommand, vimUtils, vimPlugins, haskell, lib, fetchFromGitHub }:
-let
+{
+  runCommand,
+  vimUtils,
+  vimPlugins,
+  haskell,
+  lib,
+  fetchFromGitHub,
+}: let
   inherit (vimUtils) buildVimPluginFrom2Nix;
 in {
   cmp-rime = buildVimPluginFrom2Nix {

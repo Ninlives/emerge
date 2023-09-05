@@ -1,9 +1,19 @@
-{ lib, var, inputs, config, ... }:
-with lib;
-let
+{
+  lib,
+  var,
+  inputs,
+  config,
+  ...
+}:
+with lib; let
   inherit (config.lib.path) persistent;
   dp = inputs.values.secret;
-  netboot-config = { config, pkgs, modulesPath, ... }: let
+  netboot-config = {
+    config,
+    pkgs,
+    modulesPath,
+    ...
+  }: let
     build = config.system.build;
     kernelTarget = pkgs.stdenv.hostPlatform.linux-kernel.target;
   in {
@@ -14,7 +24,7 @@ let
     ];
     boot = {
       kernelPackages = pkgs.linuxPackages_latest;
-      supportedFilesystems = [ "btrfs" ];
+      supportedFilesystems = ["btrfs"];
     };
 
     networking.useNetworkd = true;
@@ -25,10 +35,10 @@ let
       getty.autologinUser = "root";
     };
 
-    environment.systemPackages = with pkgs; [ age wget jq restic ];
+    environment.systemPackages = with pkgs; [age wget jq restic];
     systemd.services.install-system = {
-      wantedBy = [ "multi-user.target" ];
-      path = [ "/run/current-system/sw" ];
+      wantedBy = ["multi-user.target"];
+      path = ["/run/current-system/sw"];
       script = ''
         set -x
         set -e
@@ -75,7 +85,7 @@ let
           --data '{ "user_data" : "SmFja3BvdCEK" }'
 
         function create_sensitive_file(){
-          mkdir -p "$(dirname "$1")" 
+          mkdir -p "$(dirname "$1")"
           chmod 700 "$(dirname "$1")"
           touch "$1"
           chmod 600 "$1"
@@ -115,7 +125,7 @@ let
       '';
     };
 
-    system.build.netboot = pkgs.runCommand "netboot" { } ''
+    system.build.netboot = pkgs.runCommand "netboot" {} ''
       mkdir -p $out
       ln -s ${build.kernel}/${kernelTarget}         $out/${kernelTarget}
       ln -s ${build.netbootRamdisk}/initrd          $out/initrd
@@ -126,9 +136,14 @@ let
 in {
   options.nano = mkOption {
     type = types.package;
-    default = (inputs.nixpkgs.lib.nixosSystem {
-      inherit (var) system;
-      modules = [ netboot-config ];
-    }).config.system.build.netboot;
+    default =
+      (inputs.nixpkgs.lib.nixosSystem {
+        inherit (var) system;
+        modules = [netboot-config];
+      })
+      .config
+      .system
+      .build
+      .netboot;
   };
 }

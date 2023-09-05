@@ -1,5 +1,8 @@
-{ config, inputs, ... }:
-let
+{
+  config,
+  inputs,
+  ...
+}: let
   dp = inputs.values.secret;
   plh = config.sops.placeholder;
   tpl = config.sops.templates;
@@ -17,7 +20,7 @@ in {
       #   fromemail = "vikunja@${dp.mail-server.domain}";
       # };
     };
-    environmentFiles = [ tpl.vikunja.path ];
+    environmentFiles = [tpl.vikunja.path];
   };
 
   sops.templates.vikunja.content = ''
@@ -30,8 +33,10 @@ in {
     enableACME = true;
   };
 
-  revive.specifications.system.boxes = [{
-    src = /Services/vikunja;
-    dst = /var/lib/private/vikunja;
-  }];
+  revive.specifications.system.boxes = [
+    {
+      src = /Services/vikunja;
+      dst = /var/lib/private/vikunja;
+    }
+  ];
 }

@@ -1,22 +1,29 @@
-{ config, fn, inputs, ... }:
-let dp = inputs.values.secret;
+{
+  fn,
+  config,
+  inputs,
+  ...
+}: let
+  dp = inputs.values.secret;
 in {
-  imports = [
-    ./nano.nix
-    ./machine.nix
-    ./restic.nix
-    ./science.nix
-    ./tunnel.nix
-    ./vaultwarden.nix
-    ./vikunja.nix
-    ./kavita.nix
-    ./jellyfin.nix
-    ./freshrss.nix
-    ./immich.nix
-    ./misskey
-    ./postgresql.nix
-    ./matrix.nix
-  ] ++ (fn.dotNixFrom ../taco);
+  imports =
+    [
+      ./nano.nix
+      ./machine.nix
+      ./restic.nix
+      ./science.nix
+      ./tunnel.nix
+      ./vaultwarden.nix
+      ./vikunja.nix
+      ./kavita.nix
+      ./jellyfin.nix
+      ./freshrss.nix
+      ./immich.nix
+      ./misskey
+      ./postgresql.nix
+      ./matrix.nix
+    ]
+    ++ (fn.dotNixFrom ../taco);
 
   security.acme.acceptTerms = true;
   security.acme.defaults.email = "${dp.email.private.address}";
@@ -36,7 +43,7 @@ in {
     }
   ];
 
-  networking.firewall.allowedTCPPorts = [ 80 443 ];
-  networking.firewall.allowedUDPPorts = [ 443 ];
+  networking.firewall.allowedTCPPorts = [80 443];
+  networking.firewall.allowedUDPPorts = [443];
   services.nginx.enable = true;
 }

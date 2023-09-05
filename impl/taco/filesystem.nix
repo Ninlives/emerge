@@ -1,31 +1,29 @@
-{ config, ... }:
-let
+{config, ...}: let
   inherit (config.lib.path) persistent;
   device = "/dev/disk/by-partlabel/${persistent.label}";
   fsType = "btrfs";
-  options = [ "noatime" "compress-force=zstd" "space_cache=v2" ];
-in
-{
+  options = ["noatime" "compress-force=zstd" "space_cache=v2"];
+in {
   fileSystems = {
     "/" = {
       fsType = "tmpfs";
-      options = [ "defaults" "mode=755" ];
+      options = ["defaults" "mode=755"];
     };
 
     "/nix" = {
       inherit device fsType;
-      options = [ "subvol=nix" ] ++ options;
+      options = ["subvol=nix"] ++ options;
     };
 
     ${persistent.root} = {
       inherit device fsType;
-      options = [ "subvol=${persistent.volume}" ] ++ options;
+      options = ["subvol=${persistent.volume}"] ++ options;
       neededForBoot = true;
     };
 
     "/tmp" = {
       inherit device fsType;
-      options = [ "subvol=tmp" ] ++ options;
+      options = ["subvol=tmp"] ++ options;
     };
   };
   boot.tmp.cleanOnBoot = true;

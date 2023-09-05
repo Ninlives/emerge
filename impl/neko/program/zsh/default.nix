@@ -1,8 +1,12 @@
-{ config, pkgs, lib, var, nixosConfig, ... }:
-with pkgs;
-let
+{
+  config,
+  pkgs,
+  lib,
+  nixosConfig,
+  ...
+}:
+with pkgs; let
   inherit (lib) optionalString;
-  inherit (var.proxy) address port;
   inherit (config.home) homeDirectory;
   histdb = fetchFromGitHub {
     owner = "larkery";
@@ -11,7 +15,7 @@ let
     sha256 = "sha256-PQIFF8kz+baqmZWiSr+wc4EleZ/KD8Y+lxW2NT35/bg=";
   };
 in {
-  home.packages = [ sqlite ];
+  home.packages = [sqlite];
   home.file.".bashrc".text = ''
     export HISTFILE=${homeDirectory}/.local/history/bash_history
     # For remote builders running on non-NixOS
@@ -50,7 +54,6 @@ in {
         ztr = "trans zh:en -shell";
         axel = "axel -n 128 -a";
         a = "ranger";
-        ssr = "all_proxy=socks5://${address}:${toString port.local}";
         open = "xdg-open";
       };
 
@@ -67,7 +70,7 @@ in {
           "colored-man-pages"
         ];
 
-        custom = toString (runCommandLocal "custom" { redirPort = port.redir; } ''
+        custom = toString (runCommandLocal "custom" {} ''
           mkdir -p $out
           cp -r ${./config}/. $out/.
           find $out -type f -print0 | while read -d "" f;do
@@ -108,7 +111,6 @@ in {
           ZSH_AUTOSUGGEST_STRATEGY=histdb_top
         fi
       '';
-
     };
     z-lua = {
       enable = true;

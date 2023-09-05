@@ -1,6 +1,7 @@
-{ buildNpmPackage
-, fetchFromGitHub
-, python3
+{
+  buildNpmPackage,
+  fetchFromGitHub,
+  python3,
 }:
 buildNpmPackage rec {
   pname = "bitwarden";
@@ -15,7 +16,7 @@ buildNpmPackage rec {
   npmWorkspace = "apps/browser";
   makeCacheWritable = true;
 
-  nativeBuildInputs = [ python3 ];
+  nativeBuildInputs = [python3];
   npmBuildScript = "dist:firefox";
   env.ELECTRON_SKIP_BINARY_DOWNLOAD = "1";
 

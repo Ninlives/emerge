@@ -1,5 +1,4 @@
-{ inputs, ... }:
-let
+{inputs, ...}: let
   dp = inputs.values.secret;
   domain = "${dp.host.private.services.kavita.fqdn}";
 in {
