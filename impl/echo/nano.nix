@@ -1,6 +1,6 @@
 {
   lib,
-  var,
+  pkgs,
   inputs,
   config,
   ...
@@ -138,7 +138,7 @@ in {
     type = types.package;
     default =
       (inputs.nixpkgs.lib.nixosSystem {
-        inherit (var) system;
+        inherit (pkgs) system;
         modules = [netboot-config];
       })
       .config

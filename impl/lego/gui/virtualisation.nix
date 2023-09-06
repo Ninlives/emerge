@@ -13,7 +13,6 @@ in {
   ];
   users.users.${config.profile.user.name}.extraGroups = ["libvirtd" "kvm"];
 
-  boot.kernelModules = ["kvm-amd"];
   virtualisation.libvirtd = {
     enable = true;
     qemu.package = qemu_kvm;

@@ -2,32 +2,33 @@
   fn,
   self,
   inputs,
-  moduleWithSystem,
+  withSystem,
   ...
 }:
 with inputs;
 with self.mod; {
-  flake.nixosConfigurations.echo = nixpkgs.lib.nixosSystem {
-    specialArgs = {inherit fn self inputs;};
-    modules = [
-      sops-nix.nixosModules.sops
+  flake.nixosConfigurations.echo = withSystem "x86_64-linux" ({system, ...}:
+    nixpkgs.lib.nixosSystem {
+      inherit system;
+      specialArgs = {inherit fn self inputs;};
+      modules = [
+        bombe
+        opt.revive
+        opt.rathole
+        opt.sops
 
-      bombe
-      opt.revive
-      opt.rathole
-      opt.sops
+        impl.echo
+        {
+          sops.roles = ["net" "connect" "server"];
+          nixpkgs.overlays = self.overlays';
+        }
+      ];
+    });
 
-      impl.echo
-      {
-        sops.roles = ["net" "connect" "server"];
-        nixpkgs.overlays = self.overlays';
-      }
-    ];
-  };
-
-  flake.terraformConfigurations.zero = moduleWithSystem ({
+  flake.terraformConfigurations.zero = withSystem "x86_64-linux" ({
     pkgs,
     system,
+    ...
   }:
     (terranix.lib.terranixConfiguration {
       inherit pkgs;

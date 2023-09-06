@@ -18,6 +18,8 @@ in {
     gnome-maps
     gnome-contacts
     gnome-packagekit
+    gnome-music
+    gnome-photos
   ];
   programs.geary.enable = false;
   services.packagekit.enable = false;

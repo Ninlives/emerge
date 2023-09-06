@@ -23,7 +23,5 @@ in {
     };
   };
   home-manager.users.${config.profile.user.name} = {...}: {
-    home.file.".mozilla/firefox/zero/user.js".text =
-      config.lib.firefox.mkUserJs {"network.proxy.type" = 4;};
   };
 }
