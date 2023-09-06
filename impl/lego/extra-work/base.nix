@@ -8,7 +8,7 @@ with lib; let
   dp = inputs.values.secret;
 in {
   allowUnfreePackageNames = ["teams"];
-  profile.identity = "workstation";
+  profile.identity = "institute";
   profile.user.name = dp.workstation.username;
   profile.user.uid = 2048;
   profile.disk.persist = "institute";

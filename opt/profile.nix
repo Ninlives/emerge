@@ -10,7 +10,7 @@ in {
   options.profile = {
     identity = mkOption {
       type = str;
-      default = "private";
+      default = "garden";
     };
     user.name = mkOption {
       type = str;

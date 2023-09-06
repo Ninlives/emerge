@@ -19,7 +19,7 @@ in {
     gnome-contacts
     gnome-packagekit
     gnome-music
-    gnome-photos
+    pkgs.gnome-photos
   ];
   programs.geary.enable = false;
   services.packagekit.enable = false;
