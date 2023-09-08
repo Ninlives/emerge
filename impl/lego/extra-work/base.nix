@@ -13,6 +13,7 @@ in {
   profile.user.uid = 2048;
   profile.disk.persist = "institute";
   profile.disk.swap = "depot";
+  profile.proxy.default = "v2ray-fallback";
 
   sops.roles = ["work"];
 

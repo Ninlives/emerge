@@ -80,6 +80,4 @@ in {
   '';
 
   boot.supportedFilesystems = ["ntfs"];
-
-  nix.settings.max-jobs = lib.mkDefault 12;
 }
