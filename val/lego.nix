@@ -24,6 +24,7 @@ with self.mod; let
     impl.lego.gnome-local
     impl.lego.gui
     impl.lego.jovian
+    impl.lego.keychron
     impl.lego.proxy
     impl.lego.security
 

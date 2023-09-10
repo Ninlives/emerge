@@ -45,7 +45,7 @@ in
         "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/"
       ];
       "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
-        binding = "<Super>space";
+        binding = "F10";
         command = "drop-down-kitty";
         name = "Terminal";
       };
