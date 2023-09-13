@@ -1,7 +1,6 @@
 {
   pkgs,
   lib,
-  fn,
   config,
   nixosConfig,
   ...
@@ -9,7 +8,6 @@
   inherit (pkgs) rime-data librime fetchFromGitHub;
   inherit (lib.hm.dag) entryAfter;
   inherit (lib) optional optionals optionalString;
-  no-im = nixosConfig.i18n.inputMethod.enabled == null;
 in {
   programs.neovim.settings.cmp = entryAfter ["basic"] {
     plugins = p:
@@ -21,22 +19,7 @@ in {
           cmp-nvim-lsp
           cmp-buffer
           cmp-path
-        ]
-        ++ (optionals no-im [cmp-rime cmp-punc]);
-
-    pythonPackages = p:
-      optional no-im (p.buildPythonPackage {
-        pname = "pyrime";
-        version = "0.1";
-        src = fetchFromGitHub {
-          owner = "Ninlives";
-          repo = "pyrime";
-          rev = "721bc94605fc41e27777c6bdf7c4fec4317e8e60";
-          sha256 = "sha256-uCGpNryjxkwJ+nAWmnXqDOYuHUAMXKiqR9vcUBmJcUc=";
-        };
-
-        buildInputs = [librime];
-      });
+        ];
 
     lua =
       /*
@@ -88,15 +71,6 @@ in {
             { name = 'nvim_lsp' },
             { name = 'path' },
             { name = 'buffer' },
-            ${
-          optionalString no-im ''
-            { name = 'rime', option = {
-              shared_data_dir = '${rime-data}/share/rime-data',
-              user_data_dir = '${config.home.homeDirectory}/.config/ibus/rime'
-            } },
-            { name = 'punc' }
-          ''
-        }
           },
         }
 

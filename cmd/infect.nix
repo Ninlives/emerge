@@ -12,7 +12,7 @@
           writeShellScriptBin "infect" ''
             gen=$(\
               ${nix} build --no-link --print-out-paths \
-                $(${nix} eval --raw '${self}#transformation.physeter' \
+                $(${nix} eval --raw '${self}#pathogen.ipomoea' \
                               --apply 'f: (f "'$USER'" "'$HOME'").activationPackage.drvPath')^out\
             )
             HOME_MANAGER_BACKUP_EXT=overridden_by_hm $gen/activate
