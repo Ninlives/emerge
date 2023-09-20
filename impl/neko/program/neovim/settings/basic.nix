@@ -14,7 +14,6 @@ in {
         vim-signify
         vim-smoothie
         auto-pairs
-        vibusen
         goyo-vim
         limelight-vim
 

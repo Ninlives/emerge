@@ -10,7 +10,7 @@
 in {
   cmp-rime = buildVimPluginFrom2Nix {
     pname = "cmp-rime";
-    version = "git";
+    version = "unstable-2022-07-20";
     src = fetchFromGitHub {
       owner = "Ninlives";
       repo = "cmp-rime";
@@ -23,17 +23,6 @@ in {
     pname = "cmp-punc";
     version = "local";
     src = ./cmp-punc;
-  };
-
-  vibusen = buildVimPluginFrom2Nix {
-    pname = "vibusen.vim";
-    version = "unstable-2020-04-01";
-    src = fetchFromGitHub {
-      owner = "lsrdg";
-      repo = "vibusen.vim";
-      rev = "9d944ea023253d35351e672eb2742ddcf1445355";
-      sha256 = "1n2s8b7kya8dnn1d5b0dc8yadl92iwf58s7sb5950b6yyi3i3q7f";
-    };
   };
 
   mundo = buildVimPluginFrom2Nix {
@@ -49,12 +38,12 @@ in {
 
   nerdtree-syntax-highlight = buildVimPluginFrom2Nix {
     pname = "vim-nerdtree-syntax-highlight";
-    version = "unstable-2021-01-11";
+    version = "unstable-2023-07-07";
     src = fetchFromGitHub {
       owner = "tiagofumo";
       repo = "vim-nerdtree-syntax-highlight";
-      rev = "5178ee4d7f4e7761187df30bb709f703d91df18a";
-      sha256 = "0i690a9sd3a9193mdm150q5yx43mihpzkm0k5glllsmnwpngrq1a";
+      rev = "35e70334a2ff6e89b82a145d1ac889e82d1ddb4e";
+      sha256 = "0rkr3w7mcc7ha5g6m4lg0ik52v10hrx1mn2ahxnvb30h0isdyzb8";
     };
   };
 }
