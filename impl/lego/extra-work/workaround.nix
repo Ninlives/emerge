@@ -6,4 +6,10 @@
       });
     })
   ];
+
+  services.xserver.config = ''
+    Section "Extensions"
+        Option "MIT-SHM" "Disable"
+    EndSection
+  '';
 }
