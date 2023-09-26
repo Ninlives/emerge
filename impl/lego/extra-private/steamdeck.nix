@@ -29,7 +29,7 @@ in {
   users.users.deck = {
     isNormalUser = true;
     extraGroups = ["networkmanager" "input"];
-    passwordFile = config.sops.secrets.hashed-password-deck.path;
+    hashedPasswordFile = config.sops.secrets.hashed-password-deck.path;
     home = "/home/deck";
     createHome = true;
     uid = 1001;

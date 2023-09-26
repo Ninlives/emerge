@@ -1,1 +1,1 @@
-update
+add_hid_apple_to_initrd_for_keychron

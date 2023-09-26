@@ -22,7 +22,7 @@
     createHome = true;
     isNormalUser = true;
     extraGroups = ["pulseaudio" "audio" "video" "power" "wheel" "networkmanager"];
-    passwordFile = config.sops.secrets.hashed-password.path;
+    hashedPasswordFile = config.sops.secrets.hashed-password.path;
   };
   sops.secrets.hashed-password.neededForUsers = true;
 
