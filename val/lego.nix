@@ -23,10 +23,12 @@ with self.mod; let
     impl.lego.gnome-basic
     impl.lego.gnome-local
     impl.lego.gui
-    impl.lego.jovian
-    impl.lego.keychron
     impl.lego.proxy
     impl.lego.security
+
+    impl.lego.jovian
+    impl.lego.keychron
+    impl.lego.acer
 
     ({config, ...}: {
       system.nixos.tags = mkAfter [(builtins.readFile ../tag.txt)];

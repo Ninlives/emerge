@@ -1,5 +1,5 @@
-{inputs, ...}: {
-  boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "usb_storage" "usbhid" "sd_mod" "sdhci_pci"];
+{inputs, pkgs, ...}: {
+  boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "usb_storage" "usbhid" "sd_mod" "sdhci_pci" "cdc_ncm"];
   boot.kernelModules = ["kvm-amd"];
   imports = ["${inputs.jovian}/modules"];
 
@@ -12,6 +12,7 @@
   services.pipewire.alsa.support32Bit = true;
 
   hardware.bluetooth.enable = true;
+  hardware.bluetooth.package = pkgs.bluez-steamos;
   hardware.bluetooth.settings.General = {
     "Privacy" = "device";
     "JustWorksRepairing" = "always";

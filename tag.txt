@@ -1,1 +1,1 @@
-add_hid_apple_to_initrd_for_keychron
+acer_monitor_quirks

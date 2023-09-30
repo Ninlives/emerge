@@ -26,4 +26,23 @@ final: prev: {
         --set QT_SCREEN_SCALE_FACTORS 2 \
         --set QT_QPA_PLATFORM xcb
     '';
+
+  bluez-steamos = with final;
+    bluez.overrideAttrs (o: {
+      patches =
+        o.patches
+        or []
+        ++ [
+          (runCommandLocal "bluez.patch" {
+              src = fetchFromGitHub {
+                owner = "Jovian-Experiments";
+                repo = "PKGBUILDs-mirror";
+                rev = "e545ebcc3cb45fe391eeb1a384015bc84973b155";
+                sha256 = "sha256-nYBnc34QmaRHuBVeWKAO3o5Uc2LIpU+U27HVoAg/Qyc=";
+              };
+            } ''
+              cat $src/*.patch > $out
+            '')
+        ];
+    });
 }
