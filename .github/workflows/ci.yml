@@ -18,7 +18,7 @@ jobs:
     - name: Install nixFlake
       uses: cachix/install-nix-action@v20
       with:
-        install_url: https://github.com/numtide/nix-unstable-installer/releases/latest/download/install
+        install_url: https://github.com/nix-community/nix-unstable-installer/releases/download/nix-2.18.0pre20230810_a1fdc68/install
         extra_nix_config: |
           experimental-features = nix-command flakes
           extra-trusted-public-keys = nixos-cn.cachix.org-1:L0jEaL6w7kwQOPlLoCR3ADx+E3Q8SEFEcB9Jaibl0Xg= emerge.cachix.org-1:Zvw8m0TXudK0MtylBFvUZCUEHlOfTgfvE2bbIexGhVw=
