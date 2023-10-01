@@ -1,6 +1,6 @@
-diff --color -uar ./linux-6.1.52-valve2-old/drivers/gpu/drm/drm_edid.c ./linux-6.1.52-valve2-new/drivers/gpu/drm/drm_edid.c
---- ./linux-6.1.52-valve2-old/drivers/gpu/drm/drm_edid.c	2023-09-16 00:15:51.000000000 +0800
-+++ ./linux-6.1.52-valve2-new/drivers/gpu/drm/drm_edid.c	2023-10-01 02:27:40.632307424 +0800
+diff --color -uar a/drivers/gpu/drm/drm_edid.c b/drivers/gpu/drm/drm_edid.c
+--- a/drivers/gpu/drm/drm_edid.c	2023-09-16 00:15:51.000000000 +0800
++++ b/drivers/gpu/drm/drm_edid.c	2023-10-01 02:27:40.632307424 +0800
 @@ -118,6 +118,8 @@
  } edid_quirk_list[] = {
  	/* Acer AL1706 */
