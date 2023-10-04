@@ -1,4 +1,3 @@
-{ ... }: 
-{
-  boot.kernelPatches = [ { patch = ./force_8bpc.patch; } ];
+{...}: {
+  boot.kernelPatches = [{patch = ./force_8bpc.patch;}];
 }

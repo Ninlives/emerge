@@ -34,5 +34,6 @@ with inputs; {
     }) (fn.filesFrom ../impl/lego));
     impl.neko = {imports = fn.dotNixFromRecursive ../impl/neko;};
     impl.echo = import ../impl/echo;
+    impl.nano = {imports = fn.dotNixFromRecursive ../impl/nano;};
   };
 }

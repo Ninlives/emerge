@@ -8,6 +8,9 @@ with lib;
 with pkgs;
 with builtins;
 with lib.filesystem; let
+  importYAML = path:
+    fromJSON (lib.readFile (runCommandLocal "content.json" {}
+        "${yaml2json}/bin/yaml2json < ${path} > $out"));
   isYAML = f: hasSuffix ".yaml" (toString f);
   listFilesIfExists = path:
     if pathExists path
@@ -19,7 +22,7 @@ with lib.filesystem; let
     contents =
       map (f: {
         file = f;
-        content = removeAttrs (pkgs.importYAML f) ["sops"];
+        content = removeAttrs (importYAML f) ["sops"];
       })
       sources;
     generateKeys = attr:

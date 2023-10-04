@@ -41,9 +41,13 @@ with self.mod; let
     })
   ];
 in {
-  flake.nixosConfigurations.lego = withSystem "x86_64-linux" ({inputs', ...}:
+  flake.nixosConfigurations.lego = withSystem "x86_64-linux" ({
+    inputs',
+    system,
+    ...
+  }:
     nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
+      inherit system;
       specialArgs = {inherit fn self inputs inputs';};
       modules =
         baseModules

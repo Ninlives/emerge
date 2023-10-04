@@ -11,15 +11,14 @@
 in {
   programs.neovim.settings.cmp = entryAfter ["basic"] {
     plugins = p:
-      with p;
-        [
-          nvim-cmp
-          luasnip
+      with p; [
+        nvim-cmp
+        luasnip
 
-          cmp-nvim-lsp
-          cmp-buffer
-          cmp-path
-        ];
+        cmp-nvim-lsp
+        cmp-buffer
+        cmp-path
+      ];
 
     lua =
       /*

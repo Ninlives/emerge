@@ -5,6 +5,7 @@ keys:
   - &lab age1xz7t3w8l36ls8ds264875zqtulv9vwvj37ayy87u3ccacqxax9hs6nfq8r
   - &infra age1rf242hcde4xvq4pjwpz67m5xq9cxduq4wlupneyl3kf45an4uqeqh42pzg
   - &remote age14tj85jqsxl2ckgryzrl46mun2q766zmstu2cfku7yxzjxn457q8qyvtvpy
+  - &institute age1fc9839frff66gl266rmmc09s5vatvre3x3c9rx3v3awhh2t5zu3qg0qs3m
 creation_rules:
 
   - path_regex: .*/private/.*
@@ -47,3 +48,6 @@ creation_rules:
 
   - path_regex: .*/tfstate.json
     age: *infra
+
+  - path_regex: .*/institute/.*
+    age: *institute
