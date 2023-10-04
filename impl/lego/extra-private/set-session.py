@@ -17,7 +17,7 @@ def main():
     mlatus.set_session_type("wayland")
 
     deck = user_manager.get_user("deck")
-    deck.set_session("steam-wayland")
+    deck.set_session("gamescope-wayland")
     deck.set_session_type("wayland")
 
 if __name__ == "__main__":
