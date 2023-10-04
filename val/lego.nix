@@ -28,7 +28,6 @@ with self.mod; let
 
     impl.lego.jovian
     impl.lego.keychron
-    impl.lego.acer
 
     ({config, ...}: {
       system.nixos.tags = mkAfter [(builtins.readFile ../tag.txt)];
