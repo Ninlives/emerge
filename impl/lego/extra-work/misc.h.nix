@@ -22,7 +22,7 @@
     }
     {
       src = /Programs/cool-retro-term;
-      dst = ".local/share/cool-retro-term";
+      dst = ".local/share/cool-retro-term/cool-retro-term";
     }
   ];
 }
