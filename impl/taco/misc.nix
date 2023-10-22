@@ -18,7 +18,7 @@
     createHome = true;
     isNormalUser = true;
     extraGroups = ["systemd-journal"];
-    passwordFile = config.sops.secrets.hashed-password.path;
+    hashedPasswordFile = config.sops.secrets.hashed-password.path;
   };
   sops.secrets.hashed-password.neededForUsers = true;
 

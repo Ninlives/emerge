@@ -34,9 +34,9 @@
 
           if [[ "$1" == "update" ]];then
             ln -s "${self.terraformConfigurations.zero}" config.tf.json
-            ${terraform}/bin/terraform init -upgrade
+            ${opentofu}/bin/tofu init -upgrade
           else
-            ${terraform}/bin/terraform -chdir="${terra}" "$@"
+            ${opentofu}/bin/tofu -chdir="${terra}" "$@"
           fi
         '';
     };
