@@ -19,6 +19,15 @@
       target="${args.target.user}@${args.target.host}"
       host="${args.target.host}"
 
+      enter(){
+        echo "Waiting for target back online..."
+        until [[ "$(${ssh} $target -o ConnectTimeout=30 echo ok)" == "ok" ]];do
+          echo "Not reachable, waiting..."
+          sleep 10
+        done
+        ${ssh} "$target" sudo ${hat}/physeter
+      }
+
       if [[ "$action" == "seed" ]];then
         ${ssh} "$target" "mkdir -m 777 -p '${boot}'"
         ${rsync}/bin/rsync -ravhP --chmod=a+w --progress "${config.system.build.kexecBoot}/" "$target":"${boot}"
@@ -31,11 +40,11 @@
         until [[ "$(${ssh} \
                     -o UserKnownHostsFile=/dev/null \
                     -o StrictHostKeyChecking=no \
-                    -o ConnectTimeout=5 \
+                    -o ConnectTimeout=10 \
                     root@$host \
                     cat /etc/is_kexec)" == "true" ]];do
           echo "Not reachable, waiting..."
-          sleep 2
+          sleep 5
         done
 
         ssh_(){
@@ -56,17 +65,22 @@
 
         ssh_ "mkdir -p /mnt/${entry}/nix/var/nix/profiles/hat && \
               nix-env --store /mnt/${entry} -p /mnt/${entry}/nix/var/nix/profiles/hat/physeter \
-                      --set ${config.system.build.physeter}"
+                      --set ${config.system.build.physeter} && \
+              ${config.system.build.mvLink}/bin/mv-link /mnt/${entry}/nix/var/nix/profiles/hat /mnt/${hat} && \
+              reboot"
 
-        ssh_ "physester-mv-link /mnt/${entry}/nix/var/nix/profiles/hat /mnt/${hat}"
+        enter
 
       elif [[ "$action" == "grow" ]];then
         echo "Uploading system closure..."
         ${nix} copy --to "ssh://cloud@$host" "${config.system.build.physeter}"
 
         echo "Switching..."
-        ${ssh} "cloud@$host" sudo nix-env -p /nix/var/nix/profiles/hat/physeter --set "${config.system.build.physeter}"
-        ${ssh} "physester-mv-link /nix/var/nix/profiles/hat /hat"
+        ${ssh} "cloud@$host" "sudo nix-env -p /nix/var/nix/profiles/hat/physeter --set '${config.system.build.physeter}' && \
+                              sudo ${config.system.build.mvLink}/bin/mv-link /nix/var/nix/profiles/hat /hat && \
+                              sudo reboot"
+        enter
+
       fi
     '';
 }

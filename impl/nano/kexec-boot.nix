@@ -32,7 +32,7 @@ in {
   system.build.kexecBoot = pkgs.runCommand "kexec-tarball" {} ''
     mkdir kexec $out
     cp "${pkgs.pkgsStatic.busybox}/bin/busybox" $out/busybox
-    cp "${config.system.build.netbootRamdisk}/initrd" kexec/initrd
+    cp "${config.system.build.netbootRamdisk}/${config.system.boot.loader.initrdFile}" kexec/initrd
     cp "${config.system.build.kernel}/${config.system.boot.loader.kernelFile}" kexec/bzImage
     cp "${config.system.build.kexecRun}" kexec/run
     cp "${pkgs.pkgsStatic.kexec-tools}/bin/kexec" kexec/kexec

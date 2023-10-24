@@ -1,7 +1,9 @@
 {
+  fn,
   config,
   inputs,
   lib,
+  self,
   ...
 }:
 with lib; {
@@ -33,9 +35,11 @@ with lib; {
     createHome = true;
     isNormalUser = true;
     extraGroups = ["wheel"];
-    passwordFile = config.sops.secrets.hashed-password.path;
+    hashedPasswordFile = config.sops.secrets.hashed-password.path;
     openssh.authorizedKeys.keys = [inputs.values.secret.ssh.auth];
   };
+  home-manager.extraSpecialArgs = { inherit fn inputs; };
+  home-manager.users.cloud = {...}:{ imports = [ self.mod.impl.neko ]; };
 
   security.sudo.wheelNeedsPassword = false;
 

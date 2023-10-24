@@ -4,7 +4,7 @@
     ./restore_routes.py;
 in {
   systemd.network.enable = true;
-  networking.dhcpcd.enable = false;
+  networking.useDHCP = false;
 
   boot.initrd.postMountCommands = ''
     mkdir -m 755 -p /mnt-root/root/network

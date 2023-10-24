@@ -1,8 +1,5 @@
 {
   fn,
-  lib,
-  pkgs,
-  config,
   ...
 }: {
   imports = [./options.nix] ++ fn.dotNixFrom ./settings;

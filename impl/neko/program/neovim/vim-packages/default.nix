@@ -6,9 +6,9 @@
   lib,
   fetchFromGitHub,
 }: let
-  inherit (vimUtils) buildVimPluginFrom2Nix;
+  inherit (vimUtils) buildVimPlugin;
 in {
-  cmp-rime = buildVimPluginFrom2Nix {
+  cmp-rime = buildVimPlugin {
     pname = "cmp-rime";
     version = "unstable-2022-07-20";
     src = fetchFromGitHub {
@@ -19,13 +19,13 @@ in {
     };
   };
 
-  cmp-punc = buildVimPluginFrom2Nix {
+  cmp-punc = buildVimPlugin {
     pname = "cmp-punc";
     version = "local";
     src = ./cmp-punc;
   };
 
-  mundo = buildVimPluginFrom2Nix {
+  mundo = buildVimPlugin {
     pname = "vim-mundo";
     version = "unstable-2022-11-05";
     src = fetchFromGitHub {
@@ -36,7 +36,7 @@ in {
     };
   };
 
-  nerdtree-syntax-highlight = buildVimPluginFrom2Nix {
+  nerdtree-syntax-highlight = buildVimPlugin {
     pname = "vim-nerdtree-syntax-highlight";
     version = "unstable-2023-07-07";
     src = fetchFromGitHub {

@@ -1,4 +1,5 @@
 {
+  fn,
   inputs,
   pkgs,
   self,
@@ -8,8 +9,9 @@
   system.build.physeter =
     (inputs.nixpkgs.lib.nixosSystem {
       inherit (pkgs) system;
-      specialArgs = {inherit self inputs args;};
+      specialArgs = {inherit fn self inputs args;};
       modules = with self.mod; [
+        inputs.home-manager.nixosModule
         bombe
         opt.revive
         opt.sops
