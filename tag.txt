@@ -1,1 +1,1 @@
-ci_show_trace
+keychron_udev_rules
