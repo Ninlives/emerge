@@ -17,7 +17,7 @@
 in {
   imports = [
     inputs.misskey.nixosModules.default
-    inputs.courier.nixosModules.default
+    # inputs.courier.nixosModules.default
   ];
   services.misskey = {
     enable = true;
@@ -128,34 +128,34 @@ in {
     enable = true;
     port = 6379;
   };
-  sops.secrets."courier/keys/private.pem" = {
-    owner = config.services.courier.user;
-    group = config.services.courier.group;
-  };
-  sops.secrets."courier/keys/public.pem" = {
-    owner = config.services.courier.user;
-    group = config.services.courier.group;
-  };
+  # sops.secrets."courier/keys/private.pem" = {
+  #   owner = config.services.courier.user;
+  #   group = config.services.courier.group;
+  # };
+  # sops.secrets."courier/keys/public.pem" = {
+  #   owner = config.services.courier.user;
+  #   group = config.services.courier.group;
+  # };
 
   # Meilisearch
   services.meilisearch.enable = true;
 
-  # Relay
-  services.courier = {
-    enable = true;
-    listenPort = srv.courier.port;
-    hostName = srv.courier.fqdn;
-    privKeyFile = scrt."courier/keys/private.pem".path;
-    pubKeyFile = scrt."courier/keys/public.pem".path;
-  };
-  services.nginx.virtualHosts.${srv.courier.fqdn} = {
-    forceSSL = true;
-    enableACME = true;
-    locations."/" = {
-      proxyPass = "http://127.0.0.1:${toString srv.courier.port}";
-      recommendedProxySettings = true;
-    };
-  };
+  # # Relay
+  # services.courier = {
+  #   enable = true;
+  #   listenPort = srv.courier.port;
+  #   hostName = srv.courier.fqdn;
+  #   privKeyFile = scrt."courier/keys/private.pem".path;
+  #   pubKeyFile = scrt."courier/keys/public.pem".path;
+  # };
+  # services.nginx.virtualHosts.${srv.courier.fqdn} = {
+  #   forceSSL = true;
+  #   enableACME = true;
+  #   locations."/" = {
+  #     proxyPass = "http://127.0.0.1:${toString srv.courier.port}";
+  #     recommendedProxySettings = true;
+  #   };
+  # };
 
   # Persistent
   systemd.tmpfiles.rules = with config.users; [
