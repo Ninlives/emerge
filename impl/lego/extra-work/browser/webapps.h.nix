@@ -1,7 +1,7 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
     (makeDesktopItem {
-      name = "teams-for-linux";
+      name = "teams-pwa";
       desktopName = "Microsoft Teams";
       categories = ["Network" "InstantMessaging" "Chat"];
       icon = fetchurl {
@@ -11,6 +11,9 @@
       exec = ''${chromium}/bin/chromium --app="https://teams.microsoft.com" %U'';
     })
   ];
+  dconf.settings = {
+    "org/gnome/shell".favorite-apps = ["teams-pwa.desktop"];
+  };
   persistent.boxes = [
     {
       src = /Programs/chromium;
