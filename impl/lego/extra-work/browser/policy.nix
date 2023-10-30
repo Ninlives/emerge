@@ -1,14 +1,16 @@
-{
-  config,
-  inputs,
-  ...
-}: let
+{inputs, ...}: let
   dp = inputs.values.secret;
 in {
   programs.firefox.policies = {
     Authentication = {
       SPNEGO = [".${dp.workstation.host}" ".microsoftazuread-sso.com"];
       Delegated = ["*.${dp.workstation.host}"];
+    };
+  };
+  programs.chromium = {
+    enable = true;
+    extraOpts = {
+      AuthServerAllowlist = "*.${dp.workstation.host}";
     };
   };
   krb5 = {
@@ -21,7 +23,5 @@ in {
       forwardable = true;
       rdns = false;
     };
-  };
-  home-manager.users.${config.profile.user.name} = {...}: {
   };
 }
