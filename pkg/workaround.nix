@@ -15,9 +15,9 @@ final: prev: {
           '';
       });
     };
-  v2ray = prev.v2ray.override (o: {
+  v2ray = prev.v2ray.override {
     buildGoModule = args:
-      assert args.src.outputHash == "sha256-fMAPlPn53GkYKpraRS58XTF//IMZtzssaQpBkirEWfw="; (o.buildGoModule (args
+      assert args.src.outputHash == "sha256-fMAPlPn53GkYKpraRS58XTF//IMZtzssaQpBkirEWfw="; (final.buildGo120Module (args
         // rec {
           version = "5.7.0";
           src = final.fetchFromGitHub {
@@ -28,5 +28,5 @@ final: prev: {
           };
           vendorHash = "sha256-uq0v14cRGmstJabrERsa+vFRX6Bg8+5CU6iV8swrL/I=";
         }));
-  });
+  };
 }
