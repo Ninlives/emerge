@@ -15,34 +15,18 @@ final: prev: {
           '';
       });
     };
-
-  tdesktop =
-    final.runCommandLocal "tdesktop" {
-      nativeBuildInputs = [final.makeWrapper];
-    } ''
-      mkdir -p $out
-      ${final.xorg.lndir}/bin/lndir ${prev.tdesktop} $out
-      wrapProgram $out/bin/telegram-desktop \
-        --set QT_SCREEN_SCALE_FACTORS 2 \
-        --set QT_QPA_PLATFORM xcb
-    '';
-
-  bluez-steamos = with final;
-    bluez.overrideAttrs (o: {
-      patches =
-        o.patches
-        or []
-        ++ [
-          (runCommandLocal "bluez.patch" {
-              src = fetchFromGitHub {
-                owner = "Jovian-Experiments";
-                repo = "PKGBUILDs-mirror";
-                rev = "e545ebcc3cb45fe391eeb1a384015bc84973b155";
-                sha256 = "sha256-nYBnc34QmaRHuBVeWKAO3o5Uc2LIpU+U27HVoAg/Qyc=";
-              };
-            } ''
-              cat $src/*.patch > $out
-            '')
-        ];
-    });
+  v2ray = prev.v2ray.override (o: {
+    buildGoModule = args:
+      assert args.src.outputHash == "sha256-fMAPlPn53GkYKpraRS58XTF//IMZtzssaQpBkirEWfw="; (o.buildGoModule (args
+        // rec {
+          version = "5.7.0";
+          src = final.fetchFromGitHub {
+            owner = "v2fly";
+            repo = "v2ray-core";
+            rev = "v${version}";
+            hash = "sha256-gdDV5Cd/DjEqSiOF7j5a8QLtdJiFeNCnHoA4XD+yiGA=";
+          };
+          vendorHash = "sha256-uq0v14cRGmstJabrERsa+vFRX6Bg8+5CU6iV8swrL/I=";
+        }));
+  });
 }

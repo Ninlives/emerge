@@ -28,10 +28,9 @@ in {
   programs.firefox = {
     enable = true;
     package = pkgs.firefox-esr;
-    nativeMessagingHosts = {
-      gsconnect = true;
-      tridactyl = true;
-    };
+    nativeMessagingHosts.packages = with pkgs; [
+      tridactyl-native
+    ];
     languagePacks = ["zh-CN"];
     policies = {
       DisableFirefoxAccounts = true;
