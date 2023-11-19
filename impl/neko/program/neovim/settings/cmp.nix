@@ -1,13 +1,5 @@
-{
-  pkgs,
-  lib,
-  config,
-  nixosConfig,
-  ...
-}: let
-  inherit (pkgs) rime-data librime fetchFromGitHub;
+{lib, ...}: let
   inherit (lib.hm.dag) entryAfter;
-  inherit (lib) optional optionals optionalString;
 in {
   programs.neovim.settings.cmp = entryAfter ["basic"] {
     plugins = p:

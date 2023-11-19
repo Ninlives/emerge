@@ -1,9 +1,4 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
-}: let
+{lib, ...}: let
   inherit (lib.hm.dag) entryAfter;
 in {
   programs.neovim.settings.markdown = entryAfter ["which-key"] {
