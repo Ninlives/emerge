@@ -7,7 +7,7 @@ in {
       vim
       */
       ''
-        autocmd BufNewFile,BufRead *.c,*.h set noexpandtab
+        autocmd BufNewFile,BufRead *.c,*.h set tabstop=8 | set noexpandtab
       '';
   };
 }
