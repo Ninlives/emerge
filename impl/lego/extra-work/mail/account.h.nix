@@ -32,6 +32,7 @@ in {
         inherit (email.smtp) host port;
         userName = email.smtp.user;
         passwordCommand = getpass email.smtp.vaultItem;
+        tls.useStartTls = true;
       };
       getmail = mkIf email.imap.enable {
         enable = true;

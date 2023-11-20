@@ -1,1 +1,1 @@
-set_noexpandtab_for_c
+fix_msmtp
