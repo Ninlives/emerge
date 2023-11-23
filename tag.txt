@@ -1,1 +1,1 @@
-remove_mpris-indicator-button
+unpin_v2ray
