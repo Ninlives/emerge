@@ -281,11 +281,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1699777183,
-        "narHash": "sha256-b9XKdiiZKyDbFV6Wo2FREGAiKxFraA2herlqseFYDK4=",
+        "lastModified": 1700708413,
+        "narHash": "sha256-KrEoP8KaGnKTNnRym8w91h16/Fa1E0KGdMDKxDO/nMQ=",
         "owner": "Ninlives",
         "repo": "home-manager",
-        "rev": "0d1a0a85d159830b539bfd8dda6ad601b38a9a05",
+        "rev": "148a4d19afd2afa17368e25c1481b0d614631f58",
         "type": "github"
       },
       "original": {
