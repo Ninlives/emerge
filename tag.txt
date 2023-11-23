@@ -1,1 +1,1 @@
-samba
+remove_mpris-indicator-button

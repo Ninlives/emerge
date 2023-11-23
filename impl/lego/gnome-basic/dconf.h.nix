@@ -10,7 +10,6 @@ in
   with pkgs.gnomeExtensions; {
     home.packages = [
       dash-to-dock
-      mpris-indicator-button
       appindicator
       pixel-saver
       x11-gestures
