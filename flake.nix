@@ -13,7 +13,6 @@
   };
   inputs.jovian = {
     url = "github:Jovian-Experiments/Jovian-NixOS";
-    flake = false;
   };
   inputs.lanzaboote.url = "github:nix-community/lanzaboote";
 

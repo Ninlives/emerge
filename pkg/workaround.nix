@@ -17,7 +17,7 @@ final: prev: {
     };
   v2ray = prev.v2ray.override {
     buildGoModule = args:
-      assert args.src.outputHash == "sha256-fMAPlPn53GkYKpraRS58XTF//IMZtzssaQpBkirEWfw="; (final.buildGo120Module (args
+      assert args.src.outputHash == "sha256-wiAK3dzZ9TGYkt7MmBkYTD+Mi5BEid8sziDM1nI3Z80="; (final.buildGo120Module (args
         // rec {
           version = "5.7.0";
           src = final.fetchFromGitHub {
