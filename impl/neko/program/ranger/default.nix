@@ -49,6 +49,8 @@ in {
         echo "default_linemode devicons" >> $out/rc.conf
 
         cat ${compressCommand} >> $out/commands.py
+
+        sed -i -e '/# Documents/!{p;d;};N;a ext org = ''${VISUAL:-$EDITOR} -- "$@"' $out/rifle.conf
       '';
       recursive = true;
     };

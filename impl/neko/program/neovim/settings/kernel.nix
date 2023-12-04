@@ -1,7 +1,7 @@
 {lib, ...}: let
   inherit (lib.hm.dag) entryAfter;
 in {
-  programs.neovim.settings.c = entryAfter ["basic"] {
+  programs.neovim.settings.kernel = entryAfter ["basic"] {
     config =
       /*
       vim

@@ -21,10 +21,7 @@
       tree-sitter-regex
       tree-sitter-vim
       tree-sitter-nix
-      # (tree-sitter-nix.overrideAttrs (_: {
-      #   version = "fixed";
-      #   src = tree-sitter-nix';
-      # }))
+      tree-sitter-org-nvim
     ];
 in {
   programs.neovim.settings.tree-sitter = entryAnywhere {
