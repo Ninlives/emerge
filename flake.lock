@@ -300,11 +300,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1701678527,
-        "narHash": "sha256-IZsekR8N8mmiCHlbHGoxUCPbpkAc/VG9Mk3Gfxjqi10=",
+        "lastModified": 1701853617,
+        "narHash": "sha256-iyXpx1xNYeRgVQwBC1UlAsUi0I8BsinN5wCaar/Mq2Y=",
         "owner": "Jovian-Experiments",
         "repo": "Jovian-NixOS",
-        "rev": "a67dce3eb5eb80faed4be27fe22fdae976c4a4f1",
+        "rev": "c2781460c89cbbc9baa7cc84aa617a9b7d17889e",
         "type": "github"
       },
       "original": {
