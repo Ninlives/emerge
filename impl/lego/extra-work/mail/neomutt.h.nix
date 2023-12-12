@@ -20,6 +20,11 @@ in {
     settings = {
       pager = "'${config.programs.neovim.finalPackage}/bin/nvim -c \"set ft=gitsendemail\" -R'";
       prompt_after = "no";
+      hide_thread_subject = "no";
+    };
+    sidebar = {
+      enable = true;
+      width = 15;
     };
     extraConfig = ''
       source ${gruvbox}/colors-gruvbox-shuber.muttrc

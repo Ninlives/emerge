@@ -41,7 +41,14 @@ in {
         destinationCommand = "${pkgs.maildrop}/bin/maildrop";
       };
       msmtp = mkIf email.smtp.enable {enable = true;};
-      neomutt = mkIf email.imap.enable {enable = true;};
+      neomutt = mkIf email.imap.enable {
+        enable = true;
+        sendMailCommand = "${pkgs.msmtp}/bin/sendmail";
+        extraConfig = ''
+          fcc-hook . $record,^
+        '';
+        extraMailboxes = ["Sent"];
+      };
     };
   };
 
