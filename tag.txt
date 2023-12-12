@@ -1,1 +1,1 @@
-neomutt_settings
+gdm_monitors_setting

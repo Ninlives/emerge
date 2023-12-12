@@ -1,6 +1,7 @@
 {inputs, ...}: let
   conf-file = "${inputs.data.content.smartdns}";
 in {
+  networking.resolvconf.useLocalResolver = true;
   services.smartdns = {
     enable = true;
     settings = {

@@ -19,7 +19,7 @@ with self.mod; let
 
     impl.lego.basic
     impl.lego.browser
-    impl.lego.dns
+    # impl.lego.dns
     impl.lego.gnome-basic
     impl.lego.gnome-local
     impl.lego.gui

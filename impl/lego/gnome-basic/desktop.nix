@@ -12,6 +12,12 @@ in {
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.displayManager.job.logToFile = mkForce false;
 
+  systemd.services.display-manager.preStart = ''
+    ${pkgs.coreutils}/bin/mkdir -p /run/gdm/.config/
+    ${pkgs.coreutils}/bin/cp ${config.profile.user.home}/.config/monitors.xml /run/gdm/.config/monitors.xml
+    ${pkgs.coreutils}/bin/chown gdm:gdm /run/gdm/.config/monitors.xml
+  '';
+
   environment.gnome.excludePackages = with gnome; [
     gnome-software
     epiphany
