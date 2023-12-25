@@ -17,7 +17,8 @@ with self.mod; let
     opt.revive
     opt.sops
 
-    impl.lego.basic
+    impl.lego.meta
+    impl.lego.baseline
     impl.lego.browser
     impl.lego.gnome-basic
     impl.lego.gnome-local
@@ -31,8 +32,6 @@ with self.mod; let
     ({config, ...}: {
       system.nixos.tags = mkAfter [(builtins.readFile ../tag.txt)];
       sops.roles = ["net" "phys"];
-
-      nixpkgs.overlays = self.overlays';
 
       home-manager.users.${config.profile.user.name} = {...}: {
         imports = [impl.neko];

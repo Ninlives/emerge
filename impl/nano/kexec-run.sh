@@ -21,7 +21,7 @@ trap cleanup EXIT
 if ! '@kexec@' --load '@bzImage@' \
   --kexec-syscall-auto \
   --initrd="$INITRD_TMP/initrd" --no-checks \
-  --command-line "init=@init@ restore_routes.main_ip=@host@ @kernelParams@"; then
+  --command-line "init=@init@ @kernelParams@"; then
   '@busybox@' echo "kexec failed, dumping dmesg"
   '@busybox@' dmesg | tail -n 100
   exit 1

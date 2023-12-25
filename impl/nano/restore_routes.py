@@ -4,7 +4,7 @@ from pathlib import Path
 from typing import Any
 
 
-def filter_interfaces(network: list[dict[str, Any]], main_ip: str) -> list[dict[str, Any]]:
+def filter_interfaces(network: list[dict[str, Any]]) -> list[dict[str, Any]]:
     output = []
     for net in network:
         if net.get("link_type") == "loopback":
@@ -12,33 +12,9 @@ def filter_interfaces(network: list[dict[str, Any]], main_ip: str) -> list[dict[
         if not net.get("address"):
             # We need a mac address to match devices reliable
             continue
-        addr_info = []
-        has_dynamic_address = False
-        for addr in net.get("addr_info", []):
-            if addr.get("local") != main_ip:
-                # no link-local ipv4/ipv6
-                if addr.get("scope") == "link":
-                    continue
-                if addr.get("dynamic", False):
-                    has_dynamic_address = True
-                    continue
-            addr_info.append(addr)
-        if addr_info != [] or has_dynamic_address:
-            net["addr_info"] = addr_info
-            output.append(net)
+        output.append(net)
 
     return output
-
-
-def filter_routes(routes: list[dict[str, Any]]) -> list[dict[str, Any]]:
-    filtered = []
-    for route in routes:
-        # Filter out routes set by addresses with subnets, dhcp and router advertisment
-        if route.get("protocol") in ["dhcp", "kernel", "ra"]:
-            continue
-        filtered.append(route)
-
-    return filtered
 
 
 def generate_networkd_units(
@@ -86,7 +62,7 @@ IPv6AcceptRA = yes
 def main() -> None:
     if len(sys.argv) < 5:
         print(
-            f"USAGE: {sys.argv[0]} addresses routes-v4 routes-v6 networkd-directory main-ip",
+            f"USAGE: {sys.argv[0]} addresses routes-v4 routes-v6 networkd-directory",
             file=sys.stderr,
         )
         sys.exit(1)
@@ -100,10 +76,8 @@ def main() -> None:
 
     networkd_directory = Path(sys.argv[4])
 
-    main_ip = sys.argv[5]
-
-    relevant_interfaces = filter_interfaces(addresses, main_ip)
-    relevant_routes = filter_routes(v4_routes) + filter_routes(v6_routes)
+    relevant_interfaces = filter_interfaces(addresses)
+    relevant_routes = v4_routes + v6_routes
 
     generate_networkd_units(relevant_interfaces, relevant_routes, networkd_directory)
 

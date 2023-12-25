@@ -61,26 +61,23 @@
         ssh_ "umask 077;mkdir -p /mnt/${pack}/crux/sops;cat > /mnt/${pack}/crux/sops/age.key" < "$key"
 
         echo "Uploading system closure..."
-        ${nix} copy --to "ssh://root@$host?remote-store=local?root=/mnt/${entry}" "${config.system.build.physeter}"
+        ${nix} copy --substitute-on-destination --to "ssh://root@$host?remote-store=local?root=/mnt/${entry}" "${config.system.build.physeter.kexecHat}"
+        ${nix} copy --substitute-on-destination --to "ssh://root@$host?remote-store=local?root=/mnt/${entry}" "${config.system.build.physeter.kexecShoot}"
 
         ssh_ "mkdir -p /mnt/${entry}/nix/var/nix/profiles/hat && \
               nix-env --store /mnt/${entry} -p /mnt/${entry}/nix/var/nix/profiles/hat/physeter \
-                      --set ${config.system.build.physeter} && \
+                      --set ${config.system.build.physeter.kexecHat} && \
               ${config.system.build.mvLink}/bin/mv-link /mnt/${entry}/nix/var/nix/profiles/hat /mnt/${hat} && \
-              reboot"
-
-        enter
+              /mnt/${entry}/${config.system.build.physeter.kexecShoot}"
 
       elif [[ "$action" == "grow" ]];then
         echo "Uploading system closure..."
-        ${nix} copy --to "ssh://cloud@$host" "${config.system.build.physeter}"
+        ${nix} copy --substitute-on-destination --to "ssh://cloud@$host" "${config.system.build.physeter.kexecHat}"
 
         echo "Switching..."
-        ${ssh} "cloud@$host" "sudo nix-env -p /nix/var/nix/profiles/hat/physeter --set '${config.system.build.physeter}' && \
+        ${ssh} "cloud@$host" "sudo nix-env -p /nix/var/nix/profiles/hat/physeter --set '${config.system.build.physeter.kexecHat}' && \
                               sudo ${config.system.build.mvLink}/bin/mv-link /nix/var/nix/profiles/hat /hat && \
-                              sudo reboot"
-        enter
-
+                              sudo ${config.system.build.physeter.kexecHat}/smoke"
       fi
     '';
 }

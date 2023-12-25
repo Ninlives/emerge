@@ -1,4 +1,4 @@
-{pkgs, ...}: let
+{pkgs, inputs,...}: let
   restore-network =
     pkgs.writers.writePython3 "restore-network" {flakeIgnore = ["E501"];}
     ./restore_routes.py;
@@ -16,13 +16,7 @@ in {
     wants = ["network-pre.target"];
     wantedBy = ["multi-user.target"];
     script = ''
-      while read opt; do
-        if [[ $opt = restore_routes.main_ip=* ]]; then
-          MAIN_IP="''${opt#restore_routes.main_ip=}"
-        fi
-      done <<< $(xargs -n1 -a /proc/cmdline)
-      echo MAIN_IP=$MAIN_IP
-      ${restore-network} /root/network/addrs.json /root/network/routes-v4.json /root/network/routes-v6.json /etc/systemd/network "$MAIN_IP"
+      ${restore-network} /root/network/addrs.json /root/network/routes-v4.json /root/network/routes-v6.json /etc/systemd/network
     '';
 
     serviceConfig = {
@@ -36,4 +30,6 @@ in {
       "/root/network/routes-v6.json"
     ];
   };
+
+  networking.proxy.default = inputs.values.secret.proxy.institute;
 }

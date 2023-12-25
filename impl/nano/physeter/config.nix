@@ -1,18 +1,20 @@
 {
-  fn,
-  config,
-  inputs,
   lib,
+  pkgs,
   self,
+  inputs,
+  config,
   ...
 }:
 with lib; {
+  profile.identity = "cloud";
+  profile.user.name = "cloud";
+  profile.user.uid = 1000;
+  profile.disk.persist = "pack";
+
   system.stateVersion = "23.05";
-  time.timeZone = "Asia/Shanghai";
 
   documentation.enable = false;
-
-  nix.settings.trusted-users = ["cloud"];
 
   services.openssh = {
     enable = true;
@@ -28,18 +30,11 @@ with lib; {
   services.openssh.extraConfig = flip concatMapStrings config.services.openssh.hostKeys (k: ''
     HostCertificate ${k.path}-cert.pub
   '');
+  users.users.${config.profile.user.name}.openssh.authorizedKeys.keys = [inputs.values.secret.ssh.auth];
 
-  users.mutableUsers = false;
-  users.users.cloud = {
-    uid = 1000;
-    createHome = true;
-    isNormalUser = true;
-    extraGroups = ["wheel"];
-    hashedPasswordFile = config.sops.secrets.hashed-password.path;
-    openssh.authorizedKeys.keys = [inputs.values.secret.ssh.auth];
+  home-manager.users.cloud = {...}:{
+    imports = [ self.mod.impl.neko ];
   };
-  home-manager.extraSpecialArgs = { inherit fn inputs; };
-  home-manager.users.cloud = {...}:{ imports = [ self.mod.impl.neko ]; };
 
   security.sudo.wheelNeedsPassword = false;
 
@@ -48,4 +43,8 @@ with lib; {
   sops.age.sshKeyPaths = [];
   sops.gnupg.sshKeyPaths = [];
   sops.secrets.hashed-password.neededForUsers = true;
+
+  services.xrdp.enable = true;
+  services.xrdp.defaultWindowManager = "${pkgs.icewm}/bin/icewm";
+  services.xrdp.openFirewall = true;
 }

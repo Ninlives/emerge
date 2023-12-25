@@ -1,18 +1,13 @@
 {
-  config,
+  self,
   pkgs,
-  lib,
+  config,
   specialArgs,
   ...
 }: {
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
   home-manager.extraSpecialArgs = specialArgs;
-
-  system.nixos.tags = [config.boot.kernelPackages.kernel.version];
-  system.nixos.label = with lib;
-    concatStringsSep "-" ([config.profile.identity]
-      ++ (sort (x: y: x < y) config.system.nixos.tags));
 
   time.timeZone = "Asia/Shanghai";
   users.mutableUsers = false;
@@ -24,7 +19,12 @@
     extraGroups = ["pulseaudio" "audio" "video" "power" "wheel" "networkmanager"];
     hashedPasswordFile = config.sops.secrets.hashed-password.path;
   };
+  programs.zsh = {
+    enable = true;
+    promptInit = "";
+  };
+
   sops.secrets.hashed-password.neededForUsers = true;
 
-  system.stateVersion = "22.05";
+  nixpkgs.overlays = self.overlays';
 }

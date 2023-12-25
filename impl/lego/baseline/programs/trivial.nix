@@ -1,9 +1,4 @@
 {config, ...}: {
-  programs.zsh = {
-    enable = true;
-    promptInit = "";
-  };
-
   programs.adb.enable = true;
   users.users.${config.profile.user.name}.extraGroups = ["adbusers"];
   nixpkgs.config.android_sdk.accept_license = true;

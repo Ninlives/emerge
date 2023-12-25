@@ -51,6 +51,7 @@ in {
         set encoding=UTF-8
         set tabstop=2
         set shiftwidth=2
+        set nosmarttab
         set fdm=marker
         set clipboard+=unnamedplus
         set background=dark
