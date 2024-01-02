@@ -12,13 +12,10 @@ in {
       ./machine.nix
       ./restic.nix
       ./science.nix
-      ./tunnel.nix
       ./vaultwarden.nix
       ./vikunja.nix
       ./kavita.nix
-      ./jellyfin.nix
       ./freshrss.nix
-      ./immich.nix
       ./misskey
       ./postgresql.nix
       ./matrix.nix
