@@ -13,9 +13,9 @@ in {
       AuthServerAllowlist = "*.${dp.workstation.host}";
     };
   };
-  krb5 = {
+  security.krb5 = {
     enable = true;
-    libdefaults = {
+    settings.libdefaults = {
       default_realm = dp.workstation.realm;
       dns_lookup_realm = false;
       ticket_lifetime = "24h";
