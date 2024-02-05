@@ -71,18 +71,18 @@
           domains = ["regexp:\\.onion$"];
           outboundTag = "proxy";
         }
-        # {
-        #   type = "field";
-        #   inboundTag = ["acl"];
-        #   domains = ["geosite:cn"];
-        #   outboundTag = "direct";
-        # }
-        # {
-        #   type = "field";
-        #   inboundTag = ["acl"];
-        #   ip = ["geoip:cn"];
-        #   outboundTag = "direct";
-        # }
+        {
+          type = "field";
+          inboundTag = ["acl"];
+          domains = ["geosite:cn"];
+          outboundTag = "direct";
+        }
+        {
+          type = "field";
+          inboundTag = ["acl"];
+          ip = ["geoip:cn"];
+          outboundTag = "direct";
+        }
         {
           type = "field";
           inboundTag = ["acl" "proxy" "transparent" "http"];

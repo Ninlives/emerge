@@ -28,7 +28,7 @@ in {
       speed-check-mode = "tcp:443,tcp:80,ping";
       audit-enable = true;
       dualstack-ip-selection = true;
-      # inherit conf-file;
+      inherit conf-file;
     };
   };
 }
