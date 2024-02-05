@@ -7,7 +7,6 @@
   sound.mediaKeys.enable = true;
 
   services.xserver = {
-    enable = true;
     dpi = 144;
     libinput = {
       enable = true;

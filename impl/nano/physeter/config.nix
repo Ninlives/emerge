@@ -32,8 +32,15 @@ with lib; {
   '');
   users.users.${config.profile.user.name}.openssh.authorizedKeys.keys = [inputs.values.secret.ssh.auth];
 
-  home-manager.users.cloud = {...}:{
-    imports = [ self.mod.impl.neko ];
+  home-manager.users.cloud = {...}: {
+    imports = [self.mod.impl.neko];
+    programs = {
+      git = {
+        enable = true;
+        userName = inputs.values.secret.email.opensource.name;
+        userEmail = inputs.values.secret.email.opensource.address;
+      };
+    };
   };
 
   security.sudo.wheelNeedsPassword = false;
@@ -44,7 +51,8 @@ with lib; {
   sops.gnupg.sshKeyPaths = [];
   sops.secrets.hashed-password.neededForUsers = true;
 
+  systemd.services.display-manager.enable = false;
   services.xrdp.enable = true;
-  services.xrdp.defaultWindowManager = "${pkgs.icewm}/bin/icewm";
+  services.xrdp.defaultWindowManager = "${pkgs.gnome.gnome-session}/bin/gnome-session";
   services.xrdp.openFirewall = true;
 }

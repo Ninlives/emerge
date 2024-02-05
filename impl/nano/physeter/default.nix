@@ -21,6 +21,8 @@
         ./kexec-hat.nix
         ./fstab.nix
         ./config.nix
+        ./ca.nix
+        ./tasks/update-reservations
         ../network.nix
         ../mvlink.nix
       ];

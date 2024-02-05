@@ -68,9 +68,10 @@
               target.host = "{host}";
             }}).config.system.build.plant.drvPath
           """
-          drv_cmd = f"${nix} eval --raw '${self}#pathogen.physeter' --apply '{fn}'"  # noqa: E501
+          drv_cmd = f"${nix} eval --show-trace --raw '${self}#pathogen.physeter' --apply '{fn}'"  # noqa: E501
           print(drv_cmd)
           drv = check_store_path(os.popen(drv_cmd).read().strip())
+          print(drv)
           plant = check_store_path(os.popen(f"${nix} build --no-link --print-out-paths {drv}^out").read().strip())  # noqa: E501
 
           os.execv(plant, [plant] + command)

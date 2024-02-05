@@ -13,7 +13,7 @@
 
   nix.settings.auto-optimise-store = true;
   nix.settings.system-features = ["benchmark" "big-parallel" "kvm" "nixos-test" "recursive-nix"];
-  nix.settings.experimental-features = ["recursive-nix" "flakes" "nix-command"];
+  nix.settings.experimental-features = ["recursive-nix" "flakes" "nix-command" "configurable-impure-env"];
   nix.settings.flake-registry =
     pkgs.writeText "flake-empty.json"
     (builtins.toJSON {
