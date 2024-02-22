@@ -27,7 +27,7 @@ jobs:
     - uses: cachix/cachix-action@v14
       with:
         name: emerge
-        signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
+        authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
     - name: Configure git
       run: |
         git config --global user.name 'Automation - Ninlives'
