@@ -16,6 +16,7 @@ in {
   profile.proxy.default = "v2ray-fallback";
 
   sops.roles = ["work"];
+  networking.hostName = dp.workstation.hostname;
 
   services.xserver.displayManager.defaultSession = "gnome-xorg";
   environment.systemPackages = [
