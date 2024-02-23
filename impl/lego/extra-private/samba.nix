@@ -1,8 +1,6 @@
-{ config, ... }: 
-let
+{config, ...}: let
   inherit (config.profile.disk) persist;
-in
-{
+in {
   services.samba = {
     enable = true;
     securityType = "user";
@@ -36,6 +34,6 @@ in
       # };
     };
   };
-  networking.firewall.allowedTCPPorts = [ 139 445 ];
-  networking.firewall.allowedUDPPorts = [ 137 138 ];
+  networking.firewall.allowedTCPPorts = [139 445];
+  networking.firewall.allowedUDPPorts = [137 138];
 }

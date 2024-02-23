@@ -1,4 +1,4 @@
-{ lib, ... }: {
+{lib, ...}: {
   system.activationScripts.update-ca-certs = lib.stringAfter ["etc"] ''
     mkdir -p /etc/ssl/ca-anchors
     cat /etc/ssl/certs/ca-certificates.crt > /etc/ssl/ca-anchors/ca-certificates.crt

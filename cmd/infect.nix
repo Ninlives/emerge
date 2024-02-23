@@ -4,23 +4,26 @@
   ...
 }: {
   perSystem = {pkgs, ...}: let
-        nix = "${pkgs.nix}/bin/nix";
+    nix = "${pkgs.nix}/bin/nix";
   in {
     apps.infect = fn.mkApp {
-      drv =
-        with pkgs;
-          writeShellScriptBin "infect" ''
-            gen=$(\
-              ${nix} build --no-link --print-out-paths \
-                $(${nix} eval --raw '${self}#pathogen.ipomoea' \
-                              --apply 'f: (f "'$USER'" "'$HOME'").activationPackage.drvPath')^out\
-            )
-            HOME_MANAGER_BACKUP_EXT=overridden_by_hm $gen/activate
-          '';
+      drv = with pkgs;
+        writeShellScriptBin "infect" ''
+          gen=$(\
+            ${nix} build --no-link --print-out-paths \
+              $(${nix} eval --raw '${self}#pathogen.ipomoea' \
+                            --apply 'f: (f "'$USER'" "'$HOME'").activationPackage.drvPath')^out\
+          )
+          HOME_MANAGER_BACKUP_EXT=overridden_by_hm $gen/activate
+        '';
     };
-    apps.plant =
-      fn.mkApp {
-        drv = with pkgs; writers.writePython3Bin "plant" {} /* python */ ''
+    apps.plant = fn.mkApp {
+      drv = with pkgs;
+        writers.writePython3Bin "plant" {}
+        /*
+        python
+        */
+        ''
           import os
           import json
           import pathlib
@@ -54,7 +57,7 @@
 
 
           def check_store_path(path):
-              if len(path) <= ${with builtins;toString (stringLength storeDir + 33) }:
+              if len(path) <= ${with builtins; toString (stringLength storeDir + 33)}:
                   raise RuntimeError(f"{path} is not a store path")
               return path
 
@@ -76,6 +79,6 @@
 
           os.execv(plant, [plant] + command)
         '';
-      };
+    };
   };
 }

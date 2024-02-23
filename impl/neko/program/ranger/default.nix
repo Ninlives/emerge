@@ -1,19 +1,16 @@
 {
   pkgs,
-  config,
   lib,
   ...
 }:
 with pkgs; let
-  inherit (lib) optionalString;
-
   deviconPlugin = stdenv.mkDerivation {
-    name = "ranger-devicon";
+    name = "ranger-devicons2";
     src = fetchFromGitHub {
-      owner = "alexanderjeurissen";
-      repo = "ranger_devicons";
-      rev = "49fe4753c89615a32f14b2f4c78bbd02ee76be3c";
-      sha256 = "1kgzv9mqsqzbpjrj3qi8vkha7vij2qsmdnjwl547pnf04hbdhgk1";
+      owner = "cdump";
+      repo = "ranger-devicons2";
+      rev = "f7877aa0dd8caa1d498d935f6f49e57a4fc591e2";
+      sha256 = "sha256-OMMQW/mn8J8mki41TD/7/CWaDFgp/zT7B2hfTH/m0Ug=";
     };
     buildInputs = [python3];
 
@@ -46,7 +43,7 @@ in {
 
         sed -i 's#set preview_script .*#set preview_script '$out/scope.sh'#' $out/rc.conf
         sed -i 's#set preview_images_method .*#set preview_images_method kitty#' $out/rc.conf
-        echo "default_linemode devicons" >> $out/rc.conf
+        echo "default_linemode devicons2" >> $out/rc.conf
 
         cat ${compressCommand} >> $out/commands.py
 
@@ -55,7 +52,7 @@ in {
       recursive = true;
     };
 
-    "ranger/plugins/ranger_devicons" = {
+    "ranger/plugins/devicons2" = {
       source = "${deviconPlugin}";
       recursive = true;
     };

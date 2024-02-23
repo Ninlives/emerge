@@ -1,4 +1,8 @@
-{pkgs, inputs,...}: let
+{
+  pkgs,
+  inputs,
+  ...
+}: let
   restore-network =
     pkgs.writers.writePython3 "restore-network" {flakeIgnore = ["E501"];}
     ./restore_routes.py;

@@ -12,17 +12,21 @@ in {
         vim-surround
       ];
 
-    lua = /* lua */ ''
-      require('which-key').register({
-        s = {
-          name = "+surround",
-          d = { "<Plug>Dsurround", "delete" },
-          c = { "<Plug>Csurround", "change" },
-          C = { "<Plug>CSurround", "change selected" },
-          i = { "<Plug>Ysurround", "insert" },
-          I = { "<Plug>YSurround", "insert multiline" },
-        }
-      }, { prefix = "<leader>" })
-    '';
+    lua =
+      /*
+      lua
+      */
+      ''
+        require('which-key').register({
+          s = {
+            name = "+surround",
+            d = { "<Plug>Dsurround", "delete" },
+            c = { "<Plug>Csurround", "change" },
+            C = { "<Plug>CSurround", "change selected" },
+            i = { "<Plug>Ysurround", "insert" },
+            I = { "<Plug>YSurround", "insert multiline" },
+          }
+        }, { prefix = "<leader>" })
+      '';
   };
 }

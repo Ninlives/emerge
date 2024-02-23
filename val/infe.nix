@@ -30,16 +30,17 @@ with self.mod; {
         ];
       });
 
-  flake.pathogen.physeter = { fs, ... }@args: withSystem "x86_64-linux" ({
-    inputs',
-    system,
-    ...
-  }:
-    nixpkgs.lib.nixosSystem {
-      inherit system;
-      specialArgs = {inherit fn args self inputs inputs';};
-      modules = [
-        impl.nano
-      ];
-    });
+  flake.pathogen.physeter = {fs, ...} @ args:
+    withSystem "x86_64-linux" ({
+      inputs',
+      system,
+      ...
+    }:
+      nixpkgs.lib.nixosSystem {
+        inherit system;
+        specialArgs = {inherit fn args self inputs inputs';};
+        modules = [
+          impl.nano
+        ];
+      });
 }

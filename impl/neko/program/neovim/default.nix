@@ -1,7 +1,4 @@
-{
-  fn,
-  ...
-}: {
+{fn, ...}: {
   imports = [./options.nix] ++ fn.dotNixFrom ./settings;
   programs.neovim = {
     enable = true;
