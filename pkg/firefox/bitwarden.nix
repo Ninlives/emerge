@@ -9,12 +9,13 @@ buildNpmPackage rec {
   src = fetchFromGitHub {
     owner = "bitwarden";
     repo = "clients";
-    rev = "a7cce1a3ad89bfa1f12b08aa69358ae10a4e7b6b";
-    sha256 = "1fn68mfh8j7x38b8d3g1r37p754m5vmxysdxwydwgxih3gxkklh6";
+    rev = "f9f85dcb39f768bd516521ffba8b2ff74e4a70ed";
+    sha256 = "sha256-nCjcwe+7Riml/J0hAVv/t6/oHIDPhwFD5A3iQ/LNR5Y=";
   };
-  npmDepsHash = "sha256-BQBUmQsxtEM72Q9qWCS/4i+Tzp3V9jT30urhuMuUE0M=";
+  npmDepsHash = "sha256-GJl9pVwFWEg9yku9IXLcu2XMJZz+ZoQOxCf1TrW715Y=";
   npmWorkspace = "apps/browser";
   makeCacheWritable = true;
+  npmFlags = [ "--legacy-peer-deps" ];
 
   nativeBuildInputs = [python3];
   npmBuildScript = "dist:firefox";
