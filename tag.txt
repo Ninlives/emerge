@@ -1,1 +1,1 @@
-update_bitwarden_plugin
+fix_firefox_desktop

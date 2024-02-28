@@ -32,7 +32,7 @@ with lib; {
   '');
   users.users.${config.profile.user.name}.openssh.authorizedKeys.keys = [inputs.values.secret.ssh.auth];
 
-  home-manager.users.cloud = {...}: {
+  home-manager.users.${config.profile.user.name} = {...}: {
     imports = [self.mod.impl.neko];
     programs = {
       git = {

@@ -82,7 +82,7 @@ in
         "virt-manager.desktop"
         "bitwarden.desktop"
         "org.telegram.desktop.desktop"
-        "firefox.desktop"
+        "firefox-esr.desktop"
         "steam.desktop"
       ];
 
