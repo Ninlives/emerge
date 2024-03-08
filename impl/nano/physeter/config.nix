@@ -12,6 +12,8 @@ with lib; {
   profile.user.uid = 1000;
   profile.disk.persist = "pack";
 
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+
   system.stateVersion = "23.05";
 
   documentation.enable = false;

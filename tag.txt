@@ -1,1 +1,1 @@
-pinentry-gnome_to_pinentry-gnome3
+add_emulated_system_in_phy
