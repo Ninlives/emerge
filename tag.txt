@@ -1,1 +1,1 @@
-fix_firefox_desktop
+emulate_aarch64
