@@ -37,7 +37,7 @@ in {
   sops.secrets.hashed-password-deck.neededForUsers = true;
   home-manager.users.deck.home = {
     stateVersion = "22.05";
-    packages = with pkgs; [steam yuzu];
+    packages = with pkgs; [steam];
   };
 
   services.xserver.displayManager.job.preStart = "${set-session}/bin/set-session";
