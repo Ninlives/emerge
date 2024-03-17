@@ -1,1 +1,1 @@
-emulate_aarch64
+enhance_emerge_command

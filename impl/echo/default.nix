@@ -39,6 +39,12 @@ in {
       dst = /var/log;
     }
   ];
+  revive.specifications.system.scrolls = [
+    {
+      src = /Cache/machine-id;
+      dst = /etc/machine-id;
+    }
+  ];
 
   networking.firewall.allowedTCPPorts = [80 443];
   networking.firewall.allowedUDPPorts = [443];

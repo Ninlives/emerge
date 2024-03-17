@@ -23,6 +23,22 @@
 
   environment.systemPackages = [
     (pkgs.writeShellScriptBin "emerge" ''
+      nix_flags=()
+      while [[ $# -gt 1 ]];do
+        case $1 in
+          --show-trace)
+            nix_flags+=(--show-trace)
+            shift
+            ;;
+          --option)
+            nix_flags+=("$1" "$2" "$3")
+            shift 3
+            ;;
+          *)
+            break
+            ;;
+        esac
+      done
       app=$1
       shift
       nix run emerge#$app -- $@
