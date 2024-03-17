@@ -1,1 +1,1 @@
-remove_yuzu
+pinentry-gnome_to_pinentry-gnome3

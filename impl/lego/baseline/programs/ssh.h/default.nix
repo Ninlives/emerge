@@ -12,7 +12,7 @@
       Unit.After = ["graphical-session.target"];
       Service = {
         Environment = [
-          "PATH=${lib.makeBinPath [pkgs.pinentry-gnome]}"
+          "PATH=${lib.makeBinPath [pkgs.pinentry-gnome3]}"
           "TERM=linux"
         ];
         ExecStart = "${inputs'.resign.packages.default}/bin/resign --listen %t/resign.ssh";

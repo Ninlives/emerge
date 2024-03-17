@@ -11,7 +11,7 @@
   in
     writeShellApplication {
       name = "bw";
-      runtimeInputs = [keyutils jq gnused pinentry-gnome];
+      runtimeInputs = [keyutils jq gnused pinentry-gnome3];
       text = ''
         need_reset=0
         if key_id=$(keyctl search @u user bw:session 2> /dev/null);then
