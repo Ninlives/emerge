@@ -113,7 +113,7 @@ in {
     ensureUsers = [
       {
         name = "misskey";
-        ensurePermissions."DATABASE misskey" = "ALL PRIVILEGES";
+        ensureDBOwnership = true;
       }
     ];
     identMap = ''
