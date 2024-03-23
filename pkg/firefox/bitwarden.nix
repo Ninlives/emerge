@@ -15,7 +15,7 @@ buildNpmPackage rec {
   npmDepsHash = "sha256-GJl9pVwFWEg9yku9IXLcu2XMJZz+ZoQOxCf1TrW715Y=";
   npmWorkspace = "apps/browser";
   makeCacheWritable = true;
-  npmFlags = [ "--legacy-peer-deps" ];
+  npmFlags = ["--legacy-peer-deps"];
 
   nativeBuildInputs = [python3];
   npmBuildScript = "dist:firefox";

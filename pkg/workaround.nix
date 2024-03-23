@@ -15,18 +15,5 @@ final: prev: {
           '';
       });
     };
-  v2ray = prev.v2ray.override {
-    buildGoModule = args:
-      final.buildGo120Module (args
-        // rec {
-          version = "5.7.0";
-          src = final.fetchFromGitHub {
-            owner = "v2fly";
-            repo = "v2ray-core";
-            rev = "v${version}";
-            hash = "sha256-gdDV5Cd/DjEqSiOF7j5a8QLtdJiFeNCnHoA4XD+yiGA=";
-          };
-          vendorHash = "sha256-uq0v14cRGmstJabrERsa+vFRX6Bg8+5CU6iV8swrL/I=";
-        });
-  };
+  inherit ((builtins.getFlake "github:NixOS/nixpkgs/ff323ed355ff62795c79c3fed04c4ee06c641898").legacyPackages.${final.system}) v2ray;
 }
