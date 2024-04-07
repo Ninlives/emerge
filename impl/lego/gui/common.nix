@@ -25,6 +25,6 @@
 
   i18n.inputMethod = {
     enabled = "ibus";
-    ibus.engines = [pkgs.ibus-engines.rime];
+    ibus.engines = with pkgs.ibus-engines; [rime anthy];
   };
 }
