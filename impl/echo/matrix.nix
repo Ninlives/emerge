@@ -65,15 +65,15 @@ in {
         msc3266_enabled = true;
       };
     };
+  };
 
-    sliding-sync = {
-      enable = true;
-      environmentFile = tpl.sliding-sync.path;
-      settings = {
-        SYNCV3_SERVER = config.services.matrix-synapse.settings.public_baseurl;
-        SYNCV3_LOG_LEVEL = "trace";
-        SYNCV3_PPROF = "127.0.0.1:6060";
-      };
+  services.matrix-sliding-sync = {
+    enable = true;
+    environmentFile = tpl.sliding-sync.path;
+    settings = {
+      SYNCV3_SERVER = config.services.matrix-synapse.settings.public_baseurl;
+      SYNCV3_LOG_LEVEL = "trace";
+      SYNCV3_PPROF = "127.0.0.1:6060";
     };
   };
   systemd.services.matrix-synapse.serviceConfig = {
@@ -99,7 +99,7 @@ in {
     ${dp.host.public.services.matrix-sync.fqdn} = {
       forceSSL = true;
       enableACME = true;
-      locations."/".proxyPass = "http://${config.services.matrix-synapse.sliding-sync.settings.SYNCV3_BINDADDR}";
+      locations."/".proxyPass = "http://${config.services.matrix-sliding-sync.settings.SYNCV3_BINDADDR}";
     };
   };
 

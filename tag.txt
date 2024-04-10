@@ -1,1 +1,1 @@
-add_anthy
+fix_config
