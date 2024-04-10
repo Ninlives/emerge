@@ -1,1 +1,1 @@
-update_home-manager
+disable_smartdns

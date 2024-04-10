@@ -50,7 +50,7 @@ in {
       modules =
         baseModules
         ++ [
-          impl.lego.dns
+          # impl.lego.dns
           impl.lego.extra-private
           {
             specialisation.institute = {
