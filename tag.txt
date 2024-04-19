@@ -1,1 +1,1 @@
-disable_smartdns
+hledger
