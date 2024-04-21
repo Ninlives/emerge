@@ -46,6 +46,9 @@ with lib; let
     (f.type == "regular" && hasSuffix ".nix" f.path)
     || (f.type == "directory" && pathExists (defNix f.path));
 
+  # defNixFilter :: PathT -> Bool
+  defNixFilter = f: f.type == "directory" && !(pathExists (defNix f.path));
+
   # dotNixFrom :: Path -> [Path]
   dotNixFrom = dir: filesFromWith dir [disabledFilter dotNixFilter];
 
@@ -53,8 +56,17 @@ with lib; let
   dotNixFromRecursive = dir:
     filesFromWithRecursive dir [disabledFilter dotNixFilter] [
       disabledFilter
-      (f: f.type == "directory" && !(pathExists (defNix f.path)))
+      defNixFilter
     ];
 in {
-  inherit filesFromWith filesFromWithRecursive filesFrom dotNixFrom dotNixFromRecursive;
+  inherit
+    filesFromWith
+    filesFromWithRecursive
+    filesFrom
+    dotNixFrom
+    dotNixFromRecursive
+    disabledFilter
+    dotNixFilter
+    defNixFilter
+    ;
 }

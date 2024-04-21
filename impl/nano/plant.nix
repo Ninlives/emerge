@@ -19,15 +19,6 @@
       target="${args.target.user}@${args.target.host}"
       host="${args.target.host}"
 
-      enter(){
-        echo "Waiting for target back online..."
-        until [[ "$(${ssh} $target -o ConnectTimeout=30 echo ok)" == "ok" ]];do
-          echo "Not reachable, waiting..."
-          sleep 10
-        done
-        ${ssh} "$target" sudo ${hat}/physeter
-      }
-
       if [[ "$action" == "seed" ]];then
         ${ssh} "$target" "mkdir -m 777 -p '${boot}'"
         ${rsync}/bin/rsync -ravhP --chmod=a+w --progress "${config.system.build.kexecBoot}/" "$target":"${boot}"
@@ -78,6 +69,8 @@
         ${ssh} "cloud@$host" "sudo nix-env -p /nix/var/nix/profiles/hat/physeter --set '${config.system.build.physeter.kexecHat}' && \
                               sudo ${config.system.build.mvLink}/bin/mv-link /nix/var/nix/profiles/hat /hat && \
                               sudo ${config.system.build.physeter.kexecHat}/smoke"
+      elif [[ "$action" == "harvest" ]];then
+        ${ssh} "$target" "sudo ${hat}/physeter/take"
       fi
     '';
 }

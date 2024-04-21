@@ -1,10 +1,19 @@
 {
   fn,
+  lib,
   self,
   inputs,
   ...
-}: {
-  flake.overlays' = map import (fn.dotNixFromRecursive ../pkg);
+}:
+let
+  ovlFromRecursive = dir: with fn;
+    filesFromWithRecursive dir [disabledFilter dotNixFilter (f: f.type != "regular" || (baseNameOf f.path) != "config.nix")] [
+      disabledFilter
+      defNixFilter
+    ];
+in
+{
+  flake.overlays' = map import (ovlFromRecursive ../pkg);
   perSystem = {
     system,
     config,
@@ -15,6 +24,7 @@
     legacyPackages = import inputs.nixpkgs {
       inherit system;
       overlays = self.overlays';
+      config = import ../pkg/config.nix { inherit lib; };
     };
     _module.args.pkgs = config.legacyPackages;
   };
