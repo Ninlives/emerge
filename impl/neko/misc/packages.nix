@@ -20,7 +20,6 @@
     tldr
     ffmpeg
     tree
-    nixfmt
     moreutils
     encfs
     zip

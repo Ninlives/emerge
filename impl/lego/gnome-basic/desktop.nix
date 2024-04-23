@@ -11,7 +11,7 @@ in {
   services.xserver.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
   services.xserver.displayManager.gdm.enable = true;
-  services.displayManager.job.logToFile = mkForce false;
+  services.displayManager.logToFile = mkForce false;
 
   systemd.services.display-manager.preStart = ''
     if [[ -f "${config.profile.user.home}/.config/monitors.xml" ]];then

@@ -26,13 +26,13 @@
       nix_flags=()
       while [[ $# -gt 1 ]];do
         case $1 in
-          --show-trace)
-            nix_flags+=(--show-trace)
-            shift
-            ;;
           --option)
             nix_flags+=("$1" "$2" "$3")
             shift 3
+            ;;
+          -*)
+            nix_flags+=("$1")
+            shift
             ;;
           *)
             break
@@ -41,7 +41,7 @@
       done
       app=$1
       shift
-      nix run emerge#$app -- $@
+      nix run "''${nix_flags[@]}" "emerge#$app" -- "$@"
     '')
   ];
 }
