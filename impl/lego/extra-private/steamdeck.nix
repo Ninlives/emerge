@@ -40,7 +40,7 @@ in {
     packages = with pkgs; [steam];
   };
 
-  services.xserver.displayManager.job.preStart = "${set-session}/bin/set-session";
+  services.displayManager.job.preStart = "${set-session}/bin/set-session";
   environment.etc."gdm/PreSession/Default".source = pkgs.writeShellScript "presession" ''
     if [[ "$USERNAME" = "deck" ]];then
       ${config.lib.commands.speech} || true

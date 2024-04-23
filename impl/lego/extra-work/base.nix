@@ -18,7 +18,7 @@ in {
   sops.roles = ["work"];
   networking.hostName = dp.workstation.hostname;
 
-  services.xserver.displayManager.defaultSession = "gnome-xorg";
+  services.displayManager.defaultSession = "gnome-xorg";
   environment.systemPackages = [
     # pkgs.teams
     pkgs.tigervnc
