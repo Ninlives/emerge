@@ -4,7 +4,7 @@
   ...
 }: {
   perSystem = {pkgs, ...}: let
-    nix = "${pkgs.nix}/bin/nix";
+    nix = "${pkgs.nixMeta}/bin/nix";
   in {
     apps.infect = fn.mkApp {
       drv = with pkgs;

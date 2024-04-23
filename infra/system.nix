@@ -21,7 +21,7 @@ with pkgs; let
   rm = "${coreutils}/bin/rm";
   jq = "${pkgs.jq}/bin/jq";
   age = "${pkgs.age}/bin/age";
-  nix = "${pkgs.nix}/bin/nix --experimental-features nix-command";
+  nix = "${pkgs.nixMeta}/bin/nix --experimental-features nix-command";
   sed = "${gnused}/bin/sed";
   ssh = "${openssh}/bin/ssh";
   tar = "${gnutar}/bin/tar";

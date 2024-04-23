@@ -4,6 +4,7 @@
   ...
 }: {
   nix.nixPath = ["nixpkgs=${toString pkgs.path}"];
+  nix.package = pkgs.nixMeta;
 
   nix.settings.sandbox = true;
   nix.settings.keep-going = true;

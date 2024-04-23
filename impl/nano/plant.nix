@@ -6,7 +6,7 @@
 }: {
   system.build.plant = with pkgs; let
     ssh = "${openssh}/bin/ssh";
-    nix = "${nixVersions.unstable}/bin/nix --extra-experimental-features 'nix-command flakes'";
+    nix = "${nixMeta}/bin/nix --extra-experimental-features 'nix-command flakes'";
 
     entry = args.fs.entry;
     boot = "${entry}/boot";

@@ -14,7 +14,7 @@
               echo "Build finished"
             else
               if [[ $1 != "test" ]];then
-                sudo ${nix}/bin/nix-env -p /nix/var/nix/profiles/system --set ${toplevel}
+                sudo ${nixMeta}/bin/nix-env -p /nix/var/nix/profiles/system --set ${toplevel}
               fi
               exec sudo ${toplevel}/bin/switch-to-configuration "$@"
             fi

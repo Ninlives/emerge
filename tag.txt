@@ -1,1 +1,1 @@
-backport_impure_env_to_nix_stable
+just_use_nix_unstable
