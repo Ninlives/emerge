@@ -7,7 +7,7 @@
   ...
 }: let
   # does not link with iptables enabled
-  iprouteStatic = pkgs.pkgsStatic.iproute2.override {iptables = null;};
+  iprouteStatic = pkgs.pkgsStatic.iproute2.override {iptables = null; elfutils = null;};
 in {
   imports = [
     (modulesPath + "/installer/netboot/netboot-minimal.nix")

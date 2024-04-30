@@ -13,6 +13,8 @@ with lib; {
   profile.disk.persist = "pack";
 
   boot.binfmt.emulatedSystems = ["aarch64-linux" "riscv64-linux"];
+  virtualisation.libvirtd.enable = true;
+  environment.systemPackages = [pkgs.virt-manager];
 
   system.stateVersion = "23.05";
 

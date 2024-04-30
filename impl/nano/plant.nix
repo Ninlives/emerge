@@ -1,9 +1,11 @@
 {
+  self,
   args,
   pkgs,
   config,
   ...
 }: {
+  nixpkgs.overlays = self.overlays';
   system.build.plant = with pkgs; let
     ssh = "${openssh}/bin/ssh";
     nix = "${nixMeta}/bin/nix --extra-experimental-features 'nix-command flakes'";
