@@ -6,13 +6,11 @@
   sound.enable = true;
   sound.mediaKeys.enable = true;
 
-  services.xserver = {
-    dpi = 144;
-    libinput = {
-      enable = true;
-      touchpad.disableWhileTyping = true;
-      touchpad.naturalScrolling = true;
-    };
+  services.xserver.dpi = 144;
+  services.libinput = {
+    enable = true;
+    touchpad.disableWhileTyping = true;
+    touchpad.naturalScrolling = true;
   };
 
   users.users.${config.profile.user.name}.extraGroups = ["input"];
