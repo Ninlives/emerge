@@ -15,7 +15,7 @@ final: prev: {
           '';
       });
     };
-  nixMeta = final.nixVersions.unstable;
+  nixMeta = final.nixVersions.latest;
   inherit
     (import (final.fetchFromGitHub {
       owner = "NixOS";

@@ -1,1 +1,1 @@
-update
+nixVersions.latest
