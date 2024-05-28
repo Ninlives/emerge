@@ -1,12 +1,10 @@
 {
-  config,
   pkgs,
   lib,
   ...
 }: let
   inherit (pkgs) fzf ripgrep fd bat;
   inherit (lib.hm.dag) entryAnywhere;
-  withConfig = plugin: config: {inherit plugin config;};
 in {
   programs.neovim.settings.basic = entryAnywhere {
     plugins = p:

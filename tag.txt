@@ -1,1 +1,1 @@
-nixVersions.latest
+update_neovim_config

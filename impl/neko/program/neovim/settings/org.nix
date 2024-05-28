@@ -11,7 +11,6 @@ in {
         vim.o.conceallevel = 1
         local now = require('orgmode.objects.date'):now()
         local orgmode = require('orgmode')
-        orgmode.setup_ts_grammar()
         orgmode.setup({
           org_agenda_files = {'~/Documents/Org/**/*'},
           org_default_notes_file = '~/Documents/Org/refile.org',
