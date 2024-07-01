@@ -1,1 +1,1 @@
-update_neovim_config
+unset_extra_substituers_for_work_variant

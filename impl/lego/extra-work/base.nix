@@ -18,7 +18,10 @@ in {
   sops.roles = ["work"];
   networking.hostName = dp.workstation.hostname;
 
-  services.displayManager.defaultSession = "gnome-xorg";
+  nix.settings.substituters = lib.mkForce [
+    "https://c.lackof.buzz"
+  ];
+
   environment.systemPackages = [
     # pkgs.teams
     pkgs.tigervnc
