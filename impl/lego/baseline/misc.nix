@@ -10,5 +10,5 @@
       ++ (sort (x: y: x < y) config.system.nixos.tags));
 
   system.stateVersion = "22.05";
-  boot.binfmt.emulatedSystems = ["aarch64-linux"];
+  boot.binfmt.emulatedSystems = ["aarch64-linux" "riscv64-linux"];
 }

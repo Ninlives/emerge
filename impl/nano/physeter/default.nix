@@ -22,7 +22,8 @@
         ./fstab.nix
         ./config.nix
         ./ca.nix
-        ./tasks/update-reservations
+        # ./tasks/update-reservations
+        ./prc.nix
         ../network.nix
         ../mvlink.nix
       ];

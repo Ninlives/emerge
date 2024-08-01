@@ -13,8 +13,8 @@ with lib; {
   profile.disk.persist = "pack";
 
   boot.binfmt.emulatedSystems = ["aarch64-linux" "riscv64-linux"];
-  virtualisation.libvirtd.enable = true;
-  environment.systemPackages = [pkgs.virt-manager];
+  # virtualisation.libvirtd.enable = true;
+  # environment.systemPackages = [pkgs.virt-manager];
 
   system.stateVersion = "23.05";
 
@@ -22,7 +22,7 @@ with lib; {
 
   services.openssh = {
     enable = true;
-    settings.PasswordAuthentication = false;
+    settings.PasswordAuthentication = true;
   };
   systemd.services.sshd.preStart =
     mkAfter
@@ -56,7 +56,9 @@ with lib; {
   sops.secrets.hashed-password.neededForUsers = true;
 
   systemd.services.display-manager.enable = false;
-  services.xrdp.enable = true;
-  services.xrdp.defaultWindowManager = "${pkgs.gnome.gnome-session}/bin/gnome-session";
-  services.xrdp.openFirewall = true;
+  # services.xrdp.enable = true;
+  # services.xrdp.defaultWindowManager = "${pkgs.gnome.gnome-session}/bin/gnome-session";
+  # services.xrdp.openFirewall = true;
+
+  networking.firewall.allowedTCPPortRanges = [ { from = 5900; to = 9900; } ];
 }

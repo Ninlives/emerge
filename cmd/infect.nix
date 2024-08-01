@@ -34,10 +34,12 @@
           parser.add_argument("-u", "--user")
           parser.add_argument("-d", "--device")
           parser.add_argument("-t", "--fs-type")
+          parser.add_argument("-r", "--directory")
           parser.add_argument("-e", "--entry")
           args = {k: v for k, v in vars(parser.parse_args()).items() if v is not None}
           host = args["action"][0]
-          command = args["action"][1:]
+          action = args["action"][1]
+          command = args["action"][2:]
           del args["action"]
 
           json_dir = pathlib.Path("~/.local/state/nix/cmd/plant").expanduser()
@@ -51,6 +53,9 @@
 
           record = records.get(host, {})
           record.update(args)
+          if "directory" not in record:
+              record["directory"] = record["entry"]
+
           records[host] = record
           with records_json.open(mode='w') as f:
               json.dump(records, f)
@@ -69,7 +74,8 @@
               fs.entry = "{record["entry"]}";
               target.user = "{record["user"]}";
               target.host = "{host}";
-            }}).config.system.build.plant.drvPath
+              target.directory = "{record["directory"]}";
+            }}).config.system.build.plant.{action}.drvPath
           """
           drv_cmd = f"${nix} eval --show-trace --raw '${self}#pathogen.physeter' --apply '{fn}'"  # noqa: E501
           print(drv_cmd)

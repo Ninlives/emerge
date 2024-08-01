@@ -27,7 +27,7 @@ in {
       if [[ -L "$l" ]];then
         f=$(${basename} "$l")
         o=$(${realpath} "$l")
-        ${ln} -s "${args.fs.entry}/$o" "$dst/$f"
+        ${ln} -s "${args.target.directory}/$o" "$dst/$f"
       fi
     done
   '';

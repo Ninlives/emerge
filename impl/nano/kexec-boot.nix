@@ -18,12 +18,12 @@ in {
     isExecutable = true;
 
     host = args.target.host;
-    busybox = "${args.fs.entry}/boot/busybox";
-    ip = "${args.fs.entry}/boot/ip";
-    kexec = "${args.fs.entry}/boot/kexec";
+    busybox = "${args.target.directory}/boot/busybox";
+    ip = "${args.target.directory}/boot/ip";
+    kexec = "${args.target.directory}/boot/kexec";
 
-    initrd = "${args.fs.entry}/boot/initrd";
-    bzImage = "${args.fs.entry}/boot/bzImage";
+    initrd = "${args.target.directory}/boot/initrd";
+    bzImage = "${args.target.directory}/boot/bzImage";
 
     init = "${config.system.build.toplevel}/init";
     kernelParams = lib.escapeShellArgs config.boot.kernelParams;
