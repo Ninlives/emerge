@@ -37,4 +37,6 @@ in {
 
   networking.proxy.default = inputs.values.secret.proxy.institute;
   networking.proxy.noProxy = "127.0.0.1,localhost,${inputs.values.secret.workstation.host}";
+
+  networking.hostName = "mlatus-nixos";
 }
