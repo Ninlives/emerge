@@ -3,9 +3,6 @@
   config,
   ...
 }: {
-  sound.enable = true;
-  sound.mediaKeys.enable = true;
-
   services.xserver.dpi = 144;
   services.libinput = {
     enable = true;
