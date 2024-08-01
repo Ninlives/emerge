@@ -17,7 +17,6 @@
         opt.sops
         opt.profile
         impl.lego.meta
-        impl.lego.gnome-basic
         ./kexec-hat.nix
         ./fstab.nix
         ./config.nix
