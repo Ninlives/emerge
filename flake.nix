@@ -28,7 +28,6 @@
   };
   inputs.misskey = {
     url = "github:Ninlives/misskey.nix";
-    inputs.nixpkgs.follows = "nixpkgs";
   };
   inputs.courier = {
     url = "github:Ninlives/courier";
