@@ -50,7 +50,7 @@ with lib; {
   security.sudo.wheelNeedsPassword = false;
 
   sops.roles = ["institute"];
-  sops.age.keyFile = "/pack/crux/sops/age.key";
+  sops.age.keyFile = "/pack/Crux/Data/sops/age.key";
   sops.age.sshKeyPaths = [];
   sops.gnupg.sshKeyPaths = [];
   sops.secrets.hashed-password.neededForUsers = true;

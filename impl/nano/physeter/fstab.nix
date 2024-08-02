@@ -2,7 +2,11 @@
   config,
   args,
   ...
-}: {
+}:
+let
+  inherit (config.home-manager.users.${config.profile.user.name}) persistent;
+in
+{
   fileSystems = {
     "/" = {
       fsType = "tmpfs";
@@ -40,15 +44,15 @@
   boot.loader.grub.enable = false;
 
   revive.specifications.storage = {
-    seal = "/pack/storage";
+    seal = "/pack/Shed";
     user = config.users.users.cloud.name;
     group = config.users.groups.users.name;
   };
-  revive.specifications.crux.seal = "/pack/crux";
+  revive.specifications.crux.seal = "/pack/Crux";
   revive.specifications.storage.boxes = [
     {
-      src = /cloud;
+      src = /Storage;
       dst = "${config.users.users.cloud.home}/Storage";
     }
-  ];
+  ] ++ persistent.boxes;
 }

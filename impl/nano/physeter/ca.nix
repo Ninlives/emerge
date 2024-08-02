@@ -13,7 +13,7 @@
 
   revive.specifications.crux.boxes = [
     {
-      src = /ca-anchors;
+      src = /Data/ca-anchors;
       dst = /etc/ssl/ca-anchors;
     }
   ];

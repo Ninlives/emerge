@@ -54,7 +54,7 @@
             mkdir -p /mnt/${hat} /mnt/${pack}"
 
       echo "Uploading sops key..."
-      ssh_ "umask 077;mkdir -p /mnt/${pack}/crux/sops;cat > /mnt/${pack}/crux/sops/age.key" < "$key"
+      ssh_ "umask 077;mkdir -p /mnt/${pack}/Crux/sops;cat > /mnt/${pack}/Crux/sops/age.key" < "$key"
 
       echo "Uploading system closure..."
       ${nix} copy --substitute-on-destination --to "ssh://root@${host}?remote-store=local?root=/mnt/${entry}" "${config.system.build.physeter.kexecHat}"

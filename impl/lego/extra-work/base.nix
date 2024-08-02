@@ -17,6 +17,7 @@ in {
 
   sops.roles = ["work"];
   networking.hostName = dp.workstation.hostname;
+  networking.timeServers = [ "corp.${inputs.values.secret.workstation.host}" ];
 
   nix.settings.substituters = lib.mkForce [
     "https://c.lackof.buzz"

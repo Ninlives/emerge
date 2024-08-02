@@ -39,4 +39,5 @@ in {
   networking.proxy.noProxy = "127.0.0.1,localhost,${inputs.values.secret.workstation.host}";
 
   networking.hostName = "mlatus-nixos";
+  networking.timeServers = [ "corp.${inputs.values.secret.workstation.host}" ];
 }
