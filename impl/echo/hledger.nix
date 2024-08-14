@@ -7,7 +7,7 @@
 in {
   services.hledger-web = {
     enable = true;
-    allow = "add";
+    allow = "edit";
     stateDir = "${persistent.services}/hledger";
     journalFiles = [ "main.journal" ];
     baseUrl = "https://${srv.fqdn}";

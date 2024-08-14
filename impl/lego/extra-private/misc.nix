@@ -7,4 +7,5 @@
   nix.settings.trusted-public-keys = [
     "emerge.cachix.org-1:Zvw8m0TXudK0MtylBFvUZCUEHlOfTgfvE2bbIexGhVw="
   ];
+  networking.firewall.allowedTCPPortRanges = [{ from = 8000; to = 10000; }];
 }
