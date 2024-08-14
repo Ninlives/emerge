@@ -1,1 +1,1 @@
-lock_misskey_dependency
+chore

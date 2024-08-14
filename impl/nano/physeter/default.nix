@@ -23,6 +23,7 @@
         ./ca.nix
         # ./tasks/update-reservations
         ./prc.nix
+        # ./fhs.nix
         ../network.nix
         ../mvlink.nix
       ];

@@ -2,11 +2,9 @@
   config,
   args,
   ...
-}:
-let
+}: let
   inherit (config.home-manager.users.${config.profile.user.name}) persistent;
-in
-{
+in {
   fileSystems = {
     "/" = {
       fsType = "tmpfs";
@@ -49,10 +47,14 @@ in
     group = config.users.groups.users.name;
   };
   revive.specifications.crux.seal = "/pack/Crux";
-  revive.specifications.storage.boxes = [
-    {
-      src = /Storage;
-      dst = "${config.users.users.cloud.home}/Storage";
-    }
-  ] ++ persistent.boxes;
+  revive.specifications.storage.boxes =
+    [
+      {
+        src = /Storage;
+        dst = "${config.users.users.cloud.home}/Storage";
+      }
+    ]
+    ++ persistent.boxes;
+
+  nix.settings.build-dir = "/pack/Crux/Build";
 }

@@ -6,7 +6,10 @@
   ...
 }: let
   # does not link with iptables enabled
-  iprouteStatic = pkgs.pkgsStatic.iproute2.override {iptables = null; elfutils = null;};
+  iprouteStatic = pkgs.pkgsStatic.iproute2.override {
+    iptables = null;
+    elfutils = null;
+  };
   runOn = prefix:
     pkgs.substituteAll {
       src = ../kexec-run.sh;
