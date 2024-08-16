@@ -21,14 +21,14 @@ in {
     fi
   '';
 
-  environment.gnome.excludePackages = with gnome; [
+  environment.gnome.excludePackages = with gnome; with pkgs; [
     gnome-software
     epiphany
     gnome-maps
     gnome-contacts
     gnome-packagekit
     gnome-music
-    pkgs.gnome-photos
+    gnome-photos
   ];
   programs.geary.enable = false;
   services.packagekit.enable = false;
@@ -38,7 +38,7 @@ in {
 
   services.gnome.sushi.enable = true;
 
-  environment.systemPackages = [gnome.gnome-tweaks pkgs.networkmanagerapplet];
+  environment.systemPackages = [pkgs.gnome-tweaks pkgs.networkmanagerapplet];
 
   services.touchegg.enable = true;
 

@@ -9,7 +9,7 @@
     "org/gnome/desktop/background".picture-uri-dark = "file://${inputs.data.content.resources "wallpapers/jez.jpg"}";
   };
 
-  home.packages = [pkgs.gnome.pomodoro pkgs.cool-retro-term];
+  home.packages = [pkgs.pomodoro pkgs.cool-retro-term];
 
   persistent.boxes = [
     {

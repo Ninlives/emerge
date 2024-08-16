@@ -75,7 +75,7 @@ in {
     }
   ];
 
-  hardware.opengl.driSupport32Bit = true;
+  hardware.graphics.enable32Bit = true;
   hardware.pulseaudio.support32Bit = true;
   allowUnfreePackageNames = ["steam" "steam-run" "steamdeck-hw-theme" "steam-jupiter-original"];
   environment.systemPackages = [steam-application];
