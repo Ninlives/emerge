@@ -25,9 +25,6 @@ in {
       webserver.nginx = {
         enableACME = true;
         forceSSL = true;
-        locations."/".extraConfig = ''
-          proxy_redirect off;
-        '';
       };
     };
   };
