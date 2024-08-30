@@ -25,7 +25,7 @@ in
       file:///${nixosConfig.profile.disk.persist}/Share Share
     '';
 
-    xdg.configFile."gtk-4.0".source = "${gruvbox-gtk-theme}/share/themes/Gruvbox-Dark-B/gtk-4.0";
+    # xdg.configFile."gtk-4.0".source = "${gruvbox-gtk-theme}/share/themes/Gruvbox-Dark-B/gtk-4.0";
 
     dconf.settings = {
       "org/gnome/settings-daemon/plugins/power" = {
@@ -90,7 +90,7 @@ in
         color-scheme = "prefer-dark";
         cursor-theme = "Bibata-Modern-Classic";
         icon-theme = "Gruvbox-Plus-Dark";
-        gtk-theme = "Gruvbox-Dark-B";
+        gtk-theme = "Gruvbox-Dark";
 
         clock-show-weekday = true;
         show-battery-percentage = true;
@@ -98,7 +98,7 @@ in
         text-scaling-factor = 1.5;
       };
       "org/gnome/mutter".dynamic-workspaces = true;
-      "org/gnome/shell/extensions/user-theme".name = "Gruvbox-Dark-B";
+      "org/gnome/shell/extensions/user-theme".name = "Gruvbox-Dark";
       "org/gnome/desktop/calendar".show-weekdate = true;
       "org/gnome/desktop/wm/preferences" = {
         button-layout = "appmenu:minimize,maximize,close";

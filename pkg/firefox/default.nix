@@ -8,8 +8,8 @@ final: prev: {
     csshacks = final.fetchFromGitHub {
       owner = "MrOtherGuy";
       repo = "firefox-csshacks";
-      rev = "05ad86ab51cc1550459d3cac6d8a8acc00bb4570";
-      sha256 = "1cc5nqwm9858kzkk84f7f1qkvvmcqkh3dkrf6w9s34m54m5dn8ws";
+      rev = "9a9dd88871104528422ada76ebb7e35ca3c2bc6b";
+      sha256 = "0k4w38v4jaygqm3xzjnx469jh64m43pqb6s6dwpdcylx9nbm2hvv";
     };
   };
 }

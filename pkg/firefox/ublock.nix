@@ -9,27 +9,27 @@
     name = "main";
     owner = "uBlockOrigin";
     repo = "uAssets";
-    rev = "94a72ad81631e8d4c965c2ae607f8c394494b3d1";
-    sha256 = "sha256-qBcixh2M82oRAXaPzbzilBVjpsi+SHku5oahhNwZsS4=";
+    rev = "b9e359aa08c1985a4512d1ba7a75f12db6f1b8a0";
+    sha256 = "sha256-JoZgXbSoMIZm/pqLZT/gCz/PtpN8Y/hrSfUC1A01Jlk=";
   };
 
   assetsProd = fetchFromGitHub {
     name = "prod";
     owner = "uBlockOrigin";
     repo = "uAssets";
-    rev = "4e8ab43f052b352411b06f6b9a03e3c0280c23eb";
-    sha256 = "sha256-IVeyPZBzlqCR1ueXyvUodBP/aqg54zIqlZkEirFgjIs=";
+    rev = "6d527a0910be91fe1db4052f7971722ee3d52a9a";
+    sha256 = "sha256-XPP3nZZiSyjGWllvCcZ4PFAP28ToUaom/u5yeLvxGyQ=";
   };
 in
   stdenv.mkDerivation {
     pname = "uBlock";
-    version = "unstable-2023-08-10";
+    version = "unstable-2024-08-12";
 
     src = fetchFromGitHub {
       owner = "gorhill";
       repo = "uBlock";
-      rev = "5ec0550581f0bdf9b4f41fbf8b0c4bb6ca521ad5";
-      sha256 = "0lsmkyyxjdjwq67nfyn0ikpygqkpi28zs8x9cxv6csfzpadyqlxz";
+      rev = "9ced01ebf7f0c4a8961b572f5c14c2c3330f1131";
+      sha256 = "1fif1jf73srlwmw2yw59c6k1vsinxiar8q62gg16k7p1gs0bxmv6";
     };
 
     nativeBuildInputs = [python3 zip];
