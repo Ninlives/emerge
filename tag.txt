@@ -1,1 +1,1 @@
-update_misskey_config
+global_protect

@@ -24,5 +24,15 @@
       src = /Programs/cool-retro-term;
       dst = ".local/share/cool-retro-term/cool-retro-term";
     }
+    {
+      src = /Data/global-protect/nm-openconnect-auth-dialog;
+      dst = ".local/share/nm-openconnect-auth-dialog";
+    }
+  ];
+  persistent.scrolls = [
+    {
+      src = /Data/global-protect/openconnect_saml_cookies;
+      dst = ".local/share/openconnect_saml_cookies";
+    }
   ];
 }
