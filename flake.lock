@@ -80,11 +80,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1726795437,
-        "narHash": "sha256-QnOJktvcE8tNNGqxj0+A25cZ56fq71G0AcpzYI+1Zs0=",
+        "lastModified": 1727054809,
+        "narHash": "sha256-f9T3Ddfk4tDLIezg92s89TVYnxmKzyZjaNVB9YCWJDk=",
         "owner": "Ninlives",
         "repo": "data",
-        "rev": "e0bc9e303222fd1b7106847f8c7598b2b84ef094",
+        "rev": "48823ccebc97e43349c87ea72ba922e83754494b",
         "type": "github"
       },
       "original": {
@@ -285,11 +285,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1726902390,
-        "narHash": "sha256-ESAD6AkxsQdV/j5ZBcO4Vg94J7Xd0nfpiEZpJtwSEhg=",
+        "lastModified": 1727071274,
+        "narHash": "sha256-xG83n8zvL+fMFArU1ikcUpw0bhRkrzkSTDJPpBCLlUA=",
         "owner": "Jovian-Experiments",
         "repo": "Jovian-NixOS",
-        "rev": "faf4c746c068dd8e41b1fa5f18beeabd34d4064c",
+        "rev": "03aa054340528d300711253a98f7dccca9378604",
         "type": "github"
       },
       "original": {
@@ -495,11 +495,11 @@
     },
     "nixpkgs_5": {
       "locked": {
-        "lastModified": 1726885390,
-        "narHash": "sha256-NPoqPAA2z9o/Syyx4M4v3/e6ROkK21enXx4+29Q45uc=",
+        "lastModified": 1727061148,
+        "narHash": "sha256-EzxYQ3p2pMCF+BbpI8gRb1IMJ93HpTOAryXJ5luL8sc=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "f7bfe794a79c69c01f2dce20fb7b287ae98a96eb",
+        "rev": "e2c10d90570266d558ec233b4cd472076d06676c",
         "type": "github"
       },
       "original": {
