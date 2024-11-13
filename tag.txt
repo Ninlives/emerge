@@ -1,1 +1,1 @@
-update_neovim_config
+fix_i18n_config
