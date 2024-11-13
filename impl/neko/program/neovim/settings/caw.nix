@@ -14,25 +14,22 @@ in {
       lua
       */
       ''
-        require('which-key').register({
-          c = {
-            name = "+comment",
-            i = { "<Plug>(caw:hatpos:comment)", "hatpos" },
-            I = { "<Plug>(caw:zeropos:comment)", "zeropos" },
-            a = { "<Plug>(caw:dollarpos:comment)", "dollarpos" },
-            w = { "<Plug>(caw:wrap:comment)", "wrap" },
-            b = { "<Plug>(caw:box:comment)", "box" },
-            o = { "<Plug>(caw:jump:comment-next)", "jump next" },
-            O = { "<Plug>(caw:jump:comment-prev)", "jump prev" },
-            u = {
-                name = "+uncomment",
-                i = { "<Plug>(caw:hatpos:uncomment)", "hatpos" },
-                I = { "<Plug>(caw:zeropos:uncomment)", "zeropos" },
-                a = { "<Plug>(caw:dollarpos:uncomment)", "dollarpos" },
-                w = { "<Plug>(caw:wrap:uncomment)", "wrap" },
-            }
-          }
-        }, { prefix = "<leader>" })
+        require('which-key').add({
+          { "<leader>c", group = "comment" },
+          { "<leader>cI", "<Plug>(caw:zeropos:comment)", desc = "zeropos" },
+          { "<leader>cO", "<Plug>(caw:jump:comment-prev)", desc = "jump prev" },
+          { "<leader>ca", "<Plug>(caw:dollarpos:comment)", desc = "dollarpos" },
+          { "<leader>cb", "<Plug>(caw:box:comment)", desc = "box" },
+          { "<leader>ci", "<Plug>(caw:hatpos:comment)", desc = "hatpos" },
+          { "<leader>co", "<Plug>(caw:jump:comment-next)", desc = "jump next" },
+
+          { "<leader>cu", group = "uncomment" },
+          { "<leader>cuI", "<Plug>(caw:zeropos:uncomment)", desc = "zeropos" },
+          { "<leader>cua", "<Plug>(caw:dollarpos:uncomment)", desc = "dollarpos" },
+          { "<leader>cui", "<Plug>(caw:hatpos:uncomment)", desc = "hatpos" },
+          { "<leader>cuw", "<Plug>(caw:wrap:uncomment)", desc = "wrap" },
+          { "<leader>cw", "<Plug>(caw:wrap:comment)", desc = "wrap" },
+        })
       '';
   };
 }

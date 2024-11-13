@@ -24,26 +24,4 @@ in {
     version = "local";
     src = ./cmp-punc;
   };
-
-  mundo = buildVimPlugin {
-    pname = "vim-mundo";
-    version = "unstable-2022-11-05";
-    src = fetchFromGitHub {
-      owner = "simnalamburt";
-      repo = "vim-mundo";
-      rev = "b53d35fb5ca9923302b9ef29e618ab2db4cc675e";
-      sha256 = "1dwrarcxrh8in78igm036lpvyww60c93vmmlk8h054i3v2p8vv59";
-    };
-  };
-
-  nerdtree-syntax-highlight = buildVimPlugin {
-    pname = "vim-nerdtree-syntax-highlight";
-    version = "unstable-2023-07-07";
-    src = fetchFromGitHub {
-      owner = "tiagofumo";
-      repo = "vim-nerdtree-syntax-highlight";
-      rev = "35e70334a2ff6e89b82a145d1ac889e82d1ddb4e";
-      sha256 = "0rkr3w7mcc7ha5g6m4lg0ik52v10hrx1mn2ahxnvb30h0isdyzb8";
-    };
-  };
 }

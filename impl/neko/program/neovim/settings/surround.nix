@@ -17,16 +17,14 @@ in {
       lua
       */
       ''
-        require('which-key').register({
-          s = {
-            name = "+surround",
-            d = { "<Plug>Dsurround", "delete" },
-            c = { "<Plug>Csurround", "change" },
-            C = { "<Plug>CSurround", "change selected" },
-            i = { "<Plug>Ysurround", "insert" },
-            I = { "<Plug>YSurround", "insert multiline" },
-          }
-        }, { prefix = "<leader>" })
+        require('which-key').add({
+          { "<leader>s", group = "surround" },
+          { "<leader>sC", "<Plug>CSurround", desc = "change selected" },
+          { "<leader>sI", "<Plug>YSurround", desc = "insert multiline" },
+          { "<leader>sc", "<Plug>Csurround", desc = "change" },
+          { "<leader>sd", "<Plug>Dsurround", desc = "delete" },
+          { "<leader>si", "<Plug>Ysurround", desc = "insert" },
+        })
       '';
   };
 }

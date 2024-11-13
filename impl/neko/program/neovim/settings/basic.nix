@@ -16,14 +16,14 @@ in {
         limelight-vim
 
         vim-airline
-        mundo
+        vim-mundo
         fzfWrapper
         fzf-vim
         gruvbox
         nerdtree
         nerdtree-git-plugin
         vim-devicons
-        nerdtree-syntax-highlight
+        vim-nerdtree-syntax-highlight
 
         vim-terraform
       ];
