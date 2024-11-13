@@ -12,7 +12,7 @@ with lib; {
   profile.user.uid = 1000;
   profile.disk.persist = "pack";
 
-  # boot.binfmt.emulatedSystems = ["aarch64-linux" "riscv64-linux"];
+  boot.binfmt.emulatedSystems = ["aarch64-linux" "riscv64-linux"];
   # virtualisation.libvirtd.enable = true;
   # environment.systemPackages = [pkgs.virt-manager];
 

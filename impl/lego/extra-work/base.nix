@@ -23,11 +23,6 @@ in {
     "https://c.lackof.buzz"
   ];
 
-  environment.systemPackages = [
-    # pkgs.teams
-    pkgs.tigervnc
-  ];
-
   system.activationScripts.update-ca-certs = stringAfter ["etc"] ''
     mkdir -p /etc/ssl/ca-anchors
     cat /etc/ssl/certs/ca-certificates.crt > /etc/ssl/ca-anchors/ca-certificates.crt

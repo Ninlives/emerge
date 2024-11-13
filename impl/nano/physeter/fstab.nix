@@ -40,6 +40,7 @@ in {
     };
   };
   boot.loader.grub.enable = false;
+  swapDevices = [{device = "/pack/Crux/Debris"; size = 65536;}];
 
   revive.specifications.storage = {
     seal = "/pack/Shed";
