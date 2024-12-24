@@ -1,1 +1,1 @@
-add_unfree_package_steam
+update_extension

@@ -11,7 +11,6 @@ in
     home.packages = [
       dash-to-dock
       appindicator
-      pixel-saver
       x11-gestures
 
       bibata-cursors
@@ -118,7 +117,6 @@ in
         "windowsNavigator@gnome-shell-extensions.gcampax.github.com"
         "appindicatorsupport@rgcjonas.gmail.com"
         "mprisindicatorbutton@JasonLG1979.github.io"
-        "pixel-saver@deadalnix.me"
         "x11gestures@joseexposito.github.io"
         "asusctl-gex@asus-linux.org"
       ];
