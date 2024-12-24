@@ -26,9 +26,6 @@
     url = "github:Ninlives/deckbd";
     inputs.nixpkgs.follows = "nixpkgs";
   };
-  inputs.misskey = {
-    url = "github:Ninlives/misskey.nix";
-  };
   inputs.courier = {
     url = "github:Ninlives/courier";
     inputs.nixpkgs.follows = "nixpkgs";
