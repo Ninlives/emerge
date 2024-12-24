@@ -1,1 +1,1 @@
-update_extension
+adapt_nerd-fonts_update
