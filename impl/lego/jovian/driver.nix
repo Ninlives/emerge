@@ -7,6 +7,7 @@
     enable = true;
     enableDefaultCmdlineConfig = false;
   };
+  allowUnfreePackageNames = [ "steam-jupiter-unwrapped" ];
 
   hardware.pulseaudio.enable = false;
   services.pipewire.alsa.support32Bit = true;
