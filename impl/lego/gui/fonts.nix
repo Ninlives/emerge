@@ -12,7 +12,7 @@ in {
       sarasa-gothic
       twitter-color-emoji
       noto-fonts
-      noto-fonts-cjk
+      noto-fonts-cjk-sans
       liberation_ttf
       wqy_zenhei
     ];
