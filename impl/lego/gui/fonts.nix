@@ -8,8 +8,8 @@ with pkgs; let
 in {
   fonts = {
     packages = lib.mkForce [
-      sarasa-gothic
       (nerdfonts.override {fonts = ["ShareTechMono"];})
+      sarasa-gothic
       twitter-color-emoji
       noto-fonts
       noto-fonts-cjk
