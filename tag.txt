@@ -1,1 +1,1 @@
-adapt_more_changes
+disable_mail_settings
