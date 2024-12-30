@@ -1,1 +1,1 @@
-disable_mail_settings
+remove_matrix_sliding-sync_config

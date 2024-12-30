@@ -67,15 +67,6 @@ in {
     };
   };
 
-  services.matrix-sliding-sync = {
-    enable = true;
-    environmentFile = tpl.sliding-sync.path;
-    settings = {
-      SYNCV3_SERVER = config.services.matrix-synapse.settings.public_baseurl;
-      SYNCV3_LOG_LEVEL = "trace";
-      SYNCV3_PPROF = "127.0.0.1:6060";
-    };
-  };
   systemd.services.matrix-synapse.serviceConfig = {
     CPUQuota = "50%";
     MemoryMax = "1G";
