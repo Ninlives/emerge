@@ -87,11 +87,6 @@ in {
       locations."/_matrix".proxyPass = "http://127.0.0.1:${toString port}";
       locations."/_synapse/client".proxyPass = "http://127.0.0.1:${toString port}";
     };
-    ${dp.host.public.services.matrix-sync.fqdn} = {
-      forceSSL = true;
-      enableACME = true;
-      locations."/".proxyPass = "http://${config.services.matrix-sliding-sync.settings.SYNCV3_BINDADDR}";
-    };
   };
 
   services.postgresql = {
@@ -108,17 +103,8 @@ in {
     owner = users.matrix-synapse.name;
     group = groups.matrix-synapse.name;
   };
-  sops.templates.sliding-sync.content = ''
-    SYNCV3_SECRET=${plh."matrix/sync-v3-secret"}
-  '';
 
   systemd.tmpfiles.rules = with config.users; [
     "d ${config.services.matrix-synapse.dataDir} 0700 ${users.matrix-synapse.name} ${groups.matrix-synapse.name} -"
-  ];
-  revive.specifications.system.boxes = [
-    {
-      src = /Data/matrix-sliding-sync;
-      dst = /var/lib/private/matrix-sliding-sync;
-    }
   ];
 }
