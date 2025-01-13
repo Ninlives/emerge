@@ -11,8 +11,8 @@
 
   reddit = "${dp.host.private.services.libreddit.fqdn}";
   cache = "${dp.host.private.services.cache.fqdn}";
-  libredditHost = "${config.services.libreddit.address}:${
-    toString config.services.libreddit.port
+  libredditHost = "${config.services.redlib.address}:${
+    toString config.services.redlib.port
   }";
   mkProxy = port: {
     proxyPass = "http://127.0.0.1:${toString port}";
@@ -73,10 +73,10 @@ in {
       ExecStart = [
         ""
         (pkgs.writeShellScript "start" ''
-          ${pkgs.v2ray}/bin/v2ray run -config $CREDENTIALS_DIRECTORY/config
+          ${pkgs.v2ray}/bin/v2ray run -config $CREDENTIALS_DIRECTORY/config.json
         '')
       ];
-      LoadCredential = "config:${tpl.v2ray.path}";
+      LoadCredential = "config.json:${tpl.v2ray.path}";
     };
   };
 
@@ -119,38 +119,36 @@ in {
   services.tor.enable = true;
   services.tor.client.enable = true;
 
-  services.libreddit = {
+  services.redlib = {
     enable = true;
     address = "127.0.0.1";
     port = dp.host.private.services.libreddit.port;
-  };
-  systemd.services.libreddit.environment = {
-    LIBREDDIT_BANNER = "Cheers!";
-    LIBREDDIT_ROBOTS_DISABLE_INDEXING = "on";
+    settings = {
+      REDLIB_BANNER = "Cheers!";
+      REDLIB_ROBOTS_DISABLE_INDEXING = "on";
 
-    LIBREDDIT_DEFAULT_THEME = "gruvboxdark";
-    LIBREDDIT_DEFAULT_SHOW_NSFW = "on";
-    LIBREDDIT_DEFAULT_USE_HLS = "on";
-    LIBREDDIT_DEFAULT_SUBSCRIPTIONS = lib.concatStringsSep "+" [
-      "bindingofisaac"
-      "commandline"
-      "Cyberpunk"
-      "exapunks"
-      "geek"
-      "HiFiRush"
-      "homelab"
-      "itsaunixsystem"
-      "linux"
-      "linux_gaming"
-      "linuxmasterrace"
-      "linuxmemes"
-      "NixOS"
-      "oddlysatisfying"
-      "ProgrammerHumor"
-      "SteamDeck"
-      "steampunk"
-      "unixporn"
-      "xkcd"
-    ];
+      REDLIB_DEFAULT_THEME = "gruvboxdark";
+      REDLIB_DEFAULT_SHOW_NSFW = "on";
+      REDLIB_DEFAULT_USE_HLS = "on";
+      REDLIB_DEFAULT_SUBSCRIPTIONS = lib.concatStringsSep "+" [
+        "bindingofisaac"
+        "commandline"
+        "Cyberpunk"
+        "exapunks"
+        "geek"
+        "homelab"
+        "itsaunixsystem"
+        "linux"
+        "linux_gaming"
+        "linuxmasterrace"
+        "linuxmemes"
+        "NixOS"
+        "oddlysatisfying"
+        "ProgrammerHumor"
+        "steampunk"
+        "unixporn"
+        "xkcd"
+      ];
+    };
   };
 }
