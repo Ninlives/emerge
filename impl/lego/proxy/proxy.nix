@@ -176,9 +176,9 @@ in {
   sops.templates.v2ray-template = mkTemplate template;
   sops.templates.v2ray-common = mkTemplate common;
 
-  systemd.services.v2ray-trojan = mkService "$CREDENTIALS_DIRECTORY/config" {
+  systemd.services.v2ray-trojan = mkService "$CREDENTIALS_DIRECTORY/config.json" {
     wantedBy = lib.mkIf (default == "v2ray-trojan") ["multi-user.target"];
-  } {LoadCredential = "config:${tpl.v2ray-trojan.path}";};
+  } {LoadCredential = "config.json:${tpl.v2ray-trojan.path}";};
   systemd.services.v2ray-fallback =
     mkService "$RUNTIME_DIRECTORY/config.json" {
       wantedBy = lib.mkIf (default == "v2ray-fallback") ["multi-user.target"];
