@@ -1,7 +1,5 @@
 {config, inputs, ...}: let
   inherit (config.lib.path) persistent;
-  plh = config.sops.placeholder;
-  tpl = config.sops.templates;
   dp = inputs.values.secret;
   srv = dp.host.private.services.hledger;
 in {
@@ -18,8 +16,15 @@ in {
     forceSSL = true;
     enableACME = true;
     locations = {
-      "/".proxyPass = "http://${config.services.hledger-web.host}:${toString srv.port}";
+      "/" = {
+        proxyPass = "http://${config.services.hledger-web.host}:${toString srv.port}";
+        basicAuthFile = config.sops.secrets."hledger/auth".path;
+      };
     };
+  };
+  sops.secrets."hledger/auth" = {
+    owner = config.users.users.nginx.name;
+    group = config.users.groups.nginx.name;
   };
 
   users.users.hledger.uid = 953;
