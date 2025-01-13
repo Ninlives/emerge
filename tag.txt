@@ -1,1 +1,1 @@
-only_downgrade_pcsclite_in_lego
+downgrade_pcscd_service
