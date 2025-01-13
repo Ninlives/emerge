@@ -1,6 +1,8 @@
 final: prev: let
   inherit (final) fakeFS;
 in {
+  nixMeta = final.nixVersions.latest;
+
   idea-community = fakeFS {
     drv = prev.jetbrains.idea-community;
     fakeHome = "$HOME/.local/fakefs/java";
