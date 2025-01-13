@@ -1,1 +1,1 @@
-update_description
+update_icons

@@ -5,13 +5,13 @@ final: prev: {
   in
     stdenvNoCC.mkDerivation rec {
       pname = "gruvbox-plus-icon-pack";
-      version = "unstable-2023-07-17";
+      version = "unstable-2025-01";
 
       src = fetchFromGitHub {
         owner = "SylEleuth";
         repo = pname;
-        rev = "4eb713e4dd227a12307ab36c1737cbcc04ae3915";
-        sha256 = "0lw8ry5hvrkan51xrcrix0vx5h962gnv6vr49ggwmm22b0g2s3gk";
+        rev = "d41c375cc8d3f6c92a8b6de3bc33edb041935881";
+        sha256 = "sha256-Qqrwi7JNnFQZKTtFeE6icRVQ4du1faPqHUAO50c0mGk=";
       };
 
       nativeBuildInputs = [gtk3];
@@ -21,10 +21,6 @@ final: prev: {
         cd ${variant}
         mkdir -p ${iconDir}
         rm icon-theme.cache
-        # name contains space breaks cache generation
-        find|grep ' '|while read broken;do
-          mv "$broken" "''${broken// /_}"
-        done
         cp -r * ${iconDir}
         gtk-update-icon-cache ${iconDir}
       '';
