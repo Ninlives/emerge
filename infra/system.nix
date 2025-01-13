@@ -247,7 +247,7 @@ in {
             ${ssh} root@${ip} \
               'nix-env -p /nix/var/nix/profiles/system --set ${system} \
               && ${system}/bin/switch-to-configuration boot \
-              && reboot'
+              && nohup sh -c "sleep 6 && reboot" &'
           fi
           echo '{ "path": "${system}" }'
         '';
