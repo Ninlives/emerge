@@ -1,1 +1,1 @@
-update_icons
+update_redlib_subscriptions

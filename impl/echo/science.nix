@@ -148,6 +148,9 @@ in {
         "steampunk"
         "unixporn"
         "xkcd"
+        "ClockworkPi"
+        "cyberDeck"
+        "programming"
       ];
     };
   };
