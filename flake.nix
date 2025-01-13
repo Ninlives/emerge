@@ -1,5 +1,5 @@
 {
-  description = "My personal config files for my daily environment, configured for Asus Flow X13. Now with flakes!";
+  description = "My personal config files for my daily environment, configured for Steam Deck. Now with flakes!";
 
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
   inputs.flake-parts.url = "github:hercules-ci/flake-parts";
