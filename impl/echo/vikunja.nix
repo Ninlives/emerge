@@ -4,6 +4,7 @@
   ...
 }: let
   dp = inputs.values.secret;
+  cfg = config.services.vikunja;
   plh = config.sops.placeholder;
   tpl = config.sops.templates;
 in {
@@ -28,9 +29,10 @@ in {
     VIKUNJA_MAILER_PASSWORD='${plh."vikunja/smtp-password"}'
   '';
 
-  services.nginx.virtualHosts.${config.services.vikunja.frontendHostname} = {
+  services.nginx.virtualHosts.${cfg.frontendHostname} = {
     forceSSL = true;
     enableACME = true;
+    locations."/".proxyPass = "http://${cfg.host}/${cfg.port}";
   };
 
   revive.specifications.system.boxes = [
