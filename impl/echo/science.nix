@@ -151,6 +151,8 @@ in {
         "ClockworkPi"
         "cyberDeck"
         "programming"
+        "minecraft"
+        "botania"
       ];
     };
   };

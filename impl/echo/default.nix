@@ -14,7 +14,6 @@ in {
       ./science.nix
       ./vaultwarden.nix
       ./vikunja.nix
-      ./kavita.nix
       ./freshrss.nix
       ./misskey
       ./postgresql.nix
