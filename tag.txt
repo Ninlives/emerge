@@ -1,1 +1,1 @@
-vikunja
+use_corp_email_by_default

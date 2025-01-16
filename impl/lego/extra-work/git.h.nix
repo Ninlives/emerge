@@ -3,7 +3,7 @@
   pkgs,
   ...
 }: let
-  email = inputs.values.secret.email.opensource;
+  email = inputs.values.secret.email.corp;
 in {
   programs = {
     git = {
