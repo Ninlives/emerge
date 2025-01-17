@@ -32,7 +32,7 @@ in {
   services.nginx.virtualHosts.${cfg.frontendHostname} = {
     forceSSL = true;
     enableACME = true;
-    locations."/".proxyPass = "http://${cfg.host}/${cfg.port}";
+    locations."/".proxyPass = "http://127.0.0.1/${cfg.port}";
   };
 
   revive.specifications.system.boxes = [
