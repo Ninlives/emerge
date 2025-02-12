@@ -1,11 +1,9 @@
 {
-  config,
   inputs,
   ...
 }: let
   dp = inputs.values.secret;
   srv = dp.host.public.services;
-  inherit (config.lib.path) persistent;
 in {
   services.misskey = {
     enable = true;
@@ -25,7 +23,7 @@ in {
         enableACME = true;
         forceSSL = true;
         extraConfig = ''
-          client_max_body_size 256M
+          client_max_body_size 256M;
         '';
       };
     };
