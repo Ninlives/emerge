@@ -24,6 +24,9 @@ in {
       webserver.nginx = {
         enableACME = true;
         forceSSL = true;
+        extraConfig = ''
+          client_max_body_size 256M
+        '';
       };
     };
   };
