@@ -5,7 +5,7 @@
       desktopName = "Microsoft Teams";
       categories = ["Network" "InstantMessaging" "Chat"];
       icon = fetchurl {
-        url = "https://github.com/IsmaelMartinez/teams-for-linux/blob/develop/build/icons/512x512.png?raw=true";
+        url = "https://github.com/IsmaelMartinez/teams-for-linux/blob/de1391e03d49fdc05de18e39bed3c1868d9f9adc/build/icons/512x512.png";
         sha256 = "sha256-xtsgbOxulrLyOeVICWm0ZvpOPGlQ9giCZX+ZdBaiafo=";
       };
       exec = ''${chromium}/bin/chromium --app="https://teams.microsoft.com" %U'';
