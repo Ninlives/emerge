@@ -30,6 +30,7 @@
     url = "github:Ninlives/courier";
     inputs.nixpkgs.follows = "nixpkgs";
   };
+  inputs.parasyteOS.url = "github:parasyteOS/flake/upstream";
 
   outputs = {
     self,

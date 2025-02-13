@@ -35,5 +35,6 @@ with inputs; {
     impl.neko = {imports = fn.dotNixFromRecursive ../impl/neko;};
     impl.echo = import ../impl/echo;
     impl.nano = {imports = fn.dotNixFromRecursive ../impl/nano;};
+    impl.acro = {imports = fn.dotNixFromRecursive ../impl/acro;};
   };
 }

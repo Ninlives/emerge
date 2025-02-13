@@ -1,6 +1,7 @@
-{inputs, ...}: {
+{inputs, config, ...}: {
   boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "usb_storage" "usbhid" "sd_mod" "sdhci_pci"];
-  boot.kernelModules = ["kvm-amd"];
+  boot.extraModulePackages = [ config.boot.kernelPackages.evdi ];
+  boot.kernelModules = ["kvm-amd" "evdi"];
   imports = [inputs.jovian.nixosModules.default];
 
   jovian.devices.steamdeck = {
