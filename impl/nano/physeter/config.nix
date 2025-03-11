@@ -68,4 +68,5 @@ with lib; {
       to = 9900;
     }
   ];
+  virtualisation.podman.enable = true;
 }

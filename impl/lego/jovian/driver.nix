@@ -8,18 +8,11 @@
     enable = true;
     enableDefaultCmdlineConfig = false;
   };
+  jovian.steamos.enableBluetoothConfig = true;
   allowUnfreePackageNames = [ "steam-jupiter-unwrapped" ];
 
   services.pulseaudio.enable = false;
   services.pipewire.alsa.support32Bit = true;
-
-  hardware.bluetooth.enable = true;
-  hardware.bluetooth.settings.General = {
-    "Privacy" = "device";
-    "JustWorksRepairing" = "always";
-    "Class" = "0x000100";
-    "FastConnectable" = true;
-  };
 
   hardware.xpadneo.enable = true;
   services.joycond.enable = true;
