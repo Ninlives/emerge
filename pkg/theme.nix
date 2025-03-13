@@ -26,5 +26,6 @@ final: prev: {
       '';
 
       dontDropIconThemeCache = true;
+      dontCheckForBrokenSymlinks = true;
     };
 }
