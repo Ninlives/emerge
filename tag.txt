@@ -1,1 +1,1 @@
-lock_update
+do_not_speech_on_steam

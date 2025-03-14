@@ -43,12 +43,10 @@ in {
   services.displayManager.preStart = "${set-session}/bin/set-session";
   environment.etc."gdm/PreSession/Default".source = pkgs.writeShellScript "presession" ''
     if [[ "$USERNAME" = "deck" ]];then
-      ${config.lib.commands.speech} || true
       ${systemctl} stop opensd.service || true
     fi
   '';
   environment.etc."gdm/PostSession/Default".source = pkgs.writeShellScript "postsession" ''
-    ${config.lib.commands.speechless} || true
     ${systemctl} start opensd.service || true
   '';
 
