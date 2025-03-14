@@ -26,10 +26,7 @@
     url = "github:Ninlives/deckbd";
     inputs.nixpkgs.follows = "nixpkgs";
   };
-  inputs.courier = {
-    url = "github:Ninlives/courier";
-    inputs.nixpkgs.follows = "nixpkgs";
-  };
+  inputs.paisa.url = "github:Ninlives/paisa";
   inputs.parasyteOS.url = "github:parasyteOS/flake/upstream";
 
   outputs = {
