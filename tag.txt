@@ -1,1 +1,1 @@
-do_not_speech_on_steam
+substituteAll_->_replaceVars

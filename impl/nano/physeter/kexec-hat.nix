@@ -11,7 +11,7 @@
     elfutils = null;
   };
   runOn = prefix:
-    pkgs.substituteAll {
+    pkgs.replaceVars {
       src = ../kexec-run.sh;
       isExecutable = true;
 

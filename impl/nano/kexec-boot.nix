@@ -13,7 +13,7 @@ in {
     (modulesPath + "/installer/netboot/netboot-minimal.nix")
   ];
 
-  system.build.kexecRun = pkgs.substituteAll {
+  system.build.kexecRun = pkgs.replaceVars {
     src = ./kexec-run.sh;
     isExecutable = true;
 
