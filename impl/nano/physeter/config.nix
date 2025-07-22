@@ -69,4 +69,10 @@ with lib; {
     }
   ];
   virtualisation.podman.enable = true;
+
+  services.nix-serve = {
+    enable = true;
+    openFirewall = true;
+    secretKeyFile = config.sops.secrets."cache/private-key".path;
+  };
 }

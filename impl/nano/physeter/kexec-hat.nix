@@ -11,20 +11,20 @@
     elfutils = null;
   };
   runOn = prefix:
-    pkgs.replaceVars {
+    pkgs.replaceVarsWith {
       src = ../kexec-run.sh;
+      replacements = {
+        busybox = "${prefix}/${pkgs.pkgsStatic.busybox}/bin/busybox";
+        ip = "${prefix}/${iprouteStatic}/bin/ip";
+        kexec = "${prefix}/${pkgs.pkgsStatic.kexec-tools}/bin/kexec";
+
+        initrd = "${prefix}/${config.system.build.initialRamdisk}/initrd";
+        bzImage = "${prefix}/${config.system.build.kernel}/${config.system.boot.loader.kernelFile}";
+
+        init = "${config.system.build.toplevel}/init";
+        kernelParams = lib.escapeShellArgs config.boot.kernelParams;
+      };
       isExecutable = true;
-
-      host = args.target.host;
-      busybox = "${prefix}/${pkgs.pkgsStatic.busybox}/bin/busybox";
-      ip = "${prefix}/${iprouteStatic}/bin/ip";
-      kexec = "${prefix}/${pkgs.pkgsStatic.kexec-tools}/bin/kexec";
-
-      initrd = "${prefix}/${config.system.build.initialRamdisk}/initrd";
-      bzImage = "${prefix}/${config.system.build.kernel}/${config.system.boot.loader.kernelFile}";
-
-      init = "${config.system.build.toplevel}/init";
-      kernelParams = lib.escapeShellArgs config.boot.kernelParams;
     };
 
   take = runOn args.target.directory;
