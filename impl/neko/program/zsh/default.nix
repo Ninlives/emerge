@@ -44,7 +44,7 @@ in {
   programs = {
     zsh = rec {
       enable = true;
-      dotDir = ".config/zsh";
+      dotDir = "${homeDirectory}/.config/zsh";
       enableCompletion = true;
       history.path = "${homeDirectory}/.local/history/zsh_history";
 
@@ -58,8 +58,8 @@ in {
       };
 
       sessionVariables = {
-        HISTDB_FILE = "${homeDirectory}/${dotDir}/zsh-history.db";
-        _ZL_DATA = "${homeDirectory}/${dotDir}/zlua";
+        HISTDB_FILE = "${dotDir}/zsh-history.db";
+        _ZL_DATA = "${dotDir}/zlua";
       };
 
       oh-my-zsh = {
@@ -80,7 +80,7 @@ in {
         theme = "lam";
       };
 
-      initExtra = ''
+      initContent = ''
         ${optionalString nixosConfig.services.xserver.enable "${keyutils}/bin/keyctl new_session shell > /dev/null"}
         source ${zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
         source ${zsh-autopair}/share/zsh/zsh-autopair/autopair.zsh

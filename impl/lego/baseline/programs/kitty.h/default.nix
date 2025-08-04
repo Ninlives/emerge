@@ -28,9 +28,9 @@ in {
     };
   };
 
-  nixpkgs.overlays = [
-    (self: super: {
-      fish = super.fish.overrideAttrs (_: {doCheck = false;});
-    })
-  ];
+  # nixpkgs.overlays = [
+  #   (self: super: {
+  #     fish = super.fish.overrideAttrs (_: {doCheck = false;});
+  #   })
+  # ];
 }

@@ -36,6 +36,7 @@ in
       "org/gnome/settings-daemon/plugins/color" = {
         night-light-enabled = true;
         night-light-schedule-automatic = true;
+        night-light-temperature = 3000;
       };
 
       "org/gnome/settings-daemon/plugins/media-keys".custom-keybindings = [

@@ -8,7 +8,7 @@
     inputs.nixpkgs.follows = "nixpkgs";
   };
   inputs.home-manager = {
-    url = "github:Ninlives/home-manager";
+    url = "github:nix-community/home-manager";
     inputs.nixpkgs.follows = "nixpkgs";
   };
   inputs.jovian = {

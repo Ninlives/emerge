@@ -10,7 +10,7 @@ with lib;
 with inputs;
 with self.mod; let
   baseModules = [
-    home-manager.nixosModule
+    home-manager.nixosModules.home-manager
 
     bombe
     opt.profile

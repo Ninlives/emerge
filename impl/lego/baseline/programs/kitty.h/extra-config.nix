@@ -1,7 +1,7 @@
 {...}: {
   programs = {
     zsh = {
-      initExtra = ''
+      initContent = ''
         kitty + complete setup zsh | source /dev/stdin
       '';
       shellAliases.gdiff = "git difftool --no-symlinks --dir-diff";

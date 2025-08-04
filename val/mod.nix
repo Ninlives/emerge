@@ -24,7 +24,7 @@ with inputs; {
       in
         {config, ...}:
           {
-            imports = pat.wrong ++ (optional (pat.right != []) home-manager.nixosModule);
+            imports = pat.wrong ++ (optional (pat.right != []) home-manager.nixosModules.home-manager);
           }
           // (optionalAttrs (pat.right != []) {
             home-manager.users.${config.profile.user.name} = {...}: {
