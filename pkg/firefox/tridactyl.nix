@@ -9,8 +9,8 @@
   src = fetchFromGitHub {
     owner = "tridactyl";
     repo = "tridactyl";
-    rev = "4ec92541113a78d64942594f506997fb3a53106e";
-    sha256 = "0vnik8p6f5asp38z6pxvl5pw7p1rqyiydswwza8nldx9ly3pd99q";
+    rev = "0885811abeefa6011e3acd11ab5ae91babb589bb";
+    sha256 = "1x8kbgdfgz2qqljrdprlav9bdzxlala0v655lm91xzar52p82y4k";
   };
   deps = mkYarnModules {
     pname = "tridactyl-modules";

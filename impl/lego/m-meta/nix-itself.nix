@@ -9,6 +9,7 @@
   nix.settings.sandbox = true;
   nix.settings.keep-going = true;
   nix.settings.trusted-users = [config.profile.user.name];
+  nix.settings.max-jobs = 12;
 
   nix.settings.auto-optimise-store = true;
   nix.settings.system-features = ["benchmark" "big-parallel" "kvm" "nixos-test" "recursive-nix"];

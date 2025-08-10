@@ -1,5 +1,4 @@
 {pkgs, ...}: {
-  nix.settings.max-jobs = 12;
   environment.systemPackages = with pkgs; [
     steamdeck-firmware
     jupiter-dock-updater-bin
@@ -21,5 +20,4 @@
     "facetimehd-calibration"
     "facetimehd-firmware"
   ];
-  services.fwupd.enable = true;
 }

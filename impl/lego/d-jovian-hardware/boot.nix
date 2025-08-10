@@ -7,10 +7,7 @@
 }: {
   imports = [inputs.lanzaboote.nixosModules.lanzaboote];
 
-  boot.loader.efi.efiSysMountPoint = "/boot";
-  boot.bootspec.enable = true;
   boot.loader.systemd-boot.enable = false;
-  boot.loader.timeout = 65535;
 
   boot.loader.systemd-boot.consoleMode = "auto";
   boot.lanzaboote = {
@@ -31,22 +28,4 @@
       "secureboot/keys/PK/PK.pem"
     ]));
   environment.systemPackages = [pkgs.sbctl];
-
-  boot.tmp.cleanOnBoot = true;
-
-  services.fwupd.enable = true;
-  revive.specifications.system.boxes = [
-    {
-      src = /Log;
-      dst = /var/log;
-    }
-    {
-      src = /Cache/fwupd;
-      dst = /var/cache/fwupd;
-    }
-    {
-      src = /Data/fwupd;
-      dst = /var/lib/fwupd;
-    }
-  ];
 }

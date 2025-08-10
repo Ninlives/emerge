@@ -13,6 +13,7 @@ in
       appindicator
       x11-gestures
 
+      user-themes
       bibata-cursors
       gruvbox-gtk-theme
       gtk-engine-murrine
