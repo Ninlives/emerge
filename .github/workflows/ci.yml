@@ -36,8 +36,10 @@ jobs:
         eval $(ssh-agent)
         echo "${{ secrets.VALUES_SSH_KEY }}"|ssh-add -
         nix flake update
-    - name: Build system
+    - name: Build jovian system
       run: nix build .#nixosConfigurations.lego.config.system.build.toplevel --print-build-logs --show-trace
+    - name: Build desktop system
+      run: nix build .#nixosConfigurations.holo.config.system.build.toplevel --print-build-logs --show-trace
     - name: Build terraform configuration
       run: nix build .#terraformConfigurations.zero --print-build-logs --show-trace
     - name: Commit if build succeed

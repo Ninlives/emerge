@@ -58,7 +58,7 @@ in {
           {
             specialisation.institute = {
               inheritParentConfig = false;
-              configuration.imports = baseModules ++ [impl.lego.hardware-jovian impl.lego.extra-work];
+              configuration.imports = baseModules ++ [impl.lego.d-jovian-hardware impl.lego.d-jovian-extra-work];
             };
           }
         ];
