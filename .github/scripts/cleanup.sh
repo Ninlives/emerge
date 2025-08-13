@@ -7,6 +7,8 @@ BloatedPackagesWithServices=(\
     'finalrd' \
     'irqbalance' \
     '^libmono.*' \
+    'man-db' \
+    'manpages' \
     '^mono.*' \
     'multipath-tools' \
     '^moby.*' \
@@ -21,25 +23,27 @@ BloatedPackagesWithServices=(\
 BloatedPackages=(\
     '^.*-icon-theme' \
     'ant' \
-    'apache2' \
+    'apache2.*' \
     '^aspnetcore.*' \
     'azure-cli' \
     '^bcache.*' \
     'bolt' \
     'brotli' \
     'build-essential' \
+    'buildah' \
     'byobu' \
     '^cpp.*' \
     '^clang.*' \
     'crun' \
+    'containerd.io' \
     '^emacsen.*' \
     '^firebird.*' \
+    'firefox' \
     '^fonts.*' \
     '^freetds.*' \
     'friendly-recovery' \
     '^gconf.*' \
     '^gfortran.*' \
-    'gh' \
     '^gir.*' \
     '^glib.*' \
     '^google.*' \
@@ -50,11 +54,11 @@ BloatedPackages=(\
     'icu-devtools' \
     '^imagemagick.*' \
     '^java.*' \
+    '^kotlin.*' \
     '^landscape.*' \
+    '^libclang.*' \
     '^lld.*' \
     '^llvm.*' \
-    'man-db' \
-    'manpages' \
     '^mecab.*' \
     '^mercurial.*' \
     '^microsoft.*' \
@@ -105,8 +109,6 @@ BloatedPackages=(\
 sudo apt purge --yes "${BloatedPackages[@]}" "${BloatedPackagesWithServices[@]}"
 sudo apt autopurge --yes
 
-
-
 BloatedPaths=(\
     '/usr/share/dotnet' \
     '/usr/share/swift' \
@@ -114,16 +116,21 @@ BloatedPaths=(\
     '/usr/share/gradle' \
     '/usr/share/sbt' \
     '/usr/local/' \
-    '/opt/ghc' \
-    '/opt/hostedtoolcache' \
-    '/opt/pipx' \
-    '/opt/powershell' \
+    '/opt' \
+    '/snap' \
     '/var/snap' \
-    '/var/cache/' \
     '/var/lib/docker' \
     '/var/lib/mysql' \
     '/var/lib/gems' \
-    '/etc/skel'
+    '/etc/skel' \
+    '/usr/lib/jvm' \
+    '/usr/lib/google-cloud-sdk' \
+    '/usr/lib/llvm-'* \
+    '/usr/lib/dotnet' \
+    '/usr/lib/firefox' \
+    "$HOME/.rustup" \
+    "$HOME/.cargo" \
+    "$HOME/.dotnet"
 )
 
 for path in "${BloatedPaths[@]}";do
