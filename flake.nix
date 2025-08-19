@@ -31,7 +31,7 @@
     inputs.nixpkgs.follows = "nixpkgs";
   };
   inputs.paisa.url = "github:Ninlives/paisa";
-  inputs.parasyteOS.url = "github:parasyteOS/flake/upstream";
+  inputs.minegrub-theme.url = "github:Lxtharia/minegrub-theme";
 
   outputs = {
     self,
