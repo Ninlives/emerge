@@ -1,1 +1,1 @@
-allow_via
+update
