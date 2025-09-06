@@ -52,11 +52,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1757033667,
-        "narHash": "sha256-opCpX/esAM/8LEUTtnkxcHC+22T7j52YAvwbKdLzrLc=",
+        "lastModified": 1757119980,
+        "narHash": "sha256-ywc0CRDnDOmEpRGElDOwXnTFt2pF5hOF3q3v45pmK8o=",
         "owner": "Ninlives",
         "repo": "data",
-        "rev": "269691a0a2189e84f2bef1ed70d19087b5c2e468",
+        "rev": "3568bba3878c2844902748e1fb1f1204282bdbbe",
         "type": "github"
       },
       "original": {
