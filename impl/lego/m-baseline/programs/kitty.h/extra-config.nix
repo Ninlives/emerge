@@ -7,7 +7,7 @@
       shellAliases.gdiff = "git difftool --no-symlinks --dir-diff";
     };
     git = {
-      extraConfig = {
+      settings = {
         diff = {
           tool = "kitty";
           guitool = "kitty.gui";

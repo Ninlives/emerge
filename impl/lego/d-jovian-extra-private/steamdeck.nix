@@ -13,7 +13,7 @@
       dontUnpack = true;
       strictDeps = false;
 
-      nativeBuildInputs = [wrapGAppsHook gobject-introspection];
+      nativeBuildInputs = [wrapGAppsHook3 gobject-introspection];
       buildInputs = [accountsservice glib];
       propagatedBuildInputs = with python3.pkgs; [pygobject3 ordered-set];
 

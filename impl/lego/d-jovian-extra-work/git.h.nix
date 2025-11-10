@@ -10,7 +10,7 @@ in {
       enable = true;
       userName = email.name;
       userEmail = email.address;
-      extraConfig = {
+      settings = {
         commit.template = builtins.toFile "template" ''
           ##################################################
 
