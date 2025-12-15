@@ -29,6 +29,11 @@ in {
     };
   };
 
+  systemd.services.misskey.serviceConfig = {
+    RuntimeMaxSec = 4 * 60 * 60;
+    Restart = "always";
+  };
+
   users.users.misskey = {
     group = "misskey";
     uid = 954;
