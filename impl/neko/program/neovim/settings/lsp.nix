@@ -17,16 +17,15 @@ in {
       */
       ''
         local lsps = { 'nil_ls', 'bashls', 'pyright', 'texlab', 'ltex'}
-        local lspconfig = require('lspconfig')
         for _, lsp in pairs(lsps) do
-          lspconfig[lsp].setup {
+          vim.lsp.config[lsp].setup {
             on_attach = on_attach,
             capabilities = capabilities,
           }
         end
 
         local ltex_types = lspconfig.ltex.document_config.default_config.filetypes
-        lspconfig.ltex.setup {
+        vim.lsp.config.ltex.setup {
           on_attach = on_attach,
           capabilities = capabilities,
           filetypes = ltex_types,

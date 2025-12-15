@@ -1,5 +1,5 @@
 {pkgs, ...}: {
-  home.packages = [pkgs.bitwarden pkgs.bitwarden-cli-wrapper];
+  home.packages = [pkgs.bitwarden-desktop pkgs.bitwarden-cli-wrapper];
   persistent.boxes = [
     {
       src = /Programs/vaultwarden/gui;
