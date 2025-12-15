@@ -18,23 +18,20 @@ in {
       ''
         local lsps = { 'nil_ls', 'bashls', 'pyright', 'texlab', 'ltex'}
         for _, lsp in pairs(lsps) do
-          vim.lsp.config[lsp].setup {
-            on_attach = on_attach,
-            capabilities = capabilities,
-          }
+          vim.lsp.enable(lsp)
         end
 
-        local ltex_types = lspconfig.ltex.document_config.default_config.filetypes
-        vim.lsp.config.ltex.setup {
-          on_attach = on_attach,
-          capabilities = capabilities,
-          filetypes = ltex_types,
+        vim.lsp.config('nil_ls', {
           settings = {
-            ltex = {
-              enabled = ltex_types
+            ['nil'] = {
+              nix = {
+                flake = {
+                  autoArchive = false
+                }
+              }
             }
           }
-        }
+        })
       '';
   };
 }
