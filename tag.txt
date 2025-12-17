@@ -1,1 +1,1 @@
-configure_server
+new_deployment
