@@ -1,1 +1,1 @@
-pin_hledger_to_1.32
+update_browser_extensions
