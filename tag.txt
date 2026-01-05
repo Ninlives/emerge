@@ -1,1 +1,1 @@
-update_browser_extensions
+fix_hash
