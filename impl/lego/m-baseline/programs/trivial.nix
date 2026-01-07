@@ -1,6 +1,5 @@
-{config, ...}: {
-  programs.adb.enable = true;
-  users.users.${config.profile.user.name}.extraGroups = ["adbusers"];
+{config, pkgs, ...}: {
+  environment.systemPackages = [ pkgs.android-tools ];
   nixpkgs.config.android_sdk.accept_license = true;
   revive.specifications.user.boxes = [
     {
