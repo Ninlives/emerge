@@ -1,1 +1,1 @@
-new_ssd
+update_browser_extensions

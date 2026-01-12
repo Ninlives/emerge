@@ -9,10 +9,10 @@ buildNpmPackage rec {
   src = fetchFromGitHub {
     owner = "bitwarden";
     repo = "clients";
-    rev = "d9d8b4ba55809858dc3ce2d8b1ea512253abe678";
-    sha256 = "sha256-i+hLslZ2i94r04vaOzx9e55AR8aXa9sSK8el+Dcp05A=";
+    rev = "253a4e573c51d06d32303c21fcd1b7d2ea89d2f2";
+    sha256 = "sha256-Xzo8dmpsSHqg8SLmh9mvcf1BAK6pPUlaUm3TjDlwS5E=";
   };
-  npmDepsHash = "sha256-OT9Ll+F4e/yOJVpay/zwfEHcBqRvSFOM2mtlrJ8E6fs=";
+  npmDepsHash = "sha256-22222222222222222222222222RvSFOM2mtlrJ8E6fs=";
   npmWorkspace = "apps/browser";
   makeCacheWritable = true;
   npmFlags = ["--legacy-peer-deps"];
