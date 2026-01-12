@@ -50,6 +50,24 @@ in
         };
       };
     };
+    disk.misc = {
+      device = "/dev/nvme1n1";
+      content = {
+        type = "gpt";
+        partitions.TAR = {
+          size = "100%";
+          content = {
+            type = "btrfs";
+            subvolumes = {
+              "/tavern" = {
+                mountpoint = "/tavern";
+                mountOptions = btrfsOpts;
+              };
+            };
+          };
+        };
+      };
+    };
     nodev."/" = {
       fsType = "tmpfs";
       mountOptions = ["mode=0755" "defaults" "size=75%"];
