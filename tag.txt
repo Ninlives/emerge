@@ -1,1 +1,1 @@
-update_browser_extensions
+revert_bitwarden_browser_ext_update

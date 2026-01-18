@@ -5,14 +5,14 @@
 }:
 buildNpmPackage rec {
   pname = "bitwarden";
-  version = "unstable-2026-01-02";
+  version = "unstable-2024-08-05";
   src = fetchFromGitHub {
     owner = "bitwarden";
     repo = "clients";
-    rev = "253a4e573c51d06d32303c21fcd1b7d2ea89d2f2";
-    sha256 = "sha256-Xzo8dmpsSHqg8SLmh9mvcf1BAK6pPUlaUm3TjDlwS5E=";
+    rev = "92f87dad9a81362b57cde2ede98afbf80556f75b";
+    sha256 = "1fxkjs1vfh2r17phnz7pxyd0jis6lfnpscn9c25allxam6phady6";
   };
-  npmDepsHash = "sha256-22222222222222222222222222RvSFOM2mtlrJ8E6fs=";
+  npmDepsHash = "sha256-u1Jct5R7cUGEDoQmkel1Noeq1SJDi/LfxyVMfpRle90=";
   npmWorkspace = "apps/browser";
   makeCacheWritable = true;
   npmFlags = ["--legacy-peer-deps"];
