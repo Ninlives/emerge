@@ -1,6 +1,7 @@
 {
   buildNpmPackage,
   fetchFromGitHub,
+  nodejs_22,
   python3,
 }:
 buildNpmPackage rec {
@@ -16,6 +17,9 @@ buildNpmPackage rec {
   npmWorkspace = "apps/browser";
   makeCacheWritable = true;
   npmFlags = ["--legacy-peer-deps"];
+
+  # https://github.com/NixOS/nixpkgs/issues/474535
+  nodejs = nodejs_22;
 
   nativeBuildInputs = [python3];
   npmBuildScript = "dist:firefox";
