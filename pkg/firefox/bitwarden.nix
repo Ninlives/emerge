@@ -11,7 +11,7 @@ buildNpmPackage rec {
     owner = "bitwarden";
     repo = "clients";
     rev = "82470bdff16bb4f1e24035ccca9ed506e827c6d2";
-    sha256 = "11111111111117phnz7pxyd0jis6lfnpscn9c25allxam6phady6";
+    hash = "sha256-yER9LDFwTQkOdjB84UhEiWUDE+5Qa2vlRzq1/Qc/soY=";
   };
   npmDepsHash = "sha256-22222222222222222222222222RvSFOM2mtlrJ8E6fs=";
   npmWorkspace = "apps/browser";
