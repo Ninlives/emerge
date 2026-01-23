@@ -13,7 +13,7 @@ buildNpmPackage rec {
     rev = "82470bdff16bb4f1e24035ccca9ed506e827c6d2";
     hash = "sha256-yER9LDFwTQkOdjB84UhEiWUDE+5Qa2vlRzq1/Qc/soY=";
   };
-  npmDepsHash = "sha256-22222222222222222222222222RvSFOM2mtlrJ8E6fs=";
+  npmDepsHash = "sha256-hczwOG30ad5oaTU7APPrW+a7LmjPch+P4dZSb7B+2eU=";
   npmWorkspace = "apps/browser";
   makeCacheWritable = true;
   npmFlags = ["--legacy-peer-deps"];
