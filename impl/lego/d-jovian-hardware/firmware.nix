@@ -9,13 +9,13 @@
     broadcom-bt-firmware
     b43Firmware_5_1_138
     b43Firmware_6_30_163_46
-    xow-dongle-firmware
+    xone-dongle-firmware
     facetimehd-calibration
     facetimehd-firmware
   ];
   allowUnfreePackageNames = [
     "b43-firmware"
-    "xow-dongle-firmware"
+    "xone-dongle-firmware"
     "broadcom-bt-firmware"
     "facetimehd-calibration"
     "facetimehd-firmware"
