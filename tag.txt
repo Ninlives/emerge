@@ -1,1 +1,1 @@
-revert_bitwarden_browser_ext_update
+server passwd

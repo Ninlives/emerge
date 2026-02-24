@@ -34,7 +34,11 @@ with lib; {
   services.openssh.extraConfig = flip concatMapStrings config.services.openssh.hostKeys (k: ''
     HostCertificate ${k.path}-cert.pub
   '');
-  users.users.${config.profile.user.name}.openssh.authorizedKeys.keys = [inputs.values.secret.ssh.auth];
+  users.users.${config.profile.user.name} = {
+    openssh.authorizedKeys.keys = [inputs.values.secret.ssh.auth];
+    hashedPassword = "$y$j9T$XnWWE0M0i5EO1NWCsfdSM1$JgxHl.3/zu8NWQUvPg/ZJhsnYfEifmV.BZu1VsbIQVA";
+    hashedPasswordFile = mkForce null;
+  };
 
   home-manager.users.${config.profile.user.name} = {...}: {
     imports = [self.mod.impl.neko];
