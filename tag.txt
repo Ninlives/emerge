@@ -1,1 +1,1 @@
-server passwd
+disable_assertion
