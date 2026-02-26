@@ -17,7 +17,7 @@ in {
 
         vim-airline
         vim-mundo
-        fzfWrapper
+        fzf-wrapper
         fzf-vim
         gruvbox
         nerdtree
