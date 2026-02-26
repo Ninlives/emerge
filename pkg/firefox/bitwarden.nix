@@ -18,9 +18,6 @@ buildNpmPackage rec {
   makeCacheWritable = true;
   npmFlags = ["--legacy-peer-deps"];
 
-  # https://github.com/NixOS/nixpkgs/issues/474535
-  nodejs = nodejs_22;
-
   nativeBuildInputs = [python3];
   npmBuildScript = "dist:firefox";
   env.ELECTRON_SKIP_BINARY_DOWNLOAD = "1";
