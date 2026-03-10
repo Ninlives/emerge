@@ -2,7 +2,7 @@ final: prev: {
   firefox-extra = {
     addons = with final;
       let
-        pinned = (builtins.getFlake "github:NixOS/nixpkgs/6aa2bb6a818d12d4cf296f736263011611cf2610")
+        pinned = (builtins.getFlake "github:NixOS/nixpkgs/d23fedd87fcd067b1d160323fae0d0e4f995527d")
                   .legacyPackages.${final.stdenv.hostPlatform.system};
       in
     {
