@@ -11,7 +11,7 @@
     jq
     man-pages
     gnumake
-    neofetch
+    fastfetch
     nix-top
     ripgrep
     translate-shell
