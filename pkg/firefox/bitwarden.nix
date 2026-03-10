@@ -1,7 +1,6 @@
 {
   buildNpmPackage,
   fetchFromGitHub,
-  nodejs_22,
   python3,
 }:
 buildNpmPackage rec {
