@@ -1,8 +1,13 @@
 final: prev: {
   firefox-extra = {
-    addons = with final; {
+    addons = with final;
+      let
+        pinned = (builtins.getFlake "github:NixOS/nixpkgs/6aa2bb6a818d12d4cf296f736263011611cf2610")
+                  .legacyPackages.${final.stdenv.hostPlatform.system};
+      in
+    {
       tridactyl = callPackage ./tridactyl.nix {};
-      bitwarden = callPackage ./bitwarden.nix {};
+      bitwarden = pinned.callPackage ./bitwarden.nix {};
       ublock = callPackage ./ublock.nix {};
     };
     csshacks = final.fetchFromGitHub {
