@@ -22,7 +22,7 @@ with lib; {
     };
   };
 
-  services.resolved.settings.DNSStubListener = "no";
+  services.resolved.settings.Resolve.DNSStubListener = "no";
 
   fileSystems."/boot" = {
     device = "/dev/disk/by-partlabel/NIXOS";
