@@ -1,3 +1,3 @@
 {lib}: {
-  allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) ["android-studio-stable"];
+  allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) ["android-studio"];
 }
