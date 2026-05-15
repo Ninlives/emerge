@@ -25,6 +25,7 @@ final: prev: {
         gtk-update-icon-cache ${iconDir}
       '';
 
+      dontWrapQtApps = true;
       dontDropIconThemeCache = true;
       dontCheckForBrokenSymlinks = true;
     };
