@@ -3,8 +3,7 @@
   lib,
   ...
 }: let
-  inherit (pkgs) nil texlab pyright ltex-ls;
-  inherit (pkgs.nodePackages) bash-language-server;
+  inherit (pkgs) nil texlab pyright ltex-ls bash-language-server;
   inherit (lib.hm.dag) entryAfter;
 in {
   programs.neovim.settings.lsp = entryAfter ["cmp"] {
