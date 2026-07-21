@@ -1,1 +1,1 @@
-always_enable_bootspec
+use_upstream_hledger-_remove_encfs

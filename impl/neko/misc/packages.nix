@@ -21,7 +21,6 @@
     ffmpeg
     tree
     moreutils
-    encfs
     zip
     unzip
   ];
