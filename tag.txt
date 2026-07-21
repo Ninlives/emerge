@@ -1,1 +1,1 @@
-new_deployment
+always_enable_bootspec
