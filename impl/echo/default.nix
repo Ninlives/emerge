@@ -13,12 +13,12 @@ in {
       ./restic.nix
       ./science.nix
       ./vaultwarden.nix
-      ./vikunja.nix
+      # ./vikunja.nix
       ./freshrss.nix
       ./misskey
       ./postgresql.nix
       # ./matrix.nix
-      ./hledger.nix
+      # ./hledger.nix
     ]
     ++ (fn.dotNixFrom ../taco);
 
