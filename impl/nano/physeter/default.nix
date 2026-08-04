@@ -11,12 +11,12 @@
       inherit (pkgs) system;
       specialArgs = {inherit fn self inputs args;};
       modules = with self.mod; [
-        inputs.home-manager.nixosModule
+        inputs.home-manager.nixosModules.home-manager
         bombe
         opt.revive
         opt.sops
         opt.profile
-        impl.lego.meta
+        impl.lego.m-meta
         ./kexec-hat.nix
         ./fstab.nix
         ./config.nix

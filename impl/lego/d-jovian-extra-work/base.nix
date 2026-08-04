@@ -35,6 +35,8 @@ in {
     cp /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-bundle.crt
   '';
 
+  virtualisation.podman.enable = true;
+
   revive.specifications.system.boxes = [
     {
       src = /Data/ca-anchors;

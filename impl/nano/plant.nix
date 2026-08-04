@@ -3,8 +3,13 @@
   args,
   pkgs,
   config,
+  inputs,
   ...
-}: {
+}:
+let
+  inherit (inputs.values.secret.workstation) username;
+in
+{
   nixpkgs.overlays = self.overlays';
   system.build.plant = with pkgs; let
     ssh = "${openssh}/bin/ssh -t";
@@ -70,10 +75,10 @@
     grow = writeShellScript "grow" ''
       set -ex
       echo "Uploading system closure..."
-      ${nix} copy --substitute-on-destination --to "ssh://cloud@${host}" "${config.system.build.physeter.kexecHat}"
+      ${nix} copy --substitute-on-destination --to "ssh://${username}@${host}" "${config.system.build.physeter.kexecHat}"
 
       echo "Switching..."
-      ${ssh} "cloud@${host}" "sudo nix-env -p /nix/var/nix/profiles/hat/physeter --set '${config.system.build.physeter.kexecHat}' && \
+      ${ssh} "${username}@${host}" "sudo nix-env -p /nix/var/nix/profiles/hat/physeter --set '${config.system.build.physeter.kexecHat}' && \
                             sudo ${config.system.build.mvLink}/bin/mv-link /nix/var/nix/profiles/hat /hat && \
                             sudo ${config.system.build.physeter.kexecHat}/smoke"
     '';

@@ -6,9 +6,13 @@
   config,
   ...
 }:
+let
+  inherit (inputs.values.secret.workstation) username;
+in
 with lib; {
-  profile.identity = "cloud";
-  profile.user.name = "cloud";
+  profile.identity = username;
+  profile.user.name = username;
+  profile.user.home = "/home/cloud";
   profile.user.uid = 1000;
   profile.disk.persist = "pack";
 
@@ -79,4 +83,20 @@ with lib; {
     openFirewall = true;
     secretKeyFile = config.sops.secrets."cache/private-key".path;
   };
+
+  nixpkgs.config.allowUnfree = true;
+  hardware.enableAllFirmware = true;
+  networking.networkmanager.enable = true;
+  networking.wireless.enable = true;
+  revive.specifications.storage.boxes =
+    [
+      {
+        src = /Data/certificates;
+        dst = "${config.users.users.${username}.home}/.cert";
+      }
+      {
+        src = /Data/network-connections;
+        dst = /etc/NetworkManager/system-connections;
+      }
+    ];
 }

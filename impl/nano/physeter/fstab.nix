@@ -3,7 +3,8 @@
   args,
   ...
 }: let
-  inherit (config.home-manager.users.${config.profile.user.name}) persistent;
+  username = config.profile.user.name;
+  inherit (config.home-manager.users.${username}) persistent;
 in {
   fileSystems = {
     "/" = {
@@ -44,7 +45,7 @@ in {
 
   revive.specifications.storage = {
     seal = "/pack/Shed";
-    user = config.users.users.cloud.name;
+    user = config.users.users.${username}.name;
     group = config.users.groups.users.name;
   };
   revive.specifications.crux.seal = "/pack/Crux";
@@ -52,7 +53,7 @@ in {
     [
       {
         src = /Storage;
-        dst = "${config.users.users.cloud.home}/Storage";
+        dst = "${config.users.users.${username}.home}/Storage";
       }
     ]
     ++ persistent.boxes;
