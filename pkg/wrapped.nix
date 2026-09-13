@@ -2,6 +2,8 @@ final: prev: let
   inherit (final) fakeFS;
 in {
   nixMeta = final.nixVersions.latest;
+  hledger-web = (builtins.getFlake "github:NixOS/nixpkgs/ee09932cedcef15aaf476f9343d1dea2cb77e261")
+    .legacyPackages.${final.stdenv.hostPlatform.system}.hledger-web; # 1.50.2
 
   idea-community = fakeFS {
     drv = prev.jetbrains.idea-community;

@@ -116,8 +116,8 @@ in {
     };
   };
 
-  services.tor.enable = true;
-  services.tor.client.enable = true;
+  # services.tor.enable = true;
+  # services.tor.client.enable = true;
 
   services.redlib = {
     enable = true;

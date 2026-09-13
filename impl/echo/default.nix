@@ -18,7 +18,7 @@ in {
       ./misskey
       ./postgresql.nix
       # ./matrix.nix
-      # ./hledger.nix
+      ./hledger.nix
     ]
     ++ (fn.dotNixFrom ../taco);
 
