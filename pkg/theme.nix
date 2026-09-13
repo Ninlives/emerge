@@ -15,7 +15,7 @@ final: prev: {
       };
 
       nativeBuildInputs = [gtk3];
-      propagatedBuildInputs = [kdePackages.breeze-icons gnome-icon-theme hicolor-icon-theme];
+      propagatedBuildInputs = [kdePackages.breeze-icons hicolor-icon-theme];
 
       installPhase = ''
         cd ${variant}

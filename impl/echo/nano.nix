@@ -15,7 +15,6 @@ with lib; let
     ...
   }: let
     build = config.system.build;
-    kernelTarget = pkgs.stdenv.hostPlatform.linux-kernel.target;
   in {
     imports = [
       (modulesPath + "/profiles/minimal.nix")
@@ -127,7 +126,7 @@ with lib; let
 
     system.build.netboot = pkgs.runCommand "netboot" {} ''
       mkdir -p $out
-      ln -s ${build.kernel}/${kernelTarget}         $out/${kernelTarget}
+      ln -s ${build.kernel}/${build.kernel.target}  $out/${build.kernel.target}
       ln -s ${build.netbootRamdisk}/initrd          $out/initrd
       ln -s ${build.netbootIpxeScript}/netboot.ipxe $out/ipxe
     '';

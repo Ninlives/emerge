@@ -16,7 +16,6 @@ in
       user-themes
       bibata-cursors
       gruvbox-gtk-theme
-      gtk-engine-murrine
       gnome-themes-extra
       gruvbox-plus-icon-pack
     ];
