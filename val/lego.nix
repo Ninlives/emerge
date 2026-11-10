@@ -28,7 +28,7 @@ with self.mod; let
     impl.lego.m-security
 
     impl.lego.m-hardware
-    impl.lego.m-keychron
+    # impl.lego.m-keychron
 
     ({config, ...}: {
       system.nixos.tags = mkAfter [(builtins.readFile ../tag.txt)];
@@ -78,6 +78,22 @@ in {
           impl.lego.m-extra
           impl.lego.d-desktop-hardware
           impl.lego.d-desktop-extra
+        ];
+    });
+
+  flake.nixosConfigurations.deco = withSystem "aarch64-linux" ({
+    inputs',
+    system,
+    ...
+  }:
+    nixpkgs.lib.nixosSystem {
+      inherit system;
+      specialArgs = {inherit fn self inputs inputs';};
+      modules =
+        baseModules
+        ++ [
+          impl.lego.d-humpy-bootware
+          impl.lego.d-humpy-extra
         ];
     });
 

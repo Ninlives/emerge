@@ -43,10 +43,10 @@ in {
           installation_mode = "force_installed";
           install_url = "file://${pkgs.firefox-extra.addons.tridactyl}/share/mozilla/extensions/tridactyl.xpi";
         };
-        "{446900e4-71c2-419f-a6a7-df9c091e268b}" = {
-          installation_mode = "force_installed";
-          install_url = "file://${pkgs.firefox-extra.addons.bitwarden}/share/mozilla/extensions/bitwarden.xpi";
-        };
+        # "{446900e4-71c2-419f-a6a7-df9c091e268b}" = {
+        #   installation_mode = "force_installed";
+        #   install_url = "file://${pkgs.firefox-extra.addons.bitwarden}/share/mozilla/extensions/bitwarden.xpi";
+        # };
         "uBlock0@raymondhill.net" = {
           installation_mode = "force_installed";
           install_url = "file://${pkgs.firefox-extra.addons.ublock}/share/mozilla/extensions/uBlock.xpi";

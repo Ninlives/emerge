@@ -8,4 +8,6 @@
     "emerge.cachix.org-1:Zvw8m0TXudK0MtylBFvUZCUEHlOfTgfvE2bbIexGhVw="
   ];
   networking.firewall.allowedTCPPortRanges = [{ from = 8000; to = 10000; }];
+  boot.binfmt.emulatedSystems = ["aarch64-linux" "riscv64-linux"];
+  boot.binfmt.preferStaticEmulators = true;
 }
