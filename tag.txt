@@ -1,1 +1,1 @@
-humpy
+fix_nvim_config

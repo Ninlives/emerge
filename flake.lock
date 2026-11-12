@@ -723,15 +723,15 @@
       "locked": {
         "lastModified": 1739503522,
         "narHash": "sha256-Q7HEOU9ZrUyFwHHCFMJ646DDUquUGXmyGzGUdrC2BX4=",
-        "ref": "refs/heads/main",
+        "owner": "Ninlives",
+        "repo": "values",
         "rev": "691f47b8061e9f0cc03144705a21d9d3dae62519",
-        "revCount": 15,
-        "type": "git",
-        "url": "ssh://git@github.com/Ninlives/values.git"
+        "type": "github"
       },
       "original": {
-        "type": "git",
-        "url": "ssh://git@github.com/Ninlives/values.git"
+        "owner": "Ninlives",
+        "repo": "values",
+        "type": "github"
       }
     }
   },

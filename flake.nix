@@ -21,7 +21,7 @@
   };
 
   inputs.data.url = "github:Ninlives/data";
-  inputs.values.url = "git+ssh://git@github.com/Ninlives/values.git";
+  inputs.values.url = "github:Ninlives/values";
 
   inputs.terrasops.url = "github:NickCao/terrasops";
   inputs.terranix.url = "github:Ninlives/terranix";
@@ -46,7 +46,7 @@
       inherit inputs;
       specialArgs = {inherit fn;};
     } ({...}: {
-      systems = ["x86_64-linux"];
+      systems = ["x86_64-linux" "aarch64-linux"];
       imports = (fn.dotNixFromRecursive ./cmd) ++ (fn.dotNixFromRecursive ./val);
     });
 }

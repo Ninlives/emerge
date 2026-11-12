@@ -24,7 +24,7 @@ in {
             }
           }
         })
-        require('nvim-treesitter.configs').setup {
+        require('nvim-treesitter').setup {
           highlight = {
             additional_vim_regex_highlighting = {'org'},
           },

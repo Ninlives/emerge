@@ -10,11 +10,7 @@ in {
     plugins = p: with p; [nvim-lspconfig];
     extraPackages = [nil bash-language-server texlab pyright ltex-ls];
 
-    lua =
-      /*
-      lua
-      */
-      ''
+    lua = /* lua */ ''
         local lsps = { 'nil_ls', 'bashls', 'pyright', 'texlab', 'ltex'}
         for _, lsp in pairs(lsps) do
           vim.lsp.enable(lsp)
