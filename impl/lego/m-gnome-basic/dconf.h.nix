@@ -11,7 +11,7 @@ in
     home.packages = [
       dash-to-dock
       appindicator
-      x11-gestures
+      # x11-gestures
 
       user-themes
       bibata-cursors
