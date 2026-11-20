@@ -8,7 +8,7 @@
 in {
   programs.neovim.settings.lsp = entryAfter ["cmp"] {
     plugins = p: with p; [nvim-lspconfig];
-    extraPackages = [nil bash-language-server texlab pyright ltex-ls];
+    extraPackages = [nil bash-language-server texlab pyright];
 
     lua = /* lua */ ''
         local lsps = { 'nil_ls', 'bashls', 'pyright', 'texlab', 'ltex'}
