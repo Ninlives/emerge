@@ -107,7 +107,7 @@ BloatedPackages=(\
 )
 
 sudo apt purge --yes "${BloatedPackages[@]}" "${BloatedPackagesWithServices[@]}"
-sudo apt autopurge --yes
+# sudo apt autopurge --yes
 
 BloatedPaths=(\
     '/usr/share/dotnet' \
