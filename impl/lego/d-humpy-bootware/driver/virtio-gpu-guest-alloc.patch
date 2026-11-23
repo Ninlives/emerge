@@ -1,6 +1,6 @@
-diff --color -uar ./linux-7.3.5_o/drivers/gpu/drm/virtio/virtgpu_drv.c ./linux-7.3.5/drivers/gpu/drm/virtio/virtgpu_drv.c
---- ./linux-7.3.5_o/drivers/gpu/drm/virtio/virtgpu_drv.c	2026-11-17 18:14:21.000000000 +0800
-+++ ./linux-7.3.5/drivers/gpu/drm/virtio/virtgpu_drv.c	2026-11-24 01:27:55.301565088 +0800
+diff --color -uar a/drivers/gpu/drm/virtio/virtgpu_drv.c b/drivers/gpu/drm/virtio/virtgpu_drv.c
+--- a/drivers/gpu/drm/virtio/virtgpu_drv.c	2026-11-17 18:14:21.000000000 +0800
++++ b/drivers/gpu/drm/virtio/virtgpu_drv.c	2026-11-24 01:27:55.301565088 +0800
 @@ -181,6 +181,7 @@
  	VIRTIO_GPU_F_RESOURCE_UUID,
  	VIRTIO_GPU_F_RESOURCE_BLOB,
@@ -9,9 +9,9 @@ diff --color -uar ./linux-7.3.5_o/drivers/gpu/drm/virtio/virtgpu_drv.c ./linux-7
  	VIRTIO_GPU_F_BLOB_ALIGNMENT,
  };
  
-diff --color -uar ./linux-7.3.5_o/drivers/gpu/drm/virtio/virtgpu_drv.h ./linux-7.3.5/drivers/gpu/drm/virtio/virtgpu_drv.h
---- ./linux-7.3.5_o/drivers/gpu/drm/virtio/virtgpu_drv.h	2026-11-17 18:14:21.000000000 +0800
-+++ ./linux-7.3.5/drivers/gpu/drm/virtio/virtgpu_drv.h	2026-11-24 01:28:11.369505464 +0800
+diff --color -uar a/drivers/gpu/drm/virtio/virtgpu_drv.h b/drivers/gpu/drm/virtio/virtgpu_drv.h
+--- a/drivers/gpu/drm/virtio/virtgpu_drv.h	2026-11-17 18:14:21.000000000 +0800
++++ b/drivers/gpu/drm/virtio/virtgpu_drv.h	2026-11-24 01:28:11.369505464 +0800
 @@ -45,6 +45,13 @@
  
  #include <xen/xen.h>
@@ -34,9 +34,9 @@ diff --color -uar ./linux-7.3.5_o/drivers/gpu/drm/virtio/virtgpu_drv.h ./linux-7
  	bool has_context_init;
  	bool has_blob_alignment;
  	bool hibernated;
-diff --color -uar ./linux-7.3.5_o/drivers/gpu/drm/virtio/virtgpu_ioctl.c ./linux-7.3.5/drivers/gpu/drm/virtio/virtgpu_ioctl.c
---- ./linux-7.3.5_o/drivers/gpu/drm/virtio/virtgpu_ioctl.c	2026-11-17 18:14:21.000000000 +0800
-+++ ./linux-7.3.5/drivers/gpu/drm/virtio/virtgpu_ioctl.c	2026-11-24 01:28:28.234819907 +0800
+diff --color -uar a/drivers/gpu/drm/virtio/virtgpu_ioctl.c b/drivers/gpu/drm/virtio/virtgpu_ioctl.c
+--- a/drivers/gpu/drm/virtio/virtgpu_ioctl.c	2026-11-17 18:14:21.000000000 +0800
++++ b/drivers/gpu/drm/virtio/virtgpu_ioctl.c	2026-11-24 01:28:28.234819907 +0800
 @@ -539,6 +539,14 @@
  	params->blob_flags = rc_blob->blob_flags;
  	params->blob_hints = rc_blob->blob_hints;
@@ -95,9 +95,9 @@ diff --color -uar ./linux-7.3.5_o/drivers/gpu/drm/virtio/virtgpu_ioctl.c ./linux
  
  	bo->guest_blob = guest_blob;
  	bo->host3d_blob = host3d_blob;
-diff --color -uar ./linux-7.3.5_o/drivers/gpu/drm/virtio/virtgpu_kms.c ./linux-7.3.5/drivers/gpu/drm/virtio/virtgpu_kms.c
---- ./linux-7.3.5_o/drivers/gpu/drm/virtio/virtgpu_kms.c	2026-11-17 18:14:21.000000000 +0800
-+++ ./linux-7.3.5/drivers/gpu/drm/virtio/virtgpu_kms.c	2026-11-24 01:28:50.078484187 +0800
+diff --color -uar a/drivers/gpu/drm/virtio/virtgpu_kms.c b/drivers/gpu/drm/virtio/virtgpu_kms.c
+--- a/drivers/gpu/drm/virtio/virtgpu_kms.c	2026-11-17 18:14:21.000000000 +0800
++++ b/drivers/gpu/drm/virtio/virtgpu_kms.c	2026-11-24 01:28:50.078484187 +0800
 @@ -239,6 +239,9 @@
  			    (unsigned long)vgdev->host_visible_region.len);
  	}
@@ -108,9 +108,9 @@ diff --color -uar ./linux-7.3.5_o/drivers/gpu/drm/virtio/virtgpu_kms.c ./linux-7
  	if (virtio_has_feature(vgdev->vdev, VIRTIO_GPU_F_CONTEXT_INIT))
  		vgdev->has_context_init = true;
  
-diff --color -uar ./linux-7.3.5_o/drivers/gpu/drm/virtio/virtgpu_object.c ./linux-7.3.5/drivers/gpu/drm/virtio/virtgpu_object.c
---- ./linux-7.3.5_o/drivers/gpu/drm/virtio/virtgpu_object.c	2026-11-17 18:14:21.000000000 +0800
-+++ ./linux-7.3.5/drivers/gpu/drm/virtio/virtgpu_object.c	2026-11-24 01:28:39.410398585 +0800
+diff --color -uar a/drivers/gpu/drm/virtio/virtgpu_object.c b/drivers/gpu/drm/virtio/virtgpu_object.c
+--- a/drivers/gpu/drm/virtio/virtgpu_object.c	2026-11-17 18:14:21.000000000 +0800
++++ b/drivers/gpu/drm/virtio/virtgpu_object.c	2026-11-24 01:28:39.410398585 +0800
 @@ -24,6 +24,7 @@
   */
  
