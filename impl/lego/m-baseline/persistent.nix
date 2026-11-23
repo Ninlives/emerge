@@ -1,4 +1,4 @@
-{config, ...}: let
+{config, lib, ...}: let
   inherit (config.profile.disk) persist;
   inherit (config.home-manager.users.${config.profile.user.name}) persistent;
   home = path: "${config.profile.user.home}/${path}";
@@ -24,4 +24,11 @@ in {
     ]
     ++ persistent.boxes;
   revive.specifications.user.scrolls = persistent.scrolls;
+
+  system.activationScripts.revive = lib.stringAfter ["revive"] ''
+    echo Dumping machine-id...
+    cp '${config.revive.specifications.system.seal}/Cache/machine-id' /etc/machine-id
+    chown root:root /etc/machine-id
+    chmod 444 /etc/machine-id
+  '';
 }
