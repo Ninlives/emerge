@@ -53,12 +53,13 @@ in {
         ++ [
           # impl.lego.dns
           impl.lego.m-extra
+          impl.lego.m-physical
           impl.lego.d-jovian-hardware
           impl.lego.d-jovian-extra-private
           {
             specialisation.institute = {
               inheritParentConfig = false;
-              configuration.imports = baseModules ++ [impl.lego.d-jovian-hardware impl.lego.d-jovian-extra-work];
+              configuration.imports = baseModules ++ [impl.lego.m-physical impl.lego.d-jovian-hardware impl.lego.d-jovian-extra-work];
             };
           }
         ];
@@ -76,6 +77,7 @@ in {
         baseModules
         ++ [
           impl.lego.m-extra
+          impl.lego.m-physical
           impl.lego.d-desktop-hardware
           impl.lego.d-desktop-extra
         ];

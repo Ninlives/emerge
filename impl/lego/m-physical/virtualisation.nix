@@ -30,4 +30,6 @@ in {
   #   options kvm_intel emulate_invalid_guest_state=0
   #   options kvm ignore_msrs=1
   # '';
+  boot.binfmt.emulatedSystems = ["aarch64-linux" "riscv64-linux"];
+  boot.binfmt.preferStaticEmulators = true;
 }
